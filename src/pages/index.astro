@@ -1,0 +1,16 @@
+---
+import { Layout } from '@/components/layout/Layout';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
+import { SkillsMatrix } from '@/components/sections/SkillsMatrix';
+import { ProjectsGrid } from '@/components/sections/ProjectsGrid';
+---
+
+<Layout>
+  <main class="min-h-screen">
+    <HeroSection client:load />
+    <SkillsMatrix client:visible />
+    <ExperienceTimeline client:visible />
+    <ProjectsGrid client:visible />
+  </main>
+</Layout>
