@@ -25,9 +25,7 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   compressHTML: true,
-  experimental: {
-    optimizeHoistedScript: true,
-  },
+
   vite: {
     build: {
       cssMinify: 'lightningcss',
