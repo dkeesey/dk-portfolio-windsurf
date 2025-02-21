@@ -1,34 +1,93 @@
-# Astro Starter Kit: Basics
+# Modern Astro Stack Template
 
-```sh
-npm create astro@latest -- --template basics
-```
+A high-performance, developer-friendly template for modern web applications built with Astro. This template provides a solid foundation with best practices for type safety, performance, and maintainability.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🚀 Features
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Core Technologies
+- **Astro 4.x** - Static Site Generation with Islands Architecture
+- **React 19.x** - For interactive components
+- **TypeScript 5.x** - With strict mode enabled
+- **TailwindCSS** - With typography plugin and dark mode
+- **ShadcN UI** - Accessible component library
+- **MDX** - For content management
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Development Experience
+- **ESLint** - Customized for Astro and React
+- **Prettier** - Code formatting with plugins
+- **Husky** - Git hooks for code quality
+- **Path Aliases** - Clean and maintainable imports
+- **Content Collections** - Type-safe content management
 
-## 🚀 Project Structure
+### Build Optimizations
+- Optimized asset bundling
+- CSS minification with lightningcss
+- React vendor chunking
+- HTML compression
+- Dark mode support
+- Typography optimization
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Project Structure
 
 ```text
 /
 ├── public/
 │   └── favicon.svg
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # React and Astro components
+│   ├── content/        # MDX content collections
+│   │   ├── blog/
+│   │   └── projects/
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Astro pages
+│   ├── styles/         # Global styles
+│   └── utils/          # Utility functions
+├── astro.config.mjs    # Astro configuration
+├── tailwind.config.mjs # Tailwind configuration
+└── tsconfig.json      # TypeScript configuration
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠️ Getting Started
+
+1. Clone this template:
+```bash
+git clone [repository-url]
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start development server:
+```bash
+npm run dev
+```
+
+## 📦 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Check for code issues
+- `npm run lint:fix` - Fix code issues
+- `npm run format` - Format code with Prettier
+
+## 🔧 Configuration
+
+- **TypeScript** - Strict mode, path aliases, and enhanced type checking
+- **Tailwind** - Custom color schemes, typography, and dark mode
+- **Astro** - Optimized build settings and performance configurations
+- **ESLint** - Custom ruleset for Astro and React
+- **Prettier** - Configured with Tailwind plugin
+
+## 📚 Documentation
+
+- [Astro Documentation](https://docs.astro.build)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs)
+- [ShadcN UI Documentation](https://ui.shadcn.com)
 
 ## 🧞 Commands
 
