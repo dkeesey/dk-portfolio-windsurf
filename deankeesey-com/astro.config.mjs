@@ -6,6 +6,17 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://deankeesey.com',
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src',
+        '@components': '/src/components',
+        '@layouts': '/src/layouts',
+        '@content': '/src/content',
+        '@utils': '/src/utils'
+      }
+    }
+  },
   integrations: [
     react({
       include: ['**/react/*'],
