@@ -8,11 +8,7 @@ const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,
   RadixComponentProps<typeof TabsPrimitive.Root>
 >(({ className, class: cls, ...props }, ref) => (
-  <TabsPrimitive.Root
-    ref={ref}
-    className={cn(className || cls)}
-    {...props}
-  />
+  <TabsPrimitive.Root ref={ref} className={cn(className || cls)} {...props} />
 ));
 
 Tabs.displayName = TabsPrimitive.Root.displayName;
