@@ -29,9 +29,17 @@ export interface BadgeProps
   class?: string;
 }
 
-function Badge({ className, class: classAstro, variant, ...props }: BadgeProps) {
+function Badge({
+  className,
+  class: classAstro,
+  variant,
+  ...props
+}: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className || classAstro)} {...props} />
+    <div
+      className={cn(badgeVariants({ variant }), className || classAstro)}
+      {...props}
+    />
   );
 }
 

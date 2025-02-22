@@ -176,7 +176,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
       <div class="space-y-4">
         <h2 class="text-3xl font-semibold">Components</h2>
         <p class="text-muted-foreground">
-          Reusable UI components built with Radix UI primitives and styled with Tailwind CSS.
+          Reusable UI components built with Radix UI primitives and styled with
+          Tailwind CSS.
         </p>
       </div>
 
@@ -193,7 +194,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
               <CardHeader>
                 <CardTitle>Button Variants</CardTitle>
                 <CardDescription>
-                  Interactive button components with multiple variants and states
+                  Interactive button components with multiple variants and
+                  states
                 </CardDescription>
               </CardHeader>
               <CardContent class="space-y-8">
@@ -201,7 +203,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
                   <div class="mb-4 text-sm text-muted-foreground">
                     Style Variants
                   </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                     <div class="space-y-4">
                       <div class="flex flex-wrap gap-4">
                         <Button>Default</Button>
@@ -243,21 +245,31 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
                 <Separator />
                 <div>
                   <div class="mb-4 text-sm text-muted-foreground">States</div>
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                     <Button disabled>Disabled</Button>
                     <div class="space-y-2">
                       <Button class="w-full cursor-not-allowed opacity-50">
                         <span class="mr-2">Loading</span>
-                        <div class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
+                        <div
+                          class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+                        >
+                        </div>
                       </Button>
-                      <div class="text-xs text-muted-foreground">Loading state with spinner</div>
+                      <div class="text-xs text-muted-foreground">
+                        Loading state with spinner
+                      </div>
                     </div>
                     <div class="space-y-2">
                       <Button class="w-full cursor-not-allowed opacity-50">
                         <span class="mr-2">Processing</span>
-                        <div class="h-4 w-4 animate-pulse rounded-full bg-current"></div>
+                        <div
+                          class="h-4 w-4 animate-pulse rounded-full bg-current"
+                        >
+                        </div>
                       </Button>
-                      <div class="text-xs text-muted-foreground">Processing state with pulse</div>
+                      <div class="text-xs text-muted-foreground">
+                        Processing state with pulse
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -265,10 +277,14 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
               <CardFooter>
                 <div class="w-full space-y-2">
                   <p class="text-sm text-muted-foreground">
-                    Import from <code class="bg-muted px-1 py-0.5 rounded text-xs">@/components/ui/button</code>
+                    Import from <code
+                      class="rounded bg-muted px-1 py-0.5 text-xs"
+                      >@/components/ui/button</code
+                    >
                   </p>
                   <p class="text-xs text-muted-foreground">
-                    Built with Radix UI Button primitive and styled with Tailwind CSS
+                    Built with Radix UI Button primitive and styled with
+                    Tailwind CSS
                   </p>
                 </div>
               </CardFooter>
@@ -279,12 +295,16 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
             <Card>
               <CardHeader>
                 <CardTitle>Badge Variants</CardTitle>
-                <CardDescription>Status indicators and labels with different styles</CardDescription>
+                <CardDescription
+                  >Status indicators and labels with different styles</CardDescription
+                >
               </CardHeader>
               <CardContent class="space-y-8">
                 <div>
-                  <div class="text-sm text-muted-foreground mb-4">Style Variants</div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class="mb-4 text-sm text-muted-foreground">
+                    Style Variants
+                  </div>
+                  <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                     <div class="space-y-4">
                       <div class="flex flex-wrap gap-4">
                         <Badge variant="default">Default</Badge>
@@ -313,7 +333,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
                 </div>
                 <Separator />
                 <div>
-                  <div class="text-sm text-muted-foreground mb-4">Common Use Cases</div>
+                  <div class="mb-4 text-sm text-muted-foreground">
+                    Common Use Cases
+                  </div>
                   <div class="space-y-4">
                     <div class="flex flex-wrap gap-2">
                       <Badge variant="secondary">New</Badge>
@@ -330,10 +352,14 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
               <CardFooter>
                 <div class="w-full space-y-2">
                   <p class="text-sm text-muted-foreground">
-                    Import from <code class="bg-muted px-1 py-0.5 rounded text-xs">@/components/ui/badge</code>
+                    Import from <code
+                      class="rounded bg-muted px-1 py-0.5 text-xs"
+                      >@/components/ui/badge</code
+                    >
                   </p>
                   <p class="text-xs text-muted-foreground">
-                    Built with Radix UI Badge primitive and styled with Tailwind CSS
+                    Built with Radix UI Badge primitive and styled with Tailwind
+                    CSS
                   </p>
                 </div>
               </CardFooter>
