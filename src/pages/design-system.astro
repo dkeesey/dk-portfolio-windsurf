@@ -2,228 +2,392 @@
 import { Layout } from '@/components/layout/Layout';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 ---
 
 <Layout>
-  <div class="container py-12 space-y-16">
-    <header>
-      <h1 class="text-4xl font-bold mb-4">Design System</h1>
-      <p class="text-lg text-muted-foreground mb-8">A comprehensive guide to our design tokens, components, and patterns.</p>
+  <div class="container space-y-16 py-12">
+    <header class="space-y-4">
+      <h1 class="text-4xl font-bold">Design System</h1>
+      <div class="space-y-2">
+        <p class="text-lg text-muted-foreground">
+          A comprehensive guide to our design tokens, components, and patterns.
+        </p>
+        <p class="text-sm text-muted-foreground">
+          Built with Radix UI primitives and styled with Tailwind CSS.
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <Badge variant="secondary">v1.0.0</Badge>
+        <Badge variant="outline">Astro 4.x</Badge>
+        <Badge variant="outline">React 18+</Badge>
+      </div>
       <Separator />
     </header>
-      
-      <section>
-        <h2 class="text-3xl font-semibold mb-8">Design Tokens</h2>
-        
-        <div class="w-full">
-          <Tabs defaultValue="colors" class="w-full" client:load>
-            <TabsList>
-              <TabsTrigger value="colors">Colors</TabsTrigger>
-              <TabsTrigger value="typography">Typography</TabsTrigger>
-              <TabsTrigger value="spacing">Spacing</TabsTrigger>
-            </TabsList>
 
-            <TabsContent value="colors">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Color System</CardTitle>
-                  <CardDescription>Our color palette is designed for accessibility and consistency.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="space-y-3">
-                      <div class="h-16 bg-background border rounded-lg"></div>
-                      <div class="text-sm font-medium">Background</div>
-                      <div class="text-xs text-muted-foreground font-mono">bg-background</div>
-                    </div>
-                    <div class="space-y-3">
-                      <div class="h-16 bg-primary rounded-lg"></div>
-                      <div class="text-sm font-medium">Primary</div>
-                      <div class="text-xs text-muted-foreground font-mono">bg-primary</div>
-                    </div>
-                    <div class="space-y-3">
-                      <div class="h-16 bg-secondary rounded-lg"></div>
-                      <div class="text-sm font-medium">Secondary</div>
-                      <div class="text-xs text-muted-foreground font-mono">bg-secondary</div>
-                    </div>
-                    <div class="space-y-3">
-                      <div class="h-16 bg-muted rounded-lg"></div>
-                      <div class="text-sm font-medium">Muted</div>
-                      <div class="text-xs text-muted-foreground font-mono">bg-muted</div>
+    <section>
+      <h2 class="mb-8 text-3xl font-semibold">Design Tokens</h2>
+      <div class="w-full">
+        <Tabs defaultValue="colors" class="w-full" client:load>
+          <TabsList>
+            <TabsTrigger value="colors">Colors</TabsTrigger>
+            <TabsTrigger value="typography">Typography</TabsTrigger>
+            <TabsTrigger value="spacing">Spacing</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="colors">
+            <Card>
+              <CardHeader>
+                <CardTitle>Color System</CardTitle>
+                <CardDescription
+                  >Our color palette is designed for accessibility and
+                  consistency.</CardDescription
+                >
+              </CardHeader>
+              <CardContent>
+                <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  <div class="space-y-3">
+                    <div class="h-16 rounded-lg border bg-background"></div>
+                    <div class="text-sm font-medium">Background</div>
+                    <div class="font-mono text-xs text-muted-foreground">
+                      bg-background
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="spacing">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Spacing Scale</CardTitle>
-                  <CardDescription>8-point grid system for consistent spacing.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div class="space-y-4">
-                    <div class="flex items-center gap-4">
-                      <div class="w-4 h-4 bg-primary"></div>
-                      <div>Space 4 (1rem)</div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                      <div class="w-8 h-8 bg-primary"></div>
-                      <div>Space 8 (2rem)</div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                      <div class="w-12 h-12 bg-primary"></div>
-                      <div>Space 12 (3rem)</div>
+                  <div class="space-y-3">
+                    <div class="h-16 rounded-lg bg-primary"></div>
+                    <div class="text-sm font-medium">Primary</div>
+                    <div class="font-mono text-xs text-muted-foreground">
+                      bg-primary
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+                  <div class="space-y-3">
+                    <div class="h-16 rounded-lg bg-secondary"></div>
+                    <div class="text-sm font-medium">Secondary</div>
+                    <div class="font-mono text-xs text-muted-foreground">
+                      bg-secondary
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="h-16 rounded-lg bg-muted"></div>
+                    <div class="text-sm font-medium">Muted</div>
+                    <div class="font-mono text-xs text-muted-foreground">
+                      bg-muted
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-            <TabsContent value="typography">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Typography Scale</CardTitle>
-                  <CardDescription>Type scale for consistent text hierarchy.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div class="space-y-8">
-                    <div>
-                      <div class="text-sm text-muted-foreground mb-4">Font Family: Inter</div>
-                      <div class="space-y-4">
-                        <div>
-                          <div class="text-4xl font-bold">Heading 1</div>
-                          <div class="text-sm text-muted-foreground font-mono mt-1">text-4xl font-bold</div>
+          <TabsContent value="spacing">
+            <Card>
+              <CardHeader>
+                <CardTitle>Spacing Scale</CardTitle>
+                <CardDescription
+                  >8-point grid system for consistent spacing.</CardDescription
+                >
+              </CardHeader>
+              <CardContent>
+                <div class="space-y-4">
+                  <div class="flex items-center gap-4">
+                    <div class="h-4 w-4 bg-primary"></div>
+                    <div>Space 4 (1rem)</div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="h-8 w-8 bg-primary"></div>
+                    <div>Space 8 (2rem)</div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="h-12 w-12 bg-primary"></div>
+                    <div>Space 12 (3rem)</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="typography">
+            <Card>
+              <CardHeader>
+                <CardTitle>Typography Scale</CardTitle>
+                <CardDescription
+                  >Type scale for consistent text hierarchy.</CardDescription
+                >
+              </CardHeader>
+              <CardContent>
+                <div class="space-y-8">
+                  <div>
+                    <div class="mb-4 text-sm text-muted-foreground">
+                      Font Family: Inter
+                    </div>
+                    <div class="space-y-4">
+                      <div>
+                        <div class="text-4xl font-bold">Heading 1</div>
+                        <div
+                          class="mt-1 font-mono text-sm text-muted-foreground"
+                        >
+                          text-4xl font-bold
                         </div>
-                        <div>
-                          <div class="text-3xl font-semibold">Heading 2</div>
-                          <div class="text-sm text-muted-foreground font-mono mt-1">text-3xl font-semibold</div>
+                      </div>
+                      <div>
+                        <div class="text-3xl font-semibold">Heading 2</div>
+                        <div
+                          class="mt-1 font-mono text-sm text-muted-foreground"
+                        >
+                          text-3xl font-semibold
                         </div>
-                        <div>
-                          <div class="text-2xl font-semibold">Heading 3</div>
-                          <div class="text-sm text-muted-foreground font-mono mt-1">text-2xl font-semibold</div>
+                      </div>
+                      <div>
+                        <div class="text-2xl font-semibold">Heading 3</div>
+                        <div
+                          class="mt-1 font-mono text-sm text-muted-foreground"
+                        >
+                          text-2xl font-semibold
                         </div>
-                        <div>
-                          <div class="text-xl font-medium">Heading 4</div>
-                          <div class="text-sm text-muted-foreground font-mono mt-1">text-xl font-medium</div>
+                      </div>
+                      <div>
+                        <div class="text-xl font-medium">Heading 4</div>
+                        <div
+                          class="mt-1 font-mono text-sm text-muted-foreground"
+                        >
+                          text-xl font-medium
                         </div>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
 
-      <section>
-        <h2 class="text-3xl font-semibold mb-8">Components</h2>
-        
-        <div class="w-full">
-          <Tabs defaultValue="buttons" class="w-full" client:load>
-            <TabsList class="w-full justify-start">
-              <TabsTrigger value="buttons">Buttons</TabsTrigger>
-              <TabsTrigger value="badges">Badges</TabsTrigger>
-              <TabsTrigger value="cards">Cards</TabsTrigger>
-            </TabsList>
+    <section class="space-y-8">
+      <div class="space-y-4">
+        <h2 class="text-3xl font-semibold">Components</h2>
+        <p class="text-muted-foreground">
+          Reusable UI components built with Radix UI primitives and styled with Tailwind CSS.
+        </p>
+      </div>
 
-            <TabsContent value="buttons">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Button Variants</CardTitle>
-                  <CardDescription>Different button styles for different contexts</CardDescription>
-                </CardHeader>
-                <CardContent class="space-y-8">
-                  <div>
-                    <div class="text-sm text-muted-foreground mb-4">Style Variants</div>
-                    <div class="flex flex-wrap gap-4">
-                      <Button>Default</Button>
-                      <Button variant="secondary">Secondary</Button>
-                      <Button variant="destructive">Destructive</Button>
-                      <Button variant="outline">Outline</Button>
-                      <Button variant="ghost">Ghost</Button>
-                      <Button variant="link">Link</Button>
+      <div class="w-full">
+        <Tabs defaultValue="buttons" class="w-full" client:load>
+          <TabsList class="w-full justify-start">
+            <TabsTrigger value="buttons">Buttons</TabsTrigger>
+            <TabsTrigger value="badges">Badges</TabsTrigger>
+            <TabsTrigger value="cards">Cards</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="buttons">
+            <Card>
+              <CardHeader>
+                <CardTitle>Button Variants</CardTitle>
+                <CardDescription>
+                  Interactive button components with multiple variants and states
+                </CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-8">
+                <div>
+                  <div class="mb-4 text-sm text-muted-foreground">
+                    Style Variants
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                      <div class="flex flex-wrap gap-4">
+                        <Button>Default</Button>
+                        <Button variant="secondary">Secondary</Button>
+                        <Button variant="destructive">Destructive</Button>
+                      </div>
+                      <div class="text-sm text-muted-foreground">
+                        Primary actions and critical operations
+                      </div>
+                    </div>
+                    <div class="space-y-4">
+                      <div class="flex flex-wrap gap-4">
+                        <Button variant="outline">Outline</Button>
+                        <Button variant="ghost">Ghost</Button>
+                        <Button variant="link">Link</Button>
+                      </div>
+                      <div class="text-sm text-muted-foreground">
+                        Secondary and tertiary actions
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div class="text-sm text-muted-foreground mb-4">Size Variants</div>
+                </div>
+                <Separator />
+                <div>
+                  <div class="mb-4 text-sm text-muted-foreground">
+                    Size Variants
+                  </div>
+                  <div class="space-y-4">
                     <div class="flex items-center gap-4">
                       <Button size="sm">Small</Button>
                       <Button>Default</Button>
                       <Button size="lg">Large</Button>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="badges">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Badge Variants</CardTitle>
-                  <CardDescription>Different badge styles for different contexts</CardDescription>
-                </CardHeader>
-                <CardContent class="space-y-8">
-                  <div>
-                    <div class="text-sm text-muted-foreground mb-4">Style Variants</div>
-                    <div class="flex flex-wrap gap-4">
-                      <Badge>Default</Badge>
-                      <Badge variant="secondary">Secondary</Badge>
-                      <Badge variant="destructive">Destructive</Badge>
-                      <Badge variant="outline">Outline</Badge>
+                    <div class="text-sm text-muted-foreground">
+                      Different sizes for various contexts and hierarchies
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+                </div>
+                <Separator />
+                <div>
+                  <div class="mb-4 text-sm text-muted-foreground">States</div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Button disabled>Disabled</Button>
+                    <div class="space-y-2">
+                      <Button class="w-full cursor-not-allowed opacity-50">
+                        <span class="mr-2">Loading</span>
+                        <div class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
+                      </Button>
+                      <div class="text-xs text-muted-foreground">Loading state with spinner</div>
+                    </div>
+                    <div class="space-y-2">
+                      <Button class="w-full cursor-not-allowed opacity-50">
+                        <span class="mr-2">Processing</span>
+                        <div class="h-4 w-4 animate-pulse rounded-full bg-current"></div>
+                      </Button>
+                      <div class="text-xs text-muted-foreground">Processing state with pulse</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <div class="w-full space-y-2">
+                  <p class="text-sm text-muted-foreground">
+                    Import from <code class="bg-muted px-1 py-0.5 rounded text-xs">@/components/ui/button</code>
+                  </p>
+                  <p class="text-xs text-muted-foreground">
+                    Built with Radix UI Button primitive and styled with Tailwind CSS
+                  </p>
+                </div>
+              </CardFooter>
+            </Card>
+          </TabsContent>
 
-            <TabsContent value="cards">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Card Examples</CardTitle>
-                  <CardDescription>Different card layouts and use cases</CardDescription>
-                </CardHeader>
-                <CardContent class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Basic Card</CardTitle>
-                      <CardDescription>A simple card layout</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p class="text-muted-foreground">This is a basic card example showing the standard layout.</p>
-                    </CardContent>
-                    <CardFooter>
-                      <Button>Action</Button>
-                    </CardFooter>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Interactive Card</CardTitle>
-                      <CardDescription>With multiple actions</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p class="text-muted-foreground mb-4">This card demonstrates multiple interactive elements.</p>
-                      <div class="flex gap-2">
-                        <Badge>Featured</Badge>
-                        <Badge variant="secondary">New</Badge>
+          <TabsContent value="badges">
+            <Card>
+              <CardHeader>
+                <CardTitle>Badge Variants</CardTitle>
+                <CardDescription>Status indicators and labels with different styles</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-8">
+                <div>
+                  <div class="text-sm text-muted-foreground mb-4">Style Variants</div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                      <div class="flex flex-wrap gap-4">
+                        <Badge variant="default">Default</Badge>
+                        <Badge variant="secondary">Secondary</Badge>
+                        <Badge variant="destructive">Destructive</Badge>
                       </div>
-                    </CardContent>
-                    <CardFooter class="flex justify-between">
-                      <Button variant="outline">Cancel</Button>
-                      <Button>Continue</Button>
-                    </CardFooter>
-                  </Card>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-    </div>
-  </Layout>
+                      <div class="text-sm text-muted-foreground">
+                        Primary status indicators and labels
+                      </div>
+                    </div>
+                    <div class="space-y-4">
+                      <div class="flex flex-wrap gap-4">
+                        <Badge variant="outline">Outline</Badge>
+                        <Badge variant="outline" class="bg-background">
+                          <span class="mr-1">✓</span> Completed
+                        </Badge>
+                        <Badge variant="outline" class="text-muted-foreground">
+                          <span class="mr-1">⚠</span> Warning
+                        </Badge>
+                      </div>
+                      <div class="text-sm text-muted-foreground">
+                        Subtle status indicators and tags
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <div class="text-sm text-muted-foreground mb-4">Common Use Cases</div>
+                  <div class="space-y-4">
+                    <div class="flex flex-wrap gap-2">
+                      <Badge variant="secondary">New</Badge>
+                      <Badge variant="outline">Documentation</Badge>
+                      <Badge variant="destructive">Breaking Change</Badge>
+                      <Badge>Feature</Badge>
+                    </div>
+                    <div class="text-sm text-muted-foreground">
+                      Examples of badges in a real-world context
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <div class="w-full space-y-2">
+                  <p class="text-sm text-muted-foreground">
+                    Import from <code class="bg-muted px-1 py-0.5 rounded text-xs">@/components/ui/badge</code>
+                  </p>
+                  <p class="text-xs text-muted-foreground">
+                    Built with Radix UI Badge primitive and styled with Tailwind CSS
+                  </p>
+                </div>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="cards">
+            <Card>
+              <CardHeader>
+                <CardTitle>Card Examples</CardTitle>
+                <CardDescription
+                  >Different card layouts and use cases</CardDescription
+                >
+              </CardHeader>
+              <CardContent class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Basic Card</CardTitle>
+                    <CardDescription>A simple card layout</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p class="text-muted-foreground">
+                      This is a basic card example showing the standard layout.
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button>Action</Button>
+                  </CardFooter>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Interactive Card</CardTitle>
+                    <CardDescription>With multiple actions</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p class="mb-4 text-muted-foreground">
+                      This card demonstrates multiple interactive elements.
+                    </p>
+                    <div class="flex gap-2">
+                      <Badge>Featured</Badge>
+                      <Badge variant="secondary">New</Badge>
+                    </div>
+                  </CardContent>
+                  <CardFooter class="flex justify-between">
+                    <Button variant="outline">Cancel</Button>
+                    <Button>Continue</Button>
+                  </CardFooter>
+                </Card>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
+  </div>
+</Layout>

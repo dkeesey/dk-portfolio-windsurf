@@ -70,7 +70,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] flex items-center">
+    <section className="relative flex min-h-[80vh] items-center">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-10"
@@ -78,23 +78,21 @@ export function HeroSection() {
       />
       <Container>
         <div className="max-w-2xl">
-          <h1 className="text-5xl font-bold mb-6">
-            Hi, I'm Dean Keesey
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8">
-            Full Stack Developer & Software Engineer crafting high-performance web applications
-            with modern technologies and best practices.
+          <h1 className="mb-6 text-5xl font-bold">Hi, I'm Dean Keesey</h1>
+          <p className="mb-8 text-xl text-muted-foreground">
+            Full Stack Developer & Software Engineer crafting high-performance
+            web applications with modern technologies and best practices.
           </p>
           <div className="flex gap-4">
             <a
               href="#projects"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-8 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
             >
               Contact Me
             </a>

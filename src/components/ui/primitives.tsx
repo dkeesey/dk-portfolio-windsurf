@@ -67,12 +67,7 @@ export function Grid({
 }) {
   return (
     <Component
-      className={cn(
-        'grid',
-        `grid-cols-${cols}`,
-        `gap-${gap}`,
-        className
-      )}
+      className={cn('grid', `grid-cols-${cols}`, `gap-${gap}`, className)}
       {...props}
     />
   );
@@ -99,11 +94,7 @@ export function Container({
 
   return (
     <Component
-      className={cn(
-        'mx-auto w-full px-4',
-        sizeClasses[size],
-        className
-      )}
+      className={cn('mx-auto w-full px-4', sizeClasses[size], className)}
       {...props}
     />
   );

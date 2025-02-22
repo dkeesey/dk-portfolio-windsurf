@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { Container } from '@/components/ui/primitives';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -16,7 +22,8 @@ type Project = {
 const projects: Project[] = [
   {
     title: 'E-commerce Platform',
-    description: 'A modern e-commerce platform built with Next.js and Stripe integration.',
+    description:
+      'A modern e-commerce platform built with Next.js and Stripe integration.',
     image: '/projects/ecommerce.jpg',
     technologies: ['Next.js', 'TypeScript', 'Stripe', 'Tailwind CSS'],
     category: 'Full Stack',
@@ -24,7 +31,8 @@ const projects: Project[] = [
   },
   {
     title: 'Task Management API',
-    description: 'RESTful API for task management with authentication and real-time updates.',
+    description:
+      'RESTful API for task management with authentication and real-time updates.',
     image: '/projects/task-api.jpg',
     technologies: ['Node.js', 'Express', 'MongoDB', 'Socket.IO'],
     category: 'Backend',
@@ -40,14 +48,15 @@ export function ProjectsGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const filteredProjects = projects.filter(
-    (project) => selectedCategory === 'All' || project.category === selectedCategory
+    (project) =>
+      selectedCategory === 'All' || project.category === selectedCategory
   );
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="bg-muted/30 py-20">
       <Container>
-        <div className="flex flex-col items-center mb-12">
-          <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
+        <div className="mb-12 flex flex-col items-center">
+          <h2 className="mb-8 text-3xl font-bold">Featured Projects</h2>
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
               <Button
@@ -62,7 +71,7 @@ export function ProjectsGrid() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project, index) => (
             <a
               key={project.title}
@@ -78,9 +87,10 @@ export function ProjectsGrid() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="object-cover w-full h-full transform transition-transform duration-300"
+                    className="h-full w-full transform object-cover transition-transform duration-300"
                     style={{
-                      transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
+                      transform:
+                        hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
                     }}
                   />
                 </div>

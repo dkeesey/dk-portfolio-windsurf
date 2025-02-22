@@ -6,8 +6,8 @@ export function TypographyDemo() {
           Typography Demo
         </h1>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king, seeing how much happier his subjects were, realized the error of
-          his ways and promised to rule with justice.
+          The king, seeing how much happier his subjects were, realized the
+          error of his ways and promised to rule with justice.
         </p>
       </div>
 
@@ -16,8 +16,8 @@ export function TypographyDemo() {
           The Joke Tax
         </h2>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king, seeing how much happier his subjects were, realized the error of
-          his ways and promised to rule with justice.
+          The king, seeing how much happier his subjects were, realized the
+          error of his ways and promised to rule with justice.
         </p>
       </div>
 
@@ -26,8 +26,8 @@ export function TypographyDemo() {
           The Punchline Tax
         </h3>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king, seeing how much happier his subjects were, realized the error of
-          his ways and promised to rule with justice.
+          The king, seeing how much happier his subjects were, realized the
+          error of his ways and promised to rule with justice.
         </p>
       </div>
 
@@ -36,8 +36,8 @@ export function TypographyDemo() {
           People stopped telling jokes
         </h4>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king, seeing how much happier his subjects were, realized the error of
-          his ways and promised to rule with justice.
+          The king, seeing how much happier his subjects were, realized the
+          error of his ways and promised to rule with justice.
         </p>
       </div>
     </div>
