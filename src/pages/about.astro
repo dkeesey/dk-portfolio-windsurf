@@ -3,11 +3,12 @@ import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
 
-const seo = {
+const seo: SEOProps = {
   title: "About Me - Dean Keesey",
   description: "Learn more about Dean Keesey, a full-stack developer passionate about creating innovative web solutions.",
-  type: "website"
+  type: "website" as const
 };
 
 const skills = {

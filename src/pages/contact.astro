@@ -1,15 +1,18 @@
+---
 import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import { ContactForm } from '@/components/forms/ContactForm';
+import type { SEOProps } from '@/types';
 
-const seo = {
+const seo: SEOProps = {
   title: "Contact - Dean Keesey",
   description: "Get in touch with Dean Keesey for collaboration, opportunities, or questions about web development projects.",
-  type: "website"
+  type: "website" as const
 };
+---
 
 <Layout {seo}>
-  <Container as="main" className="py-12">
+  <Container as="main" class="py-12">
     <div class="mx-auto max-w-2xl space-y-8">
       <header class="space-y-4">
         <h1 class="text-4xl font-bold">Get in Touch</h1>

@@ -1,14 +1,12 @@
 ---
 import { Dialog as DialogReact } from '@/components/ui/dialog';
+import type { DialogProps } from '@radix-ui/react-dialog';
 
-interface Props {
-  class?: string;
-  className?: string;
-}
+type Props = DialogProps;
 
-const { class: classAstro, className, ...props } = Astro.props;
+const { ...props } = Astro.props;
 ---
 
-<DialogReact client:load class={classAstro} className={className} {...props}>
+<DialogReact {...props}>
   <slot />
 </DialogReact> 
