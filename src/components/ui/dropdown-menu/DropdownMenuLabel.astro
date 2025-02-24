@@ -1,19 +1,16 @@
-import { DropdownMenuLabel as DropdownMenuLabelReact } from '@/components/ui/dropdown-menu';
+---
+import { DropdownMenuLabel as DropdownMenuLabelPrimitive } from '@/components/ui/dropdown-menu'
 
 interface Props {
-  class?: string;
-  className?: string;
-  inset?: boolean;
+  inset?: boolean
 }
 
-const { class: classAstro, className, inset, ...props } = Astro.props;
+const { inset } = Astro.props
+---
 
-<DropdownMenuLabelReact 
+<DropdownMenuLabelPrimitive 
   client:load 
-  class={classAstro} 
-  className={className}
   inset={inset}
-  {...props}
 >
   <slot />
-</DropdownMenuLabelReact> 
+</DropdownMenuLabelPrimitive> 

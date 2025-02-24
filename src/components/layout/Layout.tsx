@@ -5,7 +5,15 @@ import Analytics from '../analytics/Analytics.astro';
 import { initializePerformanceMonitoring } from '@/lib/performance';
 import { useEffect } from 'react';
 
-export function Layout({ children }: PropsWithChildren) {
+export interface SEOProps {
+title: string;
+description: string;
+}
+
+interface LayoutProps extends PropsWithChildren {
+seo: SEOProps;
+}
+export function Layout({ children, seo }: LayoutProps) {
   useEffect(() => {
     initializePerformanceMonitoring();
   }, []);

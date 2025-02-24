@@ -1,17 +1,16 @@
-import { DropdownMenuTrigger as DropdownMenuTriggerReact } from '@/components/ui/dropdown-menu';
+---
+import { DropdownMenuTrigger as DropdownMenuTriggerPrimitive } from '@/components/ui/dropdown-menu'
 
 interface Props {
-  class?: string;
-  className?: string;
+  class?: string
 }
 
-const { class: classAstro, className, ...props } = Astro.props;
+const { class: className } = Astro.props
+---
 
-<DropdownMenuTriggerReact 
+<DropdownMenuTriggerPrimitive 
   client:load 
-  class={classAstro} 
-  className={className} 
-  {...props}
+  class={className}
 >
   <slot />
-</DropdownMenuTriggerReact> 
+</DropdownMenuTriggerPrimitive> 
