@@ -1,20 +1,18 @@
 ---
 import { Layout as LayoutReact } from './Layout';
+import SEO from '../seo/SEO.astro';
+import type { SEOProps } from '@/types';
 
 interface Props {
-  seo?: {
-    title?: string;
-    description?: string;
-    image?: string;
-    type?: 'website' | 'article';
-    publishDate?: Date;
-    author?: string;
-  };
+  seo?: SEOProps;
 }
 
 const { seo } = Astro.props;
---- 
+---
 
-<LayoutReact client:load seo={seo}>
-  <slot />
-</LayoutReact> 
+<>
+  <SEO {...seo} />
+  <LayoutReact client:load>
+    <slot />
+  </LayoutReact>
+</> 
