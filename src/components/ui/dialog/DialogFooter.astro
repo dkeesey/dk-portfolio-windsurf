@@ -7,8 +7,10 @@ interface Props {
 }
 
 const { class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<DialogFooterReact client:load class={classAstro} className={className} {...props}>
+<DialogFooterReact client:load className={combinedClassName} {...props}>
   <slot />
-</DialogFooterReact> 
+</DialogFooterReact>
+

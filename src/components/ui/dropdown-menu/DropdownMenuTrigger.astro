@@ -1,16 +1,19 @@
 ---
-import { DropdownMenuTrigger as DropdownMenuTriggerPrimitive } from '@/components/ui/dropdown-menu'
+import { DropdownMenuTrigger as DropdownMenuTriggerPrimitive } from '@/components/ui/dropdown-menu';
 
 interface Props {
-  class?: string
+  class?: string;
+  className?: string;
 }
 
-const { class: className } = Astro.props
+const { class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<DropdownMenuTriggerPrimitive 
-  client:load 
-  class={className}
+<DropdownMenuTriggerPrimitive
+  client:load
+  className={combinedClassName}
+  {...props}
 >
   <slot />
-</DropdownMenuTriggerPrimitive> 
+</DropdownMenuTriggerPrimitive>

@@ -2,14 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 
-type Particle = {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-};
-
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -40,6 +32,15 @@ export function HeroSection() {
       originalY: number;
       
       constructor() {
+        const canvas = canvasRef.current;
+        if (!canvas) {
+          this.x = this.originalX = 0;
+          this.y = this.originalY = 0;
+          this.vx = 0;
+          this.vy = 0;
+          this.size = 1;
+          return;
+        }
         this.x = this.originalX = Math.random() * canvas.width;
         this.y = this.originalY = Math.random() * canvas.height;
         this.vx = (Math.random() - 0.5) * 2;

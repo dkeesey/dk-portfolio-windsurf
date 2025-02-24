@@ -10,37 +10,40 @@ export interface Props {
 }
 
 const {
-  title = "Dean Keesey - Full Stack Developer",
-  description = "Full Stack Developer specializing in modern web development with React, TypeScript, and Node.js",
-  image = "/images/og-default.jpg", // Default OG image
+  title = 'Dean Keesey - Full Stack Developer',
+  description = 'Full Stack Developer specializing in modern web development with React, TypeScript, and Node.js',
+  image = '/images/og-default.jpg', // Default OG image
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-  type = "website",
+  type = 'website',
   publishDate,
-  author = "Dean Keesey"
+  author = 'Dean Keesey',
 } = Astro.props;
 
 const siteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Dean Keesey Portfolio",
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Dean Keesey Portfolio',
   url: Astro.site,
 };
 
-const pageSchema = type === 'article' ? {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: title,
-  image: image,
-  author: {
-    "@type": "Person",
-    name: author,
-  },
-  datePublished: publishDate?.toISOString(),
-  publisher: {
-    "@type": "Person",
-    name: author,
-  }
-} : siteSchema;
+const pageSchema =
+  type === 'article'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        image: image,
+        author: {
+          '@type': 'Person',
+          name: author,
+        },
+        datePublished: publishDate?.toISOString(),
+        publisher: {
+          '@type': 'Person',
+          name: author,
+        },
+      }
+    : siteSchema;
 ---
 
 <!-- Essential Meta Tags -->
@@ -66,13 +69,22 @@ const pageSchema = type === 'article' ? {
 <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
 <!-- JSON-LD -->
-<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(pageSchema)}
+/>
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
 <!-- RSS Feed -->
-<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="RSS Feed"
+  href="/rss.xml"
+/>
 
 <!-- Title -->
-<title>{title}</title> 
+<title>{title}</title>

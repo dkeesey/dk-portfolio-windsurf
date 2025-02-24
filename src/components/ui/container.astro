@@ -8,9 +8,10 @@ interface Props {
 }
 
 const { as, class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-
-<ContainerReact client:load as={as} class={classAstro} className={className} {...props}>
+<ContainerReact client:load as={as} className={combinedClassName} {...props}>
   <slot />
-</ContainerReact> 
+</ContainerReact>
+
