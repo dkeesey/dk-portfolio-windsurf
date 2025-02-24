@@ -4,10 +4,15 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
 import { SkillsMatrix } from '@/components/sections/SkillsMatrix';
 import { ProjectsGrid } from '@/components/sections/ProjectsGrid';
+
+const seo = {
+  title: "Dean Keesey - Full Stack Developer",
+  description: "Full Stack Developer specializing in modern web development with React, TypeScript, and Node.js",
+};
 ---
 
-<Layout>
-  <main class="min-h-screen">
+<Layout {seo}>
+  <main class="space-y-24 py-12">
     <HeroSection client:load />
     <SkillsMatrix client:visible />
     <ExperienceTimeline client:visible />

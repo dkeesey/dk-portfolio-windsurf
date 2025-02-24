@@ -1,0 +1,95 @@
+---
+import { Layout } from '@/components/layout/Layout';
+import { Container } from '@/components/ui/container';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
+const seo = {
+  title: "About Me - Dean Keesey",
+  description: "Learn more about Dean Keesey, a full-stack developer passionate about creating innovative web solutions.",
+  type: "website"
+};
+
+const skills = {
+  frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Redux'],
+  backend: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'GraphQL'],
+  devops: ['Docker', 'AWS', 'CI/CD', 'Git', 'Linux'],
+  tools: ['VS Code', 'Figma', 'Postman', 'Jest', 'GitHub']
+};
+
+const interests = [
+  'Web Development',
+  'Open Source',
+  'UI/UX Design',
+  'Cloud Computing',
+  'Machine Learning'
+];
+
+---
+
+<Layout {seo}>
+  <Container as="main" class="py-12">
+    <div class="space-y-16">
+      {/* Bio Section */}
+      <section class="space-y-6">
+        <h1 class="text-4xl font-bold">About Me</h1>
+        <div class="prose prose-lg dark:prose-invert">
+          <p>
+            Hi, I'm Dean Keesey, a Full Stack Developer passionate about creating efficient,
+            scalable, and user-friendly web applications. With years of experience in modern
+            web technologies, I specialize in building high-performance applications that
+            deliver exceptional user experiences.
+          </p>
+          <p>
+            My approach combines technical expertise with a deep understanding of business
+            needs, ensuring that every solution not only works flawlessly but also adds
+            real value to users and stakeholders.
+          </p>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Technical Skills</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {Object.entries(skills).map(([category, items]) => (
+            <Card>
+              <CardContent class="pt-6">
+                <h3 class="mb-4 text-xl font-medium capitalize">{category}</h3>
+                <div class="flex flex-wrap gap-2">
+                  {items.map((skill) => (
+                    <Badge variant="secondary">{skill}</Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Interests Section */}
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Interests & Focus Areas</h2>
+        <div class="flex flex-wrap gap-3">
+          {interests.map((interest) => (
+            <Badge variant="outline" class="text-lg py-2">{interest}</Badge>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section class="rounded-lg bg-muted p-8 text-center">
+        <h2 class="mb-4 text-2xl font-semibold">Let's Work Together</h2>
+        <p class="mb-6 text-muted-foreground">
+          Interested in collaborating or have a project in mind?
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90"
+        >
+          Get in Touch
+        </a>
+      </section>
+    </div>
+  </Container>
+</Layout> 
