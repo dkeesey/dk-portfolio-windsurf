@@ -1,0 +1,17 @@
+import { ToastViewport as ToastViewportReact } from '@/components/ui/toast';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+
+<ToastViewportReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  {...props}
+>
+  <slot />
+</ToastViewportReact> 

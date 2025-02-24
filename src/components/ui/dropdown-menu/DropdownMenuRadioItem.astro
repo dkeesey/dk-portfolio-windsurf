@@ -1,0 +1,23 @@
+---
+import { DropdownMenuRadioItem as DropdownMenuRadioItemReact } from '@/components/ui/dropdown-menu';
+
+interface Props {
+  class?: string;
+  className?: string;
+  value: string;
+}
+
+const { class: classAstro, className, value, ...props } = Astro.props;
+---
+
+<DropdownMenuRadioItemReact 
+  client:load 
+  class={classAstro} 
+  className={className}
+  value={value}
+  {...props}
+>
+  <slot />
+</DropdownMenuRadioItemReact>
+
+ 

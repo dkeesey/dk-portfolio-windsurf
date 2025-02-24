@@ -1,0 +1,19 @@
+import { DropdownMenuLabel as DropdownMenuLabelReact } from '@/components/ui/dropdown-menu';
+
+interface Props {
+  class?: string;
+  className?: string;
+  inset?: boolean;
+}
+
+const { class: classAstro, className, inset, ...props } = Astro.props;
+
+<DropdownMenuLabelReact 
+  client:load 
+  class={classAstro} 
+  className={className}
+  inset={inset}
+  {...props}
+>
+  <slot />
+</DropdownMenuLabelReact> 

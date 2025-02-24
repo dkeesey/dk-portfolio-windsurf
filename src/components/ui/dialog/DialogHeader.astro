@@ -1,0 +1,19 @@
+---
+import { DialogHeader as DialogHeaderReact } from '@/components/ui/dialog';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<DialogHeaderReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  {...props}
+>
+  <slot />
+</DialogHeaderReact> 

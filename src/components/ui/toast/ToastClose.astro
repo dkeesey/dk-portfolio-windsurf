@@ -1,0 +1,19 @@
+---
+import { ToastClose as ToastCloseReact } from '@/components/ui/toast';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<ToastCloseReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  {...props}
+>
+  <slot />
+</ToastCloseReact> 

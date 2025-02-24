@@ -1,0 +1,19 @@
+---
+import { ToastTitle as ToastTitleReact } from '@/components/ui/toast';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<ToastTitleReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  {...props}
+>
+  <slot />
+</ToastTitleReact> 
