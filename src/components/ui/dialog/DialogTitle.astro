@@ -1,0 +1,14 @@
+---
+import { DialogTitle as DialogTitleReact } from '@/components/ui/dialog';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<DialogTitleReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</DialogTitleReact> 
