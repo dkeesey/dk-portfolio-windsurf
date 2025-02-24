@@ -1,0 +1,14 @@
+---
+import { CommandEmpty as CommandEmptyReact } from '@/components/ui/command';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<CommandEmptyReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</CommandEmptyReact> 
