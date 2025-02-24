@@ -1,0 +1,14 @@
+---
+import { CardHeader as CardHeaderReact } from '@/components/ui/card';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<CardHeaderReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</CardHeaderReact> 
