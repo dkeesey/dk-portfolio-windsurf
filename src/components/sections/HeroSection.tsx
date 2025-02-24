@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { Container } from '@/components/ui/primitives';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Container } from '@/components/ui/container';
 
 type Particle = {
   x: number;
@@ -11,6 +12,7 @@ type Particle = {
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,54 +22,99 @@ export function HeroSection() {
     if (!ctx) return;
 
     // Set canvas size
-    const updateSize = () => {
+    const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.8; // 80vh
+      canvas.height = window.innerHeight * 0.8;
     };
-    updateSize();
-    window.addEventListener('resize', updateSize);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Create particles
-    const particles: Particle[] = Array.from({ length: 50 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      size: Math.random() * 4 + 1,
-    }));
+    // Enhanced particle system with mouse interaction
+    class Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      originalX: number;
+      originalY: number;
+      
+      constructor() {
+        this.x = this.originalX = Math.random() * canvas.width;
+        this.y = this.originalY = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.size = Math.random() * 3 + 1;
+      }
 
-    // Animation loop
-    let animationFrame: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      update(mouseX: number, mouseY: number) {
+        // Mouse repulsion
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+          const angle = Math.atan2(dy, dx);
+          const force = (100 - distance) / 100;
+          this.vx -= Math.cos(angle) * force * 0.5;
+          this.vy -= Math.sin(angle) * force * 0.5;
+        }
 
-      // Update and draw particles
-      particles.forEach((particle) => {
-        // Update position
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+        // Return to original position
+        const homeX = this.originalX - this.x;
+        const homeY = this.originalY - this.y;
+        this.vx += homeX * 0.05;
+        this.vy += homeY * 0.05;
 
-        // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        // Apply velocity with damping
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+        
+        this.x += this.vx;
+        this.y += this.vy;
+      }
 
-        // Draw particle
+      draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(var(--primary), 0.1)';
         ctx.fill();
+      }
+    }
+
+    // Initialize particles
+    const particles: Particle[] = Array.from({ length: 50 }, () => new Particle());
+
+    // Animation loop
+    function animate() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update(mousePosition.x, mousePosition.y);
+        particle.draw(ctx);
       });
 
-      animationFrame = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
+    }
+
+    // Handle mouse movement
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
     };
 
+    canvas.addEventListener('mousemove', handleMouseMove);
     animate();
 
     return () => {
-      window.removeEventListener('resize', updateSize);
-      cancelAnimationFrame(animationFrame);
+      window.removeEventListener('resize', resizeCanvas);
+      canvas.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [mousePosition]);
 
   return (
     <section className="relative flex min-h-[80vh] items-center">
@@ -84,18 +131,12 @@ export function HeroSection() {
             web applications with modern technologies and best practices.
           </p>
           <div className="flex gap-4">
-            <a
-              href="#projects"
-              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-8 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              Contact Me
-            </a>
+            <Button asChild size="lg">
+              <a href="#projects">View Projects</a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="#contact">Contact Me</a>
+            </Button>
           </div>
         </div>
       </Container>
