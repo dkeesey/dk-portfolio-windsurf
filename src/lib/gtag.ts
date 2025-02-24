@@ -27,6 +27,16 @@ export const event = ({ action, category, label, value }: GTagEvent): void => {
 // Type declaration for gtag
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (
+      command: 'config' | 'event',
+      targetId: string,
+      params?: {
+        page_path?: string;
+        event_category?: string;
+        event_label?: string;
+        value?: number;
+        [key: string]: string | number | boolean | null | undefined;
+      }
+    ) => void;
   }
 } 
