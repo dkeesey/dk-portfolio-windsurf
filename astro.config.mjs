@@ -10,9 +10,7 @@ export default defineConfig({
   site: 'https://deankeesey.com', // Replace with your site URL
   integrations: [
     react(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
+    tailwind(),
     partytown({
       config: {
         forward: ['dataLayer.push', 'gtag'],

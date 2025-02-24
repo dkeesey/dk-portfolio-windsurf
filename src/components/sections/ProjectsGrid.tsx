@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Container } from '@/components/ui/primitives';
 import {
   Card,
   CardHeader,
@@ -9,7 +8,6 @@ import {
   CardContent,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 type Project = {
@@ -43,15 +41,13 @@ const projects: Project[] = [
   // Add more projects here
 ];
 
-const categories = ['All', 'Full Stack', 'Frontend', 'Backend'];
-
 export function ProjectsGrid() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
   // Get unique categories and technologies
-  const categories = [...new Set(projects.map(p => p.category))];
+  const uniqueCategories = [...new Set(projects.map(p => p.category))];
   const technologies = [...new Set(projects.flatMap(p => p.technologies))];
 
   // Filter projects based on search, category, and tech
@@ -65,7 +61,7 @@ export function ProjectsGrid() {
 
   return (
     <section className="py-16">
-      <div className="container">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="mb-8 space-y-6">
           {/* Search */}
           <div className="max-w-md">
@@ -87,7 +83,7 @@ export function ProjectsGrid() {
             >
               All
             </Badge>
-            {categories.map(category => (
+            {uniqueCategories.map(category => (
               <Badge
                 key={category}
                 variant={selectedCategory === category ? 'default' : 'outline'}
