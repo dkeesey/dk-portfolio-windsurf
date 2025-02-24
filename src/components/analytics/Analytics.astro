@@ -1,12 +1,14 @@
 ---
-import { GA_MEASUREMENT_ID } from '@/lib/gtag';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { GA_MEASUREMENT_ID } from '@/lib/gtag';
 ---
 
 <!-- Google Analytics -->
 <script 
   type="text/partytown"
   src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+  async
+  defer
 ></script>
 <script type="text/partytown" define:vars={{ GA_MEASUREMENT_ID }}>
   window.dataLayer = window.dataLayer || [];
@@ -16,4 +18,4 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 </script>
 
 <!-- Vercel Analytics -->
-<VercelAnalytics client:load /> 
+<VercelAnalytics client:only="react" /> 
