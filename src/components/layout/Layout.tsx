@@ -1,19 +1,10 @@
 import { type PropsWithChildren } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import Analytics from '../analytics/Analytics.astro';
 import { initializePerformanceMonitoring } from '@/lib/performance';
 import { useEffect } from 'react';
 
-export interface SEOProps {
-title: string;
-description: string;
-}
-
-interface LayoutProps extends PropsWithChildren {
-seo: SEOProps;
-}
-export function Layout({ children, seo }: LayoutProps) {
+export function Layout({ children }: PropsWithChildren) {
   useEffect(() => {
     initializePerformanceMonitoring();
   }, []);
@@ -23,7 +14,6 @@ export function Layout({ children, seo }: LayoutProps) {
       <Header />
       <div className="flex-grow">{children}</div>
       <Footer />
-      <Analytics />
     </div>
   );
 }
