@@ -1,0 +1,19 @@
+---
+import { TabsList as TabsListReact } from '@/components/ui/tabs';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<TabsListReact 
+  client:visible 
+  class={classAstro} 
+  className={className}
+  {...props}
+>
+  <slot />
+</TabsListReact> 

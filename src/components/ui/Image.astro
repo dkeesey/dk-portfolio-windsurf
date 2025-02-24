@@ -11,6 +11,12 @@ export interface Props {
   loading?: 'lazy' | 'eager';
   decoding?: 'async' | 'sync' | 'auto';
   sizes?: string;
+  artDirectionSources?: {
+    media: string;
+    src: ImageMetadata;
+    width?: number;
+    height?: number;
+  }[];
 }
 
 const props = Astro.props;
@@ -22,17 +28,45 @@ const decoding = props.decoding ?? 'async';
 const sizes = props.sizes ?? '(min-width: 1024px) 1024px, 100vw';
 
 const aspectRatio = getAspectRatio(width, height);
-const srcSets = await generateSrcSet(props.src);
+const defaultSrcSets = await generateSrcSet(props.src);
+
+// Generate srcsets for art direction sources
+const artDirectionSrcSets = props.artDirectionSources 
+  ? await Promise.all(
+      props.artDirectionSources.map(async (source) => ({
+        media: source.media,
+        srcSets: await generateSrcSet(source.src),
+        width: source.width ?? source.src.width,
+        height: source.height ?? source.src.height,
+      }))
+    )
+  : [];
 ---
 
 <picture>
-  {srcSets && Object.entries(srcSets).map(([format, images]) => (
+  {/* Art direction sources */}
+  {artDirectionSrcSets.map((artSource) => (
+    artSource.srcSets && Object.entries(artSource.srcSets).map(([format, images]) => (
+      <source
+        media={artSource.media}
+        type={`image/${format}`}
+        srcset={getSrcSet(images)}
+        sizes={sizes}
+        width={artSource.width}
+        height={artSource.height}
+      />
+    ))
+  ))}
+  
+  {/* Default sources */}
+  {defaultSrcSets && Object.entries(defaultSrcSets).map(([format, images]) => (
     <source
       type={`image/${format}`}
       srcset={getSrcSet(images)}
       sizes={sizes}
     />
   ))}
+  
   <img
     src={props.src.src}
     alt={props.alt}

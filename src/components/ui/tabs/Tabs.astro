@@ -1,0 +1,21 @@
+---
+import { Tabs as TabsReact } from '@/components/ui/tabs';
+
+interface Props {
+  class?: string;
+  className?: string;
+  defaultValue?: string;
+}
+
+const { class: classAstro, className, defaultValue, ...props } = Astro.props;
+---
+
+<TabsReact 
+  client:load 
+  class={classAstro} 
+  className={className}
+  defaultValue={defaultValue}
+  {...props}
+>
+  <slot />
+</TabsReact> 

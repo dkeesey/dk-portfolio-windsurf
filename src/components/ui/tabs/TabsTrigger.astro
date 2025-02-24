@@ -1,0 +1,21 @@
+---
+import { TabsTrigger as TabsTriggerReact } from '@/components/ui/tabs';
+
+interface Props {
+  class?: string;
+  className?: string;
+  value: string;
+}
+
+const { class: classAstro, className, value, ...props } = Astro.props;
+---
+
+<TabsTriggerReact 
+  client:visible 
+  class={classAstro} 
+  className={className}
+  value={value}
+  {...props}
+>
+  <slot />
+</TabsTriggerReact>
