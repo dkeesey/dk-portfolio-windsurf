@@ -23,6 +23,58 @@ Creating a high-performance, developer-friendly portfolio that showcases Dean's 
   - First Contentful Paint: < 1.2s
   - Time to Interactive: < 2.5s
 
+## Component Architecture Guidelines
+
+### React-Astro Integration Pattern
+- Each UI component requires two implementations:
+  1. React (.tsx) for client-side interactivity
+  2. Astro (.astro) for server-side rendering
+- Astro components must include:
+  - Proper frontmatter delimiters
+  - TypeScript interfaces for props
+  - Proper client:load directives where needed
+
+### Component Organization
+- Group components by functionality:
+  - /ui: Base UI components
+  - /layout: Structural components
+  - /sections: Page-specific sections
+  - /features: Feature-specific components
+- Each component group should have:
+  - Index file for exports
+  - Consistent naming convention
+  - Proper TypeScript types
+  - Documentation comments
+
+### Props Handling
+- Use consistent interface naming (Props)
+- Handle both class and className props
+- Implement proper prop spreading
+- Include proper TypeScript types
+- Document required vs optional props
+
+## Git Workflow Standards
+
+### Commit Organization
+- Group related components together
+- Include associated utilities with components
+- Use conventional commit format:
+  - feat: New features
+  - fix: Bug fixes
+  - chore: Maintenance
+  - docs: Documentation
+  - style: Formatting
+  - refactor: Code restructuring
+  - test: Testing
+- Include detailed bullet points in commit body
+- Regular pushes to remote
+
+### Branch Strategy
+- Feature branches for new development
+- Main branch for production code
+- Regular rebasing to keep history clean
+- Clear branch naming convention
+
 ## Project Phases & Tasks
 
 ### 1. Foundation Setup ✅
@@ -112,9 +164,14 @@ Creating a high-performance, developer-friendly portfolio that showcases Dean's 
 - [ ] Enhance content management
   1. ✓ MDX components
   2. ✓ Code syntax highlighting
-  3. Image optimization pipeline
-  4. Category system
-  5. Related content system
+  3. ⚡ Image optimization pipeline
+    - ✓ Basic responsive images
+    - ✓ Format conversion (webp, avif)
+    - ✓ Lazy loading implementation
+    - [ ] Art direction support
+    - [ ] Placeholder generation
+  4. ✓ Category system
+  5. [ ] Related content system
 
 #### 3.4 Theme System
 - [ ] Implement theming
@@ -126,9 +183,12 @@ Creating a high-performance, developer-friendly portfolio that showcases Dean's 
 ### 4. Performance Optimization
 
 - [ ] Image optimization pipeline
-  - Responsive images
-  - Next-gen formats
-  - Lazy loading strategy
+  - ✓ Responsive images
+  - ✓ Next-gen formats (webp, avif)
+  - ✓ Lazy loading strategy
+  - [ ] Placeholder images
+  - [ ] Art direction
+  - [ ] Image preloading for critical images
 - [ ] JavaScript optimization
   - Code splitting
   - Dynamic imports
