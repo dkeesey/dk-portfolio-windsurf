@@ -1,28 +1,32 @@
 ---
-
 import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { SEOProps } from '@/types';
+import type { ReactNode } from 'react';
 
-const seo = {
+const seo: SEOProps = {
   title: "Projects - Dean Keesey",
   description: "Explore my portfolio of full-stack development projects, featuring modern web applications and technical solutions.",
-  type: "website"
+  type: "website" as const
 };
 
 const projects = await getCollection('projects');
-const categories = [...new Set(projects.flatMap(p => p.data.categories))];
+const categories = [...new Set(projects.flatMap((p: CollectionEntry<'projects'>) => p.data.categories as string[]))];
 
-// Sort projects by date
-const sortedProjects = projects.sort((a, b) => 
-  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
-);
+// Sort projects by date (fallback to current date if no publishDate)
+const sortedProjects = projects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => {
+  const dateA = a.data.publishDate || new Date();
+  const dateB = b.data.publishDate || new Date();
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout {seo}>
-  <Container as="main" className="py-12">
+  <Container as="main" class="py-12">
     <div class="space-y-8">
       <header class="space-y-4">
         <h1 class="text-4xl font-bold">Projects</h1>
@@ -32,17 +36,17 @@ const sortedProjects = projects.sort((a, b) =>
       </header>
 
       <div class="flex gap-2 flex-wrap">
-        {categories.map(category => (
+        {categories.map((category) => (
           <Badge variant="outline" data-category={category}>
-            {category}
+            {category as ReactNode}
           </Badge>
         ))}
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {sortedProjects.map(project => (
-          <Card className="group hover:shadow-lg transition-shadow">
-            <a href={`/projects/${project.id}`} className="block p-6">
+        {sortedProjects.map((project: CollectionEntry<'projects'>) => (
+          <Card class="group hover:shadow-lg transition-shadow">
+            <a href={`/projects/${project.slug}`} class="block p-6">
               {project.data.image && (
                 <div class="aspect-video overflow-hidden rounded-t-lg">
                   <img
@@ -57,9 +61,9 @@ const sortedProjects = projects.sort((a, b) =>
                 <CardDescription>{project.data.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div class="mt-4 flex flex-wrap gap-2">
                   {project.data.technologies.map((tech: string) => (
-                    <Badge variant="secondary">{tech}</Badge>
+                    <Badge variant="secondary">{tech as ReactNode}</Badge>
                   ))}
                 </div>
               </CardContent>
@@ -79,6 +83,7 @@ const sortedProjects = projects.sort((a, b) =>
   badges.forEach(badge => {
     badge.addEventListener('click', () => {
       const category = badge.getAttribute('data-category');
+      if (!category) return;
       
       projects.forEach(project => {
         const categories = project.getAttribute('data-categories')?.split(',') || [];
