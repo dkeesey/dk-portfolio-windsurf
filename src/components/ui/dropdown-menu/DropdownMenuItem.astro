@@ -1,3 +1,4 @@
+---
 import { DropdownMenuItem as DropdownMenuItemReact } from '@/components/ui/dropdown-menu';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { class: classAstro, className, inset, ...props } = Astro.props;
+---
 
 <DropdownMenuItemReact 
   client:load 

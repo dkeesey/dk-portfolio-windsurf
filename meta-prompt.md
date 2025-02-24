@@ -30,9 +30,19 @@ Creating a high-performance, developer-friendly portfolio that showcases Dean's 
   1. React (.tsx) for client-side interactivity
   2. Astro (.astro) for server-side rendering
 - Astro components must include:
-  - Proper frontmatter delimiters
+  - Proper frontmatter delimiters (---)
   - TypeScript interfaces for props
   - Proper client:load directives where needed
+  - Must follow this structure:
+    ```astro
+    ---
+    // imports
+    // interfaces
+    // props destructuring
+    ---
+    
+    // component template
+    ```
 
 ### Component Organization
 - Group components by functionality:

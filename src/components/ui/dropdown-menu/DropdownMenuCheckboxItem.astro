@@ -1,3 +1,4 @@
+---
 import { DropdownMenuCheckboxItem as DropdownMenuCheckboxItemReact } from '@/components/ui/dropdown-menu';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { class: classAstro, className, checked, ...props } = Astro.props;
+---
 
 <DropdownMenuCheckboxItemReact 
   client:load 
