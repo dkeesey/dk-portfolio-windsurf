@@ -7,13 +7,10 @@ interface Props {
 }
 
 const { class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<TabsListReact 
-  client:load 
-  class={classAstro} 
-  className={className}
-  {...props}
->
+<TabsListReact client:load className={combinedClassName} {...props}>
   <slot />
-</TabsListReact> 
+</TabsListReact>
+

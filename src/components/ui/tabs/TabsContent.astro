@@ -8,13 +8,13 @@ interface Props {
 }
 
 const { class: classAstro, className, value, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<TabsContentReact 
-  client:load 
-  class={classAstro} 
-  className={className}
+<TabsContentReact
+  client:load
   value={value}
+  className={combinedClassName}
   {...props}
 >
   <slot />

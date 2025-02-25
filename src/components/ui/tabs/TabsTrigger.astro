@@ -8,14 +8,9 @@ interface Props {
 }
 
 const { class: classAstro, className, value, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<TabsTriggerReact 
-  client:load 
-  class={classAstro} 
-  className={className}
-  value={value}
-  {...props}
->
+<TabsTriggerReact value={value} className={combinedClassName} {...props}>
   <slot />
 </TabsTriggerReact>

@@ -4,18 +4,19 @@ import { Tabs as TabsReact } from '@/components/ui/tabs';
 interface Props {
   class?: string;
   className?: string;
-  defaultValue?: string;
+  defaultValue: string;
 }
 
 const { class: classAstro, className, defaultValue, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---
 
-<TabsReact 
-  client:load 
-  class={classAstro} 
-  className={className}
+<TabsReact
+  client:load
   defaultValue={defaultValue}
+  className={combinedClassName}
   {...props}
 >
   <slot />
-</TabsReact> 
+</TabsReact>
+
