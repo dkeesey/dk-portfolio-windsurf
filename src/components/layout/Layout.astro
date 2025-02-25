@@ -2,7 +2,6 @@
 import { Layout as LayoutReact } from './Layout';
 import RootLayout from '@/layouts/RootLayout.astro';
 import SEO from '../seo/SEO.astro';
-import Analytics from '../analytics/Analytics.astro';
 import type { SEOProps } from '@/types';
 
 interface Props {
@@ -17,5 +16,5 @@ const { seo } = Astro.props;
   <LayoutReact>
     <slot />
   </LayoutReact>
-  <Analytics />
-</RootLayout> 
+</RootLayout>
+

@@ -24,7 +24,7 @@ const projects: Project[] = [
     title: 'E-commerce Platform',
     description:
       'A modern e-commerce platform built with Next.js and Stripe integration.',
-    image: '/projects/ecommerce.jpg',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=E-commerce+Platform',
     technologies: ['Next.js', 'TypeScript', 'Stripe', 'Tailwind CSS'],
     category: 'Full Stack',
     link: 'https://github.com/username/ecommerce',
@@ -33,7 +33,7 @@ const projects: Project[] = [
     title: 'Task Management API',
     description:
       'RESTful API for task management with authentication and real-time updates.',
-    image: '/projects/task-api.jpg',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Task+Management+API',
     technologies: ['Node.js', 'Express', 'MongoDB', 'Socket.IO'],
     category: 'Backend',
     link: 'https://github.com/username/task-api',

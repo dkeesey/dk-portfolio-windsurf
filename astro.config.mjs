@@ -46,8 +46,9 @@ export default defineConfig({
   },
   server: {
     headers: {
-      // Add Content-Security-Policy header
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self';"
+      // Development-friendly CSP that allows everything needed for local development
+      // NOTE: This should be made more restrictive for production
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' chrome-extension:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://placehold.co; font-src 'self' data:; connect-src 'self';"
     }
   }
 });
