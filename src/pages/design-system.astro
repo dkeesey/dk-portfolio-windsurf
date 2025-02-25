@@ -2,11 +2,7 @@
 import Layout from '@/components/layout/Layout.astro';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import TabsWrapperAstro from '@/components/ui/tabs/TabsWrapperAstro';
-import {
-  designTokensTabs,
-  componentsTabs,
-} from '@/components/ui/tabs/design-system-tabs';
+import TabsClientRenderer from '@/components/ui/tabs/TabsClientRenderer';
 ---
 
 <Layout>
@@ -32,11 +28,11 @@ import {
     <section>
       <h2 class="mb-8 text-3xl font-semibold">Design Tokens</h2>
       <div class="w-full">
-        <TabsWrapperAstro
-          client:load
+        <TabsClientRenderer
+          client:only="react"
           defaultValue="colors"
           className="w-full"
-          items={designTokensTabs}
+          tabsType="designTokens"
         />
       </div>
     </section>
@@ -51,11 +47,11 @@ import {
       </div>
 
       <div class="w-full">
-        <TabsWrapperAstro
-          client:load
+        <TabsClientRenderer
+          client:only="react"
           defaultValue="buttons"
           className="w-full"
-          items={componentsTabs}
+          tabsType="components"
         />
       </div>
     </section>

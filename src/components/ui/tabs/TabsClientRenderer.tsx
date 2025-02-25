@@ -1,28 +1,38 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { designTokensTabs, componentsTabs } from './design-system-tabs';
 
 interface TabItem {
   value: string;
   label: string;
-  content: React.ReactNode;
 }
 
-interface TabsWrapperProps {
+interface TabsClientRendererProps {
   defaultValue: string;
   className?: string;
-  items: TabItem[];
+  tabsType: 'designTokens' | 'components';
 }
 
-export default function TabsWrapperAstro({ defaultValue, className, items }: TabsWrapperProps) {
+export default function TabsClientRenderer({ 
+  defaultValue, 
+  className, 
+  tabsType 
+}: TabsClientRendererProps) {
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Find the default tab
-  const defaultTabIndex = items.findIndex(item => item.value === defaultValue);
+  // Get the appropriate tabs based on the type
+  const tabItems = tabsType === 'designTokens' ? designTokensTabs : componentsTabs;
+  
+  // Get just the metadata (without content property) for the server render
+  const tabsMeta = tabItems.map(({ value, label }) => ({ value, label }));
+  
+  // Find the default tab index
+  const defaultTabIndex = tabsMeta.findIndex(item => item.value === defaultValue);
   const activeIndex = defaultTabIndex >= 0 ? defaultTabIndex : 0;
   
   // Use a simple indicator when not mounted to avoid hydration issues
@@ -32,7 +42,7 @@ export default function TabsWrapperAstro({ defaultValue, className, items }: Tab
         <div className="w-full">
           <div className="border-b">
             <div className="flex flex-wrap -mb-px gap-2">
-              {items.map((item, i) => (
+              {tabsMeta.map((item, i) => (
                 <div key={item.value} className={`py-2 px-4 text-sm font-medium ${i === activeIndex ? 'border-b-2 border-primary' : ''}`}>
                   {item.label}
                 </div>
@@ -47,18 +57,18 @@ export default function TabsWrapperAstro({ defaultValue, className, items }: Tab
     );
   }
   
-  // Use the full Tabs component when mounted
+  // Use the full Tabs component when mounted, with content from the appropriate source
   return (
     <div className={className}>
       <Tabs defaultValue={defaultValue} className="w-full">
         <TabsList className="w-full justify-start">
-          {items.map((item) => (
+          {tabsMeta.map((item) => (
             <TabsTrigger key={item.value} value={item.value}>
               {item.label}
             </TabsTrigger>
           ))}
         </TabsList>
-        {items.map((item) => (
+        {tabItems.map((item) => (
           <TabsContent key={item.value} value={item.value}>
             {item.content}
           </TabsContent>
