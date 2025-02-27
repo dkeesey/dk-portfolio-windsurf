@@ -15,7 +15,7 @@ const { metric = '' } = Astro.props;
   initPostHog();
 
   // Function to track pageviews in both analytics platforms
-  const trackPageview = (url: string): void => {
+  const trackPageview = (url) => {
     // Track in PostHog
     trackPostHogPageview(url);
     
