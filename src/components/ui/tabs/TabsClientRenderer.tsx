@@ -1,11 +1,12 @@
-import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { designTokensTabs, componentsTabs } from './design-system-tabs';
 
-interface TabItem {
+// Used for type checking the tabItems array structure
+interface TabsItem {
   value: string;
   label: string;
+  content: React.ReactNode;
 }
 
 interface TabsClientRendererProps {

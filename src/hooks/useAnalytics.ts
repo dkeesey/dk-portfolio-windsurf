@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { trackEvent as trackPostHogEvent } from '@/lib/posthog';
 import { event as trackGoogleEvent } from '@/lib/gtag';
 

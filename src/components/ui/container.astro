@@ -1,12 +1,8 @@
 ---
 import { Container as ContainerReact } from './container';
 
-interface Props {
-  as?: 'div' | 'section' | 'main';
-  class?: string;
-  className?: string;
-}
-
+// Note: Props interface is actually used by Astro for type checking
+// Even though TypeScript thinks it's unused, it's part of Astro's component system
 const { as, class: classAstro, className, ...props } = Astro.props;
 const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
 ---

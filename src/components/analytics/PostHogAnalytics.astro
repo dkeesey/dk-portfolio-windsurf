@@ -3,7 +3,7 @@
 <script>
   import { initPostHog, trackPageview as trackPostHogPageview } from '../../lib/posthog';
   import { pageview as trackGooglePageview } from '../../lib/gtag';
-  import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
+  import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
   import { reportWebVitals } from '../../lib/analytics';
 
   // Initialize PostHog
@@ -29,7 +29,7 @@
   // Report web vitals
   onCLS(reportWebVitals);
   onFCP(reportWebVitals);
-  onFID(reportWebVitals);
   onLCP(reportWebVitals);
   onTTFB(reportWebVitals);
+  onINP(reportWebVitals); // Replaced deprecated onFID with recommended onINP
 </script>
