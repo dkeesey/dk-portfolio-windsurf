@@ -1,140 +1,132 @@
-import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 
 export function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.8;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Enhanced particle system with mouse interaction
-    class Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      originalX: number;
-      originalY: number;
-      
-      constructor() {
-        const canvas = canvasRef.current;
-        if (!canvas) {
-          this.x = this.originalX = 0;
-          this.y = this.originalY = 0;
-          this.vx = 0;
-          this.vy = 0;
-          this.size = 1;
-          return;
-        }
-        this.x = this.originalX = Math.random() * canvas.width;
-        this.y = this.originalY = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 2;
-        this.vy = (Math.random() - 0.5) * 2;
-        this.size = Math.random() * 3 + 1;
-      }
-
-      update(mouseX: number, mouseY: number) {
-        // Mouse repulsion
-        const dx = mouseX - this.x;
-        const dy = mouseY - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < 100) {
-          const angle = Math.atan2(dy, dx);
-          const force = (100 - distance) / 100;
-          this.vx -= Math.cos(angle) * force * 0.5;
-          this.vy -= Math.sin(angle) * force * 0.5;
-        }
-
-        // Return to original position
-        const homeX = this.originalX - this.x;
-        const homeY = this.originalY - this.y;
-        this.vx += homeX * 0.05;
-        this.vy += homeY * 0.05;
-
-        // Apply velocity with damping
-        this.vx *= 0.95;
-        this.vy *= 0.95;
-        
-        this.x += this.vx;
-        this.y += this.vy;
-      }
-
-      draw(ctx: CanvasRenderingContext2D) {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(var(--primary), 0.1)';
-        ctx.fill();
-      }
-    }
-
-    // Initialize particles
-    const particles: Particle[] = Array.from({ length: 50 }, () => new Particle());
-
-    // Animation loop
-    function animate() {
-      if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(particle => {
-        particle.update(mousePosition.x, mousePosition.y);
-        particle.draw(ctx);
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    // Handle mouse movement
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      });
-    };
-
-    canvas.addEventListener('mousemove', handleMouseMove);
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [mousePosition]);
-
   return (
-    <section className="relative flex min-h-[80vh] items-center">
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 -z-10"
-        style={{ opacity: 0.7 }}
+    <section className="relative flex min-h-[80vh] items-center overflow-hidden">
+      {/* Animated tileable gradient background */}
+      <div 
+        className="absolute inset-0 z-0 animate-gradient-flow" 
+        style={{
+          background: 'repeating-linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #f472b6 100%)',
+          backgroundSize: '200% 200%',
+        }}
       />
-      <Container>
-        <div className="max-w-2xl">
-          <h1 className="mb-6 text-5xl font-bold">Hi, I'm Dean Keesey</h1>
-          <p className="mb-8 text-xl text-muted-foreground">
-          Full Stack Developer specializing in modern web frameworks, SEO optimization, and digital marketing integration. I create high-performance websites that drive real-world results through improved search visibility and user engagement.
+      
+      {/* Multiple colored circles with different CSS animations */}
+      <div className="absolute inset-0 z-[1] overflow-hidden">
+        {/* Yellow Circle 1 (Large - Slow) */}
+        <div 
+          className="absolute animate-path-1-slow"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 230, 100, 0.6) 0%, rgba(255, 215, 0, 0.25) 50%, rgba(255, 200, 0, 0) 70%)',
+            filter: 'blur(15px)',
+            width: '24rem',
+            height: '24rem'
+          }}
+        />
+        
+        {/* Yellow Circle 2 (Medium - Medium speed) */}
+        <div 
+          className="absolute animate-path-2-medium"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 230, 100, 0.5) 0%, rgba(255, 215, 0, 0.2) 50%, rgba(255, 200, 0, 0) 70%)',
+            filter: 'blur(12px)',
+            width: '16rem',
+            height: '16rem'
+          }}
+        />
+        
+        {/* Yellow Circle 3 (Small - Fast) */}
+        <div 
+          className="absolute animate-path-3-fast"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 230, 100, 0.4) 0%, rgba(255, 215, 0, 0.15) 50%, rgba(255, 200, 0, 0) 70%)',
+            filter: 'blur(8px)',
+            width: '10rem',
+            height: '10rem'
+          }}
+        />
+        
+        {/* Pink Circle 1 (Large - Slow) */}
+        <div 
+          className="absolute animate-path-4-slow"
+          style={{
+            background: 'radial-gradient(circle, rgba(249, 168, 212, 0.55) 0%, rgba(236, 72, 153, 0.22) 50%, rgba(219, 39, 119, 0) 70%)',
+            filter: 'blur(15px)',
+            width: '22rem',
+            height: '22rem'
+          }}
+        />
+        
+        {/* Pink Circle 2 (Medium - Medium speed) */}
+        <div 
+          className="absolute animate-path-5-medium"
+          style={{
+            background: 'radial-gradient(circle, rgba(249, 168, 212, 0.45) 0%, rgba(236, 72, 153, 0.18) 50%, rgba(219, 39, 119, 0) 70%)',
+            filter: 'blur(10px)',
+            width: '14rem',
+            height: '14rem'
+          }}
+        />
+        
+        {/* Pink Circle 3 (Small - Fast) */}
+        <div 
+          className="absolute animate-path-6-fast"
+          style={{
+            background: 'radial-gradient(circle, rgba(249, 168, 212, 0.35) 0%, rgba(236, 72, 153, 0.12) 50%, rgba(219, 39, 119, 0) 70%)',
+            filter: 'blur(8px)',
+            width: '8rem',
+            height: '8rem'
+          }}
+        />
+        
+        {/* Previously Red Circle 1 - now Deep Purple (Large - Slow) */}
+        <div 
+          className="absolute animate-path-7-slow"
+          style={{
+            background: 'radial-gradient(circle, rgba(192, 132, 252, 0.65) 0%, rgba(168, 85, 247, 0.3) 50%, rgba(147, 51, 234, 0) 70%)',
+            filter: 'blur(15px)',
+            width: '20rem',
+            height: '20rem'
+          }}
+        />
+        
+        {/* Previously Red Circle 2 - now Vibrant Purple (Medium - Medium speed) */}
+        <div 
+          className="absolute animate-path-8-medium"
+          style={{
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.55) 0%, rgba(147, 51, 234, 0.25) 50%, rgba(126, 34, 206, 0) 70%)',
+            filter: 'blur(10px)',
+            width: '12rem',
+            height: '12rem'
+          }}
+        />
+        
+        {/* Previously Red Circle 3 - now Deep Pink (Small - Fast) */}
+        <div 
+          className="absolute animate-path-9-fast"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.45) 0%, rgba(219, 39, 119, 0.2) 50%, rgba(190, 24, 93, 0) 70%)',
+            filter: 'blur(8px)',
+            width: '7rem',
+            height: '7rem'
+          }}
+        />
+      </div>
+      
+      {/* Content */}
+      <Container className="relative z-10">
+        <div className="max-w-2xl bg-white/50 backdrop-blur-md p-8 rounded-xl shadow-lg">
+          <h1 className="mb-6 text-5xl font-bold text-gray-900">Hi, I'm Dean Keesey</h1>
+          <p className="mb-8 text-xl text-gray-800">
+            Full Stack Developer specializing in modern web frameworks, SEO optimization, and digital marketing integration. I create high-performance websites that drive real-world results through improved search visibility and user engagement.
           </p>
           <div className="flex gap-4">
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
               <a href="#projects">View Projects</a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
+            <Button variant="outline" size="lg" asChild className="border-purple-600 text-purple-700 hover:bg-purple-50">
               <a href="#contact">Contact Me</a>
             </Button>
           </div>
@@ -143,3 +135,4 @@ export function HeroSection() {
     </section>
   );
 }
+
