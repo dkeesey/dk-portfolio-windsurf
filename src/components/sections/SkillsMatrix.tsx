@@ -113,7 +113,7 @@ export function SkillsMatrix() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-[#eee]">
       <div className="container">
         <h2 className="mb-8 text-3xl font-bold">Technical Skills</h2>
         

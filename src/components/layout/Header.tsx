@@ -12,7 +12,7 @@ export function Header({ className }: HeaderProps) {
     <header 
       className={cn(
         "border-b border-border backdrop-blur", 
-        "bg-[#eee]", // Updated to #eee
+        "bg-white", // Changed from #eee to white
         className
       )}
     >

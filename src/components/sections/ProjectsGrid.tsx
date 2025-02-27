@@ -211,7 +211,7 @@ export function ProjectsGrid() {
                         {project.technologies.map(tech => (
                           <Badge
                             key={tech}
-                            variant="secondary"
+                            variant="soft"
                             className={tech === selectedTech ? 'bg-primary text-primary-foreground' : ''}
                           >
                             {tech}
