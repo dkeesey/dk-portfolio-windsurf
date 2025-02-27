@@ -13,7 +13,7 @@ export default defineConfig({
     tailwind(),
     partytown({
       config: {
-        forward: ['dataLayer.push', 'gtag'],
+        forward: ['dataLayer.push', 'gtag', 'posthog'],
       },
     }),
     sitemap({
@@ -46,9 +46,8 @@ export default defineConfig({
   },
   server: {
     headers: {
-      // Development-friendly CSP that allows everything needed for local development
-      // NOTE: This should be made more restrictive for production
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' chrome-extension:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://placehold.co; font-src 'self' data:; connect-src 'self';"
+      // Development-friendly CSP that allows analytics services
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' https://*.posthog.com https://app.posthog.com https://*.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://placehold.co https://*.posthog.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://*.posthog.com https://app.posthog.com https://*.google-analytics.com https://www.googletagmanager.com;"
     }
   }
 });

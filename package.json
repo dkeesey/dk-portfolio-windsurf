@@ -36,6 +36,7 @@
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.331.0",
     "next": "^15.1.7",
+    "posthog-js": "^1.224.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",

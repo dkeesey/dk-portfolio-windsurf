@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 type Project = {
   title: string;
@@ -45,6 +46,7 @@ export function ProjectsGrid() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const { trackClick, trackProjectView } = useAnalytics();
 
   // Get unique categories and technologies
   const uniqueCategories = [...new Set(projects.map(p => p.category))];
@@ -59,6 +61,33 @@ export function ProjectsGrid() {
     return matchesSearch && matchesCategory && matchesTech;
   });
 
+  // Handle category selection with analytics
+  const handleCategorySelect = (category: string | null) => {
+    const newCategory = selectedCategory === category ? null : category;
+    setSelectedCategory(newCategory);
+    if (newCategory) {
+      trackClick('category_filter', { category: newCategory });
+    }
+  };
+
+  // Handle tech selection with analytics
+  const handleTechSelect = (tech: string | null) => {
+    const newTech = selectedTech === tech ? null : tech;
+    setSelectedTech(newTech);
+    if (newTech) {
+      trackClick('tech_filter', { technology: newTech });
+    }
+  };
+
+  // Handle project click with analytics
+  const handleProjectClick = (project: Project) => {
+    trackProjectView(project.title, { 
+      category: project.category, 
+      technologies: project.technologies.join(','),
+      link: project.link
+    });
+  };
+
   return (
     <section className="py-16">
       <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
@@ -69,7 +98,12 @@ export function ProjectsGrid() {
               type="search"
               placeholder="Search projects..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (e.target.value.length > 2) {
+                  trackClick('project_search', { query: e.target.value });
+                }
+              }}
               className="w-full"
             />
           </div>
@@ -79,7 +113,7 @@ export function ProjectsGrid() {
             <Badge
               variant={!selectedCategory ? 'default' : 'outline'}
               className="cursor-pointer"
-              onClick={() => setSelectedCategory(null)}
+              onClick={() => handleCategorySelect(null)}
             >
               All
             </Badge>
@@ -88,9 +122,7 @@ export function ProjectsGrid() {
                 key={category}
                 variant={selectedCategory === category ? 'default' : 'outline'}
                 className="cursor-pointer"
-                onClick={() => setSelectedCategory(
-                  selectedCategory === category ? null : category
-                )}
+                onClick={() => handleCategorySelect(category)}
               >
                 {category}
               </Badge>
@@ -104,9 +136,7 @@ export function ProjectsGrid() {
                 key={tech}
                 variant={selectedTech === tech ? 'secondary' : 'outline'}
                 className="cursor-pointer"
-                onClick={() => setSelectedTech(
-                  selectedTech === tech ? null : tech
-                )}
+                onClick={() => handleTechSelect(tech)}
               >
                 {tech}
               </Badge>
@@ -129,7 +159,10 @@ export function ProjectsGrid() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <Card className="group h-full hover:shadow-lg">
-                  <a href={project.link}>
+                  <a 
+                    href={project.link}
+                    onClick={() => handleProjectClick(project)}
+                  >
                     {project.image && (
                       <div className="aspect-video overflow-hidden rounded-t-lg">
                         <motion.img

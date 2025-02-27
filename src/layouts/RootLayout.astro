@@ -1,6 +1,8 @@
 ---
 import '@/styles/globals.css';
 import { ViewTransitions } from 'astro:transitions';
+import PostHogAnalytics from '@/components/analytics/PostHogAnalytics.astro';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics.astro';
 
 interface Props {
   title?: string;
@@ -23,8 +25,10 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <ViewTransitions />
+    <GoogleAnalytics />
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <slot />
+    <PostHogAnalytics />
   </body>
 </html>

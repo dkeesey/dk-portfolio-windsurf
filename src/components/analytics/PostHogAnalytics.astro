@@ -1,0 +1,35 @@
+---
+---
+<script>
+  import { initPostHog, trackPageview as trackPostHogPageview } from '../../lib/posthog';
+  import { pageview as trackGooglePageview } from '../../lib/gtag';
+  import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
+  import { reportWebVitals } from '../../lib/analytics';
+
+  // Initialize PostHog
+  initPostHog();
+
+  // Function to track pageviews in both analytics platforms
+  function trackPageview(url: string) {
+    // Track in PostHog
+    trackPostHogPageview(url);
+    
+    // Track in Google Analytics
+    trackGooglePageview(url);
+  }
+
+  // Track initial pageview
+  trackPageview(window.location.pathname + window.location.search);
+
+  // Set up navigation tracking for client-side navigation
+  document.addEventListener('astro:page-load', () => {
+    trackPageview(window.location.pathname + window.location.search);
+  });
+
+  // Report web vitals
+  onCLS(reportWebVitals);
+  onFCP(reportWebVitals);
+  onFID(reportWebVitals);
+  onLCP(reportWebVitals);
+  onTTFB(reportWebVitals);
+</script>
