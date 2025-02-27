@@ -9,7 +9,13 @@ interface HeaderProps {
 
 export function Header({ className }: HeaderProps) {
   return (
-    <header className={cn("border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60", className)}>
+    <header 
+      className={cn(
+        "border-b border-border backdrop-blur", 
+        "bg-[#eee]", // Updated to #eee
+        className
+      )}
+    >
       <Container>
         <div className="flex h-14 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
