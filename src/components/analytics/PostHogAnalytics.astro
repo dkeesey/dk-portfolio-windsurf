@@ -1,6 +1,11 @@
 ---
+interface Props {
+  metric?: string; // Add optional metric prop to resolve potential type error
+}
+
+const { metric = '' } = Astro.props;
 ---
-<script>
+<script define:vars={{ metric }}>
   import { initPostHog, trackPageview as trackPostHogPageview } from '../../lib/posthog';
   import { pageview as trackGooglePageview } from '../../lib/gtag';
   import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';

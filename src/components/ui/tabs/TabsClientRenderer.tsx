@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { designTokensTabs, componentsTabs } from './design-system-tabs';
 
@@ -19,15 +19,15 @@ export default function TabsClientRenderer({
   defaultValue, 
   className, 
   tabsType 
-}: TabsClientRendererProps) {
-  const [mounted, setMounted] = useState(false);
+}: TabsClientRendererProps): React.JSX.Element {
+  const [mounted, setMounted] = useState<boolean>(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
 
   // Get the appropriate tabs based on the type
-  const tabItems = tabsType === 'designTokens' ? designTokensTabs : componentsTabs;
+  const tabItems: TabsItem[] = tabsType === 'designTokens' ? designTokensTabs : componentsTabs;
   
   // Get just the metadata (without content property) for the server render
   const tabsMeta = tabItems.map(({ value, label }) => ({ value, label }));
@@ -77,4 +77,4 @@ export default function TabsClientRenderer({
       </Tabs>
     </div>
   );
-} 
+}
