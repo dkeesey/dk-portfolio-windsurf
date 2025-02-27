@@ -22,24 +22,33 @@ const skillCategories: SkillCategory[] = [
       { name: 'TypeScript', level: 5, description: 'Type-safe development, generics, advanced patterns' },
       { name: 'Next.js', level: 4, description: 'Server-side rendering, static generation, API routes' },
       { name: 'CSS/Sass', level: 4, description: 'Modern layouts, animations, responsive design' },
+      { name: 'Astro', level: 3, description: 'Static site generation, component islands, content-focused sites' },
     ],
   },
   {
     name: 'Backend',
     skills: [
       { name: 'Node.js', level: 4, description: 'RESTful APIs, authentication, middleware' },
-      { name: 'Python', level: 4, description: 'Django, FastAPI, data processing' },
-      { name: 'PostgreSQL', level: 4, description: 'Schema design, optimization, migrations' },
-      { name: 'GraphQL', level: 3, description: 'Schema definition, resolvers, Apollo Server' },
+      { name: 'Python', level: 2, description: 'Basic scripting, conceptual understanding of frameworks' },
+      { name: 'PostgreSQL', level: 2, description: 'Database concepts, basic queries' },
+      { name: 'GraphQL', level: 2, description: 'API consumption, basic query structure' },
     ],
   },
   {
-    name: 'DevOps',
+    name: 'Dev Tools & Infrastructure',
     skills: [
-      { name: 'Docker', level: 4, description: 'Containerization, multi-stage builds' },
-      { name: 'AWS', level: 3, description: 'EC2, S3, Lambda, CloudFront' },
-      { name: 'CI/CD', level: 4, description: 'GitHub Actions, Jenkins pipelines' },
-      { name: 'Kubernetes', level: 3, description: 'Container orchestration, deployments' },
+      { name: 'Docker', level: 3, description: 'Development environments, basic containerization' },
+      { name: 'AWS', level: 3, description: 'S3, basic deployment configurations' },
+      { name: 'CI/CD', level: 4, description: 'GitHub Actions, automated deployment workflows' },
+      { name: 'WordPress', level: 4, description: 'Theme customization, plugin integration, security hardening' },
+    ],
+  },
+  {
+    name: 'Digital Marketing',
+    skills: [
+      { name: 'SEO', level: 4, description: 'On-page optimization, local SEO strategy, keyword research' },
+      { name: 'Analytics', level: 3, description: 'GA4 implementation, conversion tracking, performance reporting' },
+      { name: 'Web Security', level: 3, description: 'Vulnerability assessment, hardening practices' },
     ],
   },
 ];

@@ -52,12 +52,32 @@ export function ExperienceTimeline() {
   const experiences = [
     {
       date: '2022 - Present',
-      title: 'Senior Software Engineer',
-      company: 'Example Corp',
-      description: 'Led development of high-performance web applications using modern technologies.',
-      technologies: ['React', 'TypeScript', 'Node.js', 'AWS'],
+      title: 'Web Developer & SEO Specialist',
+      company: 'Independent Consultant',
+      description: 'Delivering impactful web solutions focused on performance, security, and search visibility for various clients.',
+      technologies: ['React', 'Next.js', 'Astro', 'SEO', 'Analytics', 'WordPress'],
     },
-    // Add more experiences...
+    {
+      date: '2023',
+      title: 'Website Modernization',
+      company: 'Masumi Hayashi Portfolio',
+      description: 'Rebuilt legacy art portfolio using Astro framework with modern scrolling UX similar to short-form content platforms.',
+      technologies: ['Astro', 'JavaScript', 'CSS Animations'],
+    },
+    {
+      date: '2023 - 2024',
+      title: 'Local SEO Campaign',
+      company: 'Therapist & Political Campaign',
+      description: 'Achieved page 1 rankings for therapist practice and political campaign sites through comprehensive on-page SEO and local business optimizations.',
+      technologies: ['SEO', 'WordPress', 'Content Strategy'],
+    },
+    {
+      date: '2022',
+      title: 'Security Remediation',
+      company: 'The Sticking Place',
+      description: 'Performed security overhaul for a compromised WordPress site with malicious adware and implemented hardening measures to prevent recurrence.',
+      technologies: ['WordPress', 'Security', 'PHP'],
+    },
   ];
 
   return (

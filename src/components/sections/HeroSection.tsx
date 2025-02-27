@@ -128,8 +128,7 @@ export function HeroSection() {
         <div className="max-w-2xl">
           <h1 className="mb-6 text-5xl font-bold">Hi, I'm Dean Keesey</h1>
           <p className="mb-8 text-xl text-muted-foreground">
-            Full Stack Developer & Software Engineer crafting high-performance
-            web applications with modern technologies and best practices.
+          Full Stack Developer specializing in modern web frameworks, SEO optimization, and digital marketing integration. I create high-performance websites that drive real-world results through improved search visibility and user engagement.
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg">

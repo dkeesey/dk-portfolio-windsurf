@@ -22,24 +22,50 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'E-commerce Platform',
+    title: 'Masumi Hayashi Portfolio',
     description:
-      'A modern e-commerce platform built with Next.js and Stripe integration.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=E-commerce+Platform',
-    technologies: ['Next.js', 'TypeScript', 'Stripe', 'Tailwind CSS'],
-    category: 'Full Stack',
-    link: 'https://github.com/username/ecommerce',
+      'Modernized legacy art portfolio website with a scrolling UX inspired by short-form content platforms for better art discovery.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Masumi+Hayashi+Portfolio',
+    technologies: ['Astro', 'JavaScript', 'CSS Animations', 'Responsive Design'],
+    category: 'Frontend',
+    link: 'https://masumihayashi.com',
   },
   {
-    title: 'Task Management API',
+    title: 'Therapist Practice SEO',
     description:
-      'RESTful API for task management with authentication and real-time updates.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Task+Management+API',
-    technologies: ['Node.js', 'Express', 'MongoDB', 'Socket.IO'],
-    category: 'Backend',
-    link: 'https://github.com/username/task-api',
+      'Implemented comprehensive SEO strategy achieving consistent #2 placement in map pack and page 1 results for targeted keywords.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Local+SEO+Optimization',
+    technologies: ['SEO', 'WordPress', 'Local Business', 'Google Business Profile'],
+    category: 'Digital Marketing',
+    link: 'https://megangredesky.com',
   },
-  // Add more projects here
+  {
+    title: 'Political Campaign Website',
+    description:
+      'Elevated campaign site from obscurity to page 1 search results through technical SEO and content optimization strategies.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Campaign+Website+SEO',
+    technologies: ['WordPress', 'SEO', 'Content Strategy'],
+    category: 'Digital Marketing',
+    link: 'https://kanithaforoakland.com',
+  },
+  {
+    title: 'WordPress Security Remediation',
+    description:
+      'Successfully removed malicious adware from a compromised website and implemented comprehensive security hardening measures.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=WordPress+Security',
+    technologies: ['WordPress', 'Security', 'PHP'],
+    category: 'Web Security',
+    link: 'https://thestickingplace.com',
+  },
+  {
+    title: 'GA4 Analytics Implementation',
+    description:
+      'Configured Google Analytics 4 across multiple client websites with custom event tracking and conversion measurement.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Analytics+Implementation',
+    technologies: ['Google Analytics 4', 'Tag Manager', 'Conversion Tracking'],
+    category: 'Analytics',
+    link: 'https://strangelandcomics.com',
+  },
 ];
 
 export function ProjectsGrid() {
