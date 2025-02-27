@@ -20,15 +20,17 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'React', level: 5, description: 'Advanced state management, custom hooks, performance optimization' },
       { name: 'TypeScript', level: 5, description: 'Type-safe development, generics, advanced patterns' },
+      { name: 'CSS/Sass', level: 5, description: 'Modern layouts, animations, responsive design, cross-browser compatibility' },
       { name: 'Next.js', level: 4, description: 'Server-side rendering, static generation, API routes' },
-      { name: 'CSS/Sass', level: 4, description: 'Modern layouts, animations, responsive design' },
-      { name: 'Astro', level: 3, description: 'Static site generation, component islands, content-focused sites' },
+      { name: 'Astro', level: 4, description: 'Static site generation, component islands, content-focused sites' },
+      { name: 'Tailwind', level: 4, description: 'Utility-first CSS, responsive design, component styling' },
     ],
   },
   {
     name: 'Backend',
     skills: [
       { name: 'Node.js', level: 4, description: 'RESTful APIs, authentication, middleware' },
+      { name: 'Azure', level: 3, description: 'App Services, Functions, Storage, deployment workflows' },
       { name: 'Python', level: 2, description: 'Basic scripting, conceptual understanding of frameworks' },
       { name: 'PostgreSQL', level: 2, description: 'Database concepts, basic queries' },
       { name: 'GraphQL', level: 2, description: 'API consumption, basic query structure' },
@@ -37,10 +39,11 @@ const skillCategories: SkillCategory[] = [
   {
     name: 'Dev Tools & Infrastructure',
     skills: [
+      { name: 'CI/CD', level: 4, description: 'GitHub Actions, automated deployment workflows' },
+      { name: 'WordPress', level: 4, description: 'Theme customization, plugin integration, content management' },
+      { name: 'AI Toolchain', level: 4, description: 'Effective prompt engineering, API integration, LLM workflow optimization' },
       { name: 'Docker', level: 3, description: 'Development environments, basic containerization' },
       { name: 'AWS', level: 3, description: 'S3, basic deployment configurations' },
-      { name: 'CI/CD', level: 4, description: 'GitHub Actions, automated deployment workflows' },
-      { name: 'WordPress', level: 4, description: 'Theme customization, plugin integration, security hardening' },
     ],
   },
   {
@@ -48,7 +51,13 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'SEO', level: 4, description: 'On-page optimization, local SEO strategy, keyword research' },
       { name: 'Analytics', level: 3, description: 'GA4 implementation, conversion tracking, performance reporting' },
-      { name: 'Web Security', level: 3, description: 'Vulnerability assessment, hardening practices' },
+    ],
+  },
+  {
+    name: 'Security',
+    skills: [
+      { name: 'WordPress Security', level: 5, description: 'Advanced hardening, malware removal, attack mitigation, security audits' },
+      { name: 'Web Security', level: 3, description: 'Vulnerability assessment, secure coding practices, penetration testing' },
     ],
   },
 ];
