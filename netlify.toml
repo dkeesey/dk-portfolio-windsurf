@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  PUBLIC_POSTHOG_API_KEY = "phc_va3Z6wbRWbN2n5EIX5M19qSwgtjLfM7WjoSjQfzwOZ2"
+  PUBLIC_POSTHOG_HOST = "https://app.posthog.com"
+  PUBLIC_GA_TRACKING_ID = "G-P7KMSQQN1N"

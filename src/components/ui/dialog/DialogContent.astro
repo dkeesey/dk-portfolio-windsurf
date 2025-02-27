@@ -1,0 +1,15 @@
+---
+import { DialogContent as DialogContentReact } from '@/components/ui/dialog';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
+---
+
+<DialogContentReact client:load className={combinedClassName} {...props}>
+  <slot />
+</DialogContentReact>

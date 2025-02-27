@@ -1,0 +1,90 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  author?: string;
+}
+
+const {
+  title = 'Dean Keesey - Full Stack Developer',
+  description = 'Full Stack Developer specializing in modern web development with React, TypeScript, and Node.js',
+  image = '/images/og-default.jpg', // Default OG image
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  type = 'website',
+  publishDate,
+  author = 'Dean Keesey',
+} = Astro.props;
+
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Dean Keesey Portfolio',
+  url: Astro.site,
+};
+
+const pageSchema =
+  type === 'article'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        image: image,
+        author: {
+          '@type': 'Person',
+          name: author,
+        },
+        datePublished: publishDate?.toISOString(),
+        publisher: {
+          '@type': 'Person',
+          name: author,
+        },
+      }
+    : siteSchema;
+---
+
+<!-- Essential Meta Tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content={description} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.site)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+<!-- JSON-LD -->
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(pageSchema)}
+/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+<!-- RSS Feed -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="RSS Feed"
+  href="/rss.xml"
+/>
+
+<!-- Title -->
+<title>{title}</title>

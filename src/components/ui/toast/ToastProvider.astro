@@ -1,0 +1,11 @@
+---
+import { ToastProvider as ToastProviderReact } from '@/components/ui/toast';
+
+interface Props {}
+
+const { ...props } = Astro.props;
+---
+
+<ToastProviderReact client:load {...props}>
+  <slot />
+</ToastProviderReact> 

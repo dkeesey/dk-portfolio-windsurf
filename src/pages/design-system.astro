@@ -1,0 +1,59 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import TabsClientRenderer from '@/components/ui/tabs/TabsClientRenderer';
+---
+
+<Layout>
+  <div class="container space-y-16 py-12">
+    <header class="space-y-4">
+      <h1 class="text-4xl font-bold">Design System</h1>
+      <div class="space-y-2">
+        <p class="text-lg text-muted-foreground">
+          A comprehensive guide to our design tokens, components, and patterns.
+        </p>
+        <p class="text-sm text-muted-foreground">
+          Built with Radix UI primitives and styled with Tailwind CSS.
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <Badge variant="secondary">v1.0.0</Badge>
+        <Badge variant="outline">Astro 4.x</Badge>
+        <Badge variant="outline">React 18+</Badge>
+      </div>
+      <Separator />
+    </header>
+
+    <section>
+      <h2 class="mb-8 text-3xl font-semibold">Design Tokens</h2>
+      <div class="w-full">
+        <TabsClientRenderer
+          client:only="react"
+          defaultValue="colors"
+          className="w-full"
+          tabsType="designTokens"
+        />
+      </div>
+    </section>
+
+    <section class="space-y-8">
+      <div class="space-y-4">
+        <h2 class="text-3xl font-semibold">Components</h2>
+        <p class="text-muted-foreground">
+          Reusable UI components built with Radix UI primitives and styled with
+          Tailwind CSS.
+        </p>
+      </div>
+
+      <div class="w-full">
+        <TabsClientRenderer
+          client:only="react"
+          defaultValue="buttons"
+          className="w-full"
+          tabsType="components"
+        />
+      </div>
+    </section>
+  </div>
+</Layout>

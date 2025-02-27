@@ -1,0 +1,16 @@
+---
+import { Container as ContainerReact } from './container';
+
+interface Props {
+  as?: 'div' | 'section' | 'main';
+  class?: string;
+  className?: string;
+}
+
+const { as, class: classAstro, className, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
+---
+
+<ContainerReact client:load as={as} className={combinedClassName} {...props}>
+  <slot />
+</ContainerReact>

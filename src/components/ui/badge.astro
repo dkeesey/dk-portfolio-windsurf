@@ -1,0 +1,15 @@
+---
+import { Badge as BadgeReact } from './badge';
+
+interface Props {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  class?: string;
+  className?: string;
+}
+
+const { variant, class: classAstro, className, ...props } = Astro.props;
+---
+
+<BadgeReact client:load variant={variant} class={classAstro} className={className} {...props}>
+  <slot />
+</BadgeReact> 

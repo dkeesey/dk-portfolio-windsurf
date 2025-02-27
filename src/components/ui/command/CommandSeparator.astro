@@ -1,0 +1,14 @@
+---
+import { CommandSeparator as CommandSeparatorReact } from '@/components/ui/command';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<CommandSeparatorReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</CommandSeparatorReact> 

@@ -1,0 +1,12 @@
+---
+import { Dialog as DialogReact } from '@/components/ui/dialog';
+import type { DialogProps } from '@radix-ui/react-dialog';
+
+type Props = DialogProps;
+
+const { ...props } = Astro.props;
+---
+
+<DialogReact {...props}>
+  <slot />
+</DialogReact> 

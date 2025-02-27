@@ -1,0 +1,21 @@
+---
+import { TabsContent as TabsContentReact } from '@/components/ui/tabs';
+
+interface Props {
+  class?: string;
+  className?: string;
+  value: string;
+}
+
+const { class: classAstro, className, value, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
+---
+
+<TabsContentReact
+  client:load
+  value={value}
+  className={combinedClassName}
+  {...props}
+>
+  <slot />
+</TabsContentReact>

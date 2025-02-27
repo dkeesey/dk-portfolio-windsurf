@@ -1,0 +1,16 @@
+---
+import { TabsTrigger as TabsTriggerReact } from '@/components/ui/tabs';
+
+interface Props {
+  class?: string;
+  className?: string;
+  value: string;
+}
+
+const { class: classAstro, className, value, ...props } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
+---
+
+<TabsTriggerReact value={value} className={combinedClassName} {...props}>
+  <slot />
+</TabsTriggerReact>

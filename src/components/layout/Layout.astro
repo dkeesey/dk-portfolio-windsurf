@@ -1,0 +1,20 @@
+---
+import { Layout as LayoutReact } from './Layout';
+import RootLayout from '@/layouts/RootLayout.astro';
+import SEO from '../seo/SEO.astro';
+import type { SEOProps } from '@/types';
+
+interface Props {
+  seo?: SEOProps;
+}
+
+const { seo } = Astro.props;
+---
+
+<RootLayout>
+  <SEO {...seo} />
+  <LayoutReact>
+    <slot />
+  </LayoutReact>
+</RootLayout>
+
