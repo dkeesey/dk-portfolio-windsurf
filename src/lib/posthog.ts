@@ -4,6 +4,9 @@ import posthog from 'posthog-js';
 export const POSTHOG_API_KEY = import.meta.env.PUBLIC_POSTHOG_API_KEY || '';
 export const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://app.posthog.com';
 
+// Track initialization state
+let isPostHogInitialized = false;
+
 // Initialize PostHog (only in browser, not during SSR)
 export function initPostHog() {
   if (typeof window !== 'undefined' && POSTHOG_API_KEY) {
@@ -11,6 +14,7 @@ export function initPostHog() {
       api_host: POSTHOG_HOST,
       capture_pageview: false, // We'll handle pageviews manually
       loaded: (posthog) => {
+        isPostHogInitialized = true;
         if (import.meta.env.DEV) {
           // Disable capturing in development
           posthog.opt_out_capturing();
@@ -20,9 +24,18 @@ export function initPostHog() {
   }
 }
 
+// Safe check for PostHog initialization
+const isInitialized = () => {
+  if (typeof window === 'undefined') return false;
+  
+  // Check both our manual flag and any properties PostHog might set
+  return isPostHogInitialized || 
+    (typeof (posthog as any).initialized !== 'undefined' && (posthog as any).initialized);
+};
+
 // Track pageview
 export function trackPageview(url: string) {
-  if (typeof window !== 'undefined' && posthog.initialized) {
+  if (typeof window !== 'undefined' && isInitialized()) {
     posthog.capture('$pageview', {
       current_url: url,
     });
@@ -31,14 +44,14 @@ export function trackPageview(url: string) {
 
 // Custom event tracking
 export function trackEvent(eventName: string, properties?: Record<string, any>) {
-  if (typeof window !== 'undefined' && posthog.initialized) {
+  if (typeof window !== 'undefined' && isInitialized()) {
     posthog.capture(eventName, properties);
   }
 }
 
 // Web vitals tracking
 export function trackWebVitals(metric: any) {
-  if (typeof window !== 'undefined' && posthog.initialized) {
+  if (typeof window !== 'undefined' && isInitialized()) {
     const { name, value, id } = metric;
     
     trackEvent('web_vitals', {
@@ -51,7 +64,7 @@ export function trackWebVitals(metric: any) {
 
 // Identify user (if needed for authenticated areas)
 export function identifyUser(userId: string, traits?: Record<string, any>) {
-  if (typeof window !== 'undefined' && posthog.initialized) {
+  if (typeof window !== 'undefined' && isInitialized()) {
     posthog.identify(userId, traits);
   }
 }
