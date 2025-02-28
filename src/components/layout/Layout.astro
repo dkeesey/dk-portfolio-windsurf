@@ -13,8 +13,7 @@ const { seo } = Astro.props;
 
 <RootLayout>
   <SEO {...seo} />
-  <LayoutReact>
+  <LayoutReact client:load>
     <slot />
   </LayoutReact>
 </RootLayout>
-

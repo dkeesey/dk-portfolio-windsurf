@@ -11,7 +11,8 @@ const seo = {
 ---
 
 <Layout {seo}>
-  <main class="space-y-24 py-12">
+  {/* Removed the py-12 padding top from main to allow hero to start right after header */}
+  <main class="space-y-24">
     <HeroSection client:load />
     <SkillsMatrix client:visible />
     <ExperienceTimeline client:visible />

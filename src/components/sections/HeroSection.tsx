@@ -3,7 +3,8 @@ import { Container } from '@/components/ui/container';
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-[80vh] items-center overflow-hidden">
+    // Removed min-h-[80vh] and set to min-h-[90vh] to make it larger and added -mt-px to remove any gap
+    <section className="relative flex min-h-[90vh] items-center overflow-hidden -mt-px">
       {/* Animated tileable gradient background */}
       <div 
         className="absolute inset-0 z-0 animate-gradient-flow" 
