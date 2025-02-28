@@ -39,101 +39,141 @@ export function ContactForm() {
 
   async function onSubmit(data: FormData) {
     setIsSubmitting(true);
+    
+    // Encode form data for Netlify
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     try {
-      // Replace with your form submission logic
-      await fetch('/api/contact', {
+      const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString()
       });
-      
-      toast({
-        title: 'Message sent!',
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      });
-      
-      form.reset();
+
+      if (response.ok) {
+        toast({
+          title: 'Message sent!',
+          description: "Thanks for reaching out. I'll review your message and schedule a call if needed.",
+        });
+        
+        form.reset();
+      } else {
+        throw new Error('Submission failed');
+      }
     } catch (error) {
       toast({
         title: 'Error',
-        description: 'Failed to send message. Please try again.',
+        description: 'Failed to send message. Please try again or use Reclaim.',
         variant: 'destructive',
       });
     }
+    
     setIsSubmitting(false);
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="your@email.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="subject"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Subject</FormLabel>
-              <FormControl>
-                <Input placeholder="What's this about?" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Your message..."
-                  className="min-h-[150px]"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmitting}
+    <div>
+      <Form {...form}>
+        <form 
+          name="contact" 
+          method="POST" 
+          netlify 
+          onSubmit={form.handleSubmit(onSubmit)} 
+          className="space-y-6"
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          <input type="hidden" name="form-name" value="contact" />
+          
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="your@email.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input placeholder="What's this about?" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Your message..."
+                    className="min-h-[150px]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </Button>
+        </form>
+      </Form>
+
+      <div className="mt-6 text-center">
+        <p className="mb-4 text-muted-foreground">
+          Prefer to schedule directly?
+        </p>
+        <Button 
+          variant="outline" 
+          asChild
+          className="w-full"
+        >
+          <a 
+            href="https://app.reclaim.ai/m/dean-keesey/flexible-quick-meeting" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Schedule a Flexible Quick Meeting
+          </a>
         </Button>
-      </form>
-    </Form>
+      </div>
+    </div>
   );
-} 
+}

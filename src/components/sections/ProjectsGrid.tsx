@@ -22,13 +22,13 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'Masumi Hayashi Portfolio',
+    title: 'Masumi Hayashi Digital Archive',
     description:
-      'Modernized legacy art portfolio website with a scrolling UX inspired by short-form content platforms for better art discovery.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Masumi+Hayashi+Portfolio',
+      'Immersive digital archive of panoramic photo-collages documenting the Japanese American internment experience, transforming historical trauma into a powerful visual narrative that preserves memory and promotes understanding.',
+    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Masumi+Hayashi+Archive',
     technologies: ['Astro', 'JavaScript', 'CSS Animations', 'Responsive Design'],
     category: 'Frontend',
-    link: 'https://masumihayashi.com',
+    link: 'https://gallery.masumihayashi.com',
   },
   {
     title: 'Therapist Practice SEO',
@@ -160,7 +160,7 @@ export function ProjectsGrid() {
             {technologies.map(tech => (
               <Badge
                 key={tech}
-                variant={selectedTech === tech ? 'secondary' : 'outline'}
+                variant={selectedTech === tech ? 'secondary' : 'skill'}
                 className="cursor-pointer"
                 onClick={() => handleTechSelect(tech)}
               >
@@ -211,7 +211,7 @@ export function ProjectsGrid() {
                         {project.technologies.map(tech => (
                           <Badge
                             key={tech}
-                            variant="soft"
+                            variant="skill"
                             className={tech === selectedTech ? 'bg-primary text-primary-foreground' : ''}
                           >
                             {tech}

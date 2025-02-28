@@ -127,7 +127,7 @@ export function HeroSection() {
               <a href="/projects">View Projects</a>
             </Button>
             <Button variant="outline" size="lg" asChild className="border-purple-600 text-purple-700 hover:bg-purple-50">
-              <a href="#contact">Contact Me</a>
+              <a href="/contact">Contact Me</a>
             </Button>
           </div>
         </div>

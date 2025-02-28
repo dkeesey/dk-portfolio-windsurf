@@ -2,7 +2,25 @@
   command = "npm run build"
   publish = "dist"
 
-[build.environment]
-  PUBLIC_POSTHOG_API_KEY = "phc_va3Z6wbRWbN2n5EIX5M19qSwgtjLfM7WjoSjQfzwOZ2"
-  PUBLIC_POSTHOG_HOST = "https://app.posthog.com"
-  PUBLIC_GA_TRACKING_ID = "G-P7KMSQQN1N"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-form-submissions"
+
+  [plugins.inputs]
+    # Optional: Customize how form submissions are handled
+    saveToDatabase = true
+    notifications = true
