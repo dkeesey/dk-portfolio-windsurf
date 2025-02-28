@@ -39,7 +39,7 @@ export function ContactForm() {
 
   async function onSubmit(data: FormData) {
     setIsSubmitting(true);
-    
+
     // Encode form data for Netlify
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
@@ -58,7 +58,7 @@ export function ContactForm() {
           title: 'Message sent!',
           description: "Thanks for reaching out. I'll review your message and schedule a call if needed.",
         });
-        
+
         form.reset();
       } else {
         throw new Error('Submission failed');
@@ -70,22 +70,22 @@ export function ContactForm() {
         variant: 'destructive',
       });
     }
-    
+
     setIsSubmitting(false);
   }
 
   return (
     <div>
       <Form {...form}>
-        <form 
-          name="contact" 
-          method="POST" 
-          netlify 
-          onSubmit={form.handleSubmit(onSubmit)} 
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6"
         >
           <input type="hidden" name="form-name" value="contact" />
-          
+
           <FormField
             control={form.control}
             name="name"
@@ -160,14 +160,14 @@ export function ContactForm() {
         <p className="mb-4 text-muted-foreground">
           Prefer to schedule directly?
         </p>
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           asChild
           className="w-full"
         >
-          <a 
-            href="https://app.reclaim.ai/m/dean-keesey/flexible-quick-meeting" 
-            target="_blank" 
+          <a
+            href="https://app.reclaim.ai/m/dean-keesey/flexible-quick-meeting"
+            target="_blank"
             rel="noopener noreferrer"
           >
             Schedule a Flexible Quick Meeting
