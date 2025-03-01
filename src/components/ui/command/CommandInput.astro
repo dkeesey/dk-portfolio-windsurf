@@ -5,7 +5,7 @@ interface Props {
   class?: string;
   className?: string;
   value?: string;
-  onValueChange?: Function;
+  onValueChange?: (value: string) => void;
 }
 
 const { class: classAstro, className, value, onValueChange, ...props } = Astro.props;

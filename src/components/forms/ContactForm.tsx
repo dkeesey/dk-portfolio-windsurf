@@ -42,12 +42,12 @@ export function ContactForm() {
 
     try {
       // Get the form element from the DOM
-      const form = document.querySelector('form[name="contact"]');
+      const form = document.querySelector('form[name="contact"]') as HTMLFormElement;
       if (!form) throw new Error('Form not found');
-      
+
       // Create form data from the form element (this preserves hidden fields)
-      const formData = new FormData(form as HTMLFormElement);
-      
+      const formData = new FormData(form);
+
       // Ensure all data from our validated React form is included
       Object.entries(data).forEach(([key, value]) => {
         formData.set(key, value as string);
@@ -66,7 +66,10 @@ export function ContactForm() {
           description: "Thanks for reaching out. I'll review your message and schedule a call if needed.",
         });
 
-        form.reset();
+        // Use HTMLFormElement type assertion
+        if (form instanceof HTMLFormElement) {
+          form.reset();
+        }
       } else {
         throw new Error('Submission failed');
       }
