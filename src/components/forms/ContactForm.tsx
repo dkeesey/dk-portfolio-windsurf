@@ -42,6 +42,8 @@ export function ContactForm() {
 
     // Encode form data for Netlify
     const formData = new FormData();
+    // Add form-name field which Netlify requires
+    formData.append('form-name', 'contact');
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
@@ -49,8 +51,8 @@ export function ContactForm() {
     try {
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString()
+        body: new URLSearchParams(formData as any).toString(),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
 
       if (response.ok) {

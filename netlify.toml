@@ -18,7 +18,7 @@
   directory = "netlify/functions"
 
 [[plugins]]
-  package = "@netlify/plugin-form-submissions"
+  package = "netlify-plugin-form-submissions"
 
   [plugins.inputs]
     # Optional: Customize how form submissions are handled
