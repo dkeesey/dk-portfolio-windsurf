@@ -40,19 +40,24 @@ export function ContactForm() {
   async function onSubmit(data: FormData) {
     setIsSubmitting(true);
 
-    // Encode form data for Netlify
-    const formData = new FormData();
-    // Add form-name field which Netlify requires
-    formData.append('form-name', 'contact');
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
     try {
+      // Get the form element from the DOM
+      const form = document.querySelector('form[name="contact"]');
+      if (!form) throw new Error('Form not found');
+      
+      // Create form data from the form element (this preserves hidden fields)
+      const formData = new FormData(form as HTMLFormElement);
+      
+      // Ensure all data from our validated React form is included
+      Object.entries(data).forEach(([key, value]) => {
+        formData.set(key, value as string);
+      });
+
+      // Submit to Netlify Forms
       const response = await fetch('/', {
         method: 'POST',
-        body: new URLSearchParams(formData as any).toString(),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString()
       });
 
       if (response.ok) {
@@ -66,9 +71,10 @@ export function ContactForm() {
         throw new Error('Submission failed');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       toast({
         title: 'Error',
-        description: 'Failed to send message. Please try again or use Reclaim.',
+        description: 'Failed to send message. Please try again or use the direct email link.',
         variant: 'destructive',
       });
     }
@@ -83,10 +89,17 @@ export function ContactForm() {
           name="contact"
           method="POST"
           data-netlify="true"
+          netlify-honeypot="bot-field"
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6"
         >
+          {/* Hidden fields for Netlify Forms */}
           <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden">
+            <label>
+              Don't fill this out if you're human: <input name="bot-field" />
+            </label>
+          </p>
 
           <FormField
             control={form.control}

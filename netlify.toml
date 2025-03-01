@@ -17,10 +17,4 @@
 [functions]
   directory = "netlify/functions"
 
-[[plugins]]
-  package = "netlify-plugin-form-submissions"
-
-  [plugins.inputs]
-    # Optional: Customize how form submissions are handled
-    saveToDatabase = true
-    notifications = true
+# No plugins needed for our serverless form submission approach

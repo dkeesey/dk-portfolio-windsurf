@@ -1,7 +1,9 @@
-<!-- A hidden form that will be picked up by Netlify's form detection -->
+<!-- This file exists solely for Netlify to detect the form during build -->
+<!-- You won't see this page, it's just a hidden form declaration -->
 <form name="contact" netlify netlify-honeypot="bot-field" hidden>
   <input type="text" name="name" />
   <input type="email" name="email" />
   <input type="text" name="subject" />
   <textarea name="message"></textarea>
+  <input name="bot-field" />
 </form>

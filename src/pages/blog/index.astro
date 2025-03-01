@@ -21,12 +21,12 @@ const seo: SEOProps = {
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort(
-  (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+  (a, b) =>
     new Date(b.data.publishDate).getTime() -
     new Date(a.data.publishDate).getTime()
 );
 
-const formatDate = (date: Date) => {
+const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
