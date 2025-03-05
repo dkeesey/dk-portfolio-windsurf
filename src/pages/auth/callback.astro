@@ -1,0 +1,20 @@
+---
+import { supabase } from '@/lib/supabase';
+
+// Handle the OAuth callback
+const { searchParams } = new URL(Astro.request.url);
+const code = searchParams.get('code');
+const redirectTo = searchParams.get('next') || '/';
+
+// If we have a code, exchange it for a session
+if (code) {
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  
+  if (error) {
+    console.error('Error exchanging code for session:', error);
+  }
+}
+
+// Redirect to the next page or home
+return Astro.redirect(redirectTo);
+--- 
