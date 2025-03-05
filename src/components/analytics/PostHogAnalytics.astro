@@ -6,18 +6,16 @@ interface Props {
 const { metric = '' } = Astro.props;
 ---
 <!-- Load PostHog script directly to avoid import issues -->
-<script type="module">
+<script is:inline>
   try {
-    // Import the necessary functions
-    import { initPostHog, trackPageview as trackPostHogPageview } from '/lib/posthog.js';
-    import { pageview as trackGooglePageview } from '/lib/gtag.js';
-    import { reportWebVitals } from '/lib/analytics.js';
-
-    // Import web-vitals from CDN
-    import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'https://unpkg.com/web-vitals@3.5.0/dist/web-vitals.attribution.js?module';
-
-    // Initialize PostHog
-    initPostHog();
+    // Use window objects directly instead of imports
+    const trackPostHogPageview = window.posthog && window.posthog.capture ? 
+      (url) => window.posthog.capture('$pageview', { url }) : 
+      () => console.warn('PostHog not available for tracking');
+    
+    const trackGooglePageview = window.gtag ? 
+      (url) => window.gtag('event', 'page_view', { page_path: url }) : 
+      () => console.warn('Google Analytics not available for tracking');
 
     // Function to track pageviews in both analytics platforms
     const trackPageview = (url) => {
@@ -40,12 +38,7 @@ const { metric = '' } = Astro.props;
       trackPageview(window.location.pathname + window.location.search);
     });
 
-    // Report web vitals
-    onCLS(reportWebVitals);
-    onFCP(reportWebVitals);
-    onLCP(reportWebVitals);
-    onTTFB(reportWebVitals);
-    onINP(reportWebVitals); // Replaced deprecated onFID with recommended onINP
+    // We'll handle web vitals separately if needed
   } catch (error) {
     console.error('Error in PostHogAnalytics:', error);
   }
