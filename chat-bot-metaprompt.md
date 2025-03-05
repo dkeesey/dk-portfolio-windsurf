@@ -279,8 +279,8 @@ I need to build a recruiter-focused chatbot for my Astro website deployed on Net
 ## External Service Details
 I will provide the following when requested:
 - Azure OpenAI endpoint, API key, deployment name, model version
-  - Endpoint: https://mhf-azure-openai-west-gpt4o.openai.azure.com/
-  - API Key: FP2sWvoxwsTtctiraEXGC1aZdFNttqdl7a4TCJENGNYzBMTmcHPXJQQJ99AKAC4f1cMXJ3w3AAABACOG1I9R
+  - Endpoint: [REDACTED - stored in environment variables]
+  - API Key: [REDACTED - stored in environment variables]
   - Deployment Name: [To be provided]
   - Model Version: GPT-4o
 - Supabase project URL and API keys (Provided)

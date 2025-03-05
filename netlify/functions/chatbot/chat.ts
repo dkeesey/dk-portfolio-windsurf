@@ -18,12 +18,17 @@ const getSupabaseClient = () => {
 
 // Initialize the OpenAI client
 const getOpenAIClient = () => {
-    const apiKey = process.env.AZURE_OPENAI_API_KEY || 'FP2sWvoxwsTtctiraEXGC1aZdFNttqdl7a4TCJENGNYzBMTmcHPXJQQJ99AKAC4f1cMXJ3w3AAABACOG1I9R';
+    const apiKey = process.env.AZURE_OPENAI_API_KEY;
     if (!apiKey) {
+        console.warn('Azure OpenAI API Key is missing. This is expected during build.');
         return null;
     }
 
-    const endpoint = process.env.AZURE_OPENAI_ENDPOINT || 'https://mhf-azure-openai-west-gpt4o.openai.azure.com/';
+    const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+    if (!endpoint) {
+        console.warn('Azure OpenAI Endpoint is missing. This is expected during build.');
+        return null;
+    }
     const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o';
     const apiVersion = process.env.AZURE_OPENAI_API_VERSION || '2023-05-15';
 
