@@ -1,0 +1,43 @@
+---
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_TRACKING_ID || 'G-P7KMSQQN1N';
+---
+
+{GA_MEASUREMENT_ID && (
+  <Fragment>
+    <!-- Google tag (gtag.js) -->
+    <script 
+      is:inline
+      async 
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+    ></script>
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+      try {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          try {
+            if (arguments && dataLayer) {
+              dataLayer.push(arguments);
+            }
+          } catch (e) {
+            console.error('Google Analytics error:', e);
+          }
+        }
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+        
+        // Add page navigation tracking for client-side routing
+        document.addEventListener('astro:page-load', function() {
+          try {
+            gtag('config', GA_MEASUREMENT_ID, {
+              page_path: window.location.pathname + window.location.search
+            });
+          } catch (e) {
+            console.error('Google Analytics page tracking error:', e);
+          }
+        });
+      } catch (e) {
+        console.error('Google Analytics initialization error:', e);
+      }
+    </script>
+  </Fragment>
+)} 

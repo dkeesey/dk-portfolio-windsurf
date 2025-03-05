@@ -5,36 +5,48 @@ interface Props {
 
 const { metric = '' } = Astro.props;
 ---
-<script is:inline define:vars={{ metric }}>
-  import { initPostHog, trackPageview as trackPostHogPageview } from '../../lib/posthog';
-  import { pageview as trackGooglePageview } from '../../lib/gtag';
-  import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
-  import { reportWebVitals } from '../../lib/analytics';
+<!-- Load PostHog script directly to avoid import issues -->
+<script type="module">
+  try {
+    // Import the necessary functions
+    import { initPostHog, trackPageview as trackPostHogPageview } from '/lib/posthog.js';
+    import { pageview as trackGooglePageview } from '/lib/gtag.js';
+    import { reportWebVitals } from '/lib/analytics.js';
 
-  // Initialize PostHog
-  initPostHog();
+    // Import web-vitals from CDN
+    import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'https://unpkg.com/web-vitals@3.5.0/dist/web-vitals.attribution.js?module';
 
-  // Function to track pageviews in both analytics platforms
-  const trackPageview = (url) => {
-    // Track in PostHog
-    trackPostHogPageview(url);
-    
-    // Track in Google Analytics
-    trackGooglePageview(url);
-  }
+    // Initialize PostHog
+    initPostHog();
 
-  // Track initial pageview
-  trackPageview(window.location.pathname + window.location.search);
+    // Function to track pageviews in both analytics platforms
+    const trackPageview = (url) => {
+      try {
+        // Track in PostHog
+        trackPostHogPageview(url);
+        
+        // Track in Google Analytics
+        trackGooglePageview(url);
+      } catch (error) {
+        console.error('Error tracking pageview:', error);
+      }
+    }
 
-  // Set up navigation tracking for client-side navigation
-  document.addEventListener('astro:page-load', () => {
+    // Track initial pageview
     trackPageview(window.location.pathname + window.location.search);
-  });
 
-  // Report web vitals
-  onCLS(reportWebVitals);
-  onFCP(reportWebVitals);
-  onLCP(reportWebVitals);
-  onTTFB(reportWebVitals);
-  onINP(reportWebVitals); // Replaced deprecated onFID with recommended onINP
+    // Set up navigation tracking for client-side navigation
+    document.addEventListener('astro:page-load', () => {
+      trackPageview(window.location.pathname + window.location.search);
+    });
+
+    // Report web vitals
+    onCLS(reportWebVitals);
+    onFCP(reportWebVitals);
+    onLCP(reportWebVitals);
+    onTTFB(reportWebVitals);
+    onINP(reportWebVitals); // Replaced deprecated onFID with recommended onINP
+  } catch (error) {
+    console.error('Error in PostHogAnalytics:', error);
+  }
 </script>
