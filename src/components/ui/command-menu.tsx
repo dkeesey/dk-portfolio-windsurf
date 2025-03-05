@@ -1,11 +1,11 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Command } from "cmdk";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export function CommandMenu() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <>
@@ -22,31 +22,40 @@ export function CommandMenu() {
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0">
-          <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-            <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-              <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-              <Command.Input
-                placeholder="Search..."
-                className="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+          <div className="flex items-center border-b px-3">
+            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+            <Command className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50">
+              <input
+                className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Type a command or search..."
               />
-            </div>
-            <Command.List>
-              <Command.Empty>No results found.</Command.Empty>
-              <Command.Group heading="Projects">
-                <Command.Item onSelect={() => window.location.href = "/projects"}>
-                  All Projects
-                </Command.Item>
-              </Command.Group>
-              <Command.Group heading="Pages">
-                <Command.Item onSelect={() => window.location.href = "/blog"}>
-                  Blog
-                </Command.Item>
-                <Command.Item onSelect={() => window.location.href = "/design-system"}>
-                  Design System
-                </Command.Item>
-              </Command.Group>
-            </Command.List>
-          </Command>
+            </Command>
+          </div>
+          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <Command.Empty className="py-6 text-center text-sm">
+              No results found.
+            </Command.Empty>
+            <Command.Group heading="Suggestions">
+              <Command.Item
+                onSelect={() => {
+                  setOpen(false);
+                  window.location.href = "/";
+                }}
+                className="flex cursor-pointer items-center px-2 py-1 text-sm"
+              >
+                <span>Home</span>
+              </Command.Item>
+              <Command.Item
+                onSelect={() => {
+                  setOpen(false);
+                  window.location.href = "/about";
+                }}
+                className="flex cursor-pointer items-center px-2 py-1 text-sm"
+              >
+                <span>About</span>
+              </Command.Item>
+            </Command.Group>
+          </Command.List>
         </DialogContent>
       </Dialog>
     </>

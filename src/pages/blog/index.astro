@@ -19,7 +19,14 @@ const seo: SEOProps = {
   type: 'website' as const,
 };
 
-const posts = await getCollection('blog');
+// Try to get the blog collection, but handle the case where it might not exist yet
+let posts: CollectionEntry<'blog'>[] = [];
+try {
+  posts = await getCollection('blog');
+} catch (error) {
+  console.warn('Blog collection not found or empty:', error);
+}
+
 const sortedPosts = posts.sort(
   (a, b) =>
     new Date(b.data.publishDate).getTime() -
@@ -48,7 +55,7 @@ const formatDate = (date: Date) => {
         </header>
 
         <div class="grid gap-8">
-          {
+          {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
               <Card class="group transition-shadow hover:shadow-lg">
                 <a href={`/blog/${post.slug}`} class="block p-6">
@@ -75,7 +82,16 @@ const formatDate = (date: Date) => {
                 </a>
               </Card>
             ))
-          }
+          ) : (
+            <Card class="p-6">
+              <CardHeader class="p-0">
+                <CardTitle>Coming Soon</CardTitle>
+                <CardDescription class="mt-2">
+                  Blog posts are coming soon. Check back later for articles about web development, software engineering, and technology.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          )}
         </div>
       </div>
     </Container>

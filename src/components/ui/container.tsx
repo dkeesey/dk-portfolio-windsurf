@@ -1,15 +1,17 @@
 import { cn } from "@/lib/utils";
-import type { ComponentPropsWithoutRef } from "react";
+import React from "react";
 
-interface ContainerProps extends ComponentPropsWithoutRef<"div"> {
+interface ContainerProps {
   as?: "div" | "section" | "main";
+  className?: string;
+  children?: React.ReactNode;
 }
 
-export function Container({ 
-  as: Component = "div", 
-  className, 
-  children, 
-  ...props 
+export function Container({
+  as: Component = "div",
+  className,
+  children,
+  ...props
 }: ContainerProps) {
   return (
     <Component

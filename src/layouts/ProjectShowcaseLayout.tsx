@@ -1,83 +1,36 @@
-import { Layout } from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 import { MainContent } from "@/components/layout/MainContent";
-import { Badge } from "@/components/ui/badge";
-import type { PropsWithChildren } from "react";
+import React from "react";
 
-interface ProjectShowcaseLayoutProps extends PropsWithChildren {
+interface ProjectShowcaseLayoutProps {
   title: string;
   description: string;
   technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  imageUrl?: string;
+  children?: React.ReactNode;
 }
 
 export function ProjectShowcaseLayout({
-  children,
   title,
   description,
   technologies,
-  githubUrl,
-  liveUrl,
-  imageUrl,
+  children,
 }: ProjectShowcaseLayoutProps) {
   return (
-    <Layout>
+    <Container as="section">
+      <header className="py-8">
+        <h1 className="text-4xl font-bold mb-4">{title}</h1>
+        <p className="text-xl mb-4">{description}</p>
+        <div className="flex flex-wrap gap-2">
+          {technologies.map((tech) => (
+            <span key={tech} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </header>
       <MainContent>
-        <article className="mx-auto max-w-4xl">
-          {imageUrl && (
-            <div className="mb-8 overflow-hidden rounded-lg">
-              <img
-                src={imageUrl}
-                alt={`${title} project screenshot`}
-                className="w-full object-cover"
-                width={800}
-                height={400}
-              />
-            </div>
-          )}
-          
-          <header className="mb-8">
-            <h1 className="mb-4 text-4xl font-bold">{title}</h1>
-            <p className="mb-4 text-xl text-muted-foreground">{description}</p>
-            
-            <div className="mb-4 flex flex-wrap gap-2">
-              {technologies.map((tech) => (
-                <Badge key={tech} variant="secondary">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-
-            <div className="flex gap-4">
-              {githubUrl && (
-                <a
-                  href={githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  View on GitHub
-                </a>
-              )}
-              {liveUrl && (
-                <a
-                  href={liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  Visit Live Site
-                </a>
-              )}
-            </div>
-          </header>
-
-          <div className="prose prose-lg dark:prose-invert">
-            {children}
-          </div>
-        </article>
+        {children}
       </MainContent>
-    </Layout>
+    </Container>
   );
 } 

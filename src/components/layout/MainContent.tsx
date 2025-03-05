@@ -1,15 +1,16 @@
 import { cn } from "@/lib/utils";
-import type { PropsWithChildren } from "react";
+import React from "react";
 
-interface MainContentProps extends PropsWithChildren {
+interface MainContentProps {
   className?: string;
   fullWidth?: boolean;
+  children?: React.ReactNode;
 }
 
-export function MainContent({ 
-  children, 
+export function MainContent({
+  children,
   className,
-  fullWidth = false 
+  fullWidth = false
 }: MainContentProps) {
   return (
     <main

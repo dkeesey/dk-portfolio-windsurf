@@ -1,42 +1,29 @@
-import { Layout } from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 import { MainContent } from "@/components/layout/MainContent";
-import type { PropsWithChildren } from "react";
+import React from "react";
 
-interface BlogPostLayoutProps extends PropsWithChildren {
+interface BlogPostLayoutProps {
   title: string;
   date: string;
   author: string;
-  readingTime?: string;
+  children?: React.ReactNode;
 }
 
 export function BlogPostLayout({
-  children,
   title,
   date,
   author,
-  readingTime,
+  children,
 }: BlogPostLayoutProps) {
   return (
-    <Layout>
+    <Container as="section">
+      <header className="py-8 text-center">
+        <h1 className="text-4xl font-bold mb-2">{title}</h1>
+        <p className="text-gray-500">By {author} on {date}</p>
+      </header>
       <MainContent className="prose prose-lg dark:prose-invert mx-auto">
-        <article>
-          <header className="mb-8">
-            <h1 className="mb-2 text-4xl font-bold">{title}</h1>
-            <div className="text-sm text-muted-foreground">
-              <span>{author}</span>
-              <span className="mx-2">•</span>
-              <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
-              {readingTime && (
-                <>
-                  <span className="mx-2">•</span>
-                  <span>{readingTime}</span>
-                </>
-              )}
-            </div>
-          </header>
-          {children}
-        </article>
+        {children}
       </MainContent>
-    </Layout>
+    </Container>
   );
 } 

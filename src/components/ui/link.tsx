@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
-import type { ComponentPropsWithoutRef } from "react";
+import React from "react";
 
-interface LinkProps extends ComponentPropsWithoutRef<"a"> {
+interface LinkProps {
   href: string;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export function Link({ href, className, children, ...props }: LinkProps) {
