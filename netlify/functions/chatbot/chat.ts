@@ -4,12 +4,13 @@ import OpenAI from 'openai';
 import { csrfProtection } from '../../../src/lib/csrf';
 
 // Initialize the Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || 'https://clzvndqgtmbsugmdpdsq.supabase.co';
+const supabaseUrl = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL || 'https://clzvndqgtmbsugmdpdsq.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 // Create the Supabase client only if the key is available
 const getSupabaseClient = () => {
     if (!supabaseServiceKey) {
+        console.warn('Supabase Service Role Key is missing. Database operations will not work.');
         return null;
     }
     return createClient(supabaseUrl, supabaseServiceKey);

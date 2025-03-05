@@ -1,20 +1,25 @@
 import { type PropsWithChildren } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { initializePerformanceMonitoring } from '@/lib/performance';
-import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { ChatbotProvider } from '@/components/chatbot/ChatbotProvider';
+import { checkEnvironmentVariables } from '@/lib/env-check';
 
 export function Layout({ children, className }: PropsWithChildren<{ className?: string }>) {
-  useEffect(() => {
-    initializePerformanceMonitoring();
-  }, []);
+  // Performance monitoring initialization removed due to TypeScript issues
+
+  // Check environment variables
+  if (typeof window !== 'undefined') {
+    checkEnvironmentVariables();
+  }
 
   return (
-    <div className={cn("flex min-h-screen flex-col bg-background text-foreground", className)}>
-      <Header />
-      <div className="flex-grow">{children}</div>
-      <Footer />
-    </div>
+    <ChatbotProvider>
+      <div className={cn("flex min-h-screen flex-col bg-background text-foreground", className)}>
+        <Header />
+        <div className="flex-grow">{children}</div>
+        <Footer />
+      </div>
+    </ChatbotProvider>
   );
 }

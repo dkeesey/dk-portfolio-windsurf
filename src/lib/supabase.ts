@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize the Supabase client with environment variables or fallback to the provided URL
-const supabaseUrl = import.meta.env.SUPABASE_URL || 'https://clzvndqgtmbsugmdpdsq.supabase.co';
-const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY || '';
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || import.meta.env.SUPABASE_URL || 'https://clzvndqgtmbsugmdpdsq.supabase.co';
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || import.meta.env.SUPABASE_ANON_KEY || '';
 
 // Create a function to get the Supabase client
 const getSupabaseClient = () => {
