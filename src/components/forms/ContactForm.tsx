@@ -195,6 +195,25 @@ export function ContactForm() {
         </form>
       </Form>
 
+      <div className="mt-6 text-center">
+        <p className="mb-4 text-muted-foreground">
+          Prefer to schedule a quick call?
+        </p>
+        <Button
+          variant="outline"
+          asChild
+          className="w-full"
+        >
+          <a
+            href="https://calendly.com/dean-keesey/15min"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Schedule a 15-Minute Call
+          </a>
+        </Button>
+      </div>
+
 
     </div>
   );
