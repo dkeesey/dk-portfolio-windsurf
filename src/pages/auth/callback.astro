@@ -1,0 +1,115 @@
+---
+import { createClient } from '@supabase/supabase-js';
+
+// Handle the OAuth callback
+const { searchParams } = new URL(Astro.request.url);
+const code = searchParams.get('code');
+const redirectTo = searchParams.get('next') || '/';
+
+console.log('Auth callback received with code:', code ? 'Code present' : 'No code');
+console.log('Will redirect to:', redirectTo);
+
+// Hardcoded Supabase values for reliability
+const SUPABASE_URL = 'https://clzvndqgtmbsugmdpdsq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsenZuZHFndG1ic3VnbWRwZHNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwOTExNDAsImV4cCI6MjA1NTY2NzE0MH0.Moo_Tz87N5HaFHFTjqbLcAOXncKF8SC_ln39q2d7VEw';
+
+let sessionData = null;
+
+try {
+  // Create a direct Supabase client with hardcoded values
+  console.log('Creating Supabase client...');
+  
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    },
+  });
+  
+  // If we have a code, exchange it for a session
+  if (code) {
+    console.log('Exchanging code for session...');
+    
+    try {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+      
+      if (error) {
+        console.error('Error exchanging code for session:', error);
+      } else {
+        console.log('Session exchange successful!', data?.session ? 'Session exists' : 'No session in response');
+        sessionData = data;
+        
+        // Let's verify the session
+        const { data: sessionCheck } = await supabase.auth.getSession();
+        console.log('Session check after exchange:', sessionCheck?.session ? 'Session verified' : 'No session found');
+      }
+    } catch (err) {
+      console.error('Exception during code exchange:', err);
+    }
+  }
+} catch (err) {
+  console.error('Failed to initialize Supabase client:', err);
+}
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authentication Complete</title>
+  <meta http-equiv="refresh" content={`3;url=${redirectTo}`}>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px 40px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #666;
+      margin: 20px 0;
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-radius: 50%;
+      border-top-color: #3182ce;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Authentication Complete</h1>
+    <p><span class="spinner"></span> Redirecting you back to the application...</p>
+    <p>If you are not redirected automatically, <a href={redirectTo}>click here</a>.</p>
+  </div>
+
+  <script>
+    // Ensure the session is properly stored before redirecting
+    setTimeout(function() {
+      console.log("Callback page: Redirecting to", {redirectTo: '{redirectTo}'});
+      window.location.href = '{redirectTo}' || '/';
+    }, 2000);
+  </script>
+</body>
+</html>

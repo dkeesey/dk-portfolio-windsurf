@@ -1,0 +1,19 @@
+---
+import { Command as CommandReact } from '@/components/ui/command';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<CommandReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  {...props}
+>
+  <slot />
+</CommandReact> 

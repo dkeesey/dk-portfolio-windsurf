@@ -1,0 +1,39 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { ProjectsGrid } from '@/components/sections/ProjectsGrid';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Projects - Dean Keesey",
+  description: "Explore my portfolio of full-stack development projects, featuring modern web applications and technical solutions.",
+  type: "website" as const
+};
+---
+
+<Layout {seo}>
+  <div class="relative min-h-screen pb-0 mb-0">
+    <!-- Subtle gradient background -->
+    <div 
+      class="absolute inset-0 z-0" 
+      style={{
+        background: 'linear-gradient(to bottom, #f3f4f6, #e5e7eb)',
+      }}
+    >
+    </div>
+    
+    <!-- Optional subtle pattern overlay -->
+    <div 
+      class="absolute inset-0 z-[1] opacity-5"
+      style={{
+        backgroundImage: `radial-gradient(#6366f1 1px, transparent 1px)`,
+        backgroundSize: '30px 30px',
+      }}
+    >
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10">
+      <ProjectsGrid client:load />
+    </div>
+  </div>
+</Layout>

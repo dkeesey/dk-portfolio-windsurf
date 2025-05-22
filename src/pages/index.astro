@@ -1,0 +1,20 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
+import { SkillsMatrix } from '@/components/sections/SkillsMatrix';
+
+const seo = {
+  title: "Dean Keesey - Full Stack Developer & SEO Specialist",
+  description: "Full Stack Developer specializing in modern web frameworks, SEO optimization, WordPress security, and digital marketing integration",
+};
+---
+
+<Layout {seo}>
+  {/* Removed the py-12 padding top from main to allow hero to start right after header */}
+  <main class="space-y-24">
+    <HeroSection client:load />
+    <SkillsMatrix client:visible />
+    <ExperienceTimeline client:visible />
+  </main>
+</Layout>

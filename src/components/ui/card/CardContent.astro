@@ -1,0 +1,13 @@
+---
+import { CardContent as CardContentReact } from '@/components/ui/card';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+<CardContentReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</CardContentReact> 

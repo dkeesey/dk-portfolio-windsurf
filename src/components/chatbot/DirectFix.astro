@@ -1,0 +1,80 @@
+---
+// Direct fix for Botpress chat input with no dependencies or complex code
+---
+
+<script is:inline>
+// Apply fixes only after Botpress is fully loaded
+(function() {
+  // Check for Botpress elements every 500ms for 20 seconds
+  var attempts = 0;
+  var maxAttempts = 40;
+  
+  function checkAndFixChat() {
+    if (attempts >= maxAttempts) return;
+    attempts++;
+    
+    try {
+      // Find the chat input element
+      var inputElement = document.querySelector('[contenteditable="true"]');
+      var sendButton = document.querySelector('[data-webchat-component="SendButton"]') || 
+                       document.querySelector('[data-webchat-component="Input"] button');
+      
+      // If both elements exist, apply fixes
+      if (inputElement && sendButton) {
+        console.log("Found Botpress elements! Applying fixes...");
+        
+        // 1. Fix contentEditable behavior
+        // Force the element to be truly editable
+        inputElement.setAttribute("contenteditable", "plaintext-only");
+        
+        // 2. Ensure the element accepts input events
+        inputElement.addEventListener('input', function(e) {
+          // Enable the send button if there's text
+          if (inputElement.textContent && inputElement.textContent.trim().length > 0) {
+            sendButton.removeAttribute('disabled');
+          } else {
+            sendButton.setAttribute('disabled', 'disabled');
+          }
+        });
+        
+        // 3. Force-enable the button when text is entered
+        var originalInsertText = document.execCommand;
+        document.execCommand = function(command) {
+          var result = originalInsertText.apply(this, arguments);
+          if (command === 'insertText' && inputElement.textContent.trim().length > 0) {
+            sendButton.removeAttribute('disabled');
+          }
+          return result;
+        };
+        
+        // 4. Handle Enter key explicitly
+        inputElement.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            if (inputElement.textContent.trim().length > 0) {
+              e.preventDefault();
+              sendButton.click();
+            }
+          }
+        });
+        
+        // Successfully applied fixes
+        return true;
+      }
+    } catch (err) {
+      console.warn("Error applying Botpress fixes:", err);
+    }
+    
+    // If we haven't fixed it yet, try again
+    setTimeout(checkAndFixChat, 500);
+  }
+  
+  // Start the fixing process after DOM is loaded
+  if (document.readyState === "loading") {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(checkAndFixChat, 1000);
+    });
+  } else {
+    setTimeout(checkAndFixChat, 1000);
+  }
+})();
+</script>

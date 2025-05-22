@@ -1,0 +1,110 @@
+---
+// Component for Botpress input fix only
+---
+
+<script is:inline>
+// Enhanced fix for Botpress dictation and input issues
+document.addEventListener('DOMContentLoaded', function() {
+  var checkCount = 0;
+  var maxChecks = 20;
+  var checkInterval = 1000; // in milliseconds
+  var fixApplied = false;
+  
+  // Set up a MutationObserver to watch for Botpress elements
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (!fixApplied && document.querySelector('[data-webchat-component="Input"]')) {
+        applyInputFix();
+      }
+    });
+  });
+  
+  // Start observing the document body for added nodes
+  observer.observe(document.body, { childList: true, subtree: true });
+  
+  // Also use polling as a fallback
+  function checkForBotpressElements() {
+    if (fixApplied || checkCount >= maxChecks) {
+      return;
+    }
+    
+    checkCount++;
+    var inputArea = document.querySelector('[data-webchat-component="Input"]');
+    
+    if (inputArea) {
+      applyInputFix();
+    } else {
+      setTimeout(checkForBotpressElements, checkInterval);
+    }
+  }
+  
+  // Apply the fix
+  function applyInputFix() {
+    if (fixApplied) return;
+    
+    try {
+      var inputArea = document.querySelector('[data-webchat-component="Input"]');
+      if (!inputArea) return;
+      
+      // Find the contenteditable div
+      var textInput = inputArea.querySelector('[contenteditable="true"]');
+      if (!textInput) return;
+      
+      // Find the send button
+      var sendButton = inputArea.querySelector('button') || 
+                       inputArea.querySelector('[data-webchat-component="SendButton"]');
+      if (!sendButton) return;
+      
+      // Add mutation observer for contenteditable div
+      var textObserver = new MutationObserver(function() {
+        if (textInput.textContent.trim().length > 0) {
+          sendButton.removeAttribute('disabled');
+        } else {
+          sendButton.setAttribute('disabled', 'disabled');
+        }
+      });
+      
+      // Observe changes to the contenteditable text
+      textObserver.observe(textInput, { 
+        childList: true, 
+        characterData: true,
+        subtree: true 
+      });
+      
+      // Add input handler for dictation
+      textInput.addEventListener('input', function() {
+        if (textInput.textContent.trim().length > 0) {
+          sendButton.removeAttribute('disabled');
+        } else {
+          sendButton.setAttribute('disabled', 'disabled');
+        }
+      });
+      
+      // Add focus handler
+      textInput.addEventListener('focus', function() {
+        // Enable button on focus if there's text
+        if (textInput.textContent.trim().length > 0) {
+          sendButton.removeAttribute('disabled');
+        }
+      });
+      
+      // Add enter key handler
+      textInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey && textInput.textContent.trim()) {
+          e.preventDefault();
+          sendButton.click();
+        }
+      });
+      
+      // Mark the fix as applied
+      fixApplied = true;
+      console.log('Botpress input fix successfully applied');
+    } catch (err) {
+      console.warn('Failed to apply Botpress input fix:', err);
+    }
+  }
+  
+  // Start the polling
+  setTimeout(checkForBotpressElements, 1500);
+});
+</script>

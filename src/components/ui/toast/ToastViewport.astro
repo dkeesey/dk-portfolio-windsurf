@@ -1,0 +1,10 @@
+---
+import { ToastViewport as ToastViewportPrimitive } from '@/components/ui/toast';
+
+const { class: classAstro, className } = Astro.props;
+const combinedClassName = [classAstro, className].filter(Boolean).join(' ');
+---
+
+<ToastViewportPrimitive client:load className={combinedClassName}>
+  <slot />
+</ToastViewportPrimitive>

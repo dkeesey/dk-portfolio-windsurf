@@ -1,0 +1,96 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '@/components/layout/Layout.astro';
+import { Container } from '@/components/ui/container';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+// Generate static paths for all blog posts
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog', ({ data }) => {
+    // In production, filter out draft posts
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+  
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// Get the blog post from the props
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Format the date for display
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+};
+
+// SEO props
+const seo: SEOProps = {
+  title: `${entry.data.title} - Dean Keesey's Blog`,
+  description: entry.data.description,
+  type: entry.data.type || 'article',
+  image: entry.data.image,
+  publishDate: entry.data.publishDate,
+};
+---
+
+<Layout {seo}>
+  <Container as="main" className="py-12">
+    <article class="mx-auto max-w-3xl">
+      <header class="mb-8 text-center">
+        <div class="mb-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <time datetime={entry.data.publishDate.toISOString()}>
+            {formatDate(entry.data.publishDate)}
+          </time>
+          <span>•</span>
+          <span>{entry.data.readingTime || '5'} min read</span>
+        </div>
+        <h1 class="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+          {entry.data.title}
+        </h1>
+        <p class="text-xl text-muted-foreground">
+          {entry.data.description}
+        </p>
+        <div class="mt-4 flex flex-wrap justify-center gap-2">
+          {entry.data.tags.map((tag: string) => (
+            <Badge variant="secondary">{tag}</Badge>
+          ))}
+        </div>
+      </header>
+
+      {entry.data.image && (
+        <div class="mb-8 overflow-hidden rounded-lg">
+          <img
+            src={entry.data.image}
+            alt={`Cover image for ${entry.data.title}`}
+            class="h-auto w-full object-cover"
+          />
+        </div>
+      )}
+
+      <div class="prose prose-lg mx-auto max-w-none dark:prose-invert">
+        <Content />
+      </div>
+
+      <div class="mt-12 border-t pt-6">
+        <div class="flex items-center justify-between">
+          <a href="/blog" class="text-primary hover:underline">
+            &larr; Back to all posts
+          </a>
+          {entry.data.author && (
+            <p class="text-sm text-muted-foreground">
+              Written by <span class="font-medium">{entry.data.author}</span>
+            </p>
+          )}
+        </div>
+      </div>
+    </article>
+  </Container>
+</Layout> 

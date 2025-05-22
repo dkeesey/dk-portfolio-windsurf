@@ -1,0 +1,45 @@
+---
+interface Props {
+  metric?: string; // Add optional metric prop to resolve potential type error
+}
+
+const { metric = '' } = Astro.props;
+---
+<!-- Load PostHog script directly to avoid import issues -->
+<script is:inline>
+  try {
+    // Use window objects directly instead of imports
+    const trackPostHogPageview = window.posthog && window.posthog.capture ? 
+      (url) => window.posthog.capture('$pageview', { url }) : 
+      () => console.warn('PostHog not available for tracking');
+    
+    const trackGooglePageview = window.gtag ? 
+      (url) => window.gtag('event', 'page_view', { page_path: url }) : 
+      () => console.warn('Google Analytics not available for tracking');
+
+    // Function to track pageviews in both analytics platforms
+    const trackPageview = (url) => {
+      try {
+        // Track in PostHog
+        trackPostHogPageview(url);
+        
+        // Track in Google Analytics
+        trackGooglePageview(url);
+      } catch (error) {
+        console.error('Error tracking pageview:', error);
+      }
+    }
+
+    // Track initial pageview
+    trackPageview(window.location.pathname + window.location.search);
+
+    // Set up navigation tracking for client-side navigation
+    document.addEventListener('astro:page-load', () => {
+      trackPageview(window.location.pathname + window.location.search);
+    });
+
+    // We'll handle web vitals separately if needed
+  } catch (error) {
+    console.error('Error in PostHogAnalytics:', error);
+  }
+</script>

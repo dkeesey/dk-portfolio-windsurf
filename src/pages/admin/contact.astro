@@ -1,0 +1,30 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Container } from '@/components/ui/container';
+import { ContactSubmissionsAdmin } from '@/components/admin/ContactSubmissionsAdmin';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: 'Contact Submissions - Admin',
+  description: 'View and manage contact form submissions',
+  type: 'website' as const,
+  noindex: true // Prevent search engines from indexing admin pages
+};
+---
+
+<Layout {seo}>
+  <div class="bg-[#eee] min-h-screen">
+    <Container as="main" className="py-12">
+      <div class="mx-auto max-w-6xl space-y-8 bg-white p-8 rounded-lg shadow-sm">
+        <header class="space-y-4">
+          <h1 class="text-4xl font-bold">Contact Submissions</h1>
+          <p class="text-xl text-muted-foreground">
+            View and manage contact form submissions from your website.
+          </p>
+        </header>
+
+        <ContactSubmissionsAdmin client:load />
+      </div>
+    </Container>
+  </div>
+</Layout>

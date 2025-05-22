@@ -1,0 +1,141 @@
+---
+// A script to handle CORS issues and fix Botpress functionality in development mode
+---
+
+<script is:inline>
+  // CORS handling for development environment
+  (function() {
+    // Add a proxy for Botpress API calls
+    const originalFetch = window.fetch;
+    
+    window.fetch = function(url, options) {
+      // Check if this is a Botpress API call
+      if (url && typeof url === 'string' && url.includes('botpress.cloud')) {
+        console.log('Intercepting Botpress API call:', url);
+        
+        // In development, we could use a CORS proxy or local proxy
+        // For now, let's just log it and continue with the original fetch
+        console.log('CORS issue may occur with this request in development mode');
+      }
+      
+      // Proceed with original fetch
+      return originalFetch.apply(this, arguments);
+    };
+    
+    // Fix for Botpress iframe loading
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Adding Botpress iframe development fixes');
+      
+      // Give Botpress time to load
+      setTimeout(function() {
+        // Find all iframes that might be related to Botpress
+        const iframes = document.querySelectorAll('iframe');
+        
+        iframes.forEach(iframe => {
+          try {
+            // Add allow-same-origin to iframe sandbox attribute if it exists
+            if (iframe.sandbox && !iframe.sandbox.contains('allow-same-origin')) {
+              const sandboxValues = iframe.sandbox.value.split(' ');
+              if (!sandboxValues.includes('allow-same-origin')) {
+                sandboxValues.push('allow-same-origin');
+                iframe.sandbox.value = sandboxValues.join(' ');
+                console.log('Added allow-same-origin to iframe sandbox');
+              }
+            }
+            
+            // Try to add CORS headers to iframe content
+            iframe.addEventListener('load', function() {
+              try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Add meta tag to iframe document if possible
+                const meta = document.createElement('meta');
+                meta.httpEquiv = 'Content-Security-Policy';
+                meta.content = 'upgrade-insecure-requests';
+                
+                if (iframeDoc && iframeDoc.head) {
+                  iframeDoc.head.appendChild(meta);
+                  console.log('Added CSP meta tag to iframe');
+                }
+              } catch (error) {
+                console.log('Unable to modify iframe content due to CORS restrictions');
+              }
+            });
+          } catch (error) {
+            console.log('Error applying iframe fix:', error);
+          }
+        });
+      }, 1000);
+    });
+    
+    // Fix for Botpress input issues
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check every second for 30 seconds
+      let attempts = 0;
+      const checkInterval = setInterval(function() {
+        try {
+          // Try to find the contenteditable element
+          const textInput = document.querySelector('[contenteditable="true"]');
+          const sendButton = document.querySelector('button[type="submit"]') || 
+                            document.querySelector('[data-webchat-component="SendButton"]') ||
+                            document.querySelector('[data-webchat-component="Input"] button');
+          
+          // If we found both elements, apply the fix
+          if (textInput && sendButton) {
+            console.log("Found Botpress elements, applying direct fix");
+            
+            // Clear the interval since we found the elements
+            clearInterval(checkInterval);
+            
+            // Direct fix for the textarea input
+            textInput.style.minHeight = "40px";
+            textInput.style.padding = "8px";
+            textInput.style.fontSize = "14px";
+            
+            // Make sure the element is actually editable
+            textInput.contentEditable = "true";
+            textInput.setAttribute("role", "textbox");
+            
+            // Add direct input handler to enable the send button
+            textInput.addEventListener('input', function() {
+              if (textInput.textContent && textInput.textContent.trim().length > 0) {
+                sendButton.disabled = false;
+                sendButton.removeAttribute('disabled');
+              } else {
+                sendButton.disabled = true;
+                sendButton.setAttribute('disabled', 'disabled');
+              }
+            });
+            
+            // Handle enter key directly
+            textInput.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' && !e.shiftKey && textInput.textContent.trim().length > 0) {
+                e.preventDefault();
+                
+                // Force the button to be enabled
+                sendButton.disabled = false;
+                sendButton.removeAttribute('disabled');
+                
+                // Click the button
+                sendButton.click();
+                
+                // Clear the input manually
+                setTimeout(function() {
+                  textInput.textContent = '';
+                }, 100);
+              }
+            });
+          } else {
+            attempts++;
+            if (attempts >= 30) {
+              clearInterval(checkInterval);
+              console.log("Could not find Botpress elements after 30 attempts");
+            }
+          }
+        } catch (error) {
+          console.error("Error in Botpress fix script:", error);
+        }
+      }, 1000);
+    });
+  })();
+</script>

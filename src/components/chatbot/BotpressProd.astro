@@ -1,0 +1,298 @@
+---
+// BotpressProd - Implementation for production only
+---
+
+<!-- Container for the webchat -->
+<div id="webchat" style="width: 500px; height: 500px; display: none;"></div>
+
+<!-- Botpress initialization and error handling -->
+<script>
+  // Function to load script with error handling
+  function loadScript(src, callback) {
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    
+    script.onload = () => {
+      if (callback) callback(null, script);
+    };
+    
+    script.onerror = () => {
+      console.warn(`Failed to load script: ${src}`);
+      if (callback) callback(new Error(`Failed to load script: ${src}`), script);
+    };
+    
+    document.head.appendChild(script);
+    return script;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Try to load Botpress with error handling
+    loadScript('https://cdn.botpress.cloud/webchat/v2.3/inject.js', (err) => {
+      if (err) {
+        console.warn('Botpress failed to load:', err);
+        // Show the minimal chat instead
+        const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+        if (minimalChatToggle) {
+          minimalChatToggle.style.display = 'flex';
+        }
+        return;
+      }
+      
+      // Initialize Botpress
+      setTimeout(() => {
+        try {
+          // Make sure window.botpress exists and is properly initialized
+          if (window.botpress) {
+            // Check if botpress is already initialized
+            if (typeof window.botpress.init !== 'function') {
+              console.warn('Botpress object exists but init is not a function. Creating a new instance.');
+              // Create a new instance if init is not available
+              window.botpress = {
+                init: function(config) {
+                  console.log('Using fallback init function with config:', config);
+                  // Minimal implementation that just shows the container
+                  if (config && config.selector && typeof config.selector === 'string') {
+                    const selectorId = config.selector.startsWith('#') ? 
+                      config.selector.substring(1) : config.selector;
+                    const container = document.getElementById(selectorId);
+                    if (container) {
+                      container.style.display = 'block';
+                    }
+                  } else {
+                    console.warn('Invalid selector in config:', config);
+                  }
+                },
+                open: function() {
+                  console.log('Using fallback open function');
+                  const container = document.getElementById('botpress-container');
+                  if (container) {
+                    container.classList.remove('hidden');
+                  }
+                },
+                close: function() {
+                  console.log('Using fallback close function');
+                  const container = document.getElementById('botpress-container');
+                  if (container) {
+                    container.classList.add('hidden');
+                  }
+                }
+              };
+            }
+            
+            // Now initialize with our configuration
+            window.botpress.init({
+              "selector": "#webchat",
+              "hideWidget": true, // We'll handle the visibility ourselves
+            });
+            
+            // Load bot-specific script
+            loadScript('https://files.bpcontent.cloud/2025/03/04/22/20250304222237-YQK2DZJ2.js', (err) => {
+              if (err) {
+                console.warn('Bot-specific script failed to load:', err);
+              }
+            });
+            
+            // Additional initialization
+            if (typeof window.botpress.on === 'function') {
+              window.botpress.on("webchat:ready", () => {
+                console.log("Botpress webchat is ready");
+              });
+            }
+          } else {
+            console.warn('Botpress object not available');
+            // Show the minimal chat instead
+            const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+            if (minimalChatToggle) {
+              minimalChatToggle.style.display = 'flex';
+            }
+          }
+        } catch (error) {
+          console.error('Error initializing Botpress:', error);
+          // Show the minimal chat instead
+          const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+          if (minimalChatToggle) {
+            minimalChatToggle.style.display = 'flex';
+          }
+        }
+      }, 1000);
+    });
+  });
+</script>
+
+<!-- Custom container with toggle buttons -->
+<div id="botpress-container" class="fixed bottom-5 right-5 w-[500px] max-w-[calc(100vw-20px)] h-[500px] max-h-[75vh] shadow-xl rounded-lg overflow-hidden transition-all duration-300 hidden bg-white">
+  <!-- Close button -->
+  <button id="botpress-close" class="absolute top-3 right-3 bg-white/10 backdrop-blur rounded-full p-1 hover:bg-white/20 transition-colors duration-200 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  
+  <!-- This div will contain the Botpress chat -->
+  <div id="botpress-chat-container" class="w-full h-full"></div>
+</div>
+
+<!-- Chat toggle button -->
+<button id="botpress-toggle" class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-purple-600 text-white shadow-lg flex items-center justify-center hover:brightness-110 transition-all duration-300">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- Custom UI management -->
+<script>
+  // Wait for DOM content loaded with additional delay to ensure all elements are available
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add a longer delay to ensure all UI elements are properly rendered
+    setTimeout(() => {
+      try {
+        // First verify all elements exist
+        const container = document.getElementById('botpress-container');
+        const chatContainer = document.getElementById('botpress-chat-container');
+        const toggle = document.getElementById('botpress-toggle');
+        const close = document.getElementById('botpress-close');
+        
+        // Check if all required elements exist before proceeding
+        if (!container) console.error('botpress-container not found');
+        if (!chatContainer) console.error('botpress-chat-container not found');
+        if (!toggle) console.error('botpress-toggle not found');
+        if (!close) console.error('botpress-close not found');
+        
+        if (!container || !chatContainer || !toggle || !close) {
+          console.error('One or more Botpress UI elements not found - will retry');
+          
+          // Maybe try another approach later or show minimal chat
+          const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+          if (minimalChatToggle) {
+            minimalChatToggle.style.display = 'flex';
+          }
+          return;
+        }
+        
+        console.log('All Botpress UI elements found successfully');
+        
+        let isChatOpen = false;
+        
+        // Function to check if Botpress is ready by scanning the DOM
+        function isBotpressReady() {
+          const bpWidget = document.querySelector('.bp-widget');
+          return bpWidget !== null;
+        }
+        
+        // Function to move the Botpress widget into our container
+        function moveBotpressWidget() {
+          const bpWidget = document.querySelector('.bp-widget');
+          if (bpWidget && !chatContainer.contains(bpWidget)) {
+            chatContainer.appendChild(bpWidget);
+            return true;
+          }
+          return false;
+        }
+        
+        // Show the chat
+        function showChat() {
+          isChatOpen = true;
+          container.classList.remove('hidden');
+          toggle.classList.add('hidden');
+          
+          // Try to move the widget
+          if (!moveBotpressWidget()) {
+            // If we couldn't move it, it might not be ready yet
+            // Set up a polling mechanism to check periodically
+            const widgetCheckInterval = setInterval(() => {
+              if (moveBotpressWidget()) {
+                clearInterval(widgetCheckInterval);
+              }
+            }, 200);
+            
+            // Safety timeout to clear the interval if it takes too long
+            setTimeout(() => clearInterval(widgetCheckInterval), 10000);
+          }
+          
+          // Try to open the chat if Botpress is available
+          try {
+            if (window.botpress && typeof window.botpress.open === 'function') {
+              window.botpress.open();
+            }
+          } catch (error) {
+            console.error('Error opening Botpress chat:', error);
+          }
+        }
+        
+        // Hide the chat
+        function hideChat() {
+          isChatOpen = false;
+          container.classList.add('hidden');
+          toggle.classList.remove('hidden');
+          
+          // Try to close the chat
+          try {
+            if (window.botpress && typeof window.botpress.close === 'function') {
+              window.botpress.close();
+            }
+          } catch (error) {
+            console.error('Error closing Botpress chat:', error);
+          }
+        }
+        
+        // Add event listeners
+        toggle.addEventListener('click', showChat);
+        close.addEventListener('click', hideChat);
+      } catch (error) {
+        console.error('Error setting up Botpress UI:', error);
+        // Fallback to minimal chat
+        const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+        if (minimalChatToggle) {
+          minimalChatToggle.style.display = 'flex';
+        }
+      }
+    }, 1500); // Increased delay to 1.5 seconds
+  });
+</script>
+
+<style>
+  /* Transitions */
+  #botpress-container {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  #botpress-container.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  
+  #botpress-toggle {
+    transition: all 0.3s ease;
+  }
+  
+  #botpress-toggle.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+  }
+  
+  /* Botpress styling overrides */
+  :global(.bp-widget) {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    border-radius: 0 !important;
+  }
+  
+  :global(.bpw-layout) {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+  }
+  
+  :global(.bpw-header-container) {
+    border-radius: 0 !important;
+  }
+  
+  :global(.bpw-floating-button) {
+    display: none !important;
+  }
+</style>

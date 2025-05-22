@@ -1,0 +1,21 @@
+---
+import { Toast as ToastReact } from '@/components/ui/toast';
+
+interface Props {
+  class?: string;
+  className?: string;
+  variant?: "default" | "destructive";
+}
+
+const { class: classAstro, className, variant, ...props } = Astro.props;
+---
+
+<ToastReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  variant={variant}
+  {...props}
+>
+  <slot />
+</ToastReact> 

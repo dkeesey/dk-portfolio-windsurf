@@ -1,0 +1,132 @@
+---
+// Simple Botpress integration that follows the official iframe code
+---
+
+<!-- Custom styling for the Botpress webchat -->
+<style>
+  #webchat .bpWebchat {
+    position: unset !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  #webchat .bpFab {
+    display: none !important;
+  }
+  
+  /* Container styling with transitions */
+  #botpress-container {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  #botpress-container.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  
+  #botpress-toggle {
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  
+  #botpress-toggle.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+  }
+</style>
+
+<!-- Container for the webchat -->
+<div id="botpress-container" class="fixed bottom-5 right-5 w-[500px] max-w-[calc(100vw-20px)] h-[500px] max-h-[75vh] hidden">
+  <!-- Close button -->
+  <button id="botpress-close" class="absolute top-3 right-3 bg-white/10 backdrop-blur rounded-full p-1 hover:bg-white/20 transition-colors duration-200 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  
+  <!-- This is the actual webchat div from Botpress docs -->
+  <div id="webchat" style="width: 100%; height: 100%;"></div>
+</div>
+
+<!-- Chat toggle button -->
+<button id="botpress-toggle" class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:brightness-110 transition-all duration-300">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- Inject.js must be loaded first -->
+<script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+
+<script>
+  // Simple toggle functionality for the chat
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('botpress-container');
+    const toggle = document.getElementById('botpress-toggle');
+    const close = document.getElementById('botpress-close');
+    let botpressInitialized = false;
+    
+    // Show the chat
+    function showChat() {
+      container.classList.remove('hidden');
+      toggle.classList.add('hidden');
+      
+      // Initialize Botpress if not already done
+      if (!botpressInitialized) {
+        initBotpress();
+        botpressInitialized = true;
+      } else if (window.botpress) {
+        // If already initialized, just open it
+        window.botpress.open();
+      }
+    }
+    
+    // Hide the chat
+    function hideChat() {
+      container.classList.add('hidden');
+      toggle.classList.remove('hidden');
+      
+      // Close Botpress if it's initialized
+      if (window.botpress) {
+        window.botpress.close();
+      }
+    }
+    
+    // Initialize Botpress
+    function initBotpress() {
+      // Use a timeout to ensure botpress is loaded
+      setTimeout(() => {
+        if (window.botpress) {
+          // Initialize with the exact code from Botpress
+          window.botpress.init({
+            "selector": "#webchat"
+          });
+          
+          // Open the chat when ready
+          window.botpress.on("webchat:ready", () => {
+            window.botpress.open();
+          });
+        } else {
+          console.warn("Botpress not loaded yet, retrying...");
+          setTimeout(initBotpress, 500); // Retry after 500ms
+        }
+      }, 100);
+    }
+    
+    // Add event listeners
+    toggle.addEventListener('click', showChat);
+    close.addEventListener('click', hideChat);
+  });
+</script>
+
+<!-- Bot-specific script (must be loaded after inject.js) -->
+<script src="https://files.bpcontent.cloud/2025/03/04/22/20250304222237-YQK2DZJ2.js"></script>

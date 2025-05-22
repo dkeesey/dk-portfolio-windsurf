@@ -1,0 +1,23 @@
+---
+import { CommandInput as CommandInputReact } from '@/components/ui/command';
+
+interface Props {
+  class?: string;
+  className?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+}
+
+const { class: classAstro, className, value, onValueChange, ...props } = Astro.props;
+---
+
+<CommandInputReact 
+  client:load 
+  class={classAstro} 
+  className={className} 
+  value={value}
+  onValueChange={onValueChange}
+  {...props}
+>
+  <slot />
+</CommandInputReact> 

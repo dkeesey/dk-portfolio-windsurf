@@ -1,0 +1,43 @@
+---
+// Botpress - Conditional wrapper component that renders different versions based on environment
+import BotpressSimple from './BotpressSimple.astro';
+import BotpressProd from './BotpressProd.astro';
+import BotpressMinimal from './BotpressMinimal.astro';
+
+const isDev = import.meta.env.DEV;
+---
+
+<!-- Use BotpressSimple for development to avoid CORS issues -->
+{isDev ? <BotpressSimple /> : <BotpressProd />}
+<BotpressMinimal />
+
+<!-- Fallback script to handle Botpress load errors -->
+<script>
+  // Check if Botpress loaded correctly after a timeout
+  setTimeout(() => {
+    try {
+      const isBotpressLoaded = window.botpress && typeof window.botpress.init === 'function';
+      const isProdEnv = import.meta.env.PROD;
+      
+      // Only in production and if Botpress failed to load
+      if (isProdEnv && !isBotpressLoaded) {
+        console.log('Botpress failed to load. Using minimal fallback.');
+        
+        // Hide Botpress components if they exist
+        const botpressElements = document.querySelectorAll('[id^="botpress-"]');
+        botpressElements.forEach(el => {
+          if (el) el.style.display = 'none';
+        });
+        
+        // Show minimal chat components
+        const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+        if (minimalChatToggle) minimalChatToggle.style.display = 'flex';
+      }
+    } catch (error) {
+      console.error('Error checking Botpress status:', error);
+      // Show minimal chat as fallback
+      const minimalChatToggle = document.getElementById('minimal-chat-toggle');
+      if (minimalChatToggle) minimalChatToggle.style.display = 'flex';
+    }
+  }, 3000); // Wait 3 seconds for Botpress to load
+</script>

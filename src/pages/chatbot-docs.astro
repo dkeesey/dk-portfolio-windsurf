@@ -1,0 +1,136 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+---
+
+<Layout title="Chatbot Documentation">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">Recruiter Chatbot Documentation</h1>
+    
+    <div class="prose max-w-none">
+      <h2>Overview</h2>
+      <p>
+        The recruiter chatbot is a conversational interface designed to help recruiters interact with your portfolio website.
+        It can answer questions about your experience, skills, projects, and more, providing a personalized experience for recruiters.
+      </p>
+      
+      <h2>Architecture</h2>
+      <p>
+        The chatbot is built using the following technologies:
+      </p>
+      <ul>
+        <li><strong>Frontend:</strong> React components within Astro</li>
+        <li><strong>Authentication:</strong> Supabase Auth</li>
+        <li><strong>Database:</strong> Supabase PostgreSQL</li>
+        <li><strong>AI:</strong> OpenAI API</li>
+        <li><strong>Serverless Functions:</strong> Netlify Functions</li>
+      </ul>
+      
+      <h3>Component Structure</h3>
+      <pre><code class="language-plaintext">
+src/components/chatbot/
+├── ChatbotProvider.tsx    # Context provider for chat and auth
+├── hooks/
+│   ├── useAuth.ts         # Authentication hook
+│   └── useChat.ts         # Chat functionality hook
+├── types.ts               # TypeScript type definitions
+├── ui/
+│   ├── ChatContainer.tsx  # Container for chat messages
+│   ├── ChatInput.tsx      # User input component
+│   ├── ChatMessage.tsx    # Individual message component
+│   └── ChatWidget.tsx     # Main chatbot widget
+└── README.md              # Documentation
+      </code></pre>
+      
+      <h3>API Endpoints</h3>
+      <ul>
+        <li><code>/api/chatbot/chat</code> - Handles chat messages</li>
+        <li><code>/api/chatbot/history</code> - Retrieves chat history</li>
+      </ul>
+      
+      <h3>Netlify Functions</h3>
+      <ul>
+        <li><code>/netlify/functions/chatbot/chat.ts</code> - Processes chat messages with OpenAI</li>
+        <li><code>/netlify/functions/chatbot/history.ts</code> - Manages conversation history in Supabase</li>
+      </ul>
+      
+      <h2>Database Schema</h2>
+      <p>
+        The chatbot uses the following tables in Supabase:
+      </p>
+      
+      <h3>conversations</h3>
+      <pre><code class="language-sql">
+CREATE TABLE conversations (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  recruiter_id UUID REFERENCES auth.users(id),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+      </code></pre>
+      
+      <h3>messages</h3>
+      <pre><code class="language-sql">
+CREATE TABLE messages (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  conversation_id UUID REFERENCES conversations(id),
+  role TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+      </code></pre>
+      
+      <h2>Authentication Flow</h2>
+      <p>
+        The chatbot uses Supabase Auth for authentication:
+      </p>
+      <ol>
+        <li>User clicks "Sign In" in the chatbot</li>
+        <li>Supabase Auth redirects to the authentication provider</li>
+        <li>After successful authentication, the user is redirected back to the callback URL</li>
+        <li>The callback page extracts the session information and redirects back to the original page</li>
+        <li>The chatbot retrieves the user's session and displays the authenticated interface</li>
+      </ol>
+      
+      <h2>Chat Flow</h2>
+      <p>
+        The chat flow works as follows:
+      </p>
+      <ol>
+        <li>User sends a message through the chat interface</li>
+        <li>The message is sent to the API endpoint</li>
+        <li>The API forwards the request to the Netlify function</li>
+        <li>The Netlify function retrieves the conversation history from Supabase</li>
+        <li>The function sends the conversation to OpenAI for processing</li>
+        <li>The AI response is saved to Supabase and returned to the client</li>
+        <li>The chat interface displays the response</li>
+      </ol>
+      
+      <h2>Customization</h2>
+      <p>
+        The chatbot can be customized in several ways:
+      </p>
+      <ul>
+        <li><strong>System Prompt:</strong> Modify the system prompt in <code>netlify/functions/chatbot/chat.ts</code></li>
+        <li><strong>UI:</strong> Customize the UI components in <code>src/components/chatbot/ui/</code></li>
+        <li><strong>Authentication:</strong> Configure authentication providers in Supabase</li>
+      </ul>
+      
+      <h2>Deployment</h2>
+      <p>
+        To deploy the chatbot, you need to:
+      </p>
+      <ol>
+        <li>Set up a Supabase project with the required tables</li>
+        <li>Configure environment variables in your hosting platform</li>
+        <li>Deploy your Astro website with the chatbot components</li>
+      </ol>
+      
+      <h3>Environment Variables</h3>
+      <pre><code class="language-plaintext">
+PUBLIC_SUPABASE_URL=your_supabase_url
+PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+OPENAI_API_KEY=your_openai_api_key
+      </code></pre>
+    </div>
+  </main>
+</Layout> 

@@ -1,0 +1,65 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+---
+
+<Layout title="Chatbot Example">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">Chatbot Example</h1>
+    
+    <div class="prose max-w-none mb-8">
+      <p>
+        This page demonstrates how to use the recruiter chatbot component. The chatbot is designed to help recruiters
+        interact with your portfolio website and learn more about your skills, experience, and projects.
+      </p>
+      
+      <h2>Features</h2>
+      <ul>
+        <li>Real-time chat interface</li>
+        <li>Authentication with Supabase</li>
+        <li>Conversation history storage</li>
+        <li>OpenAI integration for natural language processing</li>
+        <li>Responsive design for mobile and desktop</li>
+      </ul>
+      
+      <h2>How to Use</h2>
+      <p>
+        Click the chat button in the bottom-right corner to open the chatbot. You can ask questions about my
+        experience, skills, projects, or anything else you'd like to know about me as a candidate.
+      </p>
+      
+      <h2>Implementation</h2>
+      <p>
+        The chatbot is implemented using React components within an Astro website. It uses Supabase for authentication
+        and data storage, and OpenAI for natural language processing.
+      </p>
+      
+      <div class="bg-gray-100 p-4 rounded-md">
+        <p class="font-mono text-sm">
+          // Import the components<br />
+          import &#123; ChatbotProvider &#125; from '@/components/chatbot/ChatbotProvider';<br />
+          import &#123; ChatWidget &#125; from '@/components/chatbot/ui/ChatWidget';<br />
+          <br />
+          // Basic usage<br />
+          &lt;ChatbotProvider&gt;<br />
+          &nbsp;&nbsp;&lt;ChatWidget /&gt;<br />
+          &lt;/ChatbotProvider&gt;<br />
+          <br />
+          // With controlled state (React component example)<br />
+          // const [isOpen, setIsOpen] = useState(false);<br />
+          // <br />
+          // &lt;ChatbotProvider&gt;<br />
+          // &nbsp;&nbsp;&lt;ChatWidget <br />
+          // &nbsp;&nbsp;&nbsp;&nbsp;isOpen=&#123;isOpen&#125; <br />
+          // &nbsp;&nbsp;&nbsp;&nbsp;onOpenChange=&#123;setIsOpen&#125; <br />
+          // &nbsp;&nbsp;/&gt;<br />
+          // &lt;/ChatbotProvider&gt;
+        </p>
+      </div>
+      
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 my-4">
+        <p class="font-bold">Note:</p>
+        <p>The actual chatbot component is temporarily disabled on this page. The chatbot will be available once all the backend services are properly configured.</p>
+      </div>
+    </div>
+  </main>
+</Layout> 

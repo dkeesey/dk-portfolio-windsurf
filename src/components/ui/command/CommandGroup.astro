@@ -1,0 +1,14 @@
+---
+import { CommandGroup as CommandGroupReact } from '@/components/ui/command';
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classAstro, className, ...props } = Astro.props;
+---
+
+<CommandGroupReact client:load class={classAstro} className={className} {...props}>
+  <slot />
+</CommandGroupReact> 

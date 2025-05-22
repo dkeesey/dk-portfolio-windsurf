@@ -1,0 +1,121 @@
+/* Botpress chat styling */
+
+/* Container styling */
+[data-botpress-container] {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Make the widget button more visible */
+[data-webchat-floating-button] {
+  width: 56px !important;
+  height: 56px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Header styling */
+[data-webchat-component="Header"] {
+  padding: 16px 18px !important;
+  background: linear-gradient(to right, #3a0ca3, #4361ee) !important;
+}
+
+[data-webchat-component="Header"] [data-webchat-component="BotName"] {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+/* Window styling */
+[data-webchat-component="Container"] {
+  max-height: 80vh !important; /* Prevent overly tall chat on mobile */
+  border-radius: 12px !important;
+}
+
+/* Message bubbles */
+[data-webchat-component="UserMessage"] {
+  border-radius: 16px 16px 0 16px !important;
+  padding: 10px 14px !important;
+  background-color: #4361ee !important;
+}
+
+[data-webchat-component="BotMessage"] {
+  border-radius: 16px 16px 16px 0 !important;
+  padding: 10px 14px !important;
+  background-color: #f0f0f0 !important;
+  color: #262626 !important;
+}
+
+/* Message text */
+[data-webchat-component="UserMessage"] [data-webchat-component="MessageText"] {
+  color: white !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+[data-webchat-component="BotMessage"] [data-webchat-component="MessageText"] {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* Critical input area fixes */
+[contenteditable="true"],
+[data-webchat-component="Composer"] [contenteditable="true"] {
+  cursor: text !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-user-modify: read-write !important;
+  -moz-user-modify: read-write !important;
+  min-height: 40px !important;
+  padding: 10px 12px !important;
+  line-height: 1.5 !important;
+  background-color: white !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 18px !important;
+  overflow-y: auto !important;
+  max-height: 120px !important;
+  word-break: break-word !important;
+  outline: none !important;
+}
+
+/* Fix input caret visibility */
+[contenteditable="true"]:focus {
+  outline: none !important;
+  border-color: #4361ee !important;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2) !important;
+}
+
+/* Send button */
+[data-webchat-component="SendButton"] {
+  background-color: #4361ee !important;
+  padding: 8px !important;
+  border-radius: 50% !important;
+  right: 6px !important;
+}
+
+/* Typing indicator */
+[data-webchat-component="TypingIndicator"] {
+  padding: 10px 14px !important;
+}
+
+/* Fix for iOS */
+@supports (-webkit-touch-callout: none) {
+  [data-webchat-component="Composer"] {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+}
+
+/* Make it look better on dark mode sites */
+.dark [data-webchat-component="BotMessage"] {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark [data-webchat-component="Input"] {
+  background-color: #1a1a1a !important;
+  border-top: 1px solid #333 !important;
+}
+
+.dark [data-webchat-component="Composer"] [contenteditable="true"] {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+}

@@ -1,0 +1,151 @@
+---
+// BotpressDev - Special implementation for local development to handle CORS issues
+const isDev = import.meta.env.DEV;
+---
+
+<!-- Custom styling -->
+<style>
+  #botpress-container {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  #botpress-container.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  
+  #botpress-toggle {
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  
+  #botpress-toggle.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+  }
+
+  /* Chat content styling */
+  #botpress-chat-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bot-message {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    border-radius: 16px 16px 16px 0;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    max-width: 80%;
+    color: #262626;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+    background-color: #4361ee;
+    color: white;
+    border-radius: 16px 16px 0 16px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    max-width: 80%;
+  }
+  
+  /* Header styling */
+  #botpress-header {
+    background: linear-gradient(to right, #3a0ca3, #4361ee);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #botpress-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+</style>
+
+<!-- Simple container with mock chatbot for dev environments -->
+<div id="botpress-container" class="fixed bottom-5 right-5 w-[380px] max-w-[calc(100vw-20px)] h-[500px] max-h-[75vh] flex flex-col hidden">
+  <!-- Header -->
+  <div id="botpress-header">
+    <h3>Ask me anything</h3>
+    <button id="botpress-close" class="bg-white/10 backdrop-blur rounded-full p-1 hover:bg-white/20 transition-colors duration-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <!-- Chat content -->
+  <div id="botpress-chat-content" class="flex-1">
+    <div class="bot-message">👋 Hi there! I'm a mock chatbot for local development.</div>
+    <div class="bot-message">This is displayed in development mode because the real Botpress chat is blocked by CORS.</div>
+    <div class="bot-message">In production, the actual Botpress chat will be displayed here.</div>
+    <div class="user-message">How can I fix the CORS issues?</div>
+    <div class="bot-message">
+      <p>Here are some tips:</p>
+      <ul class="list-disc pl-5 space-y-1 mt-1">
+        <li>Test in production where CORS issues typically don't occur</li>
+        <li>Use a CORS proxy for development</li>
+        <li>Set up a local proxy server</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Chat input (non-functional in dev) -->
+  <div class="flex items-center p-3 border-t border-gray-200">
+    <div class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-gray-400">Type a message...</div>
+    <button class="ml-2 bg-purple-600 text-white rounded-full p-2" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Chat toggle button -->
+<button id="botpress-toggle" class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-purple-600 text-white shadow-lg flex items-center justify-center hover:brightness-110 transition-all duration-300">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- Simple toggle script that doesn't depend on external resources -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('botpress-container');
+    const toggle = document.getElementById('botpress-toggle');
+    const close = document.getElementById('botpress-close');
+    
+    // Show the chat
+    function showChat() {
+      container.classList.remove('hidden');
+      toggle.classList.add('hidden');
+    }
+    
+    // Hide the chat
+    function hideChat() {
+      container.classList.add('hidden');
+      toggle.classList.remove('hidden');
+    }
+    
+    // Add event listeners
+    toggle.addEventListener('click', showChat);
+    close.addEventListener('click', hideChat);
+  });
+</script>

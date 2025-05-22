@@ -1,0 +1,99 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Container } from '@/components/ui/container';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: 'Blog - Dean Keesey',
+  description:
+    'Technical articles and insights about web development, software engineering, and technology.',
+  type: 'website' as const,
+};
+
+// Try to get the blog collection, but handle the case where it might not exist yet
+let posts: CollectionEntry<'blog'>[] = [];
+try {
+  posts = await getCollection('blog');
+} catch (error) {
+  console.warn('Blog collection not found or empty:', error);
+}
+
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(b.data.publishDate).getTime() -
+    new Date(a.data.publishDate).getTime()
+);
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+};
+---
+
+<Layout {seo}>
+  <div class="bg-[#eee] min-h-screen">
+    <Container as="main" className="py-12">
+      <div class="space-y-8">
+        <header class="space-y-4 bg-white p-6 rounded-lg shadow-sm">
+          <h1 class="text-4xl font-bold">Blog</h1>
+          <p class="text-xl text-muted-foreground">
+            Thoughts, tutorials, and insights about web development and software
+            engineering.
+          </p>
+        </header>
+
+        <div class="grid gap-8">
+          {sortedPosts.length > 0 ? (
+            sortedPosts.map((post) => (
+              <Card class="group transition-shadow hover:shadow-lg">
+                <a href={`/blog/${post.slug}`} class="block p-6">
+                  <CardHeader class="p-0">
+                    <div class="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                      <time datetime={post.data.publishDate.toISOString()}>
+                        {formatDate(post.data.publishDate)}
+                      </time>
+                      <span>•</span>
+                      <span>{post.data.readingTime} min read</span>
+                    </div>
+                    <CardTitle class="transition-colors group-hover:text-primary">
+                      {post.data.title}
+                    </CardTitle>
+                    <CardDescription class="mt-2">
+                      {post.data.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {post.data.tags.map((tag) => (
+                      <Badge variant="secondary">{tag}</Badge>
+                    ))}
+                  </div>
+                </a>
+              </Card>
+            ))
+          ) : (
+            <Card class="p-6">
+              <CardHeader class="p-0">
+                <CardTitle>Coming Soon</CardTitle>
+                <CardDescription class="mt-2">
+                  Blog posts are coming soon. Check back later for articles about web development, software engineering, and technology.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          )}
+        </div>
+      </div>
+    </Container>
+  </div>
+</Layout>

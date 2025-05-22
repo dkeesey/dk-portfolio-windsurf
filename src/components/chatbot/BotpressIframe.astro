@@ -1,0 +1,114 @@
+---
+// Botpress integration using Partytown for both dev and production
+---
+
+<!-- HIDDEN DIV FOR WEBCHAT -->
+<div id="webchat" style="width: 500px; height: 500px; display: none;"></div>
+
+<!-- BOTPRESS CUSTOM CONTAINER -->
+<div id="botpress-chat-container" class="fixed bottom-5 right-5 z-50 w-[500px] max-w-[calc(100vw-20px)] h-[500px] max-h-[75vh] shadow-xl rounded-lg overflow-hidden transition-all duration-300 hidden">
+  <!-- IFRAME CONTAINER (WILL BE POPULATED BY BOTPRESS) -->
+  <div id="botpress-webchat-embedded" class="w-full h-full"></div>
+
+  <!-- CLOSE BUTTON -->
+  <button id="botpress-close" class="absolute top-3 right-3 bg-white/10 backdrop-blur rounded-full p-1 hover:bg-white/20 transition-colors duration-200 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+</div>
+
+<!-- CHAT BUTTON -->
+<button id="botpress-toggle" class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:brightness-110 transition-all duration-300 z-40">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- Botpress scripts using Partytown -->
+<script type="text/partytown" src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+<script type="text/partytown" src="https://files.bpcontent.cloud/2025/03/04/22/20250304222237-YQK2DZJ2.js"></script>
+
+<script is:inline>
+  // This script handles the UI interaction and doesn't rely on Botpress directly
+  document.addEventListener('DOMContentLoaded', () => {
+    // Toggle chat visibility
+    const container = document.getElementById('botpress-chat-container');
+    const webchatContainer = document.getElementById('botpress-webchat-embedded');
+    const toggle = document.getElementById('botpress-toggle');
+    const close = document.getElementById('botpress-close');
+    let chatVisible = false;
+    let checkingForChatInterval;
+
+    // Config for Botpress
+    // We set this up, and Partytown will use it when loading the Botpress scripts
+    window.botpressWebChat = {
+      init: {
+        querySelector: '#webchat',
+        showConversationsButton: false
+      }
+    };
+
+    function startCheckingForChat() {
+      // Check for Botpress elements every 200ms
+      checkingForChatInterval = setInterval(() => {
+        const bpWidget = document.querySelector('.bp-widget');
+        if (bpWidget) {
+          clearInterval(checkingForChatInterval);
+          webchatContainer.appendChild(bpWidget);
+          
+          // Try to open the chat after moving the widget
+          if (chatVisible && window.botpress && typeof window.botpress.open === 'function') {
+            window.botpress.open();
+          }
+        }
+      }, 200);
+    }
+
+    function showChat() {
+      chatVisible = true;
+      container.classList.remove('hidden');
+      toggle.classList.add('hidden');
+      
+      // Try to open the chat if Botpress is initialized
+      if (window.botpress && typeof window.botpress.open === 'function') {
+        window.botpress.open();
+      }
+      
+      // Start checking for the chat widget
+      startCheckingForChat();
+    }
+
+    function hideChat() {
+      chatVisible = false;
+      container.classList.add('hidden');
+      toggle.classList.remove('hidden');
+      
+      // Close the chat if possible
+      if (window.botpress && typeof window.botpress.close === 'function') {
+        window.botpress.close();
+      }
+      
+      // Stop checking for chat elements
+      clearInterval(checkingForChatInterval);
+    }
+
+    toggle.addEventListener('click', showChat);
+    close.addEventListener('click', hideChat);
+  });
+</script>
+
+<style>
+  #webchat .bpWebchat {
+    position: unset !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  #webchat .bpFab {
+    display: none !important;
+  }
+</style>

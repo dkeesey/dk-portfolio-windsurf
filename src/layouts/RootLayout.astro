@@ -1,0 +1,42 @@
+---
+import '@/styles/globals.css';
+import '@/components/chatbot/botpress-style.css';
+import { ViewTransitions } from 'astro:transitions';
+import PostHog from '@/components/PostHog.astro';
+import GoogleAnalytics from '@/components/GoogleAnalytics.astro';
+import Botpress from '@/components/chatbot/Botpress.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Dean Keesey - Full Stack Developer',
+  description = 'Full Stack Developer specializing in modern web development with React, TypeScript, and Node.js',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <ViewTransitions />
+    <GoogleAnalytics />
+    <PostHog />
+    
+    <!-- Development environment checks -->
+    {import.meta.env.DEV && (
+      <script type="module" src="/src/lib/env-check.js"></script>
+    )}
+  </head>
+  <body class="min-h-screen bg-background text-foreground">
+    <slot />
+    <!-- <Botpress /> Temporarily disabled to avoid rate limiting issues -->
+  </body>
+</html>

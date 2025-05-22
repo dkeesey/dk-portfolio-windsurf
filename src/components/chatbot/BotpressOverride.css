@@ -1,0 +1,51 @@
+/*
+ * Custom overrides for Botpress styling.
+ * These styles will help control the appearance of the chat widget.
+ */
+
+/* Ensure the widget container is visible and properly sized */
+[data-botpress-container] {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Add a subtle shadow for better separation from the page */
+[data-webchat-component="Container"] {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Style the header for better visibility */
+[data-webchat-component="Header"] {
+  padding: 14px 18px !important;
+}
+
+/* Make message bubbles look better */
+[data-webchat-component="UserMessage"] {
+  border-radius: 16px 16px 0 16px !important;
+  padding: 10px 14px !important;
+}
+
+[data-webchat-component="BotMessage"] {
+  border-radius: 16px 16px 16px 0 !important;
+  padding: 10px 14px !important;
+}
+
+/* Make sure text in messages is readable */
+[data-webchat-component="UserMessage"] span,
+[data-webchat-component="BotMessage"] span {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* Style the input area */
+[data-webchat-component="Input"] {
+  padding: 12px !important;
+  border-top: 1px solid #eaeaea !important;
+}
+
+/* Fix for iOS devices */
+@supports (-webkit-touch-callout: none) {
+  [data-webchat-component="Composer"] {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+}
