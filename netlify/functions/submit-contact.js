@@ -37,8 +37,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        message: 'Form submission received successfully',
-        reclaim_link: 'https://reclaim.ai/book/dean-keesey'
+        message: 'Form submission received successfully'
       })
     };
   } catch (error) {

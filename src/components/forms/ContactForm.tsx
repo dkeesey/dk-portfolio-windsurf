@@ -89,7 +89,7 @@ export function ContactForm() {
       // Success message
       toast({
         title: 'Message sent!',
-        description: "Thanks for reaching out. I'll review your message and schedule a call if needed.",
+        description: "Thanks for reaching out. I'll get back to you soon!",
       });
 
       // Reset the form
@@ -195,24 +195,7 @@ export function ContactForm() {
         </form>
       </Form>
 
-      <div className="mt-6 text-center">
-        <p className="mb-4 text-muted-foreground">
-          Prefer to schedule directly?
-        </p>
-        <Button
-          variant="outline"
-          asChild
-          className="w-full"
-        >
-          <a
-            href="https://app.reclaim.ai/m/dean-keesey/flexible-quick-meeting"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Schedule a Flexible Quick Meeting
-          </a>
-        </Button>
-      </div>
+
     </div>
   );
 }
