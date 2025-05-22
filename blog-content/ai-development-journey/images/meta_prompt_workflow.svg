@@ -1,0 +1,192 @@
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="platformGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="metaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">
+    'Do It For Me' Platforms vs Meta-Prompt Strategy
+  </text>
+  
+  <!-- Platform Workflow (Left Side) -->
+  <g>
+    <text x="300" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#d97706">
+      Platform Approach (Bolt, Lovable, v0)
+    </text>
+    
+    <!-- Input -->
+    <rect x="150" y="120" width="300" height="60" rx="8" fill="url(#platformGrad)" filter="url(#shadow)"/>
+    <text x="300" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Natural Language Description
+    </text>
+    <text x="300" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fef3c7">
+      "Build a user authentication system"
+    </text>
+    
+    <!-- Arrow Down -->
+    <path d="M 300 180 L 300 220" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Platform Processing -->
+    <rect x="200" y="220" width="200" height="80" rx="8" fill="#fed7aa" stroke="#d97706" stroke-width="2"/>
+    <text x="300" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#92400e">
+      AI Platform Processing
+    </text>
+    <text x="300" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">
+      • Makes architectural assumptions
+    </text>
+    <text x="300" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">
+      • Limited customization
+    </text>
+    <text x="300" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">
+      • Generic patterns
+    </text>
+    
+    <!-- Arrow Down -->
+    <path d="M 300 300 L 300 340" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Platform Output -->
+    <rect x="150" y="340" width="300" height="60" rx="8" fill="#fbbf24" filter="url(#shadow)"/>
+    <text x="300" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Generic Implementation
+    </text>
+    <text x="300" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fef3c7">
+      60% requirement match, needs customization
+    </text>
+    
+    <!-- Customization Loop -->
+    <path d="M 450 370 Q 500 370 500 420 Q 500 470 450 470 Q 350 470 350 420 Q 350 380 380 360" 
+          stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+    <text x="520" y="420" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" font-weight="bold">
+      Expensive
+    </text>
+    <text x="520" y="435" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" font-weight="bold">
+      Customization
+    </text>
+    <text x="520" y="450" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" font-weight="bold">
+      Loop
+    </text>
+    
+    <!-- Final Result -->
+    <rect x="150" y="520" width="300" height="60" rx="8" fill="#f59e0b" filter="url(#shadow)"/>
+    <text x="300" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Final Result
+    </text>
+    <text x="300" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fef3c7">
+      ⚠️ Inconsistent quality, integration issues
+    </text>
+  </g>
+  
+  <!-- Meta-Prompt Workflow (Right Side) -->
+  <g>
+    <text x="900" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#047857">
+      Meta-Prompt Strategy
+    </text>
+    
+    <!-- Meta-Prompt Document -->
+    <rect x="750" y="120" width="300" height="120" rx="8" fill="url(#metaGrad)" filter="url(#shadow)"/>
+    <text x="900" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Comprehensive Meta-Prompt (2000+ lines)
+    </text>
+    <text x="760" y="170" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      ✓ Detailed technical requirements
+    </text>
+    <text x="760" y="185" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      ✓ Architecture decisions with reasoning
+    </text>
+    <text x="760" y="200" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      ✓ Implementation patterns & standards
+    </text>
+    <text x="760" y="215" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      ✓ Verification checklists with checkboxes
+    </text>
+    <text x="760" y="230" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      ✓ Error handling & edge cases
+    </text>
+    
+    <!-- Arrow Down -->
+    <path d="M 900 240 L 900 280" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Claude + Cursor -->
+    <rect x="800" y="280" width="200" height="80" rx="8" fill="#a7f3d0" stroke="#059669" stroke-width="2"/>
+    <text x="900" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#065f46">
+      Claude Desktop + Cursor
+    </text>
+    <text x="900" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#065f46">
+      • Full context preservation
+    </text>
+    <text x="900" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#065f46">
+      • Architectural coherence
+    </text>
+    <text x="900" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#065f46">
+      • Systematic verification
+    </text>
+    
+    <!-- Arrow Down -->
+    <path d="M 900 360 L 900 400" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- High-Quality Output -->
+    <rect x="750" y="400" width="300" height="60" rx="8" fill="#10b981" filter="url(#shadow)"/>
+    <text x="900" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Production-Ready Implementation
+    </text>
+    <text x="900" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">
+      95% requirement compliance, minimal adjustments
+    </text>
+    
+    <!-- Sequential Thinking Enhancement -->
+    <rect x="780" y="480" width="240" height="50" rx="8" fill="#047857" filter="url(#shadow)"/>
+    <text x="900" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      + Sequential Thinking MCP
+    </text>
+    <text x="900" y="518" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      Complex multi-step reasoning
+    </text>
+    
+    <!-- Final Result -->
+    <rect x="750" y="550" width="300" height="60" rx="8" fill="#059669" filter="url(#shadow)"/>
+    <text x="900" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Exceptional Result
+    </text>
+    <text x="900" y="595" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">
+      ✅ Consistent quality, perfect integration
+    </text>
+  </g>
+  
+  <!-- Comparison Metrics -->
+  <rect x="50" y="620" width="1100" height="60" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="600" y="640" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">
+    Results Comparison
+  </text>
+  <text x="70" y="660" font-family="Arial, sans-serif" font-size="12" fill="#475569">
+    <tspan font-weight="bold" fill="#d97706">Platform:</tspan> 5min generation + 2-3hrs customization = 60% requirements met
+  </text>
+  <text x="650" y="660" font-family="Arial, sans-serif" font-size="12" fill="#475569">
+    <tspan font-weight="bold" fill="#059669">Meta-Prompt:</tspan> 30min prep + 15min generation + 30min tweaks = 95% requirements met
+  </text>
+  
+  <!-- VS indicator -->
+  <circle cx="600" cy="350" r="40" fill="#1e293b" filter="url(#shadow)"/>
+  <text x="600" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">
+    VS
+  </text>
+  
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+</svg>

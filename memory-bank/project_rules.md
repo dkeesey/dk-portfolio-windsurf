@@ -1,36 +1,38 @@
-# Project Rules: [PROJECT_NAME]
+# Project Rules: DK Portfolio Windsurf
 
-## Coding Patterns
-- [Pattern 1]: [Description]
-- [Pattern 2]: [Description]
-- [Pattern 3]: [Description]
+## Git Management Patterns
+- **Repository Corruption Recovery**: When Git index corruption occurs (BUG: unpack-trees.c:773), use this sequence:
+  1. Remove corrupted index: `rm .git/index`
+  2. Rebuild from HEAD: `git read-tree HEAD`
+  3. Add changes: `git add -A`
+  4. If push fails, create orphan branch: `git checkout --orphan branch-clean`
+  5. Force push to replace corrupted branch: `git push origin clean-branch:master --force`
 
-## Naming Conventions
-- [Convention 1]: [Example]
-- [Convention 2]: [Example]
-- [Convention 3]: [Example]
+## Screenshot Automation Patterns
+- **Puppeteer Setup**: Use ES modules with proper imports, handle `page.waitForTimeout` deprecation with `setTimeout`
+- **Website-Specific Handling**: 
+  - For video-heavy sites (Kanitha), scroll past hero sections and pause/hide videos
+  - Use `networkidle2` for dynamic content loading
+  - Always set high DPI (deviceScaleFactor: 2) for crisp screenshots
+- **Screenshot Targeting**: Search for specific text content to focus on relevant sections rather than hero images
 
-## User Preferences
-- [Preference 1]: [Details]
-- [Preference 2]: [Details]
-- [Preference 3]: [Details]
+## Netlify DNS Migration Best Practices
+- **SSL Certificate Sync Issues**: When using external DNS, load balancers may have certificate inconsistency
+- **Email Forwarding Preservation**: Always recreate MX, SPF, and DKIM records in new DNS provider
+- **MailChannels Configuration**: DreamHost uses MailChannels (mx1/mx2.mailchannels.net) for email forwarding
 
-## Project-Specific Workflows
-- [Workflow 1]: [Steps]
-- [Workflow 2]: [Steps]
-- [Workflow 3]: [Steps]
+## MCP Development Advantages
+- **File-based Memory**: Works better than Projects for persistent context across sessions
+- **Terminal Integration**: Essential for Git operations, build processes, and automation scripts
+- **Sequential Thinking**: Invaluable for complex debugging like Git corruption diagnosis
+- **Combined Tool Usage**: Filesystem + Terminal + Git + Analysis MCPs create enterprise-level development environment
 
-## Known Constraints
-- [Constraint 1]: [Workaround]
-- [Constraint 2]: [Workaround]
-- [Constraint 3]: [Workaround]
+## Portfolio UI/UX Principles
+- **Visual Evidence Over Description**: Real screenshots provide more impact than placeholder images
+- **Contrast Requirements**: Gray text on colored backgrounds fails accessibility - use dark gray/black on white
+- **Project Card Optimization**: Focus screenshots on identifying content (logos, headshots, key text) rather than generic layouts
 
-## Lessons Learned
-- [Lesson 1]: [Date] - [Details]
-- [Lesson 2]: [Date] - [Details]
-- [Lesson 3]: [Date] - [Details]
-
-## Decision Evolution
-- [Decision 1]: [Original] → [Current] - [Rationale]
-- [Decision 2]: [Original] → [Current] - [Rationale]
-- [Decision 3]: [Original] → [Current] - [Rationale]
+## Deployment Pipeline Patterns
+- **Branch Strategy**: Use clean orphan branches to avoid corrupted Git history affecting deployments
+- **Netlify Auto-Deploy**: Commits to master branch trigger automatic builds and deployment
+- **Asset Management**: Keep screenshots in `/public/images/projects/` for direct access without build processing

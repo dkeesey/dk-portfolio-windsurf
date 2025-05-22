@@ -1,0 +1,138 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="secondaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="niceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">
+    MCP Server Three-Tier Architecture
+  </text>
+  
+  <!-- Core MCPs -->
+  <g>
+    <text x="150" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e293b">
+      Core MCPs
+    </text>
+    <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#64748b">
+      Always Running
+    </text>
+    
+    <!-- Filesystem MCP -->
+    <rect x="50" y="140" width="200" height="60" rx="8" fill="url(#coreGrad)" filter="url(#shadow)"/>
+    <text x="150" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Filesystem MCP
+    </text>
+    <text x="150" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#e2e8f0">
+      File operations and navigation
+    </text>
+    
+    <!-- SQLite MCP -->
+    <rect x="50" y="220" width="200" height="60" rx="8" fill="url(#coreGrad)" filter="url(#shadow)"/>
+    <text x="150" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      SQLite MCP
+    </text>
+    <text x="150" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#e2e8f0">
+      Data persistence and queries
+    </text>
+    
+    <!-- Desktop Commander -->
+    <rect x="50" y="300" width="200" height="60" rx="8" fill="url(#coreGrad)" filter="url(#shadow)"/>
+    <text x="150" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Desktop Commander
+    </text>
+    <text x="150" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#e2e8f0">
+      Terminal and commands
+    </text>
+  </g>
+  
+  <!-- Secondary MCPs -->
+  <g>
+    <text x="400" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e293b">
+      Secondary MCPs
+    </text>
+    <text x="400" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#64748b">
+      Project Dependent
+    </text>
+    
+    <!-- GitHub MCP -->
+    <rect x="300" y="140" width="200" height="60" rx="8" fill="url(#secondaryGrad)" filter="url(#shadow)"/>
+    <text x="400" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      GitHub MCP
+    </text>
+    <text x="400" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">
+      Version control
+    </text>
+    
+    <!-- Docker MCP -->
+    <rect x="300" y="220" width="200" height="60" rx="8" fill="url(#secondaryGrad)" filter="url(#shadow)"/>
+    <text x="400" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Docker MCP
+    </text>
+    <text x="400" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">
+      Container management
+    </text>
+    
+    <!-- Notion MCP -->
+    <rect x="300" y="300" width="200" height="60" rx="8" fill="url(#secondaryGrad)" filter="url(#shadow)"/>
+    <text x="400" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Notion MCP
+    </text>
+    <text x="400" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">
+      Knowledge management
+    </text>
+  </g>
+  
+  <!-- Nice-to-Have MCPs -->
+  <g>
+    <text x="650" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e293b">
+      Nice-to-Have MCPs
+    </text>
+    <text x="650" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#64748b">
+      On Demand
+    </text>
+    
+    <!-- Web Search MCP -->
+    <rect x="550" y="140" width="200" height="60" rx="8" fill="url(#niceGrad)" filter="url(#shadow)"/>
+    <text x="650" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Web Search MCP
+    </text>
+    <text x="650" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fed7aa">
+      Research and information
+    </text>
+    
+    <!-- YouTube MCP -->
+    <rect x="550" y="220" width="200" height="60" rx="8" fill="url(#niceGrad)" filter="url(#shadow)"/>
+    <text x="650" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      YouTube MCP
+    </text>
+    <text x="650" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fed7aa">
+      Content analysis
+    </text>
+    
+    <!-- Specialized MCPs -->
+    <rect x="550" y="300" width="200" height="60" rx="8" fill="url(#niceGrad)" filter="url(#shadow)"/>
+    <text x="650" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Specialized MCPs
+    </text>
+    <text x="650" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fed7aa">
+      Domain-specific tools
+    </text>
+  </g>
+</svg>

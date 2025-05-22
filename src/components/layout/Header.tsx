@@ -73,6 +73,8 @@ export function Header({ className }: HeaderProps) {
           </div>
         </div>
       </Container>
+      {/* Decorative gradient line */}
+      <div className="h-1 w-full" style={{background: "linear-gradient(90deg, #c084fc 0%, #f472b6 50%, #c084fc 100%)"}} />
     </header>
   );
 }
