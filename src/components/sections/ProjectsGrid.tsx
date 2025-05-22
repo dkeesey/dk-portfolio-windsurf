@@ -22,13 +22,13 @@ type Project = {
   link: string;
 };
 
-// These will be replaced with real screenshots
+// Real screenshots of live projects
 const projects: Project[] = [
   {
     title: 'Masumi Hayashi Digital Archive',
     description:
       'Immersive digital archive of panoramic photo-collages documenting the Japanese American internment experience, transforming historical trauma into a powerful visual narrative that preserves memory and understanding.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Masumi+Hayashi+Archive',
+    image: '/images/projects/masumi-hayashi-archive-screenshot.png',
     technologies: ['Astro', 'JavaScript', 'CSS Animations', 'Responsive Design'],
     category: 'Frontend',
     link: 'https://gallery.masumihayashi.com',
@@ -37,7 +37,7 @@ const projects: Project[] = [
     title: 'Therapist Practice SEO',
     description:
       'Implemented comprehensive SEO strategy achieving consistent #2 placement in map pack and page 1 results for targeted keywords.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Local+SEO+Optimization',
+    image: '/images/projects/megan-gredesky-therapy-screenshot.png',
     technologies: ['SEO', 'WordPress', 'Local Business', 'Google Business Profile'],
     category: 'Digital Marketing',
     link: 'https://megangredesky.com',
@@ -46,7 +46,7 @@ const projects: Project[] = [
     title: 'Political Campaign Website',
     description:
       'Elevated campaign site from obscurity to page 1 search results through technical SEO and content optimization strategies.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Campaign+Website+SEO',
+    image: '/images/projects/kanitha-for-oakland-screenshot.png',
     technologies: ['WordPress', 'SEO', 'Content Strategy'],
     category: 'Digital Marketing',
     link: 'https://kanithaforoakland.com',
@@ -55,7 +55,7 @@ const projects: Project[] = [
     title: 'WordPress Security Remediation',
     description:
       'Successfully removed malicious adware from a compromised website and implemented comprehensive security hardening measures.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=WordPress+Security',
+    image: '/images/projects/sticking-place-security-screenshot.png',
     technologies: ['WordPress', 'Security', 'PHP'],
     category: 'Web Security',
     link: 'https://thestickingplace.com',
@@ -64,7 +64,7 @@ const projects: Project[] = [
     title: 'GA4 Analytics Implementation',
     description:
       'Configured Google Analytics 4 across multiple client websites with custom event tracking and conversion measurement.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Analytics+Implementation',
+    image: '/images/projects/strangeland-analytics-screenshot.png',
     technologies: ['Google Analytics 4', 'Tag Manager', 'Conversion Tracking'],
     category: 'Analytics',
     link: 'https://strangelandcomics.com',
@@ -203,7 +203,7 @@ export function ProjectsGrid() {
                       </h3>
                       <Badge 
                         variant="secondary" 
-                        className="mt-2 bg-purple-600 text-white border-none"
+                        className="mt-2 bg-primary/90 text-white border-none"
                       >
                         {project.category}
                       </Badge>
@@ -212,7 +212,7 @@ export function ProjectsGrid() {
                   
                   {/* Project details */}
                   <CardContent className="pt-6">
-                    <p className="text-gray-700">{project.description}</p>
+                    <p className="text-gray-900 leading-relaxed">{project.description}</p>
                   </CardContent>
                   
                   <CardFooter className="flex flex-col items-start">
