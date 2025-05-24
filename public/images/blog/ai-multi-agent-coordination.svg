@@ -1,0 +1,245 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="claudeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="taskmasterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="memoryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="bidirectional" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="700" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">
+    Multi-Agent Coordination with TaskMaster
+  </text>
+  
+  <!-- Claude Desktop Agent -->
+  <g>
+    <rect x="80" y="120" width="200" height="180" rx="12" fill="url(#claudeGrad)" filter="url(#shadow)"/>
+    
+    <!-- Claude Icon -->
+    <circle cx="180" cy="150" r="20" fill="white" opacity="0.9"/>
+    <text x="180" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">
+      CDT
+    </text>
+    
+    <text x="180" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Claude Desktop
+    </text>
+    <text x="180" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#dbeafe">
+      Strategic Agent
+    </text>
+    
+    <!-- Claude Responsibilities -->
+    <text x="90" y="220" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">
+      Responsibilities:
+    </text>
+    <text x="90" y="235" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">
+      • Architecture planning
+    </text>
+    <text x="90" y="248" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">
+      • Complex reasoning
+    </text>
+    <text x="90" y="261" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">
+      • Research &amp; analysis
+    </text>
+    <text x="90" y="274" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">
+      • Code review
+    </text>
+    <text x="90" y="287" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">
+      • Documentation
+    </text>
+  </g>
+  
+  <!-- Cursor Agent -->
+  <g>
+    <rect x="720" y="120" width="200" height="180" rx="12" fill="url(#cursorGrad)" filter="url(#shadow)"/>
+    
+    <!-- Cursor Icon -->
+    <circle cx="820" cy="150" r="20" fill="white" opacity="0.9"/>
+    <text x="820" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#059669">
+      CUR
+    </text>
+    
+    <text x="820" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      Cursor AI
+    </text>
+    <text x="820" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#d1fae5">
+      Implementation Agent
+    </text>
+    
+    <!-- Cursor Responsibilities -->
+    <text x="730" y="220" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">
+      Responsibilities:
+    </text>
+    <text x="730" y="235" font-family="Arial, sans-serif" font-size="9" fill="#d1fae5">
+      • Code implementation
+    </text>
+    <text x="730" y="248" font-family="Arial, sans-serif" font-size="9" fill="#d1fae5">
+      • Bug fixes &amp; debugging
+    </text>
+    <text x="730" y="261" font-family="Arial, sans-serif" font-size="9" fill="#d1fae5">
+      • Test development
+    </text>
+    <text x="730" y="274" font-family="Arial, sans-serif" font-size="9" fill="#d1fae5">
+      • Performance optimization
+    </text>
+    <text x="730" y="287" font-family="Arial, sans-serif" font-size="9" fill="#d1fae5">
+      • Tactical execution
+    </text>
+  </g>
+  
+  <!-- TaskMaster Coordination Hub -->
+  <g>
+    <rect x="350" y="80" width="300" height="120" rx="12" fill="url(#taskmasterGrad)" filter="url(#shadow)"/>
+    
+    <!-- TaskMaster Icon -->
+    <circle cx="500" cy="110" r="25" fill="white" opacity="0.9"/>
+    <text x="500" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#8b5cf6">
+      TM
+    </text>
+    
+    <text x="500" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">
+      TaskMaster Hub
+    </text>
+    <text x="500" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#e9d5ff">
+      Multi-Agent Coordination Layer
+    </text>
+    
+    <!-- TaskMaster Features -->
+    <text x="360" y="175" font-family="Arial, sans-serif" font-size="9" fill="white">
+      • Task assignment &amp; routing  • File conflict prevention  • Context synchronization
+    </text>
+    <text x="360" y="188" font-family="Arial, sans-serif" font-size="9" fill="white">
+      • Agent handoffs  • Progress tracking  • Memory coordination
+    </text>
+  </g>
+  
+  <!-- Coordination Arrows -->
+  <!-- Claude to TaskMaster -->
+  <path d="M 280 180 L 350 140" stroke="#8b5cf6" stroke-width="3" fill="none" marker-end="url(#bidirectional)"/>
+  <text x="295" y="155" font-family="Arial, sans-serif" font-size="8" fill="#8b5cf6" font-weight="bold">
+    Task requests
+  </text>
+  <text x="295" y="168" font-family="Arial, sans-serif" font-size="8" fill="#8b5cf6" font-weight="bold">
+    Status updates
+  </text>
+  
+  <!-- TaskMaster to Cursor -->
+  <path d="M 650 140 L 720 180" stroke="#8b5cf6" stroke-width="3" fill="none" marker-end="url(#bidirectional)"/>
+  <text x="665" y="155" font-family="Arial, sans-serif" font-size="8" fill="#8b5cf6" font-weight="bold">
+    Task assignments
+  </text>
+  <text x="665" y="168" font-family="Arial, sans-serif" font-size="8" fill="#8b5cf6" font-weight="bold">
+    Progress reports
+  </text>
+  
+  <!-- Shared Memory System -->
+  <g>
+    <rect x="200" y="400" width="600" height="140" rx="12" fill="url(#memoryGrad)" filter="url(#shadow)"/>
+    
+    <text x="500" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">
+      Shared Memory &amp; File System
+    </text>
+    
+    <!-- Memory Components -->
+    <rect x="220" y="450" width="150" height="70" rx="6" fill="white" opacity="0.9"/>
+    <text x="295" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d97706">
+      Project Memory
+    </text>
+    <text x="230" y="485" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • projectbrief.md
+    </text>
+    <text x="230" y="495" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • systemPatterns.md
+    </text>
+    <text x="230" y="505" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • progress.md
+    </text>
+    
+    <rect x="390" y="450" width="150" height="70" rx="6" fill="white" opacity="0.9"/>
+    <text x="465" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d97706">
+      Task Coordination
+    </text>
+    <text x="400" y="485" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • File lock status
+    </text>
+    <text x="400" y="495" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • Agent assignments
+    </text>
+    <text x="400" y="505" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • Handoff protocols
+    </text>
+    
+    <rect x="560" y="450" width="150" height="70" rx="6" fill="white" opacity="0.9"/>
+    <text x="635" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d97706">
+      Agent Context
+    </text>
+    <text x="570" y="485" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • claude-context/
+    </text>
+    <text x="570" y="495" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • cursor-context/
+    </text>
+    <text x="570" y="505" font-family="Arial, sans-serif" font-size="8" fill="#92400e">
+      • coordination.log
+    </text>
+  </g>
+  
+  <!-- Memory Access Arrows -->
+  <path d="M 180 300 L 295 400" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="200" y="345" font-family="Arial, sans-serif" font-size="8" fill="#64748b">
+    Memory access
+  </text>
+  
+  <path d="M 820 300 L 635 400" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="750" y="345" font-family="Arial, sans-serif" font-size="8" fill="#64748b">
+    Memory access
+  </text>
+  
+  <path d="M 500 200 L 465 400" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="460" y="300" font-family="Arial, sans-serif" font-size="8" fill="#64748b">
+    Coordination state
+  </text>
+  
+  <!-- Workflow Example -->
+  <rect x="50" y="580" width="900" height="100" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="500" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">
+    Parallel Workflow Example
+  </text>
+  
+  <text x="70" y="625" font-family="Arial, sans-serif" font-size="10" fill="#475569">
+    <tspan font-weight="bold" fill="#2563eb">Claude Desktop:</tspan> Designs OAuth architecture while reviewing yesterday's user registration code
+  </text>
+  <text x="70" y="640" font-family="Arial, sans-serif" font-size="10" fill="#475569">
+    <tspan font-weight="bold" fill="#059669">Cursor:</tspan> Implements payment gateway integration using Monday's architectural decisions
+  </text>
+  <text x="70" y="655" font-family="Arial, sans-serif" font-size="10" fill="#475569">
+    <tspan font-weight="bold" fill="#8b5cf6">TaskMaster:</tspan> Prevents file conflicts, synchronizes context, manages handoffs between agents
+  </text>
+  <text x="70" y="670" font-family="Arial, sans-serif" font-size="10" fill="#475569">
+    <tspan font-weight="bold">Result:</tspan> 40% faster development with no overwrites or context loss
+  </text>
+</svg>
