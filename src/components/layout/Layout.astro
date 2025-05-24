@@ -6,14 +6,15 @@ import type { SEOProps } from '@/types';
 
 interface Props {
   seo?: SEOProps;
+  hideGradient?: boolean;
 }
 
-const { seo } = Astro.props;
+const { seo, hideGradient } = Astro.props;
 ---
 
 <RootLayout>
   <SEO {...seo} />
-  <LayoutReact client:load>
+  <LayoutReact client:load hideGradient={hideGradient}>
     <slot />
   </LayoutReact>
 </RootLayout>

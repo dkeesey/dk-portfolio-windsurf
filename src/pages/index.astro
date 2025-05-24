@@ -1,20 +1,20 @@
 ---
 import Layout from '@/components/layout/Layout.astro';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
+import { EnterpriseExperienceTimeline } from '@/components/sections/EnterpriseExperienceTimeline';
 import { SkillsMatrix } from '@/components/sections/SkillsMatrix';
 
 const seo = {
-  title: "Dean Keesey - Full Stack Developer & SEO Specialist",
-  description: "Full Stack Developer specializing in modern web frameworks, SEO optimization, WordPress security, and digital marketing integration",
+  title: "Dean Keesey - Senior Frontend Engineer & Enterprise Software Developer",
+  description: "Senior Frontend Engineer with 15+ years of Fortune 500 experience at SAP, EA, Oracle, Goldman Sachs. Expert in React, TypeScript, and enterprise-scale applications.",
 };
 ---
 
-<Layout {seo}>
+<Layout {seo} hideGradient={true}>
   {/* Removed the py-12 padding top from main to allow hero to start right after header */}
-  <main class="space-y-24">
+  <main class="space-y-0">
     <HeroSection client:load />
+    <EnterpriseExperienceTimeline client:visible />
     <SkillsMatrix client:visible />
-    <ExperienceTimeline client:visible />
   </main>
 </Layout>
