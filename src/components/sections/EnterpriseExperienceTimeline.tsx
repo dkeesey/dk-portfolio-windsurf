@@ -55,8 +55,8 @@ function ExperienceItem({
   return (
     <motion.div
       ref={itemRef}
-      initial={{ opacity: 0, x: -50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className={`relative border-l-2 pl-8 pb-12 last:pb-0 ${
         isEnterprise ? 'border-blue-500' : 'border-gray-300'
