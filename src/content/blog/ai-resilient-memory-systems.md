@@ -193,9 +193,9 @@ MEMORY_BANK="$PROJECT_PATH/memory-bank"
 mkdir -p "$MEMORY_BANK"
 
 # Create foundation files from templates
-cp ~/Workspace/tools/claude/memory/templates/projectbrief.md "$MEMORY_BANK/"
-cp ~/Workspace/tools/claude/memory/templates/systemPatterns.md "$MEMORY_BANK/"
-cp ~/Workspace/tools/claude/memory/templates/activeContext.md "$MEMORY_BANK/"
+cp ~/Workspace/claude/memory/templates/projectbrief.md "$MEMORY_BANK/"
+cp ~/Workspace/claude/memory/templates/systemPatterns.md "$MEMORY_BANK/"
+cp ~/Workspace/claude/memory/templates/activeContext.md "$MEMORY_BANK/"
 # ... other template files
 
 echo "Memory bank initialized for project at $PROJECT_PATH"
