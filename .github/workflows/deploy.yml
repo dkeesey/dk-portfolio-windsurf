@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master  # Temporary - remove after GitHub default branch changed
 
 jobs:
   deploy:
