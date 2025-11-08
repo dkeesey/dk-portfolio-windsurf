@@ -1,32 +1,40 @@
 ---
 /**
- * GTM Analytics Component - Astro
+ * GTM Analytics Component - Enhanced
  *
- * Universal analytics component for therapy websites
+ * Universal analytics component supporting multiple tracking platforms
  * Includes: GTM + GA4 + Facebook Pixel + Microsoft Clarity
  *
- * @param {string} gtmId - Google Tag Manager ID (GTM-XXXXXXX) - Optional (required if no other IDs)
- * @param {string} ga4Id - Google Analytics 4 ID (G-XXXXXXXXXX) - Optional
+ * @param {string} gtmId - Google Tag Manager ID (GTM-XXXXXXX) - Optional
+ * @param {string} ga4Id - Google Analytics 4 ID (G-XXXXXXXXXX) - Optional (alias: gaId for compatibility)
  * @param {string} fbPixelId - Facebook Pixel ID - Optional
  * @param {string} clarityId - Microsoft Clarity ID - Optional
  * @param {boolean} enableCookieConsent - Wait for consent (default: false)
+ * @param {boolean} useDetailedTracking - Load comprehensive analytics-tracking.js (default: true when ga4Id provided)
  */
 
 interface Props {
   gtmId?: string;
   ga4Id?: string;
+  gaId?: string; // Alias for ga4Id (backwards compatibility)
   fbPixelId?: string;
   clarityId?: string;
   enableCookieConsent?: boolean;
+  useDetailedTracking?: boolean;
 }
 
 const {
   gtmId,
-  ga4Id,
+  ga4Id: ga4IdProp,
+  gaId,
   fbPixelId,
   clarityId,
-  enableCookieConsent = false
+  enableCookieConsent = false,
+  useDetailedTracking = true
 } = Astro.props;
+
+// Support both ga4Id and gaId props (backwards compatibility)
+const ga4Id = ga4IdProp || gaId;
 
 // Validate that at least one tracking ID is provided
 if (!gtmId && !ga4Id && !fbPixelId && !clarityId) {
@@ -68,7 +76,8 @@ if (gtmId && !gtmId.startsWith('GTM-')) {
 
 {ga4Id && (
   <Fragment>
-    <!-- Google Analytics 4 (Direct - Fallback) -->
+    <!-- Google Analytics 4 - Direct Implementation -->
+    <!-- STEP 1: Initialize dataLayer FIRST (prevents mobile race condition) -->
     <script is:inline define:vars={{ ga4Id }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -78,7 +87,14 @@ if (gtmId && !gtmId.startsWith('GTM-')) {
         'cookie_flags': 'SameSite=None;Secure'
       });
     </script>
+
+    <!-- STEP 2: Load gtag.js async AFTER dataLayer init -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} is:inline></script>
+
+    {useDetailedTracking && (
+      <!-- STEP 3: Comprehensive event tracking -->
+      <script src="/scripts/analytics-tracking.js" is:inline></script>
+    )}
   </Fragment>
 )}
 
@@ -128,11 +144,12 @@ if (gtmId && !gtmId.startsWith('GTM-')) {
   </Fragment>
 )}
 
-<!-- Enhanced Event Tracking Script -->
-<script is:inline>
-  // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 GTM Analytics initialized');
+{!useDetailedTracking && (
+  <!-- Basic Event Tracking (fallback when analytics-tracking.js not loaded) -->
+  <script is:inline>
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🎯 GTM Analytics initialized (basic tracking)');
 
     // Track all CTA button clicks
     document.querySelectorAll('a[href*="clientsecure"], a[href*="schedule"], .cta-button, .schedule-button').forEach(function(button) {
@@ -213,4 +230,5 @@ if (gtmId && !gtmId.startsWith('GTM-')) {
       });
     });
   });
-</script>
+  </script>
+)}
