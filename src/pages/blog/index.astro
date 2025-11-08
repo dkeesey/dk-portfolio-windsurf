@@ -13,9 +13,9 @@ import type { CollectionEntry } from 'astro:content';
 import type { SEOProps } from '@/types';
 
 const seo: SEOProps = {
-  title: 'Blog - Dean Keesey',
+  title: 'Token Overflow - Dean Keesey',
   description:
-    'Technical articles and insights about web development, software engineering, and technology.',
+    'Technical articles and insights about AI development, web engineering, and building with LLMs.',
   type: 'website' as const,
 };
 
@@ -47,37 +47,47 @@ const formatDate = (date: Date) => {
     <Container as="main" className="py-12">
       <div class="space-y-8">
         <header class="space-y-4 bg-white p-6 rounded-lg shadow-sm">
-          <h1 class="text-4xl font-bold">Blog</h1>
+          <h1 class="text-4xl font-bold">Token Overflow</h1>
           <p class="text-xl text-muted-foreground">
-            Thoughts, tutorials, and insights about web development and software
-            engineering.
+            When your ideas exceed the context limit. Technical articles about AI development, LLM workflows, and production systems.
           </p>
         </header>
 
         <div class="grid gap-8">
           {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
-              <Card class="group transition-shadow hover:shadow-lg">
-                <a href={`/blog/${post.slug}`} class="block p-6">
-                  <CardHeader class="p-0">
-                    <div class="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
-                      <time datetime={post.data.publishDate.toISOString()}>
-                        {formatDate(post.data.publishDate)}
-                      </time>
-                      <span>•</span>
-                      <span>{post.data.readingTime} min read</span>
+              <Card class="group transition-shadow hover:shadow-lg overflow-hidden">
+                <a href={`/blog/${post.slug}`} class="block">
+                  {post.data.image && (
+                    <div class="aspect-video overflow-hidden">
+                      <img
+                        src={post.data.image}
+                        alt={`Cover image for ${post.data.title}`}
+                        class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      />
                     </div>
-                    <CardTitle class="transition-colors group-hover:text-primary">
-                      {post.data.title}
-                    </CardTitle>
-                    <CardDescription class="mt-2">
-                      {post.data.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <div class="mt-4 flex flex-wrap gap-2">
-                    {post.data.tags.map((tag) => (
-                      <Badge variant="secondary">{tag}</Badge>
-                    ))}
+                  )}
+                  <div class="p-6">
+                    <CardHeader class="p-0">
+                      <div class="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                        <time datetime={post.data.publishDate.toISOString()}>
+                          {formatDate(post.data.publishDate)}
+                        </time>
+                        <span>•</span>
+                        <span>{post.data.readingTime} min read</span>
+                      </div>
+                      <CardTitle class="transition-colors group-hover:text-primary">
+                        {post.data.title}
+                      </CardTitle>
+                      <CardDescription class="mt-2">
+                        {post.data.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      {post.data.tags.map((tag) => (
+                        <Badge variant="secondary">{tag}</Badge>
+                      ))}
+                    </div>
                   </div>
                 </a>
               </Card>

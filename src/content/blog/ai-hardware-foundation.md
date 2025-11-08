@@ -3,7 +3,7 @@ title: "The Hardware Foundation for AI Development"
 description: "How the right hardware choices enabled a sophisticated AI development environment with M4 Mac Mini, 64GB RAM, and strategic storage decisions."
 publishDate: 2025-04-02
 tags: ["ai-development", "hardware", "mac-mini", "development-environment", "memory-bandwidth"]
-image: "/images/blog/ai-hardware-foundation.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760658395/blog/deankeesey/hardware-foundation-ai-development.png"
 readingTime: 12
 author: "Dean Keesey"
 ---

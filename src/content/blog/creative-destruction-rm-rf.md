@@ -3,7 +3,7 @@ title: "Creative Destruction: How 'rm -rf ~' Made Me a Better Developer"
 description: "A catastrophic script deletion destroyed my entire home directory. Forty-eight hours later, I had rebuilt something far more elegant and was already measuring 5x productivity gains. Here's the story of how disaster became the ultimate design catalyst."
 publishDate: 2025-06-03
 tags: ["resilience", "systems-thinking", "ai-development", "antifragility", "disaster-recovery", "productivity", "elegance"]
-image: "/images/blog/creative-destruction-rebuild.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659193/blog/deankeesey/creative-destruction-rm-rf.png"
 readingTime: 10
 author: "Dean Keesey"
 ---

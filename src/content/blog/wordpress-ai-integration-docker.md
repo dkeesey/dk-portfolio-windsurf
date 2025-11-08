@@ -3,7 +3,7 @@ title: "Maximizing WordPress AI Integration Through Docker"
 description: "My journey to find the optimal WordPress development environment for AI integration, evolving from Flywheel Local to Docker with full programmatic access."
 publishDate: 2025-03-20
 tags: ["wordpress", "docker", "development", "ai", "automation", "api"]
-image: "/images/blog/wordpress-ai-docker.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659205/blog/deankeesey/wordpress-ai-integration-docker.png"
 readingTime: 12
 author: "Dean Keesey"
 ---

@@ -3,7 +3,7 @@ title: "Securing Your AI Toolkit: MCP Version Control Strategy"
 description: "How security-first thinking shaped my approach to managing AI development tools and MCP server version control to prevent potential disasters."
 publishDate: 2025-04-05
 tags: ["ai-development", "security", "mcp-servers", "version-control", "development-workflow"]
-image: "/images/blog/ai-security-strategy.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760658398/blog/deankeesey/securing-ai-toolkit-mcp-security.png"
 readingTime: 10
 author: "Dean Keesey"
 ---

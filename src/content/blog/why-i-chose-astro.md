@@ -3,7 +3,7 @@ title: "Why I Chose Astro for My Portfolio Site"
 description: "The benefits of using Astro for content-focused websites, including performance advantages, the islands architecture, and integration with modern tools."
 publishDate: 2024-01-20
 tags: ["astro", "web development", "performance", "SSR", "jamstack"]
-image: "/images/blog/astro-benefits.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760660581/blog/deankeesey/why-chose-astro.png"
 readingTime: 5
 author: "Dean Keesey"
 ---

@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 import '@/components/chatbot/botpress-style.css';
 import { ViewTransitions } from 'astro:transitions';
 import PostHog from '@/components/PostHog.astro';
-import GoogleAnalytics from '@/components/GoogleAnalytics.astro';
+import Analytics from '@/components/Analytics.astro';
 import Botpress from '@/components/chatbot/Botpress.astro';
 
 interface Props {
@@ -27,7 +27,10 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <ViewTransitions />
-    <GoogleAnalytics />
+    <!-- Google Analytics 4 - Direct Implementation -->
+    <Analytics
+      gaId="G-P7KMSQQN1N"
+    />
     <PostHog />
     
     <!-- Development environment checks -->

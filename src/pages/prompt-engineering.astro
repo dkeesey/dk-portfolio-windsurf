@@ -1,0 +1,502 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Container } from '@/components/ui/container';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
+const seo = {
+  title: "Prompt Engineering Portfolio - Dean Keesey",
+  description: "Production-ready prompt systems: saved prompts, parameterized slash commands, and reusable templates. Real artifacts that deliver 80% of automation value.",
+};
+
+const slashCommands = [
+  {
+    command: "/check-email",
+    category: "Business Intelligence",
+    description: "Unified email intelligence with category filters",
+    parameters: ["--family", "--business", "--masumi", "--all"],
+    output: "Emergency/urgent/digest classifications with actionable insights",
+    frequency: "Daily",
+    value: "Zero inbox time, automated priority detection"
+  },
+  {
+    command: "/status",
+    category: "Project Management",
+    description: "Comprehensive status intelligence using platform-native tools",
+    parameters: ["--project", "--context"],
+    output: "Git status, active tasks, recent commits, blockers",
+    frequency: "Multiple/day",
+    value: "Instant project state awareness"
+  },
+  {
+    command: "/site-audit",
+    category: "SEO & Analytics",
+    description: "Unified site audit with multiple analysis types",
+    parameters: ["--links", "--redirects", "--seo", "--indexing", "--performance", "--full"],
+    output: "Structured reports with actionable recommendations",
+    frequency: "Weekly",
+    value: "Automated technical SEO monitoring"
+  },
+  {
+    command: "/create-calendar-event",
+    category: "Productivity",
+    description: "Apple Calendar event creation with structured input",
+    parameters: ["--title", "--date", "--time", "--duration", "--notes"],
+    output: "Calendar event created, confirmation returned",
+    frequency: "Daily",
+    value: "Natural language → structured calendar entry"
+  },
+  {
+    command: "/schedule-task",
+    category: "Productivity",
+    description: "Dual-track scheduling (calendar event + reminder)",
+    parameters: ["--task", "--date", "--priority", "--project"],
+    output: "Both calendar and reminder created, synced",
+    frequency: "Daily",
+    value: "Never miss follow-ups, automatic tracking"
+  },
+  {
+    command: "/email-research",
+    category: "Research",
+    description: "Ad-hoc email intelligence with flag syntax",
+    parameters: ["--topic", "--timeframe", "--account"],
+    output: "Relevant emails with context, sender info, timestamps",
+    frequency: "As-needed",
+    value: "Historical email mining without manual search"
+  }
+];
+
+const savedPrompts = [
+  {
+    title: "Morning Intelligence Report",
+    category: "Daily Automation",
+    purpose: "Comprehensive morning briefing from multiple systems",
+    components: [
+      "Emergency email scan (last 12 hours)",
+      "Urgent email classification",
+      "Family digest generation",
+      "Calendar events (today + week)",
+      "Active task reconciliation",
+      "Git repository status (all 22 repos)"
+    ],
+    output: "Single markdown report with prioritized actions",
+    timeframe: "Runs automatically at 6 AM",
+    value: "Start every day with complete situational awareness"
+  },
+  {
+    title: "Knowledge Mill Processing",
+    category: "Documentation",
+    purpose: "Extract learnings from expensive LLM conversations",
+    components: [
+      "Parse conversation transcripts",
+      "Identify architectural decisions",
+      "Extract reusable patterns",
+      "Generate quick-reference docs",
+      "Create searchable artifacts"
+    ],
+    output: "Compressed knowledge artifacts (10:1 ratio)",
+    timeframe: "After significant work sessions",
+    value: "Convert expensive scans to cheap reference material"
+  },
+  {
+    title: "WordPress Security Audit",
+    category: "Security",
+    purpose: "Automated malware detection and hardening checks",
+    components: [
+      "File integrity verification",
+      "Suspicious pattern detection",
+      "Plugin vulnerability scan",
+      "User permission audit",
+      "Htaccess security review"
+    ],
+    output: "Security report with remediation steps",
+    timeframe: "Weekly scheduled, on-demand for incidents",
+    value: "Catch compromises before client impact"
+  },
+  {
+    title: "Site Analytics Report",
+    category: "Marketing",
+    description: "Unified analytics from Search Console + GA4",
+    components: [
+      "Search performance metrics",
+      "Top queries and pages",
+      "Indexing status",
+      "Traffic trends (sessions, pageviews)",
+      "Conversion tracking"
+    ],
+    output: "Formatted markdown with insights and recommendations",
+    timeframe: "Weekly for clients, monthly for personal sites",
+    value: "Data-driven optimization without manual dashboard review"
+  }
+];
+
+const parameterizedTemplates = [
+  {
+    name: "Context Bundle Generator",
+    purpose: "Create domain-specific context packages for specialists",
+    variables: ["domain", "specialist_type", "task_complexity", "related_files"],
+    example: "Generate context bundle for WordPress work → loads MHF site structure, recent changes, deployment guide",
+    benefit: "Specialists get exactly the context they need, nothing more"
+  },
+  {
+    name: "Blog Post Generator",
+    purpose: "Structure for technical articles with AI assistance",
+    variables: ["topic", "target_audience", "code_examples", "image_prompts"],
+    example: "Topic: 'Multi-agent orchestration' → article structure + image generation prompts",
+    benefit: "Consistent quality, faster iteration, integrated asset creation"
+  },
+  {
+    name: "Code Review Protocol",
+    purpose: "Systematic review checklist with domain rules",
+    variables: ["language", "framework", "security_level", "performance_requirements"],
+    example: "Review React component → checks hooks, accessibility, performance, test coverage",
+    benefit: "Catch issues before deployment, enforce standards"
+  }
+];
+
+const metrics = [
+  { label: "Slash Commands", value: "14+", description: "Production parameterized prompts" },
+  { label: "Saved Prompts", value: "30+", description: "Reusable workflow templates" },
+  { label: "Daily Automations", value: "100+", description: "Automated operations via prompts" },
+  { label: "Time Savings", value: "2-3 hrs/day", description: "From prompt-driven automation" }
+];
+---
+
+<Layout {seo}>
+  <main class="py-16">
+    <Container>
+      {/* Hero Section */}
+      <div class="mb-16 text-center">
+        <h1 class="mb-4 text-4xl font-bold">Prompt Engineering Portfolio</h1>
+        <p class="mx-auto max-w-2xl text-xl text-muted-foreground">
+          Production-ready prompt systems: saved prompts, parameterized slash commands, and reusable templates.
+          <strong>80% of automation value comes from working artifacts, not abstract patterns.</strong>
+        </p>
+
+        {/* Hero Image */}
+        <div class="mx-auto mt-8 max-w-4xl overflow-hidden rounded-lg shadow-2xl">
+          <img
+            src="https://res.cloudinary.com/dsdxgcigp/image/upload/v1760662782/pages/deankeesey/prompt-engineering-hero.png"
+            alt="Prompt Engineering Portfolio - Code snippets, terminal commands, and automation workflows"
+            class="w-full h-auto"
+          />
+        </div>
+      </div>
+
+      {/* Metrics Grid */}
+      <div class="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {metrics.map((metric) => (
+          <Card>
+            <CardContent class="pt-6 text-center">
+              <div class="mb-2 text-4xl font-bold text-primary">{metric.value}</div>
+              <div class="mb-1 font-semibold">{metric.label}</div>
+              <div class="text-sm text-muted-foreground">{metric.description}</div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Slash Commands Section */}
+      <div class="mb-16">
+        <div class="mb-8">
+          <h2 class="mb-2 text-3xl font-bold">Parameterized Slash Commands</h2>
+          <p class="text-lg text-muted-foreground">
+            Production commands with variable parameters. Natural language → structured execution.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          {slashCommands.map((cmd) => (
+            <Card class="transition-shadow hover:shadow-lg">
+              <CardHeader>
+                <div class="mb-2 flex items-center justify-between">
+                  <code class="rounded bg-muted px-2 py-1 text-lg font-mono font-semibold">{cmd.command}</code>
+                  <Badge>{cmd.category}</Badge>
+                </div>
+                <CardDescription>{cmd.description}</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-3">
+                <div>
+                  <div class="mb-1 text-sm font-semibold">Parameters:</div>
+                  <div class="flex flex-wrap gap-1">
+                    {cmd.parameters.map((param) => (
+                      <code class="rounded bg-muted px-2 py-0.5 text-xs">{param}</code>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-1 text-sm font-semibold">Output:</div>
+                  <div class="text-sm text-muted-foreground">{cmd.output}</div>
+                </div>
+                <div class="flex items-center justify-between border-t pt-3">
+                  <span class="text-sm text-muted-foreground">Frequency: {cmd.frequency}</span>
+                  <span class="text-sm font-semibold text-primary">💡 {cmd.value}</span>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Saved Prompts Section */}
+      <div class="mb-16">
+        <div class="mb-8">
+          <h2 class="mb-2 text-3xl font-bold">Production Saved Prompts</h2>
+          <p class="text-lg text-muted-foreground">
+            Complex multi-step workflows captured as reusable prompt templates.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          {savedPrompts.map((prompt) => (
+            <Card>
+              <CardHeader>
+                <div class="flex items-start justify-between">
+                  <div>
+                    <CardTitle class="mb-1">{prompt.title}</CardTitle>
+                    <CardDescription>{prompt.purpose}</CardDescription>
+                  </div>
+                  <Badge variant="secondary">{prompt.category}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div>
+                  <div class="mb-2 font-semibold">Components:</div>
+                  <ul class="space-y-1">
+                    {prompt.components.map((component) => (
+                      <li class="flex items-start text-sm">
+                        <span class="mr-2 text-primary">▸</span>
+                        <span>{component}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="grid gap-3 md:grid-cols-2">
+                  <div class="rounded-lg bg-muted p-3">
+                    <div class="mb-1 text-xs font-semibold uppercase text-muted-foreground">Output</div>
+                    <div class="text-sm">{prompt.output}</div>
+                  </div>
+                  <div class="rounded-lg bg-muted p-3">
+                    <div class="mb-1 text-xs font-semibold uppercase text-muted-foreground">Schedule</div>
+                    <div class="text-sm">{prompt.timeframe}</div>
+                  </div>
+                </div>
+                <div class="rounded-lg bg-primary/10 p-3">
+                  <span class="font-semibold">Value:</span> {prompt.value}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Parameterized Templates Section */}
+      <div class="mb-16">
+        <div class="mb-8">
+          <h2 class="mb-2 text-3xl font-bold">Parameterized Templates</h2>
+          <p class="text-lg text-muted-foreground">
+            Reusable prompt structures with variable injection for different contexts.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {parameterizedTemplates.map((template) => (
+            <Card>
+              <CardHeader>
+                <CardTitle class="text-lg">{template.name}</CardTitle>
+                <CardDescription class="text-sm">{template.purpose}</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-3">
+                <div>
+                  <div class="mb-1 text-xs font-semibold uppercase text-muted-foreground">Variables</div>
+                  <div class="flex flex-wrap gap-1">
+                    {template.variables.map((variable) => (
+                      <code class="rounded bg-muted px-2 py-0.5 text-xs">{`{${variable}}`}</code>
+                    ))}
+                  </div>
+                </div>
+                <div class="rounded bg-muted p-2 text-xs font-mono">
+                  {template.example}
+                </div>
+                <div class="text-sm text-primary">
+                  ✓ {template.benefit}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Evolution Section */}
+      <div class="mb-16">
+        <div class="mb-8">
+          <h2 class="mb-2 text-3xl font-bold">The Evolution: 5 Scripts → 1 Parameterized Command</h2>
+          <p class="text-lg text-muted-foreground">
+            Real-world progression from script proliferation to elegant parameterization.
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          {/* Morning Reports Example */}
+          <Card class="border-2 border-primary/20">
+            <CardHeader>
+              <CardTitle>Case Study: Morning Intelligence</CardTitle>
+              <CardDescription>From 7 specialized scripts to 1 unified command</CardDescription>
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">❌ BEFORE: Script Proliferation</div>
+                <div class="space-y-1">
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">morning-summary.sh</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">morning-report-universal.sh</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">smart-morning-report.sh</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">reliable-morning-report.sh</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">shortcuts-compatible-morning-report.sh</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">morning-intelligence-cd-cm.py</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">full-morning-sync.sh</code>
+                </div>
+                <div class="mt-2 text-sm text-red-600">Problem: 7 scripts doing variations of the same thing</div>
+              </div>
+
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">✅ AFTER: Single Parameterized Command</div>
+                <code class="block rounded bg-green-50 px-3 py-2 font-mono text-sm">
+                  morning-intelligence-cd-cm.py --mode=[desktop|shortcuts] --output=[markdown|json]
+                </code>
+                <div class="mt-2 text-sm text-green-600">Solution: 1 script with parameters handles all use cases</div>
+              </div>
+
+              <div class="rounded-lg bg-primary/10 p-4">
+                <div class="font-semibold">Impact:</div>
+                <ul class="mt-2 space-y-1 text-sm">
+                  <li>• 86% reduction in script count (7 → 1)</li>
+                  <li>• Single source of truth for morning intelligence</li>
+                  <li>• Easier maintenance and debugging</li>
+                  <li>• Consistent output formats</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Email Processing Example */}
+          <Card class="border-2 border-primary/20">
+            <CardHeader>
+              <CardTitle>Case Study: Email Intelligence</CardTitle>
+              <CardDescription>From named variations to flag-based consolidation</CardDescription>
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">❌ BEFORE: Script Proliferation</div>
+                <div class="space-y-1">
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">masumi-exhibition-email-search.py</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">masumi-exhibition-email-search-v2.py</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">ada-support-search.py</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">ada-support-contact-finder.py</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">urgent-email-scanner.py</code>
+                </div>
+                <div class="mt-2 text-sm text-red-600">Problem: Each use case = new script file</div>
+              </div>
+
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">✅ AFTER: Unified with Flags</div>
+                <code class="block rounded bg-green-50 px-3 py-2 font-mono text-sm">
+                  /email-research --topic="exhibitions" --timeframe="6mo" --account="masumi"
+                </code>
+                <div class="mt-2 text-sm text-green-600">Solution: Parameters define the query, not the script name</div>
+              </div>
+
+              <div class="rounded-lg bg-primary/10 p-4">
+                <div class="font-semibold">Learning:</div>
+                <p class="mt-2 text-sm">
+                  When you find yourself adding v2, v3, or descriptive suffixes to scripts,
+                  it's time to consolidate with parameters.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Reminders Sync Example */}
+          <Card class="border-2 border-primary/20">
+            <CardHeader>
+              <CardTitle>Case Study: Task/Reminders Sync</CardTitle>
+              <CardDescription>From AppleScript variations to unified CLI approach</CardDescription>
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">❌ BEFORE: Multiple AppleScript Approaches</div>
+                <div class="space-y-1">
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">sync_reminders_simple.py (AppleScript)</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">sync_reminders_to_tasks.py (AppleScript)</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">enhanced-reminders-sync.py (AppleScript)</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">test_reminders_simple.applescript</code>
+                  <code class="block rounded bg-red-50 px-3 py-1 text-sm">sync-reminders-complete.sh (AppleScript)</code>
+                </div>
+                <div class="mt-2 text-sm text-red-600">Problem: Fragile AppleScript, high maintenance</div>
+              </div>
+
+              <div>
+                <div class="mb-2 text-sm font-semibold text-muted-foreground">✅ AFTER: Native CLI Tool</div>
+                <code class="block rounded bg-green-50 px-3 py-2 font-mono text-sm">
+                  sync-apple-reminders-cli.sh --direction=[both|to-tasks|to-reminders]
+                </code>
+                <div class="mt-2 text-sm text-green-600">Solution: Uses reminders-cli (native macOS), 100 lines vs 500+</div>
+              </div>
+
+              <div class="rounded-lg bg-primary/10 p-4">
+                <div class="font-semibold">Results:</div>
+                <ul class="mt-2 space-y-1 text-sm">
+                  <li>• 80% code reduction (500+ lines → 100 lines)</li>
+                  <li>• Archived 18+ old script variations</li>
+                  <li>• 174 tasks synced successfully (production proven)</li>
+                  <li>• Zero auth complexity (macOS keychain)</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Philosophy Section */}
+      <Card class="mb-16 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
+        <CardContent class="p-8">
+          <h2 class="mb-4 text-2xl font-bold">The 80/20 Rule of Prompt Engineering</h2>
+          <div class="space-y-4 text-lg">
+            <p>
+              <strong>80% of value</strong> comes from saved prompts and parameterized commands.
+              These are <strong>working artifacts</strong> you can execute immediately.
+            </p>
+            <p>
+              <strong>20% of value</strong> comes from prompt theory, patterns, and techniques.
+              Important for building new prompts, but the saved versions deliver the results.
+            </p>
+            <p class="text-primary">
+              <strong>Mastery = Your Library of Production Prompts</strong>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Call to Action */}
+      <div class="rounded-lg bg-muted p-8 text-center">
+        <h2 class="mb-4 text-2xl font-bold">Want to Learn More?</h2>
+        <p class="mb-6 text-lg text-muted-foreground">
+          Read detailed breakdowns of these prompts and how they were built.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a
+            href="/blog"
+            class="inline-flex items-center rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Read the Blog
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center rounded-lg border border-input bg-background px-6 py-3 font-semibold transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </Container>
+  </main>
+</Layout>

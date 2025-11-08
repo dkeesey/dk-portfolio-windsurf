@@ -3,7 +3,7 @@ title: "Coordinating AI Agents: TaskMaster and Multi-Agent Workflow Management"
 description: "How TaskMaster evolved from simple task management to sophisticated multi-agent coordination, enabling Claude Desktop and Cursor to work simultaneously without conflicts."
 publishDate: 2025-04-25
 tags: ["ai-development", "multi-agent", "taskmaster", "coordination", "workflow-management"]
-image: "/images/blog/ai-multi-agent-coordination.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659194/blog/deankeesey/multi-agent-coordination-taskmaster.png"
 readingTime: 14
 author: "Dean Keesey"
 ---

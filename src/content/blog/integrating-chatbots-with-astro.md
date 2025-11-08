@@ -3,7 +3,7 @@ title: "Integrating Chatbots with Astro: A Developer's Journey"
 description: "My experience integrating Botpress with an Astro-based portfolio site, including challenges and solutions for a seamless user experience."
 publishDate: 2023-11-15
 tags: ["astro", "chatbot", "botpress", "web development", "react"]
-image: "/images/blog/chatbot-integration.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760660595/blog/deankeesey/chatbot-astro-integration.png"
 readingTime: 7
 author: "Dean Keesey"
 ---

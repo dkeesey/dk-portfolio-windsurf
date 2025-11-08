@@ -37,11 +37,23 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    name: 'AI & LLM Engineering',
+    skills: [
+      { name: 'Prompt Engineering', level: 5, description: 'Advanced prompt design, chain-of-thought reasoning, multi-turn conversations, system instructions' },
+      { name: 'Context Engineering', level: 5, description: 'Context window optimization, knowledge priming, session state management, multi-agent orchestration' },
+      { name: 'AI API Integration', level: 5, description: 'OpenAI, Anthropic, Google AI, Azure OpenAI, streaming responses, function calling' },
+      { name: 'Agent Architecture', level: 4, description: 'Multi-agent systems, task delegation, autonomous workflows, agent state persistence' },
+      { name: 'RAG Systems', level: 4, description: 'Retrieval-Augmented Generation, vector databases, semantic search, knowledge bases' },
+      { name: 'LLM Workflow Automation', level: 4, description: 'MCP servers, tool use, automated pipelines, git integration, task orchestration' },
+      { name: 'AI Content Generation', level: 4, description: 'Automated documentation, code generation, image synthesis (DALL-E, Gemini, Stable Diffusion)' },
+      { name: 'Fine-tuning & Training', level: 2, description: 'Conceptual understanding of model training, basic fine-tuning workflows' },
+    ],
+  },
+  {
     name: 'Dev Tools & Infrastructure',
     skills: [
       { name: 'CI/CD', level: 4, description: 'GitHub Actions, automated deployment workflows' },
       { name: 'WordPress', level: 4, description: 'Theme customization, plugin integration, content management' },
-      { name: 'AI Toolchain', level: 4, description: 'Effective prompt engineering, API integration, LLM workflow optimization' },
       { name: 'Docker', level: 3, description: 'Development environments, basic containerization' },
       { name: 'AWS', level: 3, description: 'S3, basic deployment configurations' },
     ],

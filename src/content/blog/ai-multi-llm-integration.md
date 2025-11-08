@@ -3,7 +3,7 @@ title: "When AI Tools Talk to Each Other: Multi-LLM Integration Lessons"
 description: "Real-world challenges of multi-LLM orchestration and context management, and why simpler solutions often outperform complex architectures."
 publishDate: 2025-04-08
 tags: ["ai-development", "multi-llm", "architecture", "integration", "ai-models"]
-image: "/images/blog/ai-multi-llm-integration.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659200/blog/deankeesey/multi-llm-integration-ai-tools.png"
 readingTime: 14
 author: "Dean Keesey"
 ---

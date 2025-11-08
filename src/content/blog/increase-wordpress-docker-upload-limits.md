@@ -3,7 +3,7 @@ title: "Increasing Upload File Size Limits in Docker WordPress Environments"
 description: "A comprehensive guide to overcoming file upload size limitations when working with WordPress in Docker containers, especially for site migrations."
 publishDate: 2025-03-20
 tags: ["wordpress", "docker", "development", "file upload", "migration", "php"]
-image: "/images/blog/docker-wordpress.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659202/blog/deankeesey/docker-wordpress-upload-limits.png"
 readingTime: 10
 author: "Dean Keesey"
 ---

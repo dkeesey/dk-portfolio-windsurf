@@ -3,7 +3,7 @@ title: "AI Development Journey: Building a Sophisticated Development Environment
 description: "An overview of building a comprehensive AI development environment from hardware selection to operational excellence, covering six months of real-world implementation."
 publishDate: 2025-04-01
 tags: ["ai-development", "series-overview", "development-environment", "architecture", "tooling"]
-image: "/images/blog/ai-development-journey-overview.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659201/blog/deankeesey/ai-development-journey-overview.png"
 readingTime: 8
 author: "Dean Keesey"
 ---

@@ -1,0 +1,27 @@
+---
+// Analytics component for therapy landing pages
+// Google Analytics 4 tracking - CORRECTED INITIALIZATION ORDER
+const { gaId } = Astro.props;
+---
+
+<!-- Google Analytics 4 - Proper initialization order -->
+{gaId && (
+  <>
+    <!-- STEP 1: Initialize dataLayer FIRST -->
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId, {
+        'send_page_view': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+    </script>
+
+    <!-- STEP 2: Load gtag.js async AFTER dataLayer init -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} is:inline></script>
+
+    <!-- STEP 3: Comprehensive event tracking -->
+    <script src="/scripts/analytics-tracking.js" is:inline></script>
+  </>
+)}

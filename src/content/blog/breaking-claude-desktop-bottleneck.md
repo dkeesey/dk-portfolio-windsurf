@@ -3,7 +3,7 @@ title: "Breaking Claude Desktop's Single-Threaded Bottleneck: The 5x Developer P
 description: "Most developers don't realize Claude Desktop's fundamental architectural limitation is capping their productivity at 1x. Here's how AI orchestration workflows unlock 5x gains through delegation architecture."
 publishDate: 2025-06-03
 tags: ["ai-development", "claude-desktop", "productivity", "orchestration", "architecture", "workflow"]
-image: "/images/blog/claude-orchestration-architecture.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760658396/blog/deankeesey/claude-desktop-orchestration-bottleneck.png"
 readingTime: 12
 author: "Dean Keesey"
 ---

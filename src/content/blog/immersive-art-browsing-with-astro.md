@@ -3,7 +3,7 @@ title: "Creating an Immersive Art Browsing Experience with Astro Collections"
 description: "How I built a full-viewport, reel-like scrolling experience to showcase detailed artwork while preserving the ability to zoom into intricate details."
 publishDate: 2023-12-05
 tags: ["astro", "web design", "art gallery", "content collections", "user experience"]
-image: "/images/blog/immersive-gallery.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760660594/blog/deankeesey/immersive-art-browsing.png"
 readingTime: 6
 author: "Dean Keesey"
 ---

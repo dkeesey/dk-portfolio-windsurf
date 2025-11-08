@@ -3,7 +3,7 @@ title: "Building Resilient AI Memory Systems"
 description: "How memory architecture evolved from MCP-based to hybrid approaches after experiencing cascading failures, leading to more reliable and accessible systems."
 publishDate: 2025-04-11
 tags: ["ai-development", "memory-systems", "persistence", "architecture", "resilience"]
-image: "/images/blog/ai-resilient-memory-systems.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659199/blog/deankeesey/resilient-ai-memory-systems.png"
 readingTime: 13
 author: "Dean Keesey"
 ---

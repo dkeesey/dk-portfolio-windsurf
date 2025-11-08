@@ -3,7 +3,7 @@ title: "Modern CSS Techniques for Building Beautiful Websites"
 description: "Exploring the latest CSS features and techniques that can transform your website design, including CSS Grid, Custom Properties, and Container Queries."
 publishDate: 2023-12-10
 tags: ["css", "web design", "front-end", "tailwind", "responsive design"]
-image: "/images/blog/modern-css.jpg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760660593/blog/deankeesey/modern-css-techniques.png"
 readingTime: 8
 author: "Dean Keesey"
 ---

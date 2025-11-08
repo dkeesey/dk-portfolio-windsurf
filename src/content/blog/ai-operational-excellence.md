@@ -3,7 +3,7 @@ title: "Operational Excellence in AI Development"
 description: "System resilience patterns, monitoring strategies, and management approaches that keep sophisticated AI development environments running smoothly."
 publishDate: 2025-04-20
 tags: ["ai-development", "operational-excellence", "monitoring", "debugging", "maintenance"]
-image: "/images/blog/ai-operational-excellence.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659196/blog/deankeesey/operational-excellence-ai-development.png"
 readingTime: 11
 author: "Dean Keesey"
 ---

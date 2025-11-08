@@ -3,7 +3,7 @@ title: "Beyond 'Do It For Me' Platforms: Meta-Prompt Strategy"
 description: "How sophisticated prompt engineering outperformed automated platforms and revolutionized AI-assisted development workflows through detailed specifications."
 publishDate: 2025-04-17
 tags: ["ai-development", "meta-prompts", "self-improvement", "workflows", "automation"]
-image: "/images/blog/ai-meta-prompt-strategy.svg"
+image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1760659197/blog/deankeesey/meta-prompt-strategy-engineering.png"
 readingTime: 15
 author: "Dean Keesey"
 ---
