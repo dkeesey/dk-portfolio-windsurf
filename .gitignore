@@ -75,3 +75,6 @@ Temporary Items
 ehthumbs.db
 Thumbs.db
 # Build trigger Sat Nov  8 13:42:35 PST 2025
+
+# Local Netlify folder
+.netlify
