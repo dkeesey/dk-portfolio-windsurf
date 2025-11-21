@@ -28,10 +28,11 @@ const {
     <meta name="description" content={description} />
     <ViewTransitions />
     <!-- Google Analytics 4 + Microsoft Clarity + Facebook Pixel -->
+    <!-- IDs configured via Cloudflare Pages environment variables -->
     <GTMAnalytics
-      ga4Id="G-P7KMSQQN1N"
-      clarityId="u2pjuo05w0"
-      fbPixelId="1579027080201418"
+      ga4Id={import.meta.env.PUBLIC_GA4_ID}
+      clarityId={import.meta.env.PUBLIC_CLARITY_ID}
+      fbPixelId={import.meta.env.PUBLIC_FB_PIXEL_ID}
     />
     <PostHog />
     
