@@ -12,11 +12,10 @@ import path from 'path';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://deankeesey.com', // Replace with your site URL
-  // Temporarily disabled SSR for debugging
-  // output: 'server',
-  // adapter: node({
-  //   mode: 'standalone',
-  // }),
+  output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
   integrations: [
     react(),
     tailwind(),

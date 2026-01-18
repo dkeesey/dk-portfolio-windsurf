@@ -1,0 +1,90 @@
+---
+/**
+ * MdxLayout - Wrapper for MDX pages with microtext editing
+ *
+ * Provides:
+ * - Microtext context to child components
+ * - Edit mode toggle via ?edit query param
+ * - Integration with existing Layout system
+ */
+
+import MicrotextEditor from '@/components/vibe/MicrotextEditor'
+import Layout from '@/components/layout/Layout.astro'
+
+interface Props {
+  frontmatter: {
+    seo?: {
+      title?: string
+      description?: string
+    }
+    hideGradient?: boolean
+    microtext?: Record<string, any>
+  }
+}
+
+const { frontmatter } = Astro.props
+const isEditMode = Astro.url.searchParams.has('edit')
+
+// Make microtext available to MicroText components via Astro.locals
+;(Astro.locals as any).microtext = frontmatter.microtext || {}
+
+// Derive page slug from URL path
+const pageSlug = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'index'
+---
+
+<Layout seo={frontmatter.seo} hideGradient={frontmatter.hideGradient}>
+  {isEditMode && (
+    <div class="bg-yellow-50 border-b border-yellow-200 px-4 py-2 text-center text-sm text-yellow-800 relative z-50">
+      <strong>Edit Mode</strong> — Click any highlighted text to edit.
+      <a href={Astro.url.pathname} class="ml-2 underline hover:no-underline">
+        Exit edit mode
+      </a>
+    </div>
+  )}
+
+  <slot />
+
+  {isEditMode && (
+    <MicrotextEditor
+      client:load
+      pageSlug={pageSlug}
+      initialContent={frontmatter.microtext || {}}
+    />
+  )}
+
+  <style is:global>
+    /* Tiptap editor styling */
+    .ProseMirror {
+      outline: none;
+    }
+    .ProseMirror p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      color: #adb5bd;
+      pointer-events: none;
+      float: left;
+      height: 0;
+    }
+
+    /* Highlight microtext elements in edit mode */
+    body.edit-mode [data-microtext] {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    body.edit-mode [data-microtext]:hover {
+      background-color: rgba(255, 255, 0, 0.1);
+      outline: 1px dashed rgba(255, 200, 0, 0.5);
+    }
+
+    /* Edit mode body class */
+    body.edit-mode {
+      /* Any edit-mode specific styles */
+    }
+  </style>
+
+  <script>
+    // Add edit-mode class to body when in edit mode
+    if (window.location.search.includes('edit')) {
+      document.body.classList.add('edit-mode')
+    }
+  </script>
+</Layout>
