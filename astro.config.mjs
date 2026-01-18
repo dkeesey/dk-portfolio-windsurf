@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
+import node from '@astrojs/node';
 import rehypePrettyCode from 'rehype-pretty-code';
 import fs from 'fs';
 import path from 'path';
@@ -10,9 +12,15 @@ import path from 'path';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://deankeesey.com', // Replace with your site URL
+  // Temporarily disabled SSR for debugging
+  // output: 'server',
+  // adapter: node({
+  //   mode: 'standalone',
+  // }),
   integrations: [
     react(),
     tailwind(),
+    mdx(),
     partytown({
       config: {
         forward: ['dataLayer.push', 'gtag', 'posthog', 'botpress', 'botpressWebChat'],

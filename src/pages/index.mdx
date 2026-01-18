@@ -1,0 +1,23 @@
+---
+layout: ../components/layout/Layout.astro
+seo:
+  title: "Dean Keesey - Senior Frontend Engineer & Enterprise Software Developer"
+  description: "Senior Frontend Engineer with 15+ years of Fortune 500 experience at SAP, EA, Oracle, Goldman Sachs. Expert in React, TypeScript, and enterprise-scale applications."
+hideGradient: true
+microtext:
+  hero:
+    headline: "Hi, I'm Dean Keesey"
+    description: "Full Stack Developer specializing in modern web frameworks, SEO optimization, and digital marketing integration. I create high-performance websites that drive real-world results through improved search visibility and user engagement."
+    cta_primary: "View Projects"
+    cta_secondary: "Contact Me"
+---
+
+import { HeroSectionVibe } from '../components/vibe/HeroSectionVibe'
+import { EnterpriseExperienceTimeline } from '../components/sections/EnterpriseExperienceTimeline'
+import { SkillsMatrix } from '../components/sections/SkillsMatrix'
+
+<main class="space-y-0">
+  <HeroSectionVibe client:load microtext={frontmatter.microtext} />
+  <EnterpriseExperienceTimeline client:visible />
+  <SkillsMatrix client:visible />
+</main>
