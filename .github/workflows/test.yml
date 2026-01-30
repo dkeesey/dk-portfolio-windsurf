@@ -116,6 +116,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: deankeesey-com
+          projectName: deankeesey-com-v2
           directory: dist/
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
