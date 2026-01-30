@@ -91,3 +91,4 @@ export function captureMessage(
 }
 
 export default Sentry;
+// Sentry activated 2026-01-30
