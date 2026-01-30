@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Building2, Users, Trophy, TrendingUp } from 'lucide-react';
 
@@ -20,25 +19,22 @@ interface ExperienceItemProps {
   companyType?: 'fortune500' | 'unicorn' | 'enterprise' | 'consulting';
 }
 
-function ExperienceItem({ 
-  period, 
-  title, 
-  company, 
+function ExperienceItem({
+  period,
+  title,
+  company,
   companySize,
-  location, 
-  description, 
-  achievements, 
-  technologies, 
-  index, 
+  location,
+  description,
+  achievements,
+  technologies,
+  index,
   isEnterprise = false,
   logoPath,
   dualLogos,
   clientLogos,
   companyType
 }: ExperienceItemProps) {
-  const itemRef = useRef(null);
-  const isInView = useInView(itemRef, { once: true, margin: "-50px" });
-
   const getCompanyTypeIcon = () => {
     switch (companyType) {
       case 'fortune500':
@@ -54,9 +50,9 @@ function ExperienceItem({
 
   return (
     <motion.div
-      ref={itemRef}
       initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className={`relative border-l-2 pl-8 pb-12 last:pb-0 ${
         isEnterprise ? 'border-blue-500' : 'border-gray-300'
