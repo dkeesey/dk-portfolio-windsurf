@@ -1,9 +1,18 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import Layout from '@/components/layout/Layout.astro';
 import { Container } from '@/components/ui/container';
 import { Badge } from '@/components/ui/badge';
 import type { SEOProps } from '@/types';
+
+// Prerender all blog posts at build time for optimal performance
+export const prerender = true;
+
+// Define props type for type safety
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
 
 // Generate static paths for all blog posts
 export async function getStaticPaths() {
@@ -11,15 +20,21 @@ export async function getStaticPaths() {
     // In production, filter out draft posts
     return import.meta.env.PROD ? !data.draft : true;
   });
-  
+
   return blogEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
-// Get the blog post from the props
-const { entry } = Astro.props;
+// Get the blog post from the props with type safety
+const { entry } = Astro.props as Props;
+
+// Guard against undefined entry (shouldn't happen with static paths, but defensive coding)
+if (!entry) {
+  return Astro.redirect('/blog');
+}
+
 const { Content } = await entry.render();
 
 // Format the date for display
