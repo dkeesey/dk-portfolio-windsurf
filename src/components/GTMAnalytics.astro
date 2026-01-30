@@ -36,9 +36,10 @@ const {
 // Support both ga4Id and gaId props (backwards compatibility)
 const ga4Id = ga4IdProp || gaId;
 
-// Validate that at least one tracking ID is provided
-if (!gtmId && !ga4Id && !fbPixelId && !clarityId) {
-  throw new Error('GTMAnalytics: At least one tracking ID (gtmId, ga4Id, fbPixelId, or clarityId) is required');
+// If no tracking IDs are provided, render nothing (graceful degradation for CI/dev)
+const hasAnyTracking = gtmId || ga4Id || fbPixelId || clarityId;
+if (!hasAnyTracking) {
+  // Silent no-op - analytics optional in dev/CI environments
 }
 
 // Validate GTM ID format if provided
