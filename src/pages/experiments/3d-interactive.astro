@@ -1,0 +1,117 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Scene3D } from '@/components/3d/Scene3D';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Interactive 3D Scene - Dean Keesey",
+  description: "Programmatic 3D scene built with React Three Fiber demonstrating custom geometries, animations, and interactive controls.",
+  type: "website" as const
+};
+---
+
+<Layout {seo}>
+  <main class="container mx-auto max-w-4xl py-12 px-4">
+    <div class="space-y-8">
+      {/* Header */}
+      <section class="space-y-4">
+        <nav class="text-sm text-muted-foreground">
+          <a href="/" class="hover:text-foreground">Home</a>
+          <span class="mx-2">/</span>
+          <span>Experiments</span>
+          <span class="mx-2">/</span>
+          <span class="text-foreground">3D Interactive</span>
+        </nav>
+        <h1 class="text-4xl font-bold">Interactive 3D Scene</h1>
+        <p class="text-lg text-muted-foreground">
+          Programmatic 3D scene built with <code class="px-1.5 py-0.5 bg-muted rounded text-sm">React Three Fiber</code>.
+          Demonstrating real-time animations, custom geometries, and physics-based rendering.
+        </p>
+      </section>
+
+      {/* 3D Scene */}
+      <section class="space-y-4">
+        <Scene3D client:load />
+        <p class="text-sm text-muted-foreground text-center">
+          Drag to rotate, scroll to zoom. Hover over the center shape for interaction.
+        </p>
+      </section>
+
+      {/* Tech Details */}
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Technical Details</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-lg border bg-card p-4 space-y-2">
+            <h3 class="font-medium">Stack</h3>
+            <ul class="text-sm text-muted-foreground space-y-1">
+              <li>React Three Fiber</li>
+              <li>@react-three/drei</li>
+              <li>Three.js r170</li>
+              <li>TypeScript</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border bg-card p-4 space-y-2">
+            <h3 class="font-medium">Geometries</h3>
+            <ul class="text-sm text-muted-foreground space-y-1">
+              <li>Icosahedron (center)</li>
+              <li>Torus Knots (sides)</li>
+              <li>Orbiting Spheres</li>
+              <li>Wireframe Grid</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border bg-card p-4 space-y-2">
+            <h3 class="font-medium">Features</h3>
+            <ul class="text-sm text-muted-foreground space-y-1">
+              <li>useFrame animations</li>
+              <li>Environment maps</li>
+              <li>Shadow mapping</li>
+              <li>Hover interactions</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Code Example */}
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Code Highlights</h2>
+        <div class="rounded-lg border bg-muted p-4 overflow-x-auto">
+          <pre class="text-sm"><code class="language-tsx">{`// Animation loop using useFrame hook
+useFrame((state) => {
+  if (meshRef.current) {
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.rotation.y += 0.005;
+    // Sine wave for floating effect
+    meshRef.current.position.y =
+      Math.sin(state.clock.elapsedTime) * 0.1;
+  }
+});`}</code></pre>
+        </div>
+        <p class="text-sm text-muted-foreground">
+          React Three Fiber provides declarative 3D with React's component model.
+          The <code class="px-1 bg-muted rounded">useFrame</code> hook runs on every animation frame
+          at 60fps for smooth real-time updates.
+        </p>
+      </section>
+
+      {/* Astro Integration Note */}
+      <section class="rounded-lg border-l-4 border-primary bg-muted/50 p-4">
+        <h3 class="font-medium mb-2">Astro Integration</h3>
+        <p class="text-sm text-muted-foreground">
+          This component uses <code class="px-1 bg-muted rounded">client:load</code> to hydrate
+          the React component on page load. Astro's island architecture keeps the rest of the page
+          static while enabling rich interactivity where needed.
+        </p>
+      </section>
+
+      {/* Navigation */}
+      <section class="flex justify-between items-center pt-4 border-t">
+        <a href="/experiments/3d-viewer" class="text-sm text-muted-foreground hover:text-foreground">
+          &larr; model-viewer Demo
+        </a>
+        <a href="/" class="text-sm text-primary hover:underline">
+          Back to Home &rarr;
+        </a>
+      </section>
+    </div>
+  </main>
+</Layout>

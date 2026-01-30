@@ -1,0 +1,100 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "3D Model Viewer - Dean Keesey",
+  description: "Interactive 3D model viewer using Google's model-viewer web component for WebXR-ready experiences.",
+  type: "website" as const
+};
+---
+
+<Layout {seo}>
+  <main class="container mx-auto max-w-4xl py-12 px-4">
+    <div class="space-y-8">
+      {/* Header */}
+      <section class="space-y-4">
+        <nav class="text-sm text-muted-foreground">
+          <a href="/" class="hover:text-foreground">Home</a>
+          <span class="mx-2">/</span>
+          <span>Experiments</span>
+          <span class="mx-2">/</span>
+          <span class="text-foreground">3D Viewer</span>
+        </nav>
+        <h1 class="text-4xl font-bold">3D Model Viewer</h1>
+        <p class="text-lg text-muted-foreground">
+          Interactive 3D model viewer using Google's <code class="px-1.5 py-0.5 bg-muted rounded text-sm">model-viewer</code> web component.
+          Supports glTF/GLB models with AR capabilities.
+        </p>
+      </section>
+
+      {/* Model Viewer */}
+      <section class="space-y-4">
+        <div class="rounded-lg border bg-card overflow-hidden">
+          <model-viewer
+            src="/models/demo.glb"
+            alt="3D Demo Model"
+            camera-controls
+            auto-rotate
+            shadow-intensity="1"
+            environment-image="neutral"
+            exposure="1"
+            class="w-full h-[500px]"
+            style="--poster-color: transparent;"
+          >
+            <div slot="progress-bar" class="absolute bottom-0 left-0 w-full h-1 bg-muted">
+              <div class="h-full bg-primary transition-all duration-300" style="width: var(--progress);"></div>
+            </div>
+          </model-viewer>
+        </div>
+        <p class="text-sm text-muted-foreground text-center">
+          Drag to rotate, scroll to zoom, pinch on mobile
+        </p>
+      </section>
+
+      {/* Tech Details */}
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Technical Details</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border bg-card p-4 space-y-2">
+            <h3 class="font-medium">Technology</h3>
+            <ul class="text-sm text-muted-foreground space-y-1">
+              <li>Google model-viewer 3.3.0</li>
+              <li>WebGL 2.0 rendering</li>
+              <li>glTF 2.0 / GLB format</li>
+              <li>WebXR AR support</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border bg-card p-4 space-y-2">
+            <h3 class="font-medium">Features</h3>
+            <ul class="text-sm text-muted-foreground space-y-1">
+              <li>Auto-rotate animation</li>
+              <li>Environment lighting</li>
+              <li>Real-time shadows</li>
+              <li>Touch-friendly controls</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Navigation */}
+      <section class="flex justify-between items-center pt-4 border-t">
+        <a href="/" class="text-sm text-muted-foreground hover:text-foreground">
+          &larr; Back to Home
+        </a>
+        <a href="/experiments/3d-interactive" class="text-sm text-primary hover:underline">
+          Try React Three Fiber &rarr;
+        </a>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+{/* Load model-viewer web component */}
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+<style>
+  model-viewer {
+    --poster-color: transparent;
+  }
+</style>
