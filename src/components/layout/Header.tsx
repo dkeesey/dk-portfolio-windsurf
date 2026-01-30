@@ -38,6 +38,7 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
               <Link href="/projects">Projects</Link>
               <Link href="/blog">Token Overflow</Link>
               <Link href="/prompt-engineering">Prompt Engineering</Link>
+              <Link href="/experiments/3d-interactive">3D Lab</Link>
               <Link href="/contact">Contact</Link>
             </nav>
             
@@ -64,6 +65,9 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
                     <Link href="/prompt-engineering">Prompt Engineering</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
+                    <Link href="/experiments/3d-interactive">3D Lab</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
                     <Link href="/contact">Contact</Link>
