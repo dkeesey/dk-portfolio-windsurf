@@ -57,7 +57,7 @@ const formatDate = (date: Date) => {
           {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
               <Card class="group transition-shadow hover:shadow-lg overflow-hidden">
-                <a href={`/blog/${post.slug}`} class="block">
+                <a href={`/blog/${post.id}`} class="block">
                   {post.data.image && (
                     <div class="aspect-video overflow-hidden">
                       <img

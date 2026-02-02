@@ -1,7 +1,7 @@
 ---
 import '@/styles/globals.css';
 import '@/components/chatbot/botpress-style.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import PostHog from '@/components/PostHog.astro';
 import GTMAnalytics from '@/components/GTMAnalytics.astro';
 import Botpress from '@/components/chatbot/Botpress.astro';
@@ -28,7 +28,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <ViewTransitions />
+    <ClientRouter />
     <!-- Google Analytics 4 + Microsoft Clarity + Facebook Pixel -->
     <!-- IDs configured via Cloudflare Pages environment variables -->
     <GTMAnalytics

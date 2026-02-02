@@ -6,7 +6,6 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import cloudflare from '@astrojs/cloudflare';
 import sentry from '@sentry/astro';
-import rehypePrettyCode from 'rehype-pretty-code';
 import fs from 'fs';
 import path from 'path';
 
@@ -80,19 +79,10 @@ export default defineConfig({
     ]
   },
   markdown: {
-    rehypePlugins: [
-      [
-        rehypePrettyCode,
-        {
-          theme: 'github-dark',
-          onVisitLine(node) {
-            if (node.children.length === 0) {
-              node.children = [{ type: 'text', value: ' ' }];
-            }
-          },
-        },
-      ],
-    ],
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true,
+    },
   },
   server: {
     headers: {
