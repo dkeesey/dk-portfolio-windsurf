@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 import sentry from '@sentry/astro';
 import rehypePrettyCode from 'rehype-pretty-code';
 import fs from 'fs';
@@ -14,8 +14,9 @@ import path from 'path';
 export default defineConfig({
   site: 'https://deankeesey.com', // Replace with your site URL
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
+  adapter: cloudflare({
+    mode: 'directory',
+    functionPerRoute: true,
   }),
   integrations: [
     react(),
