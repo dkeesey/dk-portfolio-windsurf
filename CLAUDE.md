@@ -1,7 +1,7 @@
 # deankeesey.com - AI Product Engineer Portfolio
 
 **Live Site**: https://deankeesey.com
-**Repository**: ~/Workspace/dk-sites/dk-portfolio/
+**Repository**: ~/Workspace/dk-sites/deankeesey-com/
 **Branch**: main
 **Deployment**: Netlify + Cloudflare Pages (GitHub Actions)
 
