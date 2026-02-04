@@ -37,7 +37,7 @@ export default defineConfig({
       sentry({
         dsn: process.env.PUBLIC_SENTRY_DSN || process.env.SENTRY_DSN,
         sourceMapsUploadOptions: {
-          project: 'deankeesey-com',
+          project: 'deankeesey-portfolio',
           authToken: process.env.SENTRY_AUTH_TOKEN,
         },
       }),
