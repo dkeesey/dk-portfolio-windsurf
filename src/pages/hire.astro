@@ -1,0 +1,16 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { HirePage } from '@/components/sections/HirePage';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: 'Hire Dean Keesey - Frontend Animation & Cloud Automation Expert',
+  description:
+    'Available for freelance projects. Specializing in React animations with Framer Motion, Cloudflare Workers, Stripe integration, and performance optimization. Enterprise experience from SAP, EA, Oracle, Goldman Sachs.',
+  type: 'website' as const,
+};
+---
+
+<Layout {seo}>
+  <HirePage client:load />
+</Layout>

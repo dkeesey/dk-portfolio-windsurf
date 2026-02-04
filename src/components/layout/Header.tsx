@@ -40,6 +40,12 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
               <Link href="/prompt-engineering">Prompt Engineering</Link>
               <Link href="/experiments/3d-interactive">3D Lab</Link>
               <Link href="/contact">Contact</Link>
+              <Link
+                href="/hire"
+                className="px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+              >
+                Hire Me
+              </Link>
             </nav>
             
             {/* Command Menu (Search) */}
@@ -71,6 +77,9 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
                     <Link href="/contact">Contact</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="py-3 px-4 text-base bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-md mx-2 my-1">
+                    <Link href="/hire">Hire Me</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
