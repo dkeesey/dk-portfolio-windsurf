@@ -1,0 +1,175 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Container } from '@/components/ui/container';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "The Stack — Dean Keesey",
+  description: "The LLM is a cloud of possibilities. I build systems that harness it and focus it on specific, reliable outcomes — from terminal design through multi-agent orchestration.",
+  type: "website" as const,
+};
+---
+
+<Layout {seo}>
+  <Container as="main" className="py-16 max-w-3xl">
+    <div class="space-y-20">
+
+      {/* Thesis */}
+      <section class="space-y-6">
+        <p class="text-sm font-mono uppercase tracking-widest text-purple-600">Systems Design</p>
+        <h1 class="text-4xl font-bold leading-tight">The Stack</h1>
+        <p class="text-2xl text-gray-700 leading-relaxed">
+          The LLM is a cloud of possibilities. I build systems that harness it and focus it on specific, reliable outcomes.
+        </p>
+        <div class="prose prose-lg text-gray-600 space-y-4">
+          <p>
+            A model left to itself is non-deterministic — the same prompt returns different results
+            every time. That non-determinism is also the foundation of a legal argument: if the
+            model cannot reliably produce a specific output, it cannot claim ownership of one.
+            Value requires choices. The choices are mine.
+          </p>
+          <p>
+            Every layer below represents a deliberate design decision — not configuration, not
+            tutorial-following. Alignment of tools to work together, to suit the work.
+          </p>
+        </div>
+      </section>
+
+      {/* Stack Diagram */}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold">The Architecture</h2>
+        <div class="rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+          {/* Terminal header bar */}
+          <div class="bg-gray-800 px-4 py-3 flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="ml-3 text-gray-400 text-sm font-mono">ai-stack</span>
+          </div>
+          {/* Diagram */}
+          <pre class="bg-gray-900 text-green-400 font-mono text-sm p-8 overflow-x-auto leading-relaxed">
+{`┌─────────────────────────────────────────────────┐
+│  HUMAN INTERFACE LAYER                          │
+│  Custom iTerm theme → cascades into CC output   │
+│  WCAG contrast · session titling ·              │
+│  capture-pane inter-session visibility           │
+├─────────────────────────────────────────────────┤
+│  SESSION ORCHESTRATION                          │
+│  tmux multi-session · fork/spawn workflows ·    │
+│  inter-session state management                 │
+├─────────────────────────────────────────────────┤
+│  EVENT / HOOK LAYER                             │
+│  82 hooks · lifecycle management ·              │
+│  automated context capture · triggers           │
+├─────────────────────────────────────────────────┤
+│  COORDINATION LAYER                             │
+│  coordination.db · work_items ·                 │
+│  multi-agent state · async job queues           │
+├─────────────────────────────────────────────────┤
+│  MODEL ROUTING                                  │
+│  Haiku / Sonnet / Opus assignment ·             │
+│  token economics · cost-per-outcome             │
+├─────────────────────────────────────────────────┤
+│  MODELS  (commodity input)                      │
+│  Claude · Gemini · GPT                          │
+└─────────────────────────────────────────────────┘`}
+          </pre>
+        </div>
+        <p class="text-sm text-gray-500 italic">
+          Default Claude Code has none of this. The delta between raw model output and output
+          produced inside this stack is entirely attributable to the architecture — not the model.
+        </p>
+      </section>
+
+      {/* Human Interface Layer */}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold">The Human Interface Layer</h2>
+        <p class="text-gray-600 leading-relaxed">
+          Most infrastructure builders skip directly to the model layer. The human operator is
+          also a system component — with latency, bandwidth, and error rate — and that component
+          needs optimization too.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-lg border border-gray-200 p-6 space-y-3">
+            <h3 class="font-semibold text-gray-900">Visual Design System</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Custom iTerm themes built to WCAG contrast standards cascade through to Claude Code's
+              output rendering. Readability is a performance variable — higher signal, lower cognitive
+              load, faster comprehension.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6 space-y-3">
+            <h3 class="font-semibold text-gray-900">Session Awareness</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Window titling and tmux capture-pane give the human operator spatial orientation
+              across parallel sessions. Context-switching cost drops when you can see what each
+              session is doing without interrupting it.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6 space-y-3">
+            <h3 class="font-semibold text-gray-900">Coherent Environment</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              These aren't independent tweaks. The theme cascades. The session names inform the
+              hook system. The visual layer reinforces the coordination layer. It was designed
+              to work together.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6 space-y-3">
+            <h3 class="font-semibold text-gray-900">The Design Philosophy</h3>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+              "I aligned the tools to work together to suit me." That alignment is what
+              distinguishes a system from an accumulation of configurations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why It Protects Your Work */}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold">Why This Protects Your Work</h2>
+        <p class="text-gray-600 leading-relaxed">
+          As model vendors assert IP claims over AI-generated output, companies using raw model
+          APIs are exposed. The argument is simple: the model produced the value, we want a share.
+        </p>
+        <div class="rounded-xl bg-purple-50 border border-purple-200 p-8 space-y-4">
+          <p class="text-gray-700 leading-relaxed">
+            Work produced through this stack is <strong>defensible by design</strong>. The model
+            is one commodity input among many — the equivalent of electricity in a factory. The
+            routing logic, context management, multi-agent coordination, and verification loops
+            are deliberate engineering decisions, traceable in git history, attributable to human
+            authorship at every layer.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            The delta between "GPT out of the box" and "GPT inside this infrastructure" is
+            measurable. That delta is where the value lives. That delta is mine — and when
+            I build for you, it protects yours.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section class="rounded-lg bg-gray-900 p-10 text-center space-y-6">
+        <h2 class="text-2xl font-semibold text-white">Build Something Defensible</h2>
+        <p class="text-gray-400 max-w-lg mx-auto">
+          If you're building with AI and want infrastructure that creates clear, attributable
+          value — let's talk.
+        </p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a
+            href="/hire"
+            class="inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 text-sm font-medium text-white hover:from-purple-700 hover:to-pink-700 transition-all"
+          >
+            Work With Me
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex h-11 items-center justify-center rounded-full border border-gray-600 px-8 text-sm font-medium text-gray-300 hover:border-gray-400 hover:text-white transition-all"
+          >
+            Get in Touch
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </Container>
+</Layout>
