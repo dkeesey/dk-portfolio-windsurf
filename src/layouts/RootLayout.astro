@@ -32,8 +32,8 @@ const {
     <!-- Google Analytics 4 + Microsoft Clarity + Facebook Pixel -->
     <!-- IDs configured via Cloudflare Pages environment variables -->
     <GTMAnalytics
-      ga4Id={import.meta.env.PUBLIC_GA4_ID}
-      clarityId={import.meta.env.PUBLIC_CLARITY_ID}
+      ga4Id={import.meta.env.PUBLIC_GA4_ID || 'G-P7KMSQQN1N'}
+      clarityId={import.meta.env.PUBLIC_CLARITY_ID || 'u2pjuo05w0'}
       fbPixelId={import.meta.env.PUBLIC_FB_PIXEL_ID}
     />
     <PostHog />

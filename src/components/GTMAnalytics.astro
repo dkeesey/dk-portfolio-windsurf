@@ -92,8 +92,20 @@ if (gtmId && !gtmId.startsWith('GTM-')) {
     <!-- STEP 2: Load gtag.js async AFTER dataLayer init -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} is:inline></script>
 
+    <!-- STEP 3: Re-fire pageview on Astro View Transitions navigation -->
+    <script is:inline define:vars={{ ga4Id }}>
+      document.addEventListener('astro:page-load', function() {
+        if (window.gtag) {
+          window.gtag('event', 'page_view', {
+            page_path: window.location.pathname + window.location.search,
+            send_to: ga4Id
+          });
+        }
+      });
+    </script>
+
     {useDetailedTracking && (
-      <!-- STEP 3: Comprehensive event tracking -->
+      <!-- STEP 4: Comprehensive event tracking -->
       <script src="/scripts/analytics-tracking.js" is:inline></script>
     )}
   </Fragment>

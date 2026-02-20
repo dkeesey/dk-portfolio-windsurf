@@ -23,7 +23,7 @@ export default defineConfig({
     mdx(),
     partytown({
       config: {
-        forward: ['dataLayer.push', 'gtag', 'posthog', 'botpress', 'botpressWebChat'],
+        forward: ['dataLayer.push', 'posthog', 'botpress', 'botpressWebChat'],
         debug: process.env.NODE_ENV === 'development',
       },
     }),
