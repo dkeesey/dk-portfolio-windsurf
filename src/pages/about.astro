@@ -6,57 +6,71 @@ import { Badge } from '@/components/ui/badge';
 import type { SEOProps } from '@/types';
 
 const seo: SEOProps = {
-  title: "About Me - Dean Keesey",
-  description: "Learn more about Dean Keesey, a full-stack developer passionate about creating innovative web solutions.",
+  title: "About — Dean Keesey",
+  description: "AI Systems Builder with 15+ years enterprise engineering at Goldman Sachs, SAP, Oracle, and EA. I build orchestration infrastructure that turns LLM possibilities into specific, reliable outcomes.",
   type: "website" as const
 };
 
 const skills = {
-  frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Redux'],
-  backend: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'GraphQL'],
-  devops: ['Docker', 'AWS', 'CI/CD', 'Git', 'Linux'],
-  tools: ['VS Code', 'Figma', 'Postman', 'Jest', 'GitHub']
+  'AI Infrastructure': ['Claude Code', 'Multi-model Orchestration', 'Agent Coordination', 'Hook Systems', 'Token Economics'],
+  'Frontend': ['React', 'TypeScript', 'Astro', 'Tailwind CSS', 'Next.js'],
+  'Platform & Backend': ['Cloudflare Workers', 'Node.js', 'Python', 'SQLite', 'n8n'],
+  'Enterprise Background': ['Goldman Sachs', 'SAP', 'Oracle', 'Electronic Arts', 'Cushman & Wakefield'],
 };
 
-const interests = [
-  'Web Development',
-  'Open Source',
-  'UI/UX Design',
-  'Cloud Computing',
-  'Machine Learning'
+const focus = [
+  'AI Systems Architecture',
+  'Human-AI Interface Design',
+  'Token Economics',
+  'Multi-agent Coordination',
+  'Cloudflare Infrastructure',
+  'Defensible IP Design',
 ];
-
 ---
 
 <Layout {seo}>
-  <Container as="main" className="py-12">
+  <Container as="main" className="py-12 max-w-3xl">
     <div class="space-y-16">
-      {/* Bio Section */}
+
+      {/* Bio */}
       <section class="space-y-6">
-        <h1 class="text-4xl font-bold">About Me</h1>
+        <h1 class="text-4xl font-bold">About</h1>
         <div class="prose prose-lg dark:prose-invert">
           <p>
-            Hi, I'm Dean Keesey, a Full Stack Developer passionate about creating efficient,
-            scalable, and user-friendly web applications. With years of experience in modern
-            web technologies, I specialize in building high-performance applications that
-            deliver exceptional user experiences.
+            I'm Dean Keesey — an AI Systems Builder with 15+ years of enterprise engineering
+            across Goldman Sachs, SAP, Oracle, and Electronic Arts. I build the infrastructure
+            layer that turns LLM possibilities into specific, reliable outcomes.
           </p>
           <p>
-            My approach combines technical expertise with a deep understanding of business
-            needs, ensuring that every solution not only works flawlessly but also adds
-            real value to users and stakeholders.
+            My background is unusual: deep enterprise experience at Fortune 500 scale, combined
+            with the systems thinking required to build AI orchestration infrastructure from the
+            ground up — from terminal environment design through multi-agent coordination and
+            model routing. I didn't arrive at this by following tutorials. I built it by aligning
+            tools to work together, layer by layer, to suit the work.
+          </p>
+          <p>
+            The result is infrastructure where every layer has my fingerprints: custom iTerm
+            themes that cascade into Claude Code's visual output, WCAG-informed contrast decisions
+            that treat readability as a performance variable, session orchestration across parallel
+            agents, and a model routing system that assigns Haiku, Sonnet, or Opus based on
+            cost-per-outcome rather than convenience. Work produced inside this stack is
+            defensible — the value lives in the architecture, not the model.
+          </p>
+          <p>
+            I'm currently available for AI infrastructure work, systems architecture, and
+            senior frontend engineering roles where this stack creates leverage.
           </p>
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Skills */}
       <section class="space-y-6">
-        <h2 class="text-3xl font-semibold">Technical Skills</h2>
+        <h2 class="text-3xl font-semibold">Skills & Stack</h2>
         <div class="grid gap-6 md:grid-cols-2">
           {Object.entries(skills).map(([category, items]) => (
             <Card>
               <CardContent class="pt-6">
-                <h3 class="mb-4 text-xl font-medium capitalize">{category}</h3>
+                <h3 class="mb-4 text-xl font-medium">{category}</h3>
                 <div class="flex flex-wrap gap-2">
                   {items.map((skill) => (
                     <Badge variant="secondary">{skill}</Badge>
@@ -68,29 +82,38 @@ const interests = [
         </div>
       </section>
 
-      {/* Interests Section */}
+      {/* Focus Areas */}
       <section class="space-y-6">
-        <h2 class="text-3xl font-semibold">Interests & Focus Areas</h2>
+        <h2 class="text-3xl font-semibold">Current Focus</h2>
         <div class="flex flex-wrap gap-3">
-          {interests.map((interest) => (
-            <Badge variant="outline" class="text-lg py-2">{interest}</Badge>
+          {focus.map((area) => (
+            <Badge variant="outline" class="text-base py-2 px-4">{area}</Badge>
           ))}
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section class="rounded-lg bg-muted p-8 text-center">
-        <h2 class="mb-4 text-2xl font-semibold">Let's Work Together</h2>
-        <p class="mb-6 text-muted-foreground">
-          Interested in collaborating or have a project in mind?
-        </p>
+      {/* CTAs */}
+      <section class="grid md:grid-cols-2 gap-6">
         <a
-          href="/contact"
-          class="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90"
+          href="/ai-stack"
+          class="rounded-lg border border-purple-200 bg-purple-50 p-6 hover:bg-purple-100 transition-colors group"
         >
-          Get in Touch
+          <h3 class="font-semibold text-purple-900 mb-2 group-hover:text-purple-700">See The Stack →</h3>
+          <p class="text-sm text-purple-700">
+            The full architecture — from terminal design through multi-agent orchestration.
+          </p>
+        </a>
+        <a
+          href="/hire"
+          class="rounded-lg border border-gray-200 bg-gray-50 p-6 hover:bg-gray-100 transition-colors group"
+        >
+          <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-gray-700">Work With Me →</h3>
+          <p class="text-sm text-gray-600">
+            Available for AI infrastructure, systems architecture, and senior frontend roles.
+          </p>
         </a>
       </section>
+
     </div>
   </Container>
-</Layout> 
+</Layout>
