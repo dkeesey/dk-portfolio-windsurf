@@ -25,7 +25,7 @@ export function Footer() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-white">
               <h3 className="font-bold text-lg mb-4 text-purple-300">Dean Keesey</h3>
-              <p className="text-gray-300">Full Stack Developer specializing in modern web frameworks and SEO optimization.</p>
+              <p className="text-gray-300">AI Systems Builder. I build orchestration systems that harness LLMs and focus them on specific, reliable outcomes.</p>
               <p className="mt-4 text-gray-400">© {new Date().getFullYear()} All Rights Reserved</p>
             </div>
             

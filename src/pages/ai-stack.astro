@@ -48,31 +48,30 @@ const seo: SEOProps = {
           </div>
           {/* Diagram */}
           <pre class="bg-gray-900 text-green-400 font-mono text-sm p-8 overflow-x-auto leading-relaxed">
-{`┌─────────────────────────────────────────────────┐
-│  HUMAN INTERFACE LAYER                          │
-│  Custom iTerm theme → cascades into CC output   │
-│  WCAG contrast · session titling ·              │
-│  capture-pane inter-session visibility           │
-├─────────────────────────────────────────────────┤
-│  SESSION ORCHESTRATION                          │
-│  tmux multi-session · fork/spawn workflows ·    │
-│  inter-session state management                 │
-├─────────────────────────────────────────────────┤
-│  EVENT / HOOK LAYER                             │
-│  82 hooks · lifecycle management ·              │
-│  automated context capture · triggers           │
-├─────────────────────────────────────────────────┤
-│  COORDINATION LAYER                             │
-│  coordination.db · work_items ·                 │
-│  multi-agent state · async job queues           │
-├─────────────────────────────────────────────────┤
-│  MODEL ROUTING                                  │
-│  Haiku / Sonnet / Opus assignment ·             │
-│  token economics · cost-per-outcome             │
-├─────────────────────────────────────────────────┤
-│  MODELS  (commodity input)                      │
-│  Claude · Gemini · GPT                          │
-└─────────────────────────────────────────────────┘`}
+{`┌───────────────────────────────────────────┐
+│  HUMAN INTERFACE LAYER                    │
+│  iTerm theme → cascades into CC output    │
+│  WCAG contrast · session titling ·        │
+│  capture-pane inter-session visibility    │
+├───────────────────────────────────────────┤
+│  SESSION ORCHESTRATION                    │
+│  tmux · fork/spawn · inter-session state  │
+├───────────────────────────────────────────┤
+│  EVENT / HOOK LAYER                       │
+│  82 hooks · lifecycle management ·        │
+│  automated context capture · triggers     │
+├───────────────────────────────────────────┤
+│  COORDINATION LAYER                       │
+│  coordination.db · work_items ·           │
+│  multi-agent state · async job queues     │
+├───────────────────────────────────────────┤
+│  MODEL ROUTING                            │
+│  Haiku / Sonnet / Opus ·                  │
+│  token economics · cost-per-outcome       │
+├───────────────────────────────────────────┤
+│  MODELS  (commodity input)                │
+│  Claude · Gemini · GPT                    │
+└───────────────────────────────────────────┘`}
           </pre>
         </div>
         <p class="text-sm text-gray-500 italic">
