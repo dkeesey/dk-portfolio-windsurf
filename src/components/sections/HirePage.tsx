@@ -14,12 +14,13 @@ import {
   Sparkles,
   Server,
   BarChart3,
-  Accessibility,
+  Layers,
   Clock,
   Globe,
   CheckCircle,
   ExternalLink,
   Zap,
+  Network,
 } from 'lucide-react';
 
 // Motion tokens - consistent across all animations
@@ -95,87 +96,87 @@ const heroTextVariants = {
 // Service packages data
 const services = [
   {
-    icon: Sparkles,
-    title: 'Frontend Animation',
-    tagline: 'Premium motion that converts',
+    icon: Network,
+    title: 'AI Infrastructure & Orchestration',
+    tagline: 'The systems layer that protects your work',
     description:
-      'React + Framer Motion micro-interactions, page transitions, and delightful UI animations. Principle-based motion design for a premium feel.',
-    price: '$1,500 - $5,000',
-    timeline: '2-4 weeks',
-    technologies: ['React', 'Framer Motion', 'GSAP', 'CSS Animations'],
+      'Multi-agent coordination, model routing, hook architectures, and context management. Built on the same stack I run daily — every layer traceable, every decision attributable.',
+    price: '$5,000 - $15,000',
+    timeline: '3-6 weeks',
+    technologies: ['Claude Code', 'Multi-model Routing', 'SQLite Coordination', 'Hook Systems'],
     highlights: [
-      'Motion design system included',
-      'Performance optimized (60fps)',
-      'Reduced motion support',
-      'Reusable component library',
+      'Work product defensible by design',
+      'Token economics built in (Haiku/Sonnet/Opus)',
+      'Multi-agent state management',
+      'Full audit trail in git',
     ],
     featured: true,
   },
   {
-    icon: Server,
-    title: 'Cloudflare Workers',
-    tagline: 'Edge computing that scales',
+    icon: Sparkles,
+    title: 'AI-Powered Frontend',
+    tagline: 'React + AI integration that ships',
     description:
-      'Serverless functions, cron jobs, webhooks, and D1 databases deployed at the edge. 11 production workers running for clients.',
-    price: '$800 - $2,000',
-    timeline: '1-2 weeks',
+      'Production React applications with AI features wired in — not bolted on. TypeScript, Framer Motion, and clean component architecture with real LLM integration.',
+    price: '$3,000 - $8,000',
+    timeline: '3-5 weeks',
+    technologies: ['React', 'TypeScript', 'Astro', 'Framer Motion'],
+    highlights: [
+      'AI features built into component design',
+      'Performance optimized (60fps animations)',
+      'Motion design system included',
+      'Accessible + WCAG informed',
+    ],
+    featured: false,
+  },
+  {
+    icon: Server,
+    title: 'Cloudflare Edge Platform',
+    tagline: 'Infrastructure that scales globally',
+    description:
+      'Serverless Workers, cron jobs, webhooks, D1 databases, and KV storage deployed at the edge. Sub-50ms latency, zero cold starts, production-proven.',
+    price: '$1,500 - $4,000',
+    timeline: '1-3 weeks',
     technologies: ['Cloudflare Workers', 'D1', 'KV', 'Durable Objects'],
     highlights: [
-      '11 deployed workers as proof',
+      'Production workers deployed',
       'Cron job automation',
-      'Webhook integrations',
+      'Webhook + Stripe integrations',
       'Sub-50ms global latency',
     ],
     featured: false,
   },
   {
-    icon: Zap,
-    title: 'Stripe Integration',
-    tagline: 'Payments that just work',
-    description:
-      'Payment flows, subscriptions, checkout sessions, webhooks, and customer portal. Clean, tested, production-ready code.',
-    price: '$1,000 - $3,000',
-    timeline: '1-2 weeks',
-    technologies: ['Stripe', 'Webhooks', 'TypeScript', 'React'],
-    highlights: [
-      'Subscription billing',
-      'One-time payments',
-      'Webhook handling',
-      'Customer portal setup',
-    ],
-    featured: false,
-  },
-  {
     icon: BarChart3,
-    title: 'GA4 Analytics Setup',
-    tagline: 'Data-driven decisions',
+    title: 'Analytics Infrastructure',
+    tagline: 'Data pipelines that actually run',
     description:
-      'Custom event tracking, conversion measurement, Search Console integration, and reporting dashboards. 6 client sites tracked.',
-    price: '$750 - $1,500',
-    timeline: '1 week',
-    technologies: ['GA4', 'GTM', 'Search Console', 'Custom Events'],
+      'GA4, Search Console, BigQuery pipelines, and automated reporting. Daily data collection across multiple properties, automated to run without you.',
+    price: '$1,500 - $3,500',
+    timeline: '1-2 weeks',
+    technologies: ['GA4', 'BigQuery', 'Search Console', 'Cloudflare Workers'],
     highlights: [
-      '6 client sites live',
-      'Custom conversion tracking',
-      'Automated reporting',
-      'Search Console integration',
+      'Automated daily collection',
+      'Multi-site pipeline management',
+      'Custom event tracking',
+      'Reporting dashboards',
     ],
     featured: false,
   },
   {
-    icon: Accessibility,
-    title: 'Accessibility Audit',
-    tagline: 'WCAG 2.2 compliance',
+    icon: Zap,
+    title: 'Automation & Integration',
+    tagline: 'n8n workflows that replace manual work',
     description:
-      'Full accessibility audit with remediation. EAA compliance (June 2025 deadline). Automated + manual testing with detailed report.',
+      'Business process automation using n8n, webhooks, and API integrations. Slack notifications, email pipelines, Stripe events, and scheduled intelligence reports.',
     price: '$1,000 - $3,000',
     timeline: '1-2 weeks',
-    technologies: ['WCAG 2.2', 'axe-core', 'Screen Readers', 'ARIA'],
+    technologies: ['n8n', 'Webhooks', 'Slack', 'Stripe'],
     highlights: [
-      'EAA compliance ready',
-      'Automated + manual testing',
-      'Remediation guidance',
-      'Retest after fixes',
+      'Morning intelligence reports',
+      'Stripe → Slack pipelines live',
+      'Email digest automation',
+      'Webhook event processing',
     ],
     featured: false,
   },
@@ -190,14 +191,14 @@ const quickFacts = [
 
 // Proof badges
 const proofBadges = [
-  'SAP',
-  'EA Games',
-  'Oracle',
   'Goldman Sachs',
+  'SAP',
+  'Oracle',
+  'EA Games',
+  'Claude Code',
+  'Cloudflare',
   'TypeScript',
-  'TDD',
-  'Sentry',
-  'CI/CD',
+  'Multi-agent',
 ];
 
 export function HirePage() {
@@ -250,10 +251,10 @@ export function HirePage() {
               variants={heroTextVariants}
               className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
             >
-              Frontend Animation &
+              AI Systems Builder
               <br />
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Cloud Automation
+                for Hire
               </span>
             </motion.h1>
 
@@ -261,9 +262,9 @@ export function HirePage() {
               variants={heroTextVariants}
               className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
             >
-              Premium motion design meets enterprise reliability. React animations
-              that convert, Cloudflare Workers that scale, integrations that just
-              work.
+              The LLM is a cloud of possibilities. I build the orchestration systems
+              that harness it — from multi-agent infrastructure through AI-powered
+              frontends. Work product defensible by design.
             </motion.p>
 
             <motion.div
