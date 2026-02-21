@@ -46,6 +46,12 @@ const formatDate = (date: Date) => {
   }).format(date);
 };
 
+// Share URLs
+const siteUrl = 'https://deankeesey.com';
+const postUrl = `${siteUrl}/blog/${entry.id}`;
+const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(entry.data.title)}`;
+
 // SEO props
 const seo: SEOProps = {
   title: `${entry.data.title} - Dean Keesey's Blog`,
@@ -94,7 +100,34 @@ const seo: SEOProps = {
         <Content />
       </div>
 
-      <div class="mt-12 border-t pt-6">
+      <div class="mt-12 border-t pt-6 space-y-4">
+        {/* Share buttons */}
+        <div class="flex items-center gap-3">
+          <span class="text-sm text-muted-foreground">Share:</span>
+          <a
+            href={linkedInShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-md bg-[#0A66C2] px-4 py-2 text-sm font-medium text-white hover:bg-[#004182] transition-colors"
+          >
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a
+            href={twitterShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 transition-colors"
+          >
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            X
+          </a>
+        </div>
+
         <div class="flex items-center justify-between">
           <a href="/blog" class="text-primary hover:underline">
             &larr; Back to all posts
