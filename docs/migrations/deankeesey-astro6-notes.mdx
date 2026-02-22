@@ -1,0 +1,223 @@
+# deankeesey.com — Analytics Fix + Astro 5 Cleanup + Astro 6 Readiness
+
+**Date:** 2026-02-22
+**Astro version at time of writing:** 5.17.3
+**Applies to:** deankeesey.com (template for masumihayashi.com, megan-gredesky, walt-opie, oakland-brainspotting)
+
+---
+
+## What We Fixed (Feb 2026)
+
+### Bug 1: `is:inline` + `src` Are Mutually Exclusive
+
+The most impactful bug — caused the 20:1 GA4 vs Cloudflare analytics discrepancy.
+
+**Broken pattern:**
+```astro
+<!-- DO NOT DO THIS — is:inline and src conflict -->
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} is:inline></script>
+<script src="/scripts/analytics-tracking.js" is:inline></script>
+```
+
+**Why it fails:** `is:inline` tells Astro "render this script as-is, don't bundle." But for external scripts, Astro's bundler is already uninvolved — external URLs are never bundled. The `is:inline` directive creates an ambiguous state where the `src` attribute may be dropped or silently ignored depending on Astro version. Result: gtag.js never loads.
+
+**Correct patterns:**
+
+For external scripts loaded by `document.createElement` (avoids the ambiguity entirely):
+```astro
+<script is:inline define:vars={{ ga4Id }}>
+  // Init stub first
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', ga4Id, { send_page_view: false });
+
+  // Then load externally — no is:inline + src conflict
+  var _s = document.createElement('script');
+  _s.async = true;
+  _s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
+  document.head.appendChild(_s);
+</script>
+```
+
+For truly inline code with runtime variables:
+```astro
+<!-- CORRECT: is:inline + define:vars, no src attribute -->
+<script is:inline define:vars={{ someVar }}>
+  console.log(someVar); // rendered inline in output HTML
+</script>
+```
+
+### Bug 2: Wrong-Site Analytics File
+
+`public/scripts/analytics-tracking.js` was copied from `megangredesky.com`. It contained:
+- Hardcoded `G-R99SBB9SQKX` (Megan's GA4 property ID) in a `send_to` conversion event
+- Service pages for `/brainspotting`, `/grief-recovery`, `/infertility`
+- `clientsecure.me` schedule button tracking
+
+The `is:inline` + `src` bug accidentally prevented this file from loading. After fixing the bug, it would have fired Megan's conversion events into Dean's GA4.
+
+**Fix:** Deleted the file. Wrote fresh, site-specific event tracking inline in `Analytics.astro`.
+
+**Lesson:** Never copy `analytics-tracking.js` across client sites without auditing for hardcoded property IDs and site-specific paths.
+
+### Bug 3: Partytown Configured But Not Used (For Analytics)
+
+`astro.config.mjs` had:
+```js
+partytown({
+  config: {
+    forward: ['dataLayer.push', 'posthog', 'botpress', 'botpressWebChat'],
+  },
+}),
+```
+
+GA4, Clarity, and FB Pixel all loaded via `is:inline` — never via `type="text/partytown"`. PostHog used `type="text/partytown"` but ran its own init stub, so the `forward: ['posthog']` stub did nothing useful.
+
+The `forward: ['dataLayer.push']` stub may have been silently intercepting dataLayer calls and dropping them into a web worker that nothing was listening to.
+
+**Fix:** Removed Partytown entirely. Converted PostHog to `is:inline`.
+
+### Bug 4: CSP Only Applied to Dev Server
+
+The `server.headers` block in `astro.config.mjs` only sets headers for `astro dev`. Cloudflare Pages ignores it — production had no CSP.
+
+**Fix:** Created `public/_headers`. Cloudflare Pages deploys this file and applies headers to all routes automatically.
+
+---
+
+## Stack Simplification
+
+**Before:**
+- GTMAnalytics.astro (dead GTM container code + GA4 + Clarity + Pixel)
+- Partytown (wiring PostHog to web worker — not actually working)
+- `analytics-tracking.js` (wrong-site file, not loading due to bug)
+
+**After:**
+- `Analytics.astro` — GA4 direct + Clarity direct + optional Pixel
+- `PostHog.astro` — direct `is:inline`, no Partytown
+- Event tracking inline in `Analytics.astro` (scroll depth, outbound links, contact clicks)
+- `public/_headers` — production CSP via Cloudflare Pages
+
+**Why remove GTM?** GTM is valuable when non-technical marketing staff need to add/modify tracking. For a personal portfolio managed by one developer, GTM adds a container request, an extra abstraction layer, and harder debugging — with no benefit.
+
+---
+
+## Analytics.astro Pattern (Reusable for Other Sites)
+
+```astro
+---
+interface Props {
+  ga4Id?: string;
+  clarityId?: string;
+  fbPixelId?: string;
+}
+const { ga4Id, clarityId, fbPixelId } = Astro.props;
+---
+
+{ga4Id && (
+  <Fragment>
+    <script is:inline define:vars={{ ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', ga4Id, { send_page_view: false });
+      var _s = document.createElement('script');
+      _s.async = true;
+      _s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
+      document.head.appendChild(_s);
+    </script>
+
+    <script is:inline define:vars={{ ga4Id }}>
+      // astro:page-load fires on initial load AND every ClientRouter soft nav
+      document.addEventListener('astro:page-load', function() {
+        if (window.gtag) {
+          window.gtag('config', ga4Id, {
+            page_path: window.location.pathname + window.location.search
+          });
+        }
+      });
+    </script>
+  </Fragment>
+)}
+```
+
+**Key invariants:**
+- `send_page_view: false` in config init — let `astro:page-load` be the single source of page views
+- Dynamic script load via `createElement` — avoids `is:inline` + `src` conflict
+- `define:vars` only needed when variables from Astro frontmatter are used in the script body
+- `astro:page-load` listener registered once (inline scripts in `<head>` run once with ClientRouter)
+
+---
+
+## CSP via `public/_headers`
+
+For Cloudflare Pages, CSP belongs in `public/_headers`, not `astro.config.mjs` server.headers.
+
+**Minimum domains for GA4 + Clarity + PostHog:**
+
+```
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://us-assets.i.posthog.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://c.clarity.ms https://d.clarity.ms https://us.i.posthog.com https://us-assets.i.posthog.com; img-src 'self' data: https://www.google-analytics.com https://c.clarity.ms
+```
+
+**Clarity-specific domains often missed:**
+- `script-src`: `https://www.clarity.ms`
+- `connect-src`: `https://c.clarity.ms` + `https://d.clarity.ms` (beacon endpoints)
+- `img-src`: `https://c.clarity.ms` (session pixel)
+
+---
+
+## Astro 6 Readiness (When to Migrate)
+
+As of Feb 2026, Astro 6 is 5 weeks into beta. **Not production-ready yet.** Check `https://astro.build/blog/` for stable release announcement.
+
+### Node requirement
+Astro 6 requires Node 22+. This project runs Node 25.2.1. ✅ No action needed.
+
+### Breaking changes to plan for
+
+| Change | What breaks | Fix |
+|--------|-------------|-----|
+| `<ViewTransitions />` removed | Nothing — already migrated to `<ClientRouter />` in Astro 5 | ✅ Done |
+| `<ClientRouter />` behavior changes | Shared state may need explicit persistence | Audit components that rely on persistent state across navigations |
+| `Astro.glob()` removed | Any direct glob usage | Migrate to content collections with `glob` loader |
+| `Astro.locals.runtime` deprecated | Any runtime env access | Use direct `import.meta.env` or `context.locals` |
+| Zod 4 required | Content collection schemas using Zod validators | Run `zod` codemods; most basic schemas are non-breaking |
+
+### This project's Astro 6 exposure (low risk)
+
+- Content collections: already using glob loader pattern (`src/content.config.ts`) ✅
+- ClientRouter: already migrated ✅
+- No `Astro.glob()` usage found
+- Zod schemas: simple validators, low migration risk
+- No `Astro.locals.runtime` usage
+
+**Estimated Astro 6 migration effort for this site: 2-4 hours** after stable release.
+
+---
+
+## Stale Deps Removed
+
+| Package | Was In | Reason |
+|---------|--------|--------|
+| `@astrojs/partytown` | dependencies | Replaced with direct analytics loading |
+| `@netlify/functions` | dependencies | Netlify removed Feb 2026, Cloudflare Pages only |
+| `netlify-plugin-form-submissions` | devDependencies | Netlify removed |
+| `@astrojs/node` | dependencies | Using `@astrojs/cloudflare` adapter, not node |
+| `next` | dependencies | Not imported anywhere; accidental inclusion |
+
+---
+
+## Cross-Site Applicability
+
+This pattern applies directly to:
+
+| Site | Notes |
+|------|-------|
+| `masumihayashi.com` | Same Astro + Cloudflare Pages stack. Check for wrong-site analytics files. |
+| `megangredesky.com` | **Source** of the wrong analytics-tracking.js. Verify it's correct there. |
+| `waltopie.com` | Apply Analytics.astro pattern; may not need FB Pixel |
+| `oaklandbrainspottingtherapy.com` | Apply Analytics.astro pattern |
+
+**Before migrating each site:** grep for `G-R99SBB9SQKX` and `clientsecure.me` to find any cross-contaminated files.

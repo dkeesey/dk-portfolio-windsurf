@@ -16,7 +16,7 @@
 - **Frontend**: React 18 + TypeScript (strict)
 - **Styling**: Tailwind CSS + shadcn/ui (Radix UI primitives)
 - **Content**: MDX/Markdown via Astro content collections (glob loader)
-- **Analytics**: GTMAnalytics.astro — GA4 + GTM + FB Pixel + Microsoft Clarity (direct load); PostHog via Partytown
+- **Analytics**: Analytics.astro — GA4 + Microsoft Clarity + optional FB Pixel (direct load, no GTM, no Partytown); PostHog direct via PostHog.astro
 - **Error tracking**: Sentry (conditional — only loads if `PUBLIC_SENTRY_DSN` set)
 - **Chatbot**: Botpress
 - **Hosting**: Cloudflare Pages only — Netlify removed Feb 2026
@@ -90,9 +90,9 @@ These are the actual changes made; will bite you on any future migration or new 
 - Fixed: component renders nothing silently when env vars absent
 - **Never throw in Astro frontmatter based on env vars** — SSG runs at build time without production env
 
-### Partytown scope
-- Partytown handles PostHog only — GA4/GTM/Clarity/FB Pixel load directly (not via Partytown)
-- If analytics broken: check `forward` config in `astro.config.mjs` for PostHog; check GTMAnalytics.astro for the others
+### Partytown
+- **Removed Feb 2026.** All analytics load direct. No web worker proxying.
+- If analytics broken: check `src/components/Analytics.astro` (GA4/Clarity/Pixel) and `src/components/PostHog.astro`
 
 ---
 
@@ -100,7 +100,7 @@ These are the actual changes made; will bite you on any future migration or new 
 
 | What | Where |
 |------|-------|
-| Analytics (GA4/GTM/Pixel/Clarity) | `src/components/GTMAnalytics.astro` |
+| Analytics (GA4/Clarity/Pixel) | `src/components/Analytics.astro` |
 | Collection schemas | `src/content.config.ts` |
 | Site/adapter config | `astro.config.mjs` |
 | Blog posts | `src/content/blog/*.md` |
@@ -115,6 +115,7 @@ These are the actual changes made; will bite you on any future migration or new 
 **Status**: Live. Active blog + portfolio. Positioning: AI Systems Builder.
 
 **Recent work**:
+- **Feb 2026**: Analytics stack overhaul — removed GTM/Partytown, fixed is:inline+src bug, deleted wrong-site analytics-tracking.js (was megangredesky.com's file), added public/_headers CSP. See `docs/migrations/deankeesey-astro6-notes.mdx`.
 - **Feb 2026**: Fixed GA4 tracking (immediate load + View Transitions page view events). Commit 69f6625.
 - **Feb 2026**: Migrated Astro 4.4.0 → 5.17.1. Commit 245a874.
 - **Feb 2026**: Removed Netlify, consolidated on Cloudflare Pages. Commit a1ec707.
