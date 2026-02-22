@@ -25,7 +25,7 @@
 ```
 src/
 ├── components/        # React + Astro components
-│   └── GTMAnalytics.astro  # All analytics in one component
+│   └── Analytics.astro     # GA4 + Clarity + Pixel (no GTM)
 ├── content/blog/      # Markdown/MDX blog posts
 ├── content/projects/  # Project showcase entries
 ├── content.config.ts  # Collection definitions (glob loaders) — ROOT LEVEL
@@ -52,13 +52,12 @@ npm run preview    # Preview production build locally
 
 **Environment variables** (set in Cloudflare Pages dashboard):
 - `PUBLIC_GA4_ID` — GA4 measurement ID
-- `PUBLIC_GTM_ID` — GTM container ID
-- `PUBLIC_FB_PIXEL_ID` — Facebook Pixel
+- `PUBLIC_FB_PIXEL_ID` — Facebook Pixel (optional)
 - `PUBLIC_CLARITY_ID` — Microsoft Clarity
 - `PUBLIC_SENTRY_DSN` — Sentry (optional; Sentry skipped if unset)
 - `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`
 
-**Local builds without .env**: GTMAnalytics.astro renders nothing silently (no throw). Build will succeed.
+**Local builds without .env**: Analytics.astro renders nothing silently (no throw). Build will succeed.
 
 ---
 
@@ -85,10 +84,15 @@ These are the actual changes made; will bite you on any future migration or new 
   });
   ```
 
+### `is:inline` + `src` — mutually exclusive in Astro
+- Combining `<script is:inline src="...">` causes Astro to silently drop the `src` — script never loads
+- **External file**: use `<script src="...">` with no `is:inline`
+- **Inline code**: use `<script is:inline>/* code */</script>` with no `src`
+- This was the root cause of the analytics 20:1 discrepancy vs Cloudflare
+
 ### Build with missing env vars
-- GTMAnalytics.astro previously `throw`'d if no tracking IDs — broke SSG builds locally
-- Fixed: component renders nothing silently when env vars absent
 - **Never throw in Astro frontmatter based on env vars** — SSG runs at build time without production env
+- Analytics.astro renders nothing silently when env vars absent — build succeeds locally
 
 ### Partytown
 - **Removed Feb 2026.** All analytics load direct. No web worker proxying.
