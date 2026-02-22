@@ -1,6 +1,6 @@
 # Contact Form Integration
 
-This document explains how the contact form works in the dk-portfolio-windsurf project.
+This document explains how the contact form works in the deankeesey-com project.
 
 ## Overview
 

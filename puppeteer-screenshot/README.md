@@ -8,7 +8,7 @@ This tool captures screenshots of project websites for use in your portfolio sit
 
 2. Navigate to this directory in your terminal:
    ```
-   cd /Volumes/PRO-G40/Workspace-G40/dk-portfolio-windsurf/puppeteer-screenshot
+   cd /Volumes/PRO-G40/Workspace-G40/deankeesey-com/puppeteer-screenshot
    ```
 
 3. Run the screenshot tool:

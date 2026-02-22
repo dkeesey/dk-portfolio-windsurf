@@ -78,7 +78,7 @@ Generate custom images using DALL-E 3 or Midjourney with these prompts:
 **Cloudinary MCP Commands:**
 ```bash
 # Upload SVG diagrams
-./cloudinary-upload.sh ~/Workspace/dk-portfolio-windsurf/blog-content/ai-development-journey/images/
+./cloudinary-upload.sh ~/Workspace/deankeesey-com/blog-content/ai-development-journey/images/
 
 # Upload AI-generated images with optimization
 ./cloudinary-upload.sh --auto-optimize --format=webp image-file.png

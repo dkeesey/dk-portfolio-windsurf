@@ -1,6 +1,6 @@
 # Supabase Integration Documentation
 
-This document provides information about the Supabase integration in the dk-portfolio-windsurf project.
+This document provides information about the Supabase integration in the deankeesey-com project.
 
 ## Configuration
 

@@ -25,7 +25,7 @@ I need to build a recruiter-focused chatbot for my Astro website deployed on Net
 3. **Meta-Analysis**: Build a structured database of collected information to identify patterns in recruitment approaches, common requirements, and market trends.
 
 ## Current Project Context
-- Project repository: /dk-portfolio-windsurf/
+- Project repository: /deankeesey-com/
 - Astro version: [Will provide]
 - Current UI libraries: shadcn/ui
 - Current authentication: [Will provide if any]

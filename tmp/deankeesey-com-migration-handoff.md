@@ -19,7 +19,7 @@ dk-portfolio is the only site still on Astro 4.x and needs a MAJOR version upgra
 
 **Directory:** `~/Workspace/dk-sites/dk-portfolio/`
 **Astro Version:** 4.4.0
-**Git Remote:** `git@github.com:dkeesey/dk-portfolio-windsurf.git`
+**Git Remote:** `git@github.com:dkeesey/deankeesey-com.git`
 **Cloudflare Pages:** `deankeesey-com-v2` (but `deankeesey-com` may now be available - user rebuilt CF project for GitHub Actions CI/CD)
 **Domain:** deankeesey.com
 
@@ -98,7 +98,7 @@ Update `tsconfig.json`:
 9. Build and verify: `npm run build`
 
 ### Part 2: Project Rename (After Migration Works)
-1. Rename GitHub repo: `dk-portfolio-windsurf` → `deankeesey-com`
+1. Rename GitHub repo: `deankeesey-com` → `deankeesey-com`
    ```bash
    gh repo rename deankeesey-com
    ```

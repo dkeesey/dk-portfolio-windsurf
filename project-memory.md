@@ -4,7 +4,7 @@
 - **Project Name**: Dean Keesey Windsurf Portfolio
 - **Status**: In progress
 - **Due Date**: March 20, 2025
-- **Location**: /Volumes/PRO-G40/Workspace-G40/dk-portfolio-windsurf
+- **Location**: /Volumes/PRO-G40/Workspace-G40/deankeesey-com
 
 ## Recent Work
 

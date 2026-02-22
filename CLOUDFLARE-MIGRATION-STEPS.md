@@ -87,7 +87,7 @@ Once domain is in Cloudflare:
 2. Click **Connect to Git**
 3. Select **GitHub**
 4. Authorize Cloudflare (if needed)
-5. Select repository: `dkeesey/dk-portfolio-windsurf`
+5. Select repository: `dkeesey/deankeesey-com`
 6. Configure build:
    ```
    Framework preset: Astro

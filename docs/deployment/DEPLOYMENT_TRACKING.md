@@ -16,7 +16,7 @@
 - **Status**: ✅ **FULLY OPERATIONAL**
 - **Last Verified**: 2025-06-03 09:44 AM
 - **Platform**: Netlify (AWS Infrastructure)
-- **Repository**: dk-portfolio-windsurf
+- **Repository**: deankeesey-com
 - **Build Command**: `npm run build`
 - **Publish Directory**: `dist`
 - **Performance**: ✅ Loading fast with purple gradient hero section
@@ -32,7 +32,7 @@
 ### Production Site
 - **URL**: https://deankeesey.com
 - **Platform**: Netlify (AWS Infrastructure: 13.52.115.166, 54.215.62.21)
-- **Repository**: dk-portfolio-windsurf
+- **Repository**: deankeesey-com
 - **Branch**: main
 - **Last Deploy**: Active and current
 - **SSL Status**: ✅ **VALID UNTIL SEP 1, 2025**
@@ -117,7 +117,7 @@ project-root/
 
 ### 📋 **For Your Current Projects**
 
-1. **dk-portfolio-windsurf** ✅ 
+1. **deankeesey-com** ✅ 
    - SSL monitoring implemented
    - Deployment tracking active
    - Project organization protocol applied
