@@ -111,3 +111,4 @@ Without this, only the first page ever registers in GA4.
 
 ## Relevant Bundles
 - Deployment: `cat ~/.claude/bundles/cloudflare-deployment-gotchas.md`
+- Astro 5 upgrade (any project): `cat ~/.claude/bundles/astro-5-migration.md`

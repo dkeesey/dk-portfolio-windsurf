@@ -4,7 +4,6 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import cloudflare from '@astrojs/cloudflare';
-import sentry from '@sentry/astro';
 import fs from 'fs';
 import path from 'path';
 
@@ -25,16 +24,6 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
     }),
-    // Sentry error tracking - only enable if DSN is configured
-    ...(process.env.SENTRY_DSN || process.env.PUBLIC_SENTRY_DSN ? [
-      sentry({
-        dsn: process.env.PUBLIC_SENTRY_DSN || process.env.SENTRY_DSN,
-        sourceMapsUploadOptions: {
-          project: 'deankeesey-portfolio',
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-        },
-      }),
-    ] : []),
   ],
   vite: {
     resolve: {

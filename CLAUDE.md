@@ -17,7 +17,6 @@
 - **Styling**: Tailwind CSS + shadcn/ui (Radix UI primitives)
 - **Content**: MDX/Markdown via Astro content collections (glob loader)
 - **Analytics**: Analytics.astro — GA4 + Microsoft Clarity + optional FB Pixel (direct load, no GTM, no Partytown); PostHog direct via PostHog.astro
-- **Error tracking**: Sentry (conditional — only loads if `PUBLIC_SENTRY_DSN` set)
 - **Chatbot**: Botpress
 - **Hosting**: Cloudflare Pages only — Netlify removed Feb 2026
 
@@ -54,7 +53,6 @@ npm run preview    # Preview production build locally
 - `PUBLIC_GA4_ID` — GA4 measurement ID
 - `PUBLIC_FB_PIXEL_ID` — Facebook Pixel (optional)
 - `PUBLIC_CLARITY_ID` — Microsoft Clarity
-- `PUBLIC_SENTRY_DSN` — Sentry (optional; Sentry skipped if unset)
 - `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`
 
 **Local builds without .env**: Analytics.astro renders nothing silently (no throw). Build will succeed.
