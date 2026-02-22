@@ -83,4 +83,8 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Cloudflare Wrangler local state
+.wrangler/
+
 tmp/*.md
