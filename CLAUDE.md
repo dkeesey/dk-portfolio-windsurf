@@ -1,159 +1,130 @@
-# deankeesey.com - AI Product Engineer Portfolio
+# deankeesey.com - AI Systems Builder Portfolio
 
 **Live Site**: https://deankeesey.com
 **Repository**: ~/Workspace/dk-sites/deankeesey-com/
 **Branch**: main
-**Deployment**: Netlify + Cloudflare Pages (GitHub Actions)
+**Deployment**: Cloudflare Pages (git-driven, push to main auto-deploys)
 
 ---
 
 ## 1. WHAT IS THIS?
 
-**Purpose**: Personal portfolio and technical blog showcasing AI product engineering expertise.
+**Purpose**: Personal portfolio and technical blog. Positioning: AI Systems Builder / AI Product Engineer.
 
 **Tech Stack**:
-- **Framework**: Astro 4.4.0 (static site generator)
-- **Frontend**: React 18.2 + TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui components (Radix UI primitives)
-- **Content**: Markdown blog posts with frontmatter
-- **Analytics**: GTM + GA4 + FB Pixel + Microsoft Clarity + PostHog (via Partytown for non-blocking)
-- **Backend Services**:
-  - Supabase (authentication, database)
-  - Azure OpenAI (AI features)
-  - Botpress (chatbot integration)
-- **Hosting**: Netlify primary, Cloudflare Pages mirror (automatic deployment)
-- **Testing**: Jest + Vitest + Puppeteer
+- **Framework**: Astro 5.17.1 — SSR mode, Cloudflare adapter
+- **Frontend**: React 18 + TypeScript (strict)
+- **Styling**: Tailwind CSS + shadcn/ui (Radix UI primitives)
+- **Content**: MDX/Markdown via Astro content collections (glob loader)
+- **Analytics**: GTMAnalytics.astro — GA4 + GTM + FB Pixel + Microsoft Clarity (direct load); PostHog via Partytown
+- **Error tracking**: Sentry (conditional — only loads if `PUBLIC_SENTRY_DSN` set)
+- **Chatbot**: Botpress
+- **Hosting**: Cloudflare Pages only — Netlify removed Feb 2026
 
 **Architecture**:
 ```
-/src
-├── components/    # React components (UI, analytics, features)
-├── content/blog/  # Markdown blog posts
-├── layouts/       # Page templates
-├── pages/         # Astro routes
-└── lib/          # Utilities, env config
+src/
+├── components/        # React + Astro components
+│   └── GTMAnalytics.astro  # All analytics in one component
+├── content/blog/      # Markdown/MDX blog posts
+├── content/projects/  # Project showcase entries
+├── content.config.ts  # Collection definitions (glob loaders) — ROOT LEVEL
+├── layouts/           # RootLayout.astro (ClientRouter, analytics)
+├── pages/             # Astro routes
+└── lib/               # Utilities, env config
 
-/public           # Static assets (images, fonts)
-/netlify          # Netlify functions
+public/               # Static assets
 ```
-
-**Content Strategy**:
-- Technical blog focused on: AI development, WordPress architecture, Cloudflare infrastructure
-- Recent articles: WordPress 5-layer optimization, Last Mover Advantage (AI + WordPress), Cloudflare benefits
-- Positioning: AI product engineer with full-stack and infrastructure expertise
 
 ---
 
 ## 2. HOW DO I WORK HERE?
 
-**Local Development**:
 ```bash
 npm run dev        # Start dev server (http://localhost:4321)
 npm run build      # Build for production
 npm run preview    # Preview production build locally
-npm run lint       # ESLint + TypeScript checks
-npm run format     # Prettier formatting
 ```
 
-**Code Conventions**:
-- React components use TypeScript
-- Tailwind utility classes preferred over custom CSS
-- Blog posts in `/src/content/blog/` with YAML frontmatter
-- Images optimized before commit, stored in `/public/images/`
-- Environment variables:
-  - `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`
-  - `PUBLIC_POSTHOG_API_KEY`, `PUBLIC_POSTHOG_HOST`
-  - `PUBLIC_GA_TRACKING_ID`
+**Deployment**: Push to `main` → Cloudflare Pages auto-deploys. No manual step needed.
 
-**Deployment**:
-- **Auto-deploy**: Push to `main` → GitHub Actions → Cloudflare Pages
-- **Netlify**: Also auto-deploys from `main` branch
-- **Preview**: Netlify creates deploy previews for PRs
+**Content collections config**: `src/content.config.ts` (root-level, NOT `src/content/config.ts`)
 
-**CSP Headers**:
-- Development: Permissive (allows `unsafe-inline`, `unsafe-eval` for dev tools)
-- Production: Strict CSP with specific allowlists for analytics/chatbot domains
+**Environment variables** (set in Cloudflare Pages dashboard):
+- `PUBLIC_GA4_ID` — GA4 measurement ID
+- `PUBLIC_GTM_ID` — GTM container ID
+- `PUBLIC_FB_PIXEL_ID` — Facebook Pixel
+- `PUBLIC_CLARITY_ID` — Microsoft Clarity
+- `PUBLIC_SENTRY_DSN` — Sentry (optional; Sentry skipped if unset)
+- `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`
+
+**Local builds without .env**: GTMAnalytics.astro renders nothing silently (no throw). Build will succeed.
 
 ---
 
 ## 3. ⚠️ ANTI-PATTERNS
 
-**Things that broke this project** (add to this as issues occur):
+### Astro 5 migration (from 4.x) — breaking changes
+These are the actual changes made; will bite you on any future migration or new Astro 5 project:
 
-_No anti-patterns documented yet - this section will build over time as we encounter errors._
+- **Config file moved**: `src/content/config.ts` → `src/content.config.ts` (project root)
+- **Collections need glob loader**: `defineCollection({ loader: glob({ pattern, base, generateId }) })` — no glob loader = no entries loaded
+- **generateId must strip extensions**: `generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, '')` — without this, URLs become `/blog/post.md`
+- **`.slug` → `.id`** everywhere: `getStaticPaths`, RSS feed, any template referencing `entry.slug`
+- **`render()` import changed**: `import { render } from 'astro:content'` + `await render(entry)` — NOT `await entry.render()`
+- **`ViewTransitions` → `ClientRouter`**: `import { ClientRouter } from 'astro:transitions'`
+- **rehype-pretty-code removed**: Use Astro's built-in Shiki instead (configured in `astro.config.mjs`)
 
-**Potential gotchas to watch for**:
-- Environment variables must be prefixed with `PUBLIC_` to be client-accessible
-- Analytics scripts load via Partytown - check `forward` config if analytics broken
-- CSP headers can block new integrations - update both dev and prod CSP in `astro.config.mjs`
-- Supabase keys exposed in client code - use anon key only, server key in Netlify functions
+### GA4 + View Transitions
+- **Don't defer gtag.js via requestIdleCallback** — users who navigate quickly (<2s) never trigger idle, causing ~96% hit loss
+- **Soft-nav pages don't auto-track**: Must fire `gtag('config', ...)` on every `astro:page-load` event for View Transitions to register page views
+- Pattern that works:
+  ```js
+  document.addEventListener('astro:page-load', () => {
+    gtag('config', GA4_ID, { page_path: window.location.pathname });
+  });
+  ```
+
+### Build with missing env vars
+- GTMAnalytics.astro previously `throw`'d if no tracking IDs — broke SSG builds locally
+- Fixed: component renders nothing silently when env vars absent
+- **Never throw in Astro frontmatter based on env vars** — SSG runs at build time without production env
+
+### Partytown scope
+- Partytown handles PostHog only — GA4/GTM/Clarity/FB Pixel load directly (not via Partytown)
+- If analytics broken: check `forward` config in `astro.config.mjs` for PostHog; check GTMAnalytics.astro for the others
 
 ---
 
 ## 4. WHERE DO I FIND X?
 
-**Key Files**:
-- **Site config**: `astro.config.mjs` (CSP, integrations, partytown, sitemap)
-- **Package info**: `package.json` (dependencies, scripts)
-- **Analytics**: `src/components/analytics/Analytics.astro`
-- **Blog posts**: `src/content/blog/*.md` (markdown with frontmatter)
-- **Environment**: `src/lib/env.ts` (environment variable handling)
-- **Netlify functions**: `/netlify/functions/` (serverless functions)
-
-**Component Library**:
-- Radix UI primitives in `@radix-ui/*` packages
-- shadcn/ui components (dialog, dropdown, tabs, toast, etc.)
-- Custom UI in `src/components/`
-
-**Analytics Stack**:
-- GTM container ID in `Analytics.astro`
-- Partytown config in `astro.config.mjs` line 16-21
-- PostHog, GA4, Clarity, FB Pixel loaded via GTM
-
-**External Resources**:
-- **Analytics**: GTM dashboard, GA4 property, PostHog project
-- **Database**: Supabase project (clzvndqgtmbsugmdpdsq.supabase.co)
-- **Chatbot**: Botpress workspace
-- **Deployment**: Netlify site dashboard, Cloudflare Pages project
+| What | Where |
+|------|-------|
+| Analytics (GA4/GTM/Pixel/Clarity) | `src/components/GTMAnalytics.astro` |
+| Collection schemas | `src/content.config.ts` |
+| Site/adapter config | `astro.config.mjs` |
+| Blog posts | `src/content/blog/*.md` |
+| Blog detail page | `src/pages/blog/[slug].astro` |
+| Main layout (ClientRouter) | `src/layouts/RootLayout.astro` |
+| Env var handling | `src/lib/env.ts` |
 
 ---
 
 ## 5. WHAT'S HAPPENING NOW?
 
-**Current Status** (as of February 2026):
+**Status**: Live. Active blog + portfolio. Positioning: AI Systems Builder.
 
-**Active Work**:
-- **Gig Work Strategy**: /hire landing page added for freelance positioning
-- Portfolio actively promoting freelance services
+**Recent work**:
+- **Feb 2026**: Fixed GA4 tracking (immediate load + View Transitions page view events). Commit 69f6625.
+- **Feb 2026**: Migrated Astro 4.4.0 → 5.17.1. Commit 245a874.
+- **Feb 2026**: Removed Netlify, consolidated on Cloudflare Pages. Commit a1ec707.
+- **Feb 2026**: Repositioned as AI Systems Builder. Updated /about, /hire, /ai-stack pages.
+- **Feb 2026**: Added /hire landing page (freelance services), /ai-stack positioning page.
 
-**Recent Work** (last 3 months):
-- **Feb 2026**: Added `/hire` landing page with animated service packages
-  - Frontend Animation focus (React + Framer Motion)
-  - Cloudflare Workers + Stripe + GA4 services
-  - Upwork profile integration
-  - Navigation updated with "Hire Me" CTA button
-- **Jan 2026**: Added WordPress optimization article (5-layer architecture from Walt Opie project)
-- **Dec 2025**: Published "Why I Build Everything on Cloudflare" article
-- **Nov-Dec 2025**: Analytics stack consolidation:
-  - Migrated to GTMAnalytics component
-  - Added Microsoft Clarity
-  - Fixed GA4/FB Pixel configuration issues
-  - Standardized env variable usage
-- **Nov 2025**: Set up GitHub Actions for automatic Cloudflare Pages deployment
-
-**Decisions**:
-- Chose Cloudflare Pages as secondary deployment (redundancy + global CDN)
-- Centralized analytics via GTM + Partytown (non-blocking, better performance)
-- Blog content focuses on AI + infrastructure to establish expertise positioning
-
-**Next** (potential):
-- Continue adding technical blog content (AI, infrastructure, architecture)
-- May add more AI-powered features (chatbot already integrated via Botpress)
-- Portfolio remains static until business priorities shift
-
-**Blockers**: None currently
+**Next**:
+- Blog content: continue AI + infrastructure articles
+- See `memory/MEMORY.md` for Astro 5 migration gotchas reference
 
 ---
 
-**Last Updated**: 2026-02-03 (added /hire landing page for gig work strategy)
-**Maintenance**: Session hooks will append updates to this section going forward
+**Last Updated**: 2026-02-22
