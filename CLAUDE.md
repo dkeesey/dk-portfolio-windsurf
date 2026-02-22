@@ -109,6 +109,11 @@ These are the actual changes made; will bite you on any future migration or new 
 | Blog detail page | `src/pages/blog/[slug].astro` |
 | Main layout (ClientRouter) | `src/layouts/RootLayout.astro` |
 | Env var handling | `src/lib/env.ts` |
+| Playwright analytics tests | `tests/e2e/analytics.spec.ts` (7 tests, headless, CI-safe) |
+| GA4 Realtime pipeline test | `tests/e2e/analytics-realtime.spec.ts` (browser-side hard + Realtime informational) |
+| gcli user story | `ai_docs/user_stories/analytics-smoke.md` (11 steps, Gemini Flash) |
+| CSP headers | `public/_headers` (Cloudflare Pages production) |
+| Migration notes | `docs/migrations/deankeesey-astro6-notes.mdx` |
 
 ---
 
@@ -117,12 +122,10 @@ These are the actual changes made; will bite you on any future migration or new 
 **Status**: Live. Active blog + portfolio. Positioning: AI Systems Builder.
 
 **Recent work**:
-- **Feb 2026**: Analytics stack overhaul — removed GTM/Partytown, fixed is:inline+src bug, deleted wrong-site analytics-tracking.js (was megangredesky.com's file), added public/_headers CSP. See `docs/migrations/deankeesey-astro6-notes.mdx`.
-- **Feb 2026**: Fixed GA4 tracking (immediate load + View Transitions page view events). Commit 69f6625.
-- **Feb 2026**: Migrated Astro 4.4.0 → 5.17.1. Commit 245a874.
-- **Feb 2026**: Removed Netlify, consolidated on Cloudflare Pages. Commit a1ec707.
-- **Feb 2026**: Repositioned as AI Systems Builder. Updated /about, /hire, /ai-stack pages.
-- **Feb 2026**: Added /hire landing page (freelance services), /ai-stack positioning page.
+- **Feb 2026**: Analytics test suite — 7 Playwright e2e tests (`analytics.spec.ts`) + two-layer GA4 Realtime pipeline test (`analytics-realtime.spec.ts`). GA4 Realtime API wired to property `409273534` via OAuth token at `/tmp/ga4_token.json` (`GA4_DEANKEESEY_PROPERTY_ID` in `~/.claude/secrets.env`). GA4 bot-filters headless Playwright; Realtime layer is informational only, never fails CI.
+- **Feb 2026**: gcli user story `ai_docs/user_stories/analytics-smoke.md` — 11 steps, runs via `/gcli-ui-review url=https://deankeesey.com` (Gemini Flash, ~$0.01/run).
+- **Feb 2026**: Analytics stack overhaul — removed GTM/Partytown, fixed is:inline+src bug, deleted wrong-site analytics-tracking.js, removed Sentry, added `public/_headers` CSP.
+- **Feb 2026**: Migrated Astro 4.4.0 → 5.17.1, removed Netlify, repositioned as AI Systems Builder.
 
 **Next**:
 - Blog content: continue AI + infrastructure articles
