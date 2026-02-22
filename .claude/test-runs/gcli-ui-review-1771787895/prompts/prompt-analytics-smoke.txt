@@ -1,0 +1,61 @@
+Convert the following user story to a standalone Playwright Node.js script.
+
+CRITICAL: Output ONLY valid JavaScript. No markdown. No code fences. No explanation.
+First line must be: const { chromium } = require('playwright');
+Use headless: true.
+Set a reasonable viewport: { width: 1280, height: 720 }.
+After each major workflow step, capture a screenshot using:
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: process.env.SCREENSHOTS_DIR + /step_ + stepNumber + .png, fullPage: false });
+Use fullPage: false (viewport only) — fullPage causes sticky headers to duplicate in composite.
+Add the 300ms wait before EVERY screenshot to allow animations to settle.
+Use a stepNumber variable starting at 1, incrementing after each screenshot.
+The SCREENSHOTS_DIR env var will be set automatically — do not hardcode any path.
+Log each step result to stderr: [STEP N] description -> PASS
+Log errors to stderr: [STEP N] description -> FAIL: <reason>
+At the very end, output exactly ONE line to stdout (valid JSON):
+{"story":"NAME","url":"URL","result":"PASS","steps":[{"step":1,"action":"description","result":"PASS"}]}
+Use process.exit(0) on pass, process.exit(1) on fail.
+Wrap execution in a try/catch: on catch, output FAIL JSON and process.exit(1).
+
+LOCATOR RULES (important — prevents strict mode errors):
+- When checking visibility of elements that might appear multiple times (nav + hero + footer CTAs), use .first() — e.g. page.locator('a:has-text("Start")').first()
+- When a step says "verify X is visible", use: const el = page.locator(SELECTOR).first(); await el.waitFor({ state: 'visible', timeout: 10000 });
+- Exception: if the story explicitly says to use data-testid and mentions uniqueness, DO use strict mode (no .first()) — a strict mode violation then IS the test failure
+- For React SPAs, always waitFor('networkidle') or add a 2s wait after navigation before interacting
+- NEVER use comma-separated mixed locators like 'text=/regex/i, .css-class'. This is invalid Playwright syntax and will throw a SyntaxError.
+- When a step requires matching multiple possible selectors (e.g. "spinner OR loading text"), chain them with .or(): page.locator('.spinner').or(page.locator(':text("Loading")'))
+- When a step requires matching text OR a CSS class (e.g. "Analyzing text OR spinner element"), use two separate waitFor calls in a Promise.race() or check them sequentially with try/catch
+
+MOBILE DUAL-PANEL RULE (important — prevents false failures):
+- This app renders BOTH a desktop panel (hidden at mobile with CSS) AND a mobile panel (visible at mobile)
+- Desktop panel comes FIRST in DOM order; mobile panel comes LAST
+- When testing at mobile viewport (375px) AND looking for content that appears in both panels:
+  Use .last() NOT .first() — .last() finds the visible mobile occurrence
+  Example: page.locator(':text("Couldn't analyze")').last()
+  Never use .first() for post-action feedback text at mobile viewport
+
+CONSOLE ERROR RULES (important — prevents false failures):
+- "Verify no JavaScript errors" means ONLY JavaScript runtime errors: TypeError, ReferenceError, SyntaxError, etc.
+- Do NOT treat HTTP network request failures (401, 403, 404, 500) as JavaScript errors — these are network events, not JS errors
+- When filtering console messages, use type === 'error' AND the message must contain "TypeError" or "ReferenceError" or "SyntaxError" or "Uncaught" — ignore messages matching /Failed to load resource|net::ERR|401|403|404|500/
+- Example filter: const jsErrors = messages.filter(m => m.type() === 'error' && /TypeError|ReferenceError|SyntaxError|Uncaught/.test(m.text()) && !/Failed to load resource|net::ERR/.test(m.text()))
+
+User story:
+
+name: analytics-smoke
+url: https://deankeesey.com
+workflow:
+  - Navigate to the homepage
+  - Verify window.gtag is defined as a function (evaluate in browser console)
+  - Verify window.dataLayer exists and has at least one entry
+  - Verify a script tag loading from googletagmanager.com is present in the DOM
+  - Verify a script tag loading from clarity.ms is present in the DOM
+  - Verify the string "G-R99SBB9SQKX" does not appear anywhere in the page source (wrong-site GA4 ID)
+  - Verify no console errors mentioning gtag, dataLayer, or clarity
+  - Click the Blog navigation link to trigger a ClientRouter soft navigation
+  - Verify the URL changes to /blog without a full page reload
+  - Verify window.dataLayer has grown (more entries than before the navigation)
+  - Verify window.gtag is still defined after the soft navigation
+
+Screenshots directory: /Users/deankeesey/Workspace/dk-sites/deankeesey-com/.claude/screenshots/runs/gcli-ui-review-1771787895/analytics-smoke
