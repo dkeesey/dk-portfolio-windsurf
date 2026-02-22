@@ -84,3 +84,7 @@ Thumbs.db
 # Local Netlify folder
 .netlify
 tmp/*.md
+
+# gcli/Playwright test run artifacts
+.claude/test-runs/
+.claude/screenshots/
