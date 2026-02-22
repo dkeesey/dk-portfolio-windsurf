@@ -1,0 +1,321 @@
+# Astro 6 Migration Notes — deankeesey.com
+
+> Migration date: February 2026
+> Purpose: Upgrade to Astro 6 beta on Cloudflare with clean analytics + CSP setup
+
+---
+
+## Environment & Current State (Before Migration)
+
+| Item | Before | After |
+|------|--------|-------|
+| Astro | 5.17.1 | 6.0.0-beta.14 |
+| Node.js | 20 (.nvmrc) | 22+ |
+| `@astrojs/cloudflare` | 12.6.12 | 13.0.0-beta.8 |
+| `@astrojs/react` | 4.4.2 | 5.0.0-beta.3 |
+| `@astrojs/mdx` | 4.3.13 | 5.0.0-beta.8 |
+| `@astrojs/tailwind` | 6.0.2 (deprecated) | Removed — using `@tailwindcss/vite` |
+| `@astrojs/partytown` | 2.1.4 | Removed |
+| Tailwind CSS | 3.4.1 | 4.x via `@tailwindcss/vite` |
+| Zod | 3.24.2 | 4.x (Astro 6 peer dep) |
+| Output mode | `server` | `server` |
+| Adapter config | `mode: 'directory'`, `functionPerRoute: true` | Removed (v13 Workers-only) |
+| View Transitions | `<ClientRouter />` | Removed (incompatible with CSP) |
+| Analytics | GTMAnalytics + PostHog via Partytown | Direct GA4 + Clarity + Pixel |
+| CSP | Manual header string in `server.headers` | Astro built-in `csp` config |
+
+### Key files before migration:
+- `astro.config.mjs` — Partytown integration, manual CSP headers, old adapter config
+- `src/layouts/RootLayout.astro` — `<ClientRouter />`, GTMAnalytics, PostHog components
+- `src/components/GTMAnalytics.astro` — GA4 + Clarity + Pixel (already direct, no Partytown)
+- `src/components/PostHog.astro` — PostHog via Partytown (`type="text/partytown"`)
+- `src/components/analytics/GoogleAnalytics.astro` — Old GA4 via Partytown
+- `src/components/analytics/PostHogAnalytics.astro` — PageView tracker with `astro:page-load`
+- `.nvmrc` — Node 20
+
+---
+
+## Astro 6 Upgrade Changes
+
+### Breaking changes addressed:
+
+1. **Node 22+ required** — Astro 6 drops Node 18 and 20 support entirely.
+2. **Vite 7** — Bundled with Astro 6; all adapters updated to new majors.
+3. **`@astrojs/cloudflare` v13** — `mode`, `functionPerRoute`, `cloudflareModules` options all removed. Adapter now exclusively targets Cloudflare Workers (not Pages directory mode).
+4. **`<ViewTransitions />` removed** — Already migrated to `<ClientRouter />` in Astro 5.
+5. **`Astro.glob()` removed** — Not used in this project (confirmed via grep).
+6. **`Astro.locals.runtime` removed** — Not used in this project (confirmed via grep).
+7. **Zod 4** — Astro 6 uses Zod 4 internally. Direct usage in `ContactForm.tsx` uses `import * as z from 'zod'` with basic `.object()/.string()/.email()/.min()` — these are compatible with Zod 4.
+8. **`@astrojs/tailwind` deprecated** — Replaced with `@tailwindcss/vite` plugin.
+9. **`@astrojs/partytown` removed** — PostHog was the only Partytown consumer; analytics now direct.
+
+### Dev server changes:
+- Astro 6's `astro dev` now uses `workerd` (Cloudflare's runtime) via the Cloudflare Vite plugin.
+- `astro preview` also works with Cloudflare.
+- A `wrangler.jsonc` file is now recommended.
+
+---
+
+## CSP & Analytics Setup
+
+### Critical decision: CSP vs ClientRouter
+
+**Astro's built-in CSP is incompatible with `<ClientRouter />`.**
+
+The hash-based CSP approach requires knowing all script/style hashes at build time. ClientRouter's dynamic page swapping invalidates these hashes. The Astro team explicitly removed CSP + ClientRouter support due to breaking async issues.
+
+**Our choice: Enable CSP, remove ClientRouter.**
+
+For a portfolio site, CSP protection outweighs the SPA-like transitions provided by ClientRouter. The native browser View Transition API can provide basic transition effects without ClientRouter.
+
+### CSP Configuration (Astro 6)
+
+```js
+// astro.config.mjs
+csp: {
+  directives: {
+    'default-src': ["'self'"],
+    'img-src': ["'self'", "https:", "data:"],
+    'font-src': ["'self'", "https://fonts.gstatic.com", "data:"],
+    'style-src': ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+    'connect-src': [
+      "'self'",
+      "https://www.google-analytics.com",
+      "https://*.google-analytics.com",
+      "https://www.clarity.ms",
+      "https://graph.facebook.com",
+      "https://www.facebook.com",
+      "https://*.supabase.co",
+    ],
+    'frame-src': ["'self'"],
+  },
+  scriptDirective: {
+    resources: [
+      "https://www.googletagmanager.com",
+      "https://www.clarity.ms",
+      "https://connect.facebook.net",
+    ],
+  },
+}
+```
+
+### Analytics: What changed
+
+| Platform | Before | After |
+|----------|--------|-------|
+| GA4 | Direct via GTMAnalytics.astro | Direct via GTMAnalytics.astro (unchanged) |
+| Microsoft Clarity | Direct via GTMAnalytics.astro | Direct via GTMAnalytics.astro (unchanged) |
+| Meta Pixel | Direct via GTMAnalytics.astro | Direct via GTMAnalytics.astro (unchanged) |
+| PostHog | Via Partytown in PostHog.astro | **Removed** |
+| GTM container | Optional in GTMAnalytics (not used) | **Removed** from component |
+| Partytown | Integration in astro.config | **Removed entirely** |
+
+### Analytics scripts location:
+- `src/components/GTMAnalytics.astro` — GA4 + Clarity + Pixel (head)
+- `public/scripts/analytics-tracking.js` — Detailed event tracking (scroll, clicks, forms)
+
+### CSP domains needed per analytics service:
+
+**GA4:**
+- `script-src`: `https://www.googletagmanager.com` (hosts gtag.js)
+- `connect-src`: `https://www.google-analytics.com`, `https://*.google-analytics.com`
+
+**Microsoft Clarity:**
+- `script-src`: `https://www.clarity.ms`
+- `connect-src`: `https://www.clarity.ms`
+
+**Meta Pixel:**
+- `script-src`: `https://connect.facebook.net`
+- `connect-src`: `https://graph.facebook.com`, `https://www.facebook.com`
+- `img-src`: `https://www.facebook.com` (noscript pixel)
+
+---
+
+## View Transitions → Removed (CSP Compatibility)
+
+### Before:
+```astro
+// src/layouts/RootLayout.astro
+import { ClientRouter } from 'astro:transitions';
+// ...
+<ClientRouter />
+```
+
+### After:
+```astro
+// src/layouts/RootLayout.astro
+// ClientRouter removed — incompatible with Astro CSP
+// Native View Transition API CSS added for basic cross-fade effects
+```
+
+### Event handler changes:
+- `astro:page-load` events no longer fire (ClientRouter removed)
+- Analytics pageview tracking simplified — only tracks initial page load
+- Full page navigations trigger new script evaluation naturally
+
+### Files affected:
+- `src/layouts/RootLayout.astro` — Removed `<ClientRouter />` import and usage
+- `src/components/GTMAnalytics.astro` — Removed `astro:page-load` re-fire listener
+- `src/components/PostHog.astro` — **Deleted** (Partytown dependency removed)
+- `src/components/analytics/PostHogAnalytics.astro` — Removed `astro:page-load` listener
+- `src/lib/performance.ts` — Removed `astro:page-load` listener (now uses DOMContentLoaded)
+
+---
+
+## Cloudflare / Deployment Notes
+
+### Adapter migration (`@astrojs/cloudflare` v12 → v13):
+
+**Removed options:**
+- `mode: 'directory'` — v13 exclusively targets Workers
+- `functionPerRoute: true` — no longer applicable
+- `cloudflareModules` — native support, option unnecessary
+
+**New requirements:**
+- `wrangler.jsonc` at project root (replaces Pages-style deployment)
+- `public/.assetsignore` for Workers asset handling
+
+**Dev server:**
+- `astro dev` now runs on real `workerd` runtime
+- `astro preview` works with Cloudflare Workers
+
+### Known beta issues (as of Feb 2026):
+- `<Image>` component may error in dev mode with Cloudflare adapter
+- Vitest browser mode has compatibility issues with `workerd`
+- `<Code>` component in MDX may not render correctly
+
+---
+
+## Gotchas & Patterns for Other Sites
+
+### 1. CSP + ClientRouter are mutually exclusive
+If you need Astro's built-in CSP, you cannot use `<ClientRouter />`. Choose one.
+For content/portfolio sites, CSP is the better choice. For SPAs with heavy client navigation, ClientRouter may be preferred (implement CSP via HTTP headers instead).
+
+### 2. Partytown removal cascade
+Removing Partytown means ALL `type="text/partytown"` scripts stop working. Audit every script tag before removing the integration.
+
+### 3. `@astrojs/tailwind` → `@tailwindcss/vite`
+The old Astro Tailwind integration is deprecated. For Tailwind v4 + Astro 6:
+- Remove `@astrojs/tailwind` from integrations
+- Add `@tailwindcss/vite` as a Vite plugin
+- Import Tailwind in your CSS: `@import "tailwindcss"`
+
+### 4. Cloudflare adapter v13 is Workers-only
+No more `mode: 'directory'` or Pages function-per-route. Everything is a single Worker.
+The dev server uses real `workerd` runtime — much closer to production behavior.
+
+### 5. `astro:page-load` events require ClientRouter
+Without ClientRouter, `astro:page-load` never fires after the initial load. Use `DOMContentLoaded` for one-time setup, and rely on full page loads for navigation tracking.
+
+### 6. Zod 4 compatibility
+Basic Zod schemas (`z.object()`, `z.string()`, `z.email()`, `z.min()`) work in Zod 4. Check for any `.transform()`, `.preprocess()`, or `.pipe()` usage that may have changed.
+
+### 7. `is:inline` scripts and CSP
+Scripts with `is:inline` are kept as-is in the HTML. Astro's CSP will automatically hash them. Scripts with `define:vars` also get hashed. External scripts loaded via `src=` need to be in the CSP `scriptDirective.resources` list.
+
+### 8. Analytics verification after migration
+- **GA4**: Use DebugView in GA4 admin to verify `page_view` events fire
+- **Clarity**: Check Clarity dashboard for new session recordings
+- **Meta Pixel**: Use Facebook Pixel Helper browser extension
+- **Cloudflare Analytics** shows ALL visitors (including bots); GA4 shows ~30-70% of CF uniques
+
+### 9. Environment variables for analytics IDs
+Keep analytics IDs in environment variables (`PUBLIC_GA4_ID`, `PUBLIC_CLARITY_ID`, `PUBLIC_FB_PIXEL_ID`) so they can differ between preview and production deployments.
+
+---
+
+## Analytics Verification Plan
+
+### Expected behavior after migration:
+1. **GA4 DebugView**: Navigate to site → GA4 Admin → DebugView → should see `page_view` events
+2. **Clarity**: Dashboard should show new recordings within minutes
+3. **Meta Pixel**: Facebook Pixel Helper extension should show `PageView` event
+
+### Cloudflare vs GA4 discrepancy:
+- Cloudflare Analytics counts ALL HTTP requests (bots, crawlers, prefetch)
+- GA4 only counts JavaScript-executing browsers with no ad blockers
+- Expected ratio: GA4 ≈ 30-70% of Cloudflare unique visitors
+- If GA4 < 10% of CF, check: CSP blocking scripts, script errors, wrong measurement ID
+
+### 30-day comparison method:
+1. Note Cloudflare Analytics unique visitors for the period
+2. Note GA4 active users for the same period
+3. Ratio should be stable week-over-week
+4. Sudden drops indicate a deployment broke analytics
+
+---
+
+## Tailwind v4 Migration Notes
+
+### What changed:
+- **`@astrojs/tailwind`** integration removed (deprecated)
+- **`@tailwindcss/vite`** plugin added to `vite.plugins` in `astro.config.mjs`
+- **`tailwindcss-animate`** replaced with **`tw-animate-css`** (CSS-first, Tailwind v4 native)
+- **`tailwindcss`** upgraded from v3.4.1 to v4.2.0
+
+### Backwards compatibility bridge:
+The existing `tailwind.config.mjs` is preserved using the `@config` directive in CSS:
+
+```css
+/* src/styles/globals.css */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './tokens.css';
+
+@config "../../tailwind.config.mjs";
+```
+
+This loads all theme customizations (colors, keyframes, animations) from the existing JS config
+while using Tailwind v4's CSS-first engine. The `@tailwindcss/typography` plugin is loaded via
+the config file's `plugins` array.
+
+### Before/After:
+```css
+/* BEFORE (Tailwind v3) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AFTER (Tailwind v4 with @config bridge) */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@config "../../tailwind.config.mjs";
+```
+
+### Gotcha: shadcn/ui custom colors
+The HSL-based color system (`hsl(var(--primary))`) works in both v3 and v4 via the `@config` bridge.
+If migrating fully to CSS-first config later, these would move to `@theme` directives.
+
+---
+
+## Build Verification Results
+
+### First successful build:
+- **Build time**: ~56s (server mode)
+- **Output**: `dist/` with Cloudflare Worker bundle
+- **Prerendered pages**: 24 blog posts successfully rendered
+
+### Expected warnings (not errors):
+1. **`Request.cf` not available** — Normal when building outside Cloudflare; the `cf` object is only available in production Workers runtime
+2. **`src/content/projects/` directory doesn't exist** — Content collection defined but no project files yet; safe to ignore
+3. **Chunk size > 500KB** — Pre-existing; consider code-splitting for three.js/framer-motion bundles
+
+### Sentry peer dependency:
+`@sentry/astro@10.39.0` has `peer astro: ">=3.x || >=4.0.0-beta || >=5.x"` — doesn't include Astro 6.
+Install with `--legacy-peer-deps` until Sentry updates. Track issue on Sentry's repo.
+
+---
+
+## Deprecated API Audit
+
+| API | Status | Resolution |
+|-----|--------|------------|
+| `Astro.glob()` | Not used | N/A |
+| `Astro.locals.runtime` | Not used | N/A |
+| `<ViewTransitions />` | Already migrated to `<ClientRouter />` | Removed `<ClientRouter />` (CSP incompatible) |
+| `emitESMImage()` | Not used | N/A |
+| Content collections | Already using modern `glob()` loader in `content.config.ts` | No changes needed |
+| `@astrojs/tailwind` | Deprecated | Replaced with `@tailwindcss/vite` |
+| `@astrojs/partytown` | Removed | Was only used by PostHog |
+| `tailwindcss-animate` | Deprecated for TW v4 | Replaced with `tw-animate-css` |

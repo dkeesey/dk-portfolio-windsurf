@@ -1,8 +1,9 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
 @import './tokens.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Use existing v3 config for theme customization (backwards compat bridge) */
+@config "../../tailwind.config.mjs";
 
 @layer base {
   :root {

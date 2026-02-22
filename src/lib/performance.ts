@@ -108,8 +108,8 @@ export function measureResourceTiming() {
 }
 
 export function initializePerformanceMonitoring() {
-  // Monitor route changes
-  document.addEventListener('astro:page-load', () => {
+  // Monitor page loads (DOMContentLoaded for initial load without ClientRouter)
+  document.addEventListener('DOMContentLoaded', () => {
     measureResourceTiming();
   });
 

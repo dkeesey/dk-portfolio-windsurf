@@ -1,12 +1,8 @@
 ---
 import '@/styles/globals.css';
 import '@/components/chatbot/botpress-style.css';
-import { ClientRouter } from 'astro:transitions';
-import PostHog from '@/components/PostHog.astro';
 import GTMAnalytics from '@/components/GTMAnalytics.astro';
 import Botpress from '@/components/chatbot/Botpress.astro';
-// Temporarily disabled for debugging
-// import { MicrotextEditor } from '@/components/vibe/MicrotextEditor';
 
 interface Props {
   title?: string;
@@ -28,7 +24,6 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <ClientRouter />
     <!-- Google Analytics 4 + Microsoft Clarity + Facebook Pixel -->
     <!-- IDs configured via Cloudflare Pages environment variables -->
     <GTMAnalytics
@@ -36,8 +31,7 @@ const {
       clarityId={import.meta.env.PUBLIC_CLARITY_ID || 'u2pjuo05w0'}
       fbPixelId={import.meta.env.PUBLIC_FB_PIXEL_ID}
     />
-    <PostHog />
-    
+
     <!-- Development environment checks -->
     {import.meta.env.DEV && (
       <script type="module" src="/src/lib/env-check.js"></script>
@@ -46,6 +40,5 @@ const {
   <body class="min-h-screen bg-background text-foreground">
     <slot />
     <!-- <Botpress /> Temporarily disabled to avoid rate limiting issues -->
-    <!-- <MicrotextEditor client:only="react" /> Temporarily disabled for debugging -->
   </body>
 </html>

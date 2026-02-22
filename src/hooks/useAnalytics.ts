@@ -1,15 +1,9 @@
 import { useCallback } from 'react';
-import { trackEvent as trackPostHogEvent } from '@/lib/posthog';
 import { event as trackGoogleEvent } from '@/lib/gtag';
 
 export function useAnalytics() {
-  // Track custom events in both PostHog and Google Analytics
+  // Track custom events in Google Analytics
   const track = useCallback((eventName: string, properties?: Record<string, any>) => {
-    // Track in PostHog
-    trackPostHogEvent(eventName, properties);
-    
-    // Track in Google Analytics
-    // Convert properties to GA format
     const gaProperties = properties || {};
     trackGoogleEvent({
       action: eventName,
@@ -29,18 +23,18 @@ export function useAnalytics() {
   }, [track]);
 
   const trackProjectView = useCallback((projectName: string, properties?: Record<string, any>) => {
-    track('project_view', { 
-      project: projectName, 
-      label: projectName, // For GA compatibility
-      category: 'Projects', // For GA compatibility
-      ...properties 
+    track('project_view', {
+      project: projectName,
+      label: projectName,
+      category: 'Projects',
+      ...properties
     });
   }, [track]);
 
   return {
     track,
     trackClick,
-    trackFormSubmit, 
+    trackFormSubmit,
     trackProjectView
   };
 }
