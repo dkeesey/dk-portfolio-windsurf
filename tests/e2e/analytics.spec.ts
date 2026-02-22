@@ -34,11 +34,14 @@ test.describe('Analytics Stack', () => {
       await page.waitForLoadState('networkidle');
       const before = await page.evaluate(() => (window as any).dataLayer?.length ?? 0);
 
-      // Soft-nav to /blog via ClientRouter
-      await page.goto('/blog');
+      // Use click to trigger ClientRouter soft nav (page.goto() bypasses ClientRouter
+      // and does a hard navigation, which would restart the whole page).
+      const blogLink = page.locator('a[href="/blog"]').first();
+      await blogLink.click();
+      await page.waitForURL('/blog', { timeout: 10000 });
       await page.waitForLoadState('networkidle');
-      const after = await page.evaluate(() => (window as any).dataLayer?.length ?? 0);
 
+      const after = await page.evaluate(() => (window as any).dataLayer?.length ?? 0);
       expect(after).toBeGreaterThan(before);
     });
   });

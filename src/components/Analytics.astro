@@ -31,11 +31,14 @@ const { ga4Id, clarityId, fbPixelId } = Astro.props;
         exclusive — the src was silently dropped in the previous implementation. */}
     <script is:inline define:vars={{ ga4Id }}>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag('js', new Date());
+      // Explicit window assignment — Astro wraps define:vars scripts in an IIFE,
+      // so `function gtag(){}` would be local scope only. window.gtag must be
+      // global for the astro:page-load handler (separate script block) to reach it.
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
       // send_page_view: false — the astro:page-load handler below fires all
       // page views (including the initial load), so we never double-count.
-      gtag('config', ga4Id, { send_page_view: false });
+      window.gtag('config', ga4Id, { send_page_view: false });
 
       var _s = document.createElement('script');
       _s.async = true;
