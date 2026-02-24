@@ -23,15 +23,18 @@ Commit `31c83a9` built a proxy in `functions/scripts/[name].js` to serve analyti
 ### Root cause
 CF Pages only picks up the source `functions/` directory when there is **no build step**. With a framework build (`npm run build`), CF Pages uses the **output directory** (`dist/`) exclusively. Astro's adapter generates its own workers in `dist/functions/`. The source `functions/scripts/[name].js` is never copied to `dist/` and is never deployed.
 
-### The right pattern if you want proxy-style routing
+### The right pattern if you want proxy-style routing (Astro 5)
 Use an **Astro API route** instead:
 ```
 src/pages/scripts/[name].ts   ← Astro picks this up, outputs to dist/functions/scripts/
 ```
 This gets compiled into the SSR build and deployed correctly on CF Pages.
 
+### Astro 6 note: architecture change makes this moot
+Astro 6 (beta as of Feb 2026, v13+ of `@astrojs/cloudflare`) deploys to **Cloudflare Workers** by default, not CF Pages. `mode: 'directory'` is removed. The `functions/` directory concept is gone entirely. Custom handlers go via a custom Worker entrypoint in `wrangler.jsonc`. The Astro API route pattern works in both 5 and 6.
+
 ### Current state (commit 2ee008d)
-Reverted to direct CDN URLs in `Analytics.astro`. CSP `script-src` includes the CDN domains. The `functions/scripts/[name].js` file still exists but is inert — delete it if you want to avoid confusion, or convert to an Astro API route if you want the proxy benefits back.
+Direct CDN URLs in `Analytics.astro`. CSP `script-src` includes the CDN domains. The `functions/scripts/[name].js` file still exists but is inert — delete it or convert to Astro API route if proxy behavior is wanted.
 
 ---
 
