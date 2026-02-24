@@ -14,12 +14,12 @@ test.describe('Analytics Stack', () => {
   test.describe('GA4', () => {
     test('gtag.js loads via network request', async ({ page }) => {
       const gtagRequest = page.waitForRequest(
-        req => req.url().includes('googletagmanager.com/gtag/js'),
+        req => req.url().includes('/scripts/ga4.js'),
         { timeout: 10000 }
       );
       await page.goto('/');
       const request = await gtagRequest;
-      expect(request.url()).toContain('gtag/js');
+      expect(request.url()).toContain('/scripts/ga4.js');
     });
 
     test('window.dataLayer is initialized with events after page load', async ({ page }) => {
@@ -49,7 +49,7 @@ test.describe('Analytics Stack', () => {
   test.describe('Microsoft Clarity', () => {
     test('Clarity script request fires on page load', async ({ page }) => {
       const clarityRequest = page.waitForRequest(
-        req => req.url().includes('clarity.ms/tag/'),
+        req => req.url().includes('/scripts/clarity.js'),
         { timeout: 10000 }
       );
       await page.goto('/');
