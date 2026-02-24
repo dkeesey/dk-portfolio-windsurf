@@ -1,12 +1,37 @@
 # deankeesey.com — Project Memory
 
-## Current State (2026-02-22)
-- **Astro**: 5.17.3 (updated from 5.17.1 same session)
+## Current State (2026-02-24)
+- **Astro**: 5.17.3
 - **Deployment**: Cloudflare Pages only — Netlify removed (commit a1ec707)
 - **Output mode**: `server` with `@astrojs/cloudflare` adapter (mode: directory, functionPerRoute: true)
 - **Positioning**: AI Systems Builder / AI Product Engineer
-- **Analytics**: Direct load — GA4 + Clarity + optional Pixel in `Analytics.astro`. No GTM. No Partytown.
+- **Analytics**: Direct CDN load — GA4 + Clarity + optional Pixel in `Analytics.astro`. No GTM. No Partytown.
+  - GA4 → `https://www.googletagmanager.com/gtag/js?id=...`
+  - Clarity → `https://www.clarity.ms/tag/...`
+  - FB Pixel → `https://connect.facebook.net/en_US/fbevents.js`
 - **CLAUDE.md**: Accurate as of 2026-02-22 — trust it.
+
+---
+
+## CF Pages Functions + Astro SSR: Dead Zone (2026-02-22/24)
+
+**CRITICAL:** `functions/` directory in source root **does NOT deploy** when using `@astrojs/cloudflare` with a build step.
+
+### What happened
+Commit `31c83a9` built a proxy in `functions/scripts/[name].js` to serve analytics scripts from `/scripts/ga4.js`, `/scripts/clarity.js`, `/scripts/pixel.js` — routing to real CDN URLs server-side for tighter CSP and ad-blocker bypass. Live browser testing revealed all three returned 404.
+
+### Root cause
+CF Pages only picks up the source `functions/` directory when there is **no build step**. With a framework build (`npm run build`), CF Pages uses the **output directory** (`dist/`) exclusively. Astro's adapter generates its own workers in `dist/functions/`. The source `functions/scripts/[name].js` is never copied to `dist/` and is never deployed.
+
+### The right pattern if you want proxy-style routing
+Use an **Astro API route** instead:
+```
+src/pages/scripts/[name].ts   ← Astro picks this up, outputs to dist/functions/scripts/
+```
+This gets compiled into the SSR build and deployed correctly on CF Pages.
+
+### Current state (commit 2ee008d)
+Reverted to direct CDN URLs in `Analytics.astro`. CSP `script-src` includes the CDN domains. The `functions/scripts/[name].js` file still exists but is inert — delete it if you want to avoid confusion, or convert to an Astro API route if you want the proxy benefits back.
 
 ---
 
