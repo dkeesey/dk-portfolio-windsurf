@@ -3,7 +3,6 @@ title: "When Platforms Hide Their Walls: ASN Blocking and the Illusion of Failur
 description: "I spent days debugging a Cloudflare Workers + Slack integration that should have worked. The architecture was sound, the code was correct, but I still failed. Here's what I learned about platform defenses, invisible moats, and why stepping back matters more than pushing through."
 publishDate: 2026-02-16
 tags: ["cloudflare", "slack", "platform-engineering", "debugging", "ASN-blocking", "self-healing-systems", "developer-experience"]
-image: "https://res.cloudinary.com/dsdxgcigp/image/upload/v1739739600/blog/deankeesey/platform-walls.png"
 readingTime: 12
 author: "Dean Keesey"
 ---
