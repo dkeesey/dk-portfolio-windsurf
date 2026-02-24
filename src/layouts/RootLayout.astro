@@ -2,7 +2,6 @@
 import '@/styles/globals.css';
 import '@/components/chatbot/botpress-style.css';
 import { ClientRouter } from 'astro:transitions';
-import PostHog from '@/components/PostHog.astro';
 import Analytics from '@/components/Analytics.astro';
 import Botpress from '@/components/chatbot/Botpress.astro';
 // Temporarily disabled for debugging
@@ -36,8 +35,6 @@ const {
       clarityId={import.meta.env.PUBLIC_CLARITY_ID || 'u2pjuo05w0'}
       fbPixelId={import.meta.env.PUBLIC_FB_PIXEL_ID}
     />
-    <PostHog />
-    
     <!-- Development environment checks -->
     {import.meta.env.DEV && (
       <script type="module" src="/src/lib/env-check.js"></script>

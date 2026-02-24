@@ -5,10 +5,12 @@
 - **Deployment**: Cloudflare Pages only — Netlify removed (commit a1ec707)
 - **Output mode**: `server` with `@astrojs/cloudflare` adapter (mode: directory, functionPerRoute: true)
 - **Positioning**: AI Systems Builder / AI Product Engineer
-- **Analytics**: Direct CDN load — GA4 + Clarity + optional Pixel in `Analytics.astro`. No GTM. No Partytown.
-  - GA4 → `https://www.googletagmanager.com/gtag/js?id=...`
-  - Clarity → `https://www.clarity.ms/tag/...`
-  - FB Pixel → `https://connect.facebook.net/en_US/fbevents.js`
+- **Analytics**: Proxy via Astro API route — GA4 + Clarity + Pixel served from `/scripts/` path. No GTM. No Partytown.
+  - GA4 → `/scripts/ga4.js?id=...` (proxies googletagmanager.com)
+  - Clarity → `/scripts/clarity.js?id=...` (proxies clarity.ms)
+  - FB Pixel → `/scripts/pixel.js` (proxies connect.facebook.net)
+  - Proxy route: `src/pages/scripts/[name].ts`
+  - CDN domains removed from CSP `script-src` (still in `connect-src`)
 - **CLAUDE.md**: Accurate as of 2026-02-22 — trust it.
 
 ---
@@ -33,8 +35,10 @@ This gets compiled into the SSR build and deployed correctly on CF Pages.
 ### Astro 6 note: architecture change makes this moot
 Astro 6 (beta as of Feb 2026, v13+ of `@astrojs/cloudflare`) deploys to **Cloudflare Workers** by default, not CF Pages. `mode: 'directory'` is removed. The `functions/` directory concept is gone entirely. Custom handlers go via a custom Worker entrypoint in `wrangler.jsonc`. The Astro API route pattern works in both 5 and 6.
 
-### Current state (commit 2ee008d)
-Direct CDN URLs in `Analytics.astro`. CSP `script-src` includes the CDN domains. The `functions/scripts/[name].js` file still exists but is inert — delete it or convert to Astro API route if proxy behavior is wanted.
+### Resolved (commit 3cbeece, 2026-02-24)
+`src/pages/scripts/[name].ts` Astro API route created. Compiles to `dist/_worker.js/pages/scripts/_name_.astro.mjs` and deploys correctly. All 3 routes return 200 on production. CDN domains removed from `script-src`. Playwright tests updated to watch `/scripts/ga4.js` and `/scripts/clarity.js`.
+
+**CF Pages deployment lag:** First check showed 404s — the deployment hadn't propagated yet. Confirmed working ~2 min after push.
 
 ---
 

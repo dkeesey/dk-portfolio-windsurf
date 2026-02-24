@@ -12,8 +12,6 @@ import { vi, beforeAll, afterEach, afterAll } from 'vitest';
 vi.stubGlobal('import.meta.env', {
   PUBLIC_SUPABASE_URL: 'https://test.supabase.co',
   PUBLIC_SUPABASE_ANON_KEY: 'test-anon-key',
-  PUBLIC_POSTHOG_API_KEY: 'test-posthog-key',
-  PUBLIC_POSTHOG_HOST: 'https://app.posthog.com',
   PUBLIC_GA_TRACKING_ID: 'G-TEST123',
   DEV: true,
   PROD: false,
