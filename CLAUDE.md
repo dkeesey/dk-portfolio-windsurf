@@ -1,7 +1,7 @@
 # deankeesey.com - AI Systems Builder Portfolio
 
 **Live Site**: https://deankeesey.com
-**Repository**: ~/Workspace/dk-sites/deankeesey-com/
+**Repository**: ~/Workspace/deankeesey-com/
 **Branch**: main
 **Deployment**: Cloudflare Pages (git-driven, push to main auto-deploys)
 
