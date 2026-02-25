@@ -1,5 +1,8 @@
 # deankeesey.com - AI Systems Builder Portfolio
 
+> **Before proposing architectural changes, load `TOMBSTONES.md` for dead ends already tried.**
+> **Architecture decisions with rationale: `DECISIONS.md`**
+
 **Live Site**: https://deankeesey.com
 **Repository**: ~/Workspace/deankeesey-com/
 **Branch**: main
