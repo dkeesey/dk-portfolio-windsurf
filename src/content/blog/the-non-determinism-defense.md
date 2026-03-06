@@ -5,6 +5,7 @@ publishDate: 2026-02-20
 tags: ["ai-infrastructure", "ip-strategy", "orchestration", "systems-architecture", "claude-code"]
 readingTime: 6
 author: "Dean Keesey"
+image: "/images/blog/the-non-determinism-defense-hero.png"
 ---
 
 # The Non-Determinism Defense

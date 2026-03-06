@@ -8,6 +8,13 @@ export default defineConfig({
     // Environment for testing React components
     environment: 'jsdom',
 
+    // Pool options for better isolation
+    poolOptions: {
+      threads: {
+        singleThread: true,
+      },
+    },
+
     // Setup files run before each test file
     setupFiles: ['./src/test/setup.ts'],
 

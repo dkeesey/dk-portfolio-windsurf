@@ -1,0 +1,143 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Enterprise Automation Pipeline — Case Study",
+  description: "10+ autonomous workflows connecting email intelligence, webhook orchestration, and LLM-powered classification across Slack, Gmail, calendar, and CRM systems.",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-amber-100 text-amber-800 border-amber-200">AI Automation</Badge>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Enterprise Automation Pipeline</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        End-to-end automation infrastructure that turns manual processes into autonomous pipelines. 10+ workflows coordinate across Slack, Gmail, calendar, and CRM systems with LLM-powered classification and real-time alerting.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/enterprise-automation-pipeline.png" alt="Enterprise automation pipeline diagram" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Business operations generate a constant stream of signals — emails from clients, webhook events from payment systems, calendar conflicts, CRM updates, job opportunity notifications. Each signal requires a response, but the volume exceeds what manual processing can handle without dropping things.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The challenge isn't any single automation. It's building an infrastructure layer where new automations can be added without rewriting the plumbing — where email classification, webhook routing, and LLM-powered decision-making share common patterns and coordination mechanisms.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        n8n serves as the orchestration backbone — not because it's the most powerful tool, but because it runs on a residential IP (critical for Slack integration) and provides visual workflow debugging that LLM-generated bash scripts can't match for complex multi-step automations.
+      </p>
+
+      <div class="space-y-4">
+        <div class="bg-white border rounded-lg p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Emergency Email Detection</h3>
+          <p class="text-gray-600 text-sm">Monitors Gmail for high-priority patterns (family emergencies, client escalations, security alerts). Classified emails trigger immediate Slack notifications to <code class="bg-gray-200 px-1 rounded">#alerts-critical</code>.</p>
+        </div>
+
+        <div class="bg-white border rounded-lg p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Morning Intelligence Brief</h3>
+          <p class="text-gray-600 text-sm">Daily at 07:00 PT: aggregates overnight email, calendar events, analytics anomalies, and task status into a single Slack message. Replaces 15 minutes of manual dashboard checking.</p>
+        </div>
+
+        <div class="bg-white border rounded-lg p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Stripe Donation Pipeline</h3>
+          <p class="text-gray-600 text-sm">Stripe <code class="bg-gray-200 px-1 rounded">checkout.session.completed</code> webhooks route through a Cloudflare tunnel to n8n, which parses donor information and posts real-time notifications to <code class="bg-gray-200 px-1 rounded">#masumi-donations</code>.</p>
+        </div>
+
+        <div class="bg-white border rounded-lg p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">LinkedIn Opportunity Digest</h3>
+          <p class="text-gray-600 text-sm">Scans job opportunity signals, generates tailored application materials via Claude API (Haiku for cost efficiency), and queues results for review.</p>
+        </div>
+
+        <div class="bg-white border rounded-lg p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Supabase Keepalive</h3>
+          <p class="text-gray-600 text-sm">Automated queries to prevent Supabase free-tier auto-pause across multiple databases on separate accounts. Two workflows, two schedules, because they hit different Supabase instances.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Decision -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Architectural Decision</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The decision framework for automation tooling evolved through expensive trial and error: when to use n8n, when to use bash scripts, when to use Python.
+      </p>
+      <ul class="space-y-2 text-gray-700">
+        <li><strong>n8n:</strong> Multi-step workflows with API integrations, visual debugging, credential management, and Slack delivery (residential IP requirement).</li>
+        <li><strong>Bash:</strong> Single-purpose scripts, file operations, git automation, anything that runs in a CI/CD context or as a pre/post hook.</li>
+        <li><strong>Python:</strong> Data transformation, BigQuery queries, complex parsing, anything that benefits from libraries (pandas, google-cloud-bigquery).</li>
+      </ul>
+      <p class="text-gray-700 leading-relaxed mt-4">
+        The wrong choice wastes days. Building the Slack integration in Cloudflare Workers (bash/JS-first thinking) burned multiple days before the ASN blocking discovery. The right architecture matches the tool to the deployment constraint, not the developer's comfort zone.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-amber-600 mb-1">10+</div>
+          <div class="text-gray-700">Active workflows running autonomously</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-amber-600 mb-1">24/7</div>
+          <div class="text-gray-700">Continuous monitoring with real-time alerting</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-amber-600 mb-1">5 min</div>
+          <div class="text-gray-700">Morning brief replaces 15 min manual dashboard review</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-amber-600 mb-1">19/19</div>
+          <div class="text-gray-700">Test suite passing (smoke + integration)</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The automation infrastructure handles the operational overhead that would otherwise consume hours daily. New workflows follow established patterns — credential management, error handling, Slack delivery — so adding a new automation takes minutes, not days. The test suite catches regressions before they reach production.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['n8n', 'Claude API', 'Slack API', 'Gmail API', 'Google Calendar API', 'Stripe API', 'Cloudflare Workers', 'Cloudflare Tunnel', 'Python', 'Bash', 'Supabase', 'webhooks'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="border-t pt-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Related</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/blog/when-platforms-hide-their-walls" class="text-primary hover:underline">When Platforms Hide Their Walls: ASN Blocking and the Illusion of Failure</a>
+        <a href="/projects/slack-analytics-intelligence" class="text-primary hover:underline">Slack Analytics Intelligence — Case Study</a>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <div class="mt-12 pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>

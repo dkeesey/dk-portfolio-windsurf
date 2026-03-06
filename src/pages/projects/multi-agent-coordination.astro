@@ -1,0 +1,135 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Multi-Agent Coordination System — Case Study",
+  description: "How a multi-agent orchestration system reduced complex debugging sessions from 6+ hours to 2 hours. MCP servers, shared memory banks, and parallel AI workers.",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-purple-100 text-purple-800 border-purple-200">AI Orchestration</Badge>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Multi-Agent Coordination System</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        A coordination layer that enables parallel AI workers with shared memory, task delegation, and conflict detection — reducing complex engineering sessions from 6+ hours to 2 hours.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/multi-agent-coordination.png" alt="Multi-agent coordination system visualization" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        AI coding assistants are single-threaded by design. When Claude Desktop researches an approach, it can't simultaneously implement another. When it hits a resource limit, the accumulated context — file reads, architectural decisions, debugging state — is lost. You start over.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        For complex tasks that require both research and implementation, this single-threaded constraint means constant context-switching: research a pattern, stop, switch to implementation, lose the research context, switch back. A task that should take 2 hours stretches to 6+ because the cognitive overhead of rebuilding context dominates the actual work.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        The solution is architectural: separate orchestration from execution, give agents shared memory, and build coordination primitives that prevent collisions.
+      </p>
+
+      <div class="space-y-6">
+        <div class="border-l-4 border-purple-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Orchestration Layer</h3>
+          <p class="text-gray-700">A lead agent (Claude Desktop or Claude Code) maintains the high-level plan. It decomposes tasks, assigns them to execution agents, and monitors completion. It doesn't do the work — it coordinates it.</p>
+        </div>
+
+        <div class="border-l-4 border-purple-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Execution Agents</h3>
+          <p class="text-gray-700">Claude Code sessions running in tmux panes handle implementation. Each agent works in isolation on its assigned task. When it completes, it writes results to shared memory and signals the orchestrator.</p>
+        </div>
+
+        <div class="border-l-4 border-purple-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Shared Memory & Coordination</h3>
+          <p class="text-gray-700">SQLite coordination databases track task state, file locks, and session context. MCP servers provide structured tool access. Cross-session prompt injection enables the orchestrator to send instructions to running agents without manual intervention.</p>
+        </div>
+
+        <div class="border-l-4 border-purple-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Model Routing</h3>
+          <p class="text-gray-700">Not every task needs the same model. Mechanical implementation tasks route to Haiku (fast, cheap). Architectural decisions route to Opus (expensive, correct). This model-assignment strategy reduces cost 40-60% while maintaining quality where it matters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Insight -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Insight: Cowboy Coordination</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The most surprising finding was that minimal coordination often outperforms heavy coordination. When agents work on truly independent tasks with clear boundaries, the overhead of sophisticated synchronization protocols exceeds the cost of occasional conflicts.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        "Cowboy coordination" — where agents work independently and resolve conflicts after the fact — works well when tasks are naturally serialized by resource constraints. The system evolved from heavy-weight task management toward lightweight conflict detection with post-hoc resolution.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-purple-600 mb-1">3x</div>
+          <div class="text-gray-700">Productivity gain on complex debugging sessions</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-purple-600 mb-1">6h → 2h</div>
+          <div class="text-gray-700">Documented session time reduction</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-purple-600 mb-1">40-60%</div>
+          <div class="text-gray-700">Cost reduction via model routing (Haiku for mechanical tasks)</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-purple-600 mb-1">82+</div>
+          <div class="text-gray-700">Custom hooks, scripts, and coordination tools built</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The coordination system runs daily across all development work. Parallel agents handle implementation while the orchestrator maintains architectural coherence. The model routing system prevents quota exhaustion by matching task complexity to model capability. The entire infrastructure is self-documenting — every session captures decisions, patterns, and failures for future context recovery.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['Claude API', 'MCP Servers', 'Python', 'TypeScript', 'SQLite', 'tmux', 'Bash', 'iTerm2', 'Haiku/Sonnet/Opus'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Deep Dives -->
+    <section class="border-t pt-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Deep Dives</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/blog/breaking-claude-desktop-bottleneck" class="text-primary hover:underline">Breaking Claude Desktop's Single-Threaded Bottleneck</a>
+        <a href="/blog/cli-first-ai-workflows" class="text-primary hover:underline">CLI-First AI Workflows</a>
+        <a href="/blog/multi-agent-orchestration-benefits" class="text-primary hover:underline">Coordinating AI Agents: From Chaos to TaskMaster</a>
+        <a href="/blog/the-non-determinism-defense" class="text-primary hover:underline">The Non-Determinism Defense</a>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <div class="mt-12 pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>

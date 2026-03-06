@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Dean Keesey',
-    description: 'Full Stack Developer specializing in modern web development',
+    description: 'AI Systems Architect — production AI systems, multi-agent orchestration, and enterprise automation',
     site: context.site!,
     items: [
       ...posts.map((post) => ({

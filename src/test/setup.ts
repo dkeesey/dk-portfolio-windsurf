@@ -7,16 +7,30 @@
 
 import '@testing-library/jest-dom/vitest';
 import { vi, beforeAll, afterEach, afterAll } from 'vitest';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import fs from 'fs';
+import { setupFileReadingHook } from './file-reading-hook';
 
 // Mock import.meta.env for Astro
-vi.stubGlobal('import.meta.env', {
-  PUBLIC_SUPABASE_URL: 'https://test.supabase.co',
-  PUBLIC_SUPABASE_ANON_KEY: 'test-anon-key',
-  PUBLIC_GA_TRACKING_ID: 'G-TEST123',
-  DEV: true,
-  PROD: false,
-  MODE: 'test',
-});
+// Set up proper import.meta.url support and file reading
+setupFileReadingHook();
+
+if (!(globalThis as any).import) {
+  (globalThis as any).import = {};
+}
+
+(globalThis as any).import.meta = {
+  url: `file://${process.cwd()}/src/test/setup.ts`,
+  env: {
+    PUBLIC_SUPABASE_URL: 'https://test.supabase.co',
+    PUBLIC_SUPABASE_ANON_KEY: 'test-anon-key',
+    PUBLIC_GA_TRACKING_ID: 'G-TEST123',
+    DEV: true,
+    PROD: false,
+    MODE: 'test',
+  },
+};
 
 // Mock window.matchMedia (for responsive tests)
 Object.defineProperty(window, 'matchMedia', {
@@ -57,6 +71,42 @@ class MockResizeObserver {
 }
 
 vi.stubGlobal('ResizeObserver', MockResizeObserver);
+
+// Handle fs.readFileSync to support URL objects in tests
+// This needs to catch the error that occurs when import.meta.url is undefined
+const originalReadFileSync = fs.readFileSync.bind(fs);
+
+// Replace the function on the module
+(fs as any).readFileSync = function(filePath: any, encoding?: any, flag?: any) {
+  let finalPath = filePath;
+
+  try {
+    // Handle URL objects - convert to pathname string
+    if (filePath instanceof URL) {
+      const pathname = filePath.pathname;
+      // URL relative paths like /pages/index.mdx need src/ prepended
+      if (!pathname.includes('/src/') && (pathname.includes('/pages/') || pathname.includes('/components/'))) {
+        finalPath = path.join(process.cwd(), 'src', pathname);
+      } else {
+        finalPath = path.join(process.cwd(), pathname);
+      }
+    } else if (typeof filePath === 'string' && filePath.startsWith('file://')) {
+      // Handle file:// URLs
+      const pathname = new URL(filePath).pathname;
+      if (!pathname.includes('/src/')) {
+        finalPath = path.join(process.cwd(), 'src', pathname);
+      } else {
+        finalPath = path.join(process.cwd(), pathname);
+      }
+    }
+  } catch (e) {
+    // If URL handling fails, the URL is likely invalid/malformed
+    // Fall through to the original call which will throw with better error
+  }
+
+  // Call original with resolved path
+  return originalReadFileSync(finalPath, encoding, flag);
+};
 
 // Mock fetch (with default implementation that can be overridden)
 const mockFetch = vi.fn().mockResolvedValue({

@@ -50,10 +50,10 @@ function ExperienceItem({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
       className={`relative border-l-2 pl-8 pb-12 last:pb-0 ${
         isEnterprise ? 'border-blue-500' : 'border-gray-300'
       }`}
@@ -197,17 +197,18 @@ export function EnterpriseExperienceTimeline() {
   const experiences = [
     // Recent Consulting Work
     {
-      period: '2022 - Present',
-      title: 'Senior Frontend Engineer & Consultant',
-      company: 'Independent Practice',
+      period: '2023 - Present',
+      title: 'Founder & AI Systems Architect',
+      company: 'Client Engine AI',
       location: 'Oakland, CA',
-      description: 'Full-stack development and SEO optimization for diverse clients, focusing on modern React ecosystems and performance optimization.',
+      description: 'AI systems architecture and deployment practice. Design and build production LLM orchestration infrastructure, multi-agent coordination systems, and enterprise automation pipelines for organizations moving from AI curiosity to AI infrastructure.',
       achievements: [
-        'Delivered 20+ web solutions with 90+ Lighthouse performance scores',
-        'Achieved page 1 Google rankings for competitive local search terms',
-        'Modernized legacy art portfolio with Astro framework and scroll-based UX'
+        'Architected Claude Code Swarm — multi-agent orchestration framework coordinating parallel AI workers with task delegation, conflict detection, and automated verification',
+        'Built Enhanced iTerm MCP integration enabling AI-driven terminal automation with session management and cross-tool coordination',
+        'Designed email intelligence pipeline: automated classification, priority routing, and response drafting via n8n/Slack/LLM integration',
+        'Shipped ResumeCoach and Prettify AI — production SaaS products built on Claude API with real-time streaming and document generation'
       ],
-      technologies: ['React', 'Next.js', 'Astro', 'TypeScript', 'SEO', 'WordPress'],
+      technologies: ['Claude API', 'MCP', 'Python', 'TypeScript', 'n8n', 'Cloudflare Workers', 'React', 'Astro', 'GCP'],
       index: 0,
       companyType: 'consulting' as const
     },
@@ -215,11 +216,11 @@ export function EnterpriseExperienceTimeline() {
     // Support Logic
     {
       period: 'Sep 2021 - Apr 2022',
-      title: 'Senior UI Engineer',
-      company: 'Support Logic (AI-Powered Customer Success)',
+      title: 'Senior UI Engineer — AI Customer Success Platform',
+      company: 'SupportLogic (AI-Powered Customer Success)',
       companySize: 'Series B Startup',
       location: 'San Jose, CA',
-      description: 'Led frontend development for AI-powered customer success platform using Natural Language Processing for sentiment analysis.',
+      description: 'Built frontend for NLP-powered sentiment analysis platform. SupportLogic uses AI to predict customer escalations from support ticket language patterns, enabling proactive intervention before churn.',
       achievements: [
         'Developed alpha version of Agent Support Experience (ASX) product',
         'Built React components connecting to Salesforce API for enterprise customers',
@@ -235,17 +236,18 @@ export function EnterpriseExperienceTimeline() {
     // Masumi Hayashi Foundation
     {
       period: 'Jun 2016 - Present',
-      title: 'Founder & Technical Director',
+      title: 'Fractional CTO & Technical Director',
       company: 'Masumi Hayashi Foundation',
       location: 'Oakland, CA',
-      description: 'Founded nonprofit to preserve and promote globally renowned Japanese-American artist\'s legacy through digital platforms and art book publishing.',
+      description: 'Fractional CTO for nonprofit preserving globally renowned Japanese-American artist\'s legacy. Oversee all technology strategy, infrastructure, and digital platform development.',
       achievements: [
-        'Built Progressive Web Application with 90+ Google Lighthouse score',
-        'Implemented CI/CD pipeline with Gatsby Cloud, Netlify, and GitHub',
+        'Recovered SFMOMA exhibition deadline — emergency technical intervention saved museum partnership',
+        'Built Stripe donation pipeline with webhook automation and real-time Slack notifications',
+        'Architected GCP infrastructure: BigQuery analytics, Cloud Functions, automated reporting',
         'Placed artwork in major museums: SF MOMA, LACMA, Smithsonian Asian Art',
         'Granted digital rights for Apple Film "Swan Song" starring Mahershala Ali'
       ],
-      technologies: ['React', 'Gatsby.js', 'GraphQL', 'Styled Components', 'Netlify', 'Node.js'],
+      technologies: ['React', 'Astro', 'GCP', 'Cloudflare', 'Stripe API', 'BigQuery', 'Python', 'Node.js'],
       index: 2,
       companyType: 'consulting' as const
     },
@@ -257,7 +259,7 @@ export function EnterpriseExperienceTimeline() {
       company: 'SuccessFactors (SAP)',
       companySize: 'Fortune 50',
       location: 'San Francisco, CA',
-      description: 'Developed enterprise HR platform features for Fortune 500 companies using SAP\'s proprietary UI framework.',
+      description: 'Developed enterprise HR platform features using SAP\'s proprietary UI framework, serving major global corporations.',
       achievements: [
         'Designed "Action Search" feature with 2-phase auto-complete functionality',
         'Successfully integrated search feature across all suite SPA product pages',
@@ -436,13 +438,12 @@ export function EnterpriseExperienceTimeline() {
               Professional Experience
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              15+ years building enterprise software at Fortune 500 companies, 
-              from financial services to gaming, healthcare to SaaS platforms
+              20+ years architecting enterprise systems — from financial services infrastructure to AI-powered platforms
             </p>
             <div className="mt-6 flex justify-center">
               <Badge className="bg-blue-100 text-blue-800 border-blue-200 px-4 py-2 pointer-events-none">
                 <Building2 className="h-4 w-4 mr-2" />
-                Enterprise-Scale Frontend Engineering
+                Enterprise AI & Systems Architecture
               </Badge>
             </div>
           </div>
@@ -455,9 +456,9 @@ export function EnterpriseExperienceTimeline() {
 
           {/* Enterprise Credentials Summary */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
@@ -469,7 +470,7 @@ export function EnterpriseExperienceTimeline() {
                 <div className="text-gray-700">Fortune 500 Companies</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">15+</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
                 <div className="text-gray-700">Years Enterprise Experience</div>
               </div>
               <div className="text-center">

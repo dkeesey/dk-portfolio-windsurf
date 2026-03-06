@@ -121,11 +121,11 @@ export function HeroSection() {
         <div className="max-w-2xl bg-white/50 backdrop-blur-md p-8 rounded-xl shadow-lg">
           <h1 className="mb-6 text-5xl font-bold text-gray-900">Hi, I'm Dean Keesey</h1>
           <p className="mb-8 text-xl text-gray-800">
-            Full Stack Developer specializing in modern web frameworks, SEO optimization, and digital marketing integration. I create high-performance websites that drive real-world results through improved search visibility and user engagement.
+            AI Systems Architect building production AI products, multi-agent orchestration, and enterprise automation. I design the intelligence layer that organizations run on.
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
-              <a href="/projects">View Projects</a>
+              <a href="/projects">View Case Studies</a>
             </Button>
             <Button variant="outline" size="lg" asChild className="border-purple-600 text-purple-700 hover:bg-purple-50">
               <a href="/contact">Contact Me</a>

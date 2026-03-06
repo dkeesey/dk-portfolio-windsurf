@@ -11,7 +11,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useAnalytics } from '@/hooks/useAnalytics';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 type Project = {
   title: string;
@@ -22,52 +22,42 @@ type Project = {
   link: string;
 };
 
-// Real screenshots of live projects
 const projects: Project[] = [
   {
-    title: 'Masumi Hayashi Digital Archive',
+    title: 'Masumi Hayashi Foundation',
     description:
-      'Immersive digital archive of panoramic photo-collages documenting the Japanese American internment experience, transforming historical trauma into a powerful visual narrative that preserves memory and understanding.',
-    image: '/images/projects/masumi-hayashi-archive-screenshot.png',
-    technologies: ['Astro', 'JavaScript', 'CSS Animations', 'Responsive Design'],
-    category: 'Frontend',
-    link: 'https://gallery.masumihayashi.com',
+      'Fractional CTO for nonprofit preserving globally renowned Japanese-American artist legacy. Built the entire technical platform — 523-page site serving 30K+ annual visitors, Stripe donation pipeline, analytics infrastructure filtering 92% bot traffic, and museum partnership integrations worldwide.',
+    image: '/images/projects/masumi-hayashi-foundation-screenshot.png',
+    technologies: ['React', 'Astro', 'GCP', 'Cloudflare', 'Stripe API', 'BigQuery', 'Python', 'Node.js'],
+    category: 'CTO & Technical Leadership',
+    link: '/projects/masumi-hayashi-foundation',
   },
   {
-    title: 'Therapist Practice SEO',
+    title: 'Slack Analytics Intelligence',
     description:
-      'Implemented comprehensive SEO strategy achieving consistent #2 placement in map pack and page 1 results for targeted keywords.',
-    image: '/images/projects/megan-gredesky-therapy-screenshot.png',
-    technologies: ['SEO', 'WordPress', 'Local Business', 'Google Business Profile'],
-    category: 'Digital Marketing',
-    link: 'https://megangredesky.com',
+      'Analytics data from GA4, Facebook Pixel, and Microsoft Clarity flows through BigQuery ETL into Slack channels. One architect built the intelligence layer that an entire organization queries daily — no dashboards, no analyst queue, no context switching.',
+    image: '/images/projects/slack-analytics-intelligence.png',
+    technologies: ['BigQuery', 'GA4', 'n8n', 'Slack API', 'Python', 'Cloud Functions', 'ETL'],
+    category: 'Data Intelligence',
+    link: '/projects/slack-analytics-intelligence',
   },
   {
-    title: 'Political Campaign Website',
+    title: 'Multi-Agent Coordination System',
     description:
-      'Elevated campaign site from obscurity to page 1 search results through technical SEO and content optimization strategies.',
-    image: '/images/projects/kanitha-for-oakland-screenshot.png',
-    technologies: ['WordPress', 'SEO', 'Content Strategy'],
-    category: 'Digital Marketing',
-    link: 'https://kanithaforoakland.com',
+      'Built an array of AI coordination tools — MCP servers, CLI orchestration, tmux-based session management, SQLite coordination databases, and cross-session task delegation — reducing complex debugging sessions from 6+ hours to 2 hours.',
+    image: '/images/projects/multi-agent-coordination.png',
+    technologies: ['Claude API', 'MCP', 'Python', 'TypeScript', 'SQLite', 'tmux', 'Bash'],
+    category: 'AI Orchestration',
+    link: '/projects/multi-agent-coordination',
   },
   {
-    title: 'WordPress Security Remediation',
+    title: 'Enterprise Automation Pipeline',
     description:
-      'Successfully removed malicious adware from a compromised website and implemented comprehensive security hardening measures.',
-    image: '/images/projects/sticking-place-security-screenshot.png',
-    technologies: ['WordPress', 'Security', 'PHP'],
-    category: 'Web Security',
-    link: 'https://thestickingplace.com',
-  },
-  {
-    title: 'GA4 Analytics Implementation',
-    description:
-      'Configured Google Analytics 4 across multiple client websites with custom event tracking and conversion measurement.',
-    image: '/images/projects/strangeland-analytics-screenshot.png',
-    technologies: ['Google Analytics 4', 'Tag Manager', 'Conversion Tracking'],
-    category: 'Analytics',
-    link: 'https://strangelandcomics.com',
+      'End-to-end automation infrastructure connecting email intelligence, webhook orchestration, and LLM-powered classification. 10+ n8n workflows coordinate across Slack, Gmail, calendar, and CRM — turning manual processes into autonomous pipelines.',
+    image: '/images/projects/enterprise-automation-pipeline.png',
+    technologies: ['n8n', 'Claude API', 'Slack API', 'Gmail API', 'Cloudflare Workers', 'Python', 'webhooks'],
+    category: 'AI Automation',
+    link: '/projects/enterprise-automation-pipeline',
   },
 ];
 
@@ -121,13 +111,13 @@ export function ProjectsGrid() {
     <section className="py-16">
       <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="mb-8 space-y-6 bg-white/90 backdrop-blur-md p-6 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Projects</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Studies</h1>
           
           {/* Search */}
           <div className="max-w-md">
             <Input
               type="search"
-              placeholder="Search projects..."
+              placeholder="Search case studies..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -228,14 +218,12 @@ export function ProjectsGrid() {
                       ))}
                     </div>
                     
-                    <a 
+                    <a
                       href={project.link}
                       onClick={() => handleProjectClick(project)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 flex items-center gap-1 transition-colors"
+                      className="text-primary hover:text-primary/80 flex items-center gap-1 transition-colors font-medium"
                     >
-                      View Project <ExternalLink size={16} />
+                      Read Case Study <ArrowRight size={16} />
                     </a>
                   </CardFooter>
                 </Card>

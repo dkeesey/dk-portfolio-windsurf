@@ -1,0 +1,130 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Masumi Hayashi Foundation — Fractional CTO Case Study",
+  description: "Full technical ownership of nonprofit digital platform: 523-page site, 30K+ annual visitors, Stripe donation pipeline, analytics infrastructure, and museum partnership integrations.",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-blue-100 text-blue-800 border-blue-200">CTO & Technical Leadership</Badge>
+        <a href="https://masumihayashi.com" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-primary">masumihayashi.com &nearr;</a>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Masumi Hayashi Foundation</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Fractional CTO for a nonprofit preserving the legacy of globally renowned Japanese-American artist Masumi Hayashi. Full technical ownership of a digital platform serving museums, galleries, and researchers worldwide.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/masumi-hayashi-foundation-screenshot.png" alt="Masumi Hayashi Foundation website" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The Masumi Hayashi Foundation needed a complete digital platform to preserve and present the artist's panoramic photo-collages — work held in the permanent collections of SFMOMA, the Whitney Museum, and the Museum of Contemporary Photography. The Foundation had no technical leadership, no analytics visibility, no donation infrastructure, and an approaching SFMOMA exhibition deadline.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The stakes were specific: museum partnerships required a professional digital presence, donor relationships needed a secure giving mechanism, and the Foundation's board needed visibility into how the platform was performing — all without a technical team.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        I took full technical ownership — architecture, implementation, deployment, and ongoing operations. Every layer of the stack reflects deliberate decisions:
+      </p>
+      <ul class="space-y-3 text-gray-700">
+        <li class="flex gap-3">
+          <span class="text-blue-600 font-bold shrink-0">1.</span>
+          <span><strong>Platform architecture:</strong> Astro 5 with React components on Cloudflare Pages. Static-first for performance, server-rendered where dynamic content requires it. 523 indexed pages with automated sitemap monitoring.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-blue-600 font-bold shrink-0">2.</span>
+          <span><strong>Analytics infrastructure:</strong> GA4 + Microsoft Clarity + Facebook Pixel, all proxied through Cloudflare Pages Functions to serve from 'self' origin — bypassing CSP restrictions that were silently blocking 95% of analytics data. Custom WAF rules filter 92% bot traffic for accurate visitor metrics.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-blue-600 font-bold shrink-0">3.</span>
+          <span><strong>Donation pipeline:</strong> Stripe Checkout with webhook automation. When a donation completes, a Cloudflare tunnel routes the webhook to a local n8n workflow that posts real-time notifications to a dedicated Slack channel — giving the Foundation board instant visibility into donor activity.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-blue-600 font-bold shrink-0">4.</span>
+          <span><strong>Content architecture:</strong> Gallery collections organized by exhibition history, with high-resolution image serving optimized for art researchers. Panoramic photo-collages require specific aspect ratio handling that standard image CDNs don't support well.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Key Decision -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Architectural Decision</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The analytics stack initially showed a 20:1 ratio between Cloudflare edge hits and GA4 pageviews — meaning analytics scripts were being silently blocked. The root cause: proxying analytics scripts via Cloudflare Pages Functions serves the initial script from 'self', but the loaded libraries dynamically fetch sub-scripts from their own domains (<code class="bg-gray-200 px-1 rounded">scripts.clarity.ms</code>, <code class="bg-gray-200 px-1 rounded">connect.facebook.net</code>), which still need explicit CSP <code class="bg-gray-200 px-1 rounded">script-src</code> entries.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        This pattern — where a proxy solves the first-party loading but not the downstream dependency chain — is undocumented in most analytics setup guides. Diagnosing it required correlating Cloudflare edge logs against GA4 realtime data and inspecting the network waterfall for blocked sub-requests.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">30K+</div>
+          <div class="text-gray-700">Annual visitors across 523 indexed pages</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">6+ pages</div>
+          <div class="text-gray-700">Average session depth — high engagement with art content</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">92%</div>
+          <div class="text-gray-700">Bot traffic filtered by custom WAF rules</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">Real-time</div>
+          <div class="text-gray-700">Donation notifications via Stripe → n8n → Slack</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The SFMOMA exhibition deadline was met. The Foundation board has daily visibility into site performance and donor activity. Museum partners worldwide reference the digital archive. And the entire infrastructure runs autonomously — monitored by automated health checks, with zero manual intervention required for day-to-day operations.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['React', 'Astro', 'TypeScript', 'Cloudflare Pages', 'Cloudflare WAF', 'GCP', 'BigQuery', 'GA4', 'Microsoft Clarity', 'Stripe API', 'n8n', 'Python', 'Node.js'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="border-t pt-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Related</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/blog/when-platforms-hide-their-walls" class="text-primary hover:underline">When Platforms Hide Their Walls: ASN Blocking and the Illusion of Failure</a>
+        <a href="https://masumihayashi.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">masumihayashi.com &nearr;</a>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <div class="mt-12 pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>

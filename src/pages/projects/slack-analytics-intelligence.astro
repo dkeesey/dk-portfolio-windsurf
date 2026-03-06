@@ -1,0 +1,128 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Slack Analytics Intelligence — Case Study",
+  description: "How one architect built the analytics intelligence layer an entire organization queries daily. GA4, BigQuery ETL, and n8n workflows delivering real-time data to Slack.",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200">Data Intelligence</Badge>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Slack Analytics Intelligence</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        One architect built the intelligence layer an entire organization queries daily. Analytics from 6+ client sites flow through BigQuery into Slack channels — no dashboards, no analyst queue, no context switching.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/slack-analytics-intelligence.png" alt="Slack Analytics Intelligence pipeline diagram" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Analytics data for 6+ client websites lived in separate GA4 properties, each requiring manual login to Google Analytics to check performance. Search Console data lived in yet another interface. Microsoft Clarity heatmaps in a third. Facebook Pixel conversion data in a fourth.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The result: nobody checked analytics proactively. Data existed but wasn't actionable. When someone needed a number, they'd spend 15 minutes navigating dashboards to find it. Most of the time, they didn't bother. Critical trends — traffic drops, conversion changes, indexing issues — went unnoticed until they became emergencies.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        The insight was that people already live in Slack. If the data comes to where they already are, they'll engage with it. The architecture has three layers:
+      </p>
+
+      <div class="space-y-6">
+        <div class="border-l-4 border-emerald-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Layer 1: Collection</h3>
+          <p class="text-gray-700">A Cloudflare Worker runs daily at 03:00 UTC, pulling GA4 metrics and Search Console data via Google APIs for all properties. Raw data writes to BigQuery tables (<code class="bg-gray-200 px-1 rounded">daily_site_metrics</code>, <code class="bg-gray-200 px-1 rounded">daily_keyword_rankings</code>) with standardized schemas across all sites.</p>
+        </div>
+
+        <div class="border-l-4 border-emerald-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Layer 2: Transformation</h3>
+          <p class="text-gray-700">n8n workflows query BigQuery on schedule, computing week-over-week deltas, trend detection, and anomaly flagging. Each workflow is purpose-built: one for morning intelligence briefs, one for emergency alerts, one for weekly rollups.</p>
+        </div>
+
+        <div class="border-l-4 border-emerald-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Layer 3: Delivery</h3>
+          <p class="text-gray-700">Formatted intelligence posts to dedicated Slack channels. <code class="bg-gray-200 px-1 rounded">#morning-reports-analytics</code> gets the daily brief. <code class="bg-gray-200 px-1 rounded">#alerts-critical</code> gets anomaly alerts. Each message includes context — not just "traffic dropped 15%" but "traffic dropped 15% on masumihayashi.com, likely related to the indexing issue detected yesterday."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Decision -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Architectural Decision</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The original design used Cloudflare Workers for Slack delivery. It failed — silently. Slack blocks requests from known datacenter IP ranges (ASN-based filtering) as a defense against automation abuse. The code was correct. The authentication was correct. The network topology was the problem.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The solution: n8n running locally on a residential IP address. This isn't a workaround — it's the correct architecture for this constraint. Integration platforms like n8n and Zapier exist precisely because they handle the IP reputation problem that cloud-native deployment can't solve. This discovery led to the <a href="/blog/when-platforms-hide-their-walls" class="text-primary hover:underline">Platform Defense Maturity Model</a> framework.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-emerald-600 mb-1">8+</div>
+          <div class="text-gray-700">Active analytics workflows running daily</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-emerald-600 mb-1">6</div>
+          <div class="text-gray-700">Client sites monitored in unified pipeline</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-emerald-600 mb-1">Daily</div>
+          <div class="text-gray-700">Morning intelligence briefs to Slack at 07:00 PT</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-emerald-600 mb-1">0</div>
+          <div class="text-gray-700">Manual dashboard logins required</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The pipeline runs autonomously. Analytics data that previously required manual dashboard navigation now arrives in Slack channels before the morning coffee. Anomalies trigger immediate alerts. Weekly rollups provide trend context. The entire organization's analytics intelligence runs on infrastructure one architect designed and maintains.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['BigQuery', 'GA4', 'Google Search Console', 'n8n', 'Slack API', 'Python', 'Cloudflare Workers', 'Cloud Functions', 'ETL', 'Microsoft Clarity'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="border-t pt-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Related</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/blog/when-platforms-hide-their-walls" class="text-primary hover:underline">When Platforms Hide Their Walls: ASN Blocking and the Illusion of Failure</a>
+        <a href="/projects/enterprise-automation-pipeline" class="text-primary hover:underline">Enterprise Automation Pipeline — Case Study</a>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <div class="mt-12 pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>
