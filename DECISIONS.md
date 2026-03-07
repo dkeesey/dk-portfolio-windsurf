@@ -39,3 +39,12 @@
 **Consequences:** All routing, Functions, headers, and redirects in CF Pages config. Astro uses `@astrojs/cloudflare` adapter.
 
 ---
+
+## DECISION-004: Explicit Project Screenshot for Portfolio Showcase (2026-03-06)
+**Status:** Accepted
+**Context:** The projects index page was falling back to a non-existent `og-default.jpg`, resulting in broken social media previews on LinkedIn and X.
+**Decision:** Explicitly set the `og:image` to `/images/projects/masumi-hayashi-foundation-screenshot.png`.
+**Considered options:**
+- ✅ Specific Project Screenshot — Leading with a high-impact architectural screenshot directly supports the "AI Systems Builder" positioning for the case studies index.
+- ❌ Creating a generic `og-default.jpg` — Deferred because site-wide fallbacks are less effective than tailored visual previews for high-value landing pages.
+**Consequences:** The portfolio index now has a valid, specific social preview image. Other index pages still require explicit image definitions until a global fallback is created.

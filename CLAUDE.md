@@ -122,18 +122,6 @@ These are the actual changes made; will bite you on any future migration or new 
 
 ## 5. WHAT'S HAPPENING NOW?
 
-**Status**: Live. Active blog + portfolio. Positioning: AI Systems Builder.
+- ✅ Fixed missing `og:image` on `/projects/` index page (previously falling back to non-existent default).
+- ⚠️ Global `og-default.jpg` fallback asset is missing; ensure all top-level index pages explicitly define a valid social preview image.
 
-**Recent work**:
-- **Feb 2026**: Analytics test suite — 7 Playwright e2e tests (`analytics.spec.ts`) + two-layer GA4 Realtime pipeline test (`analytics-realtime.spec.ts`). GA4 Realtime API wired to property `409273534` via OAuth token at `/tmp/ga4_token.json` (`GA4_DEANKEESEY_PROPERTY_ID` in `~/.claude/secrets.env`). GA4 bot-filters headless Playwright; Realtime layer is informational only, never fails CI.
-- **Feb 2026**: gcli user story `ai_docs/user_stories/analytics-smoke.md` — 11 steps, runs via `/gcli-ui-review url=https://deankeesey.com` (Gemini Flash, ~$0.01/run).
-- **Feb 2026**: Analytics stack overhaul — removed GTM/Partytown, fixed is:inline+src bug, deleted wrong-site analytics-tracking.js, removed Sentry, added `public/_headers` CSP.
-- **Feb 2026**: Migrated Astro 4.4.0 → 5.17.1, removed Netlify, repositioned as AI Systems Builder.
-
-**Next**:
-- Blog content: continue AI + infrastructure articles
-- See `memory/MEMORY.md` for Astro 5 migration gotchas reference
-
----
-
-**Last Updated**: 2026-02-22
