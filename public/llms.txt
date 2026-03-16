@@ -1,0 +1,26 @@
+# Dean Keesey — Software Engineer & Technical Leader
+
+> Full-stack software engineer specializing in AI-integrated applications, cloud infrastructure, and developer tooling. Based in Oakland, CA with experience leading engineering teams and building production systems at scale.
+
+## Professional Information
+
+- **Name**: Dean Keesey
+- **Role**: Software Engineer / Technical Leader
+- **Location**: Oakland, CA
+- **Website**: https://deankeesey.com
+- **GitHub**: https://github.com/dkeesey
+- **LinkedIn**: https://linkedin.com/in/deankeesey
+
+## Technical Expertise
+
+- **Frontend**: React, TypeScript, Next.js, Astro, Tailwind CSS
+- **Backend**: Node.js, Python, PostgreSQL, BigQuery
+- **Infrastructure**: Cloudflare Workers/Pages, AWS, Docker, CI/CD
+- **AI/ML**: Claude API, OpenAI, LangChain, prompt engineering, AI agent architecture
+- **Analytics**: GA4, Google Search Console, Microsoft Clarity, data pipelines
+
+## Key Pages
+
+- [About](https://deankeesey.com/about): Background and professional experience
+- [Projects](https://deankeesey.com/projects): Portfolio of technical work
+- [Contact](https://deankeesey.com/contact): Get in touch
