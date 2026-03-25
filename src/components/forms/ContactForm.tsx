@@ -59,32 +59,12 @@ export function ContactForm() {
         throw new Error(`Supabase error: ${supabaseError.message}`);
       }
 
-      // For production: still submit to Netlify if deployed
-      if (import.meta.env.PROD) {
-        try {
-          // Get the form element from the DOM
-          const formElement = document.querySelector('form[name="contact"]') as HTMLFormElement;
-          if (!formElement) throw new Error('Form not found');
-
-          // Create form data from the form element (this preserves hidden fields)
-          const formData = new FormData(formElement);
-
-          // Ensure all data from our validated React form is included
-          Object.entries(data).forEach(([key, value]) => {
-            formData.set(key, value as string);
-          });
-
-          // Submit to Netlify Forms as a backup
-          await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString()
-          });
-        } catch (netlifyError) {
-          // Log but don't fail since Supabase submission was successful
-          console.warn('Netlify submission failed:', netlifyError);
-        }
-      }
+      // Send email notification via CF Pages function (fire-and-forget)
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).catch((err) => console.warn('Notification failed:', err));
 
       // Success message
       toast({
@@ -110,20 +90,9 @@ export function ContactForm() {
     <div>
       <Form {...form}>
         <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6"
         >
-          {/* Hidden fields for Netlify Forms */}
-          <input type="hidden" name="form-name" value="contact" />
-          <p className="hidden">
-            <label>
-              Don't fill this out if you're human: <input name="bot-field" />
-            </label>
-          </p>
 
           <FormField
             control={form.control}
