@@ -474,8 +474,8 @@ export function EnterpriseExperienceTimeline() {
                 <div className="text-gray-700">Years Enterprise Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">$1M+</div>
-                <div className="text-gray-700">Project Values Delivered</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">Fortune 50</div>
+                <div className="text-gray-700">Highest-Tier Clients</div>
               </div>
             </div>
           </motion.div>

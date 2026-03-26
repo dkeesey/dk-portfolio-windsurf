@@ -31,7 +31,6 @@ const skillCategories: SkillCategory[] = [
       { name: 'AI Readiness Assessment', level: 4, description: 'Evaluating organizational AI maturity, identifying high-leverage automation opportunities' },
       { name: 'Build vs Buy Analysis', level: 4, description: 'Custom LLM infrastructure vs SaaS AI tools — cost modeling, capability mapping, vendor evaluation' },
       { name: 'AI Governance & Safety', level: 4, description: 'Output validation, human-in-the-loop design, content policy, audit trails' },
-      { name: 'ROI & Impact Measurement', level: 3, description: 'Quantifying AI automation impact, cost-per-task analysis, productivity metrics' },
     ],
   },
   {
@@ -91,9 +90,8 @@ function SkillCard({ skill, index }: { skill: Skill; index: number }) {
         onMouseLeave={() => setIsHovered(false)}
       >
         <CardContent className="p-6">
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4">
             <h3 className="font-semibold">{skill.name}</h3>
-            <Badge variant="outline">Level {skill.level}</Badge>
           </div>
           <SkillBar level={skill.level} isHovered={isHovered} />
           <motion.p
@@ -116,7 +114,7 @@ export function SkillsMatrix() {
   return (
     <section className="py-16 bg-[#eee]">
       <div className="container">
-        <h2 className="mb-8 text-3xl font-bold">Technical Skills</h2>
+        <h2 className="mb-8 text-3xl font-bold">Capabilities</h2>
         
         <div className="mb-8 flex flex-wrap gap-2">
           {skillCategories.map((category) => (
