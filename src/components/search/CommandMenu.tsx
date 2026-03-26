@@ -72,7 +72,7 @@ export function CommandMenu() {
         <CommandInput placeholder="Search posts and projects..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Blog Posts">
+          <CommandGroup heading="Last Mover Advantage">
             {items
               .filter((item) => item.type === 'blog')
               .map((item) => (

@@ -37,7 +37,7 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
             <nav className="hidden md:flex items-center space-x-6">
               <Link href="/ai-stack">The Stack</Link>
               <Link href="/projects">Case Studies</Link>
-              <Link href="/blog">Token Overflow</Link>
+              <Link href="/blog">Last Mover Advantage</Link>
               <Link href="/contact">Contact</Link>
               <Link
                 href="/hire"
@@ -69,7 +69,7 @@ export function Header({ className, hideGradient = false }: HeaderProps) {
                     <Link href="/projects">Case Studies</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
-                    <Link href="/blog">Token Overflow</Link>
+                    <Link href="/blog">Last Mover Advantage</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="py-3 px-4 text-base hover:bg-purple-50 hover:text-purple-700">
                     <Link href="/contact">Contact</Link>

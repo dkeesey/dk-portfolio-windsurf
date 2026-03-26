@@ -34,7 +34,7 @@ export function Footer() {
               <nav className="space-y-2">
                 <a href="/" className="block text-gray-300 hover:text-purple-300 transition-colors">Home</a>
                 <a href="/projects" className="block text-gray-300 hover:text-purple-300 transition-colors">Projects</a>
-                <a href="/blog" className="block text-gray-300 hover:text-purple-300 transition-colors">Blog</a>
+                <a href="/blog" className="block text-gray-300 hover:text-purple-300 transition-colors">Last Mover Advantage</a>
                 <a href="/contact" className="block text-gray-300 hover:text-purple-300 transition-colors">Contact</a>
               </nav>
             </div>
