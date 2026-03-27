@@ -1,9 +1,10 @@
 ---
 title: "The Hoarding Problem"
-subtitle: "Why AI productivity gains stay siloed — and what breaks the logjam"
-status: draft
-date: 2026-03-26
+description: "Why AI productivity gains stay siloed inside the most capable operators — and what breaks the logjam."
+publishDate: 2026-03-26
 tags: [ai-transformation, enterprise-ai, k-shaped, last-mover-advantage]
+draft: true
+readingTime: 6
 ---
 
 ## The Core Insight

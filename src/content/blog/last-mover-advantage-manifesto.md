@@ -1,9 +1,10 @@
 ---
 title: "Last Mover Advantage"
-subtitle: "The architectural case for building second, building light, and building right"
-status: seed
-date: 2026-03-26
+description: "The architectural case for building second, building light, and building right — why the organizations that get AI right are rarely the first ones in."
+publishDate: 2026-03-26
 tags: [last-mover-advantage, ai-architecture, enterprise-ai, deterministic-systems]
+draft: true
+readingTime: 8
 ---
 
 ## The Seed (captured 2026-03-26 — expand when ready)
