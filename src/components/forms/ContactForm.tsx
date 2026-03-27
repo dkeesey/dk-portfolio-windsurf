@@ -168,19 +168,18 @@ export function ContactForm() {
         <p className="mb-4 text-muted-foreground">
           Prefer to schedule a quick call?
         </p>
-        <Button
-          variant="outline"
-          asChild
-          className="w-full"
-        >
-          <a
-            href="https://calendly.com/dean-keesey/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Schedule a 15-Minute Call
-          </a>
-        </Button>
+        <div className="flex gap-3">
+          <Button variant="outline" asChild className="flex-1">
+            <a href="https://cal.com/dkeesey/15min" target="_blank" rel="noopener noreferrer">
+              15-Minute Call
+            </a>
+          </Button>
+          <Button variant="outline" asChild className="flex-1">
+            <a href="https://cal.com/dkeesey/30min" target="_blank" rel="noopener noreferrer">
+              30-Minute Call
+            </a>
+          </Button>
+        </div>
       </div>
 
 
