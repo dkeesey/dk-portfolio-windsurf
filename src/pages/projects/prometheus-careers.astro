@@ -1,0 +1,148 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Prometheus Careers — Case Study",
+  description: "AI career coaching platform that inverted the resume-first assumption. Output is always f(career_data, job_description) — making the job description the anchor, not the resume.",
+  image: "/images/projects/prometheus-careers-screenshot.png",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-blue-100 text-blue-800 border-blue-200">AI Product</Badge>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Prometheus Careers</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        AI career coaching that starts with the job, not the resume. A complete inversion of how resume tools are built — and why most of them produce generic output that doesn't land.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/prometheus-careers-screenshot.png" alt="Prometheus Careers coaching interface" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Resumes are written for human readers — narrative arc, polished language, the impression of trajectory. ATS systems and hiring managers scanning for signal don't care about narrative arc. They're pattern-matching against a job description, and most resumes are calibrated against the wrong target.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The deeper problem: every AI resume tool built before this one started from the same wrong assumption. You upload your resume, the AI improves it. But "improve" means nothing without a target. Improve for whom? For which role? For which company's keyword matrix? Without a job description anchor, the AI is optimizing in a vacuum — producing polished-sounding generic output that impresses nobody.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The brand that came before this one — resumecoach.co — ran into a different wall: a European product with the same name had accumulated enough negative reviews to poison search results. The namespace collision was irrecoverable. The product needed a clean start with a name that owned its own space.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        The architectural rewrite made the job description the mandatory entry point. Everything flows from there:
+      </p>
+
+      <div class="space-y-6">
+        <div class="border-l-4 border-blue-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Job-First State Machine</h3>
+          <p class="text-gray-700">Five phases in strict sequence: <code class="bg-gray-200 px-1 rounded">JD_TARGETING → BASELINE_COLLECTION → COACHING → FINALIZE → APPLICATION_TRACKING</code>. The JD is collected first and becomes the anchor for everything downstream. Career data is extracted and typed into a <code class="bg-gray-200 px-1 rounded">CareerProfile</code> structure — not formatted, extracted.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Resume as Computed Output</h3>
+          <p class="text-gray-700">The resume is not stored. It's computed: <code class="bg-gray-200 px-1 rounded">f(career_data, job_description)</code>. For a different job, the same career data produces a different resume — different emphasis, different language, different ordering of experience. This makes provenance tracking possible: every resume is attributable to a specific JD.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Haiku for the Analysis Pipeline</h3>
+          <p class="text-gray-700">Resume analysis and keyword extraction routes to Claude Haiku — fast and cost-efficient for what is fundamentally a classification task. The coaching layer, where nuance matters, routes to more capable models. Model assignment matches task complexity to model capability, keeping costs viable for a free tier.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Free Tier Without Backend Cost</h3>
+          <p class="text-gray-700">The V1 free tier runs on a chain of free LLM APIs. The architectural consequence: no backend session management required. Frontend state is the source of truth. This keeps the free tier genuinely free, but means FE state architecture carries more weight than it would in a typical backend-authenticated app.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Decision -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Architectural Decision</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        V1 was resume-first. Users pasted their resume, then optionally added a job description. The AI would "improve" the resume — and the output was almost always generic. Not bad. Just calibrated against nothing in particular, which in a hiring context is the same as bad.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The core insight: AI career data extraction requires a target to determine which experiences are significant. Without a JD, the model has no way to decide that your three years of healthcare data work is more relevant than your five years of retail management. Both are real. Only one matters for this role.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        V2 removed the resume-first entry point entirely. JD is mandatory. The V1 conversational "build from scratch" flow — where users answered turn-by-turn Q&amp;A to generate content — was also removed. It had too many failure points across multi-turn sessions and produced lower-quality output than the structured BASELINE_COLLECTION phase that replaced it.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">V2</div>
+          <div class="text-gray-700">Complete architectural rewrite — resume is computed, not stored; JD is mandatory entry point</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">5</div>
+          <div class="text-gray-700">Clean state machine phases replacing V1's scattered routing logic with zombie dead-code paths</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">Free</div>
+          <div class="text-gray-700">V1 free tier on open LLM API chain — no backend state management, no per-user cost</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-blue-600 mb-1">Jaccard</div>
+          <div class="text-gray-700">Keyword overlap validation ensures generated resumes actually cover the JD's required competencies</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The product is in active development — not yet exposed to a mass audience, which means the architectural decisions haven't been pressure-tested at scale yet. The Laney College grant opportunity (if awarded) would add student tracking dashboards and application outcome data, turning a self-service tool into an institutional pipeline with measurable cohort outcomes.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['Claude API', 'Claude Haiku', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'Supabase', 'TipTap', 'Pino', 'Playwright'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Deep Dives -->
+    <section class="border-t pt-8 mb-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Deep Dives</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/blog/the-non-determinism-defense" class="text-primary hover:underline">The Non-Determinism Defense — how architectural layers make AI output attributable</a>
+        <a href="/projects/prettify-ai" class="text-primary hover:underline">Prettify AI — the shared document formatting engine</a>
+      </div>
+    </section>
+
+    <!-- Visit Live Site -->
+    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+      <p class="text-gray-700 mb-3">The product is live and accepting early users.</p>
+      <a href="https://prometheus.careers" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-blue-700 font-semibold hover:underline">
+        Visit prometheus.careers →
+      </a>
+    </div>
+
+    <!-- Back -->
+    <div class="pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>

@@ -146,6 +146,75 @@ const seo: SEOProps = {
         </div>
       </section>
 
+      {/* Compliance by Architecture */}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold">Built for Auditability</h2>
+        <p class="text-gray-600 leading-relaxed">
+          Government and enterprise procurement teams ask the same question in different vocabulary: <em>can you show your work?</em> This stack was designed to be understood, not just to function. That design choice turns out to satisfy a lot of compliance requirements without being built to satisfy them.
+        </p>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Human Interface Layer → Operator Accountability</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Every decision point is visible to a human operator. Session titling, capture-pane visibility, and WCAG-compliant rendering aren't cosmetic — they ensure the operator can see what the system is doing before outcomes ship. NIST SP 800-218 calls this "operator transparency." This layer is where that obligation is fulfilled.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Session Orchestration (tmux) → Reproducible Audit Trail</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">tmux sessions can be captured, replayed, and inspected. Every agent session is a named, documented unit of work — not an anonymous process. When EO 14028 asks for attestation of software development practices, the session history is the attestation. The log exists. It's structured. It's reviewable.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Event / Hook Layer (82 hooks) → SBOM-Ready Component Enumeration</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Every system event has a named hook. Every hook is a documented component with known inputs and outputs. This is SBOM (Software Bill of Materials) compliance by construction — the component list isn't generated after the fact, it's baked into how the system is built. EO 14028 mandates software supply chain transparency; this layer makes that transparent by design.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Coordination Layer (SQLite) → Tamper-Evident State, No Lock-In</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">SQLite is an open standard. The coordination database is a file you can inspect with any SQL tool. There's no proprietary state format, no vendor-controlled API required to read what the system has done. FedRAMP shared responsibility hinges on understanding what each system component is doing — SQLite makes that legible to anyone, including an auditor who doesn't have access to your tooling.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Model Routing (Haiku / Sonnet / Opus) → Cost Governance, Right-Sized Capability</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Routing decisions are explicit and documented: this task class routes to this model tier, for these reasons. That's cost governance — not just spend control, but defensible justification for why capability was matched to task. Government procurement frameworks increasingly require that AI systems demonstrate proportionality. The routing layer is where proportionality is implemented, not claimed.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Models as Commodity Input → Vendor Independence</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">When the models are at the bottom and the architecture is above them, swapping a model doesn't require rewiring the system. Claude, Gemini, and GPT are all plausible inputs. This is vendor independence in the meaningful sense — not just a talking point, but a structural property that survives procurement cycles and model deprecations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-xl bg-gray-50 border border-gray-200 p-8">
+          <p class="text-gray-700 leading-relaxed italic">
+            "This isn't a compliance retrofit. It's what you get when the architecture is designed to be understood."
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section class="rounded-lg bg-gray-900 p-10 text-center space-y-6">
         <h2 class="text-2xl font-semibold text-white">Build Something Defensible</h2>

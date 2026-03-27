@@ -24,13 +24,13 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'Masumi Hayashi Foundation',
+    title: 'Multi-Agent Coordination System',
     description:
-      'Fractional CTO for nonprofit preserving globally renowned Japanese-American artist legacy. Built the entire technical platform — 523-page site serving 30K+ annual visitors, Stripe donation pipeline, analytics infrastructure filtering 92% bot traffic, and museum partnership integrations worldwide.',
-    image: '/images/projects/masumi-hayashi-foundation-screenshot.png',
-    technologies: ['React', 'Astro', 'GCP', 'Cloudflare', 'Stripe API', 'BigQuery', 'Python', 'Node.js'],
-    category: 'CTO & Technical Leadership',
-    link: '/projects/masumi-hayashi-foundation',
+      'Built an array of AI coordination tools — MCP servers, CLI orchestration, tmux-based session management, SQLite coordination databases, and cross-session task delegation — reducing complex debugging sessions from 6+ hours to 2 hours.',
+    image: '/images/projects/multi-agent-coordination.png',
+    technologies: ['Claude API', 'MCP', 'Python', 'TypeScript', 'SQLite', 'tmux', 'Bash'],
+    category: 'AI Orchestration',
+    link: '/projects/multi-agent-coordination',
   },
   {
     title: 'Slack Analytics Intelligence',
@@ -40,15 +40,6 @@ const projects: Project[] = [
     technologies: ['BigQuery', 'GA4', 'n8n', 'Slack API', 'Python', 'Cloud Functions', 'ETL'],
     category: 'Data Intelligence',
     link: '/projects/slack-analytics-intelligence',
-  },
-  {
-    title: 'Multi-Agent Coordination System',
-    description:
-      'Built an array of AI coordination tools — MCP servers, CLI orchestration, tmux-based session management, SQLite coordination databases, and cross-session task delegation — reducing complex debugging sessions from 6+ hours to 2 hours.',
-    image: '/images/projects/multi-agent-coordination.png',
-    technologies: ['Claude API', 'MCP', 'Python', 'TypeScript', 'SQLite', 'tmux', 'Bash'],
-    category: 'AI Orchestration',
-    link: '/projects/multi-agent-coordination',
   },
   {
     title: 'Enterprise Automation Pipeline',
@@ -62,29 +53,38 @@ const projects: Project[] = [
   {
     title: 'Prometheus Careers',
     description:
-      'AI-powered career coaching platform. Analyzes what employers want, extracts relevant experience from a candidate\'s history, and shapes it into language that lands. Full-stack SaaS with resume editor, AI coach, and application tracking — built on Claude API.',
+      'AI career coaching that starts with the job, not the resume. Output is always f(career_data, job_description) — the JD is the anchor, career data is provenance-tracked against it. Full-stack SaaS on Claude API with a free tier powered by open LLM APIs.',
     image: '/images/projects/prometheus-careers-screenshot.png',
-    technologies: ['Claude API', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'Supabase'],
+    technologies: ['Claude API', 'Claude Haiku', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'Supabase', 'TipTap'],
     category: 'AI Product',
-    link: 'https://prometheus.careers',
+    link: '/projects/prometheus-careers',
   },
   {
     title: 'Prettify AI',
     description:
-      'AI-powered document formatter and resume builder. Converts raw markdown into professionally styled PDFs and DOCX files. Shared rendering engine with Prometheus Careers — the canonical DOCX/PDF pipeline powering both products.',
+      'LLM output comes out as markdown. Prettify turns it into a document a human would actually hand to another human — themed PDFs via browser print, ATS-optimized DOCX via the docx library. Zero server-side AI required. Shares editor DNA with Prometheus Careers.',
     image: '/images/projects/prettify-ai-screenshot.png',
-    technologies: ['Claude API', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'DOCX', 'WeasyPrint'],
+    technologies: ['Astro', 'React', 'TipTap 3.x', 'TypeScript', 'Cloudflare Pages', 'docx library', 'Supabase'],
     category: 'AI Product',
-    link: 'https://prettify-ai.com',
+    link: '/projects/prettify-ai',
+  },
+  {
+    title: 'Masumi Hayashi Foundation',
+    description:
+      'Fractional CTO for nonprofit preserving globally renowned Japanese-American artist legacy. Built the entire technical platform — 523-page site serving 30K+ annual visitors, Stripe donation pipeline, analytics infrastructure filtering 92% bot traffic, and museum partnership integrations worldwide.',
+    image: '/images/projects/masumi-hayashi-foundation-screenshot.png',
+    technologies: ['React', 'Astro', 'GCP', 'Cloudflare', 'Stripe API', 'BigQuery', 'Python', 'Node.js'],
+    category: 'CTO & Technical Leadership',
+    link: '/projects/masumi-hayashi-foundation',
   },
   {
     title: 'ClientEngine AI',
     description:
-      'AI systems for small business operations — handling the follow-ups, scheduling, and inbox work that falls through the cracks. A 3-person shop operating like a 10-person one. Founder-built from product strategy through technical delivery.',
+      'Service businesses lose deals in the follow-up gap — the owner is on a job site when the lead calls. An n8n + Claude qualification agent responds in under 60 seconds, qualifies through conversation, and books appointments before the competitor answers. A 3-person team at 10-person capacity.',
     image: '/images/projects/clientengineai-screenshot.png',
-    technologies: ['Claude API', 'n8n', 'Astro', 'React', 'TypeScript', 'Cloudflare'],
+    technologies: ['Claude API', 'n8n', 'Astro', 'React', 'TypeScript', 'Cloudflare', 'Twilio SMS'],
     category: 'AI Startup',
-    link: 'https://clientengineai.com',
+    link: '/projects/clientengine-ai',
   },
 ];
 
@@ -138,8 +138,11 @@ export function ProjectsGrid() {
     <section className="py-16">
       <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="mb-8 space-y-6 bg-white/90 backdrop-blur-md p-6 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Studies</h1>
-          
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Case Studies</h1>
+          <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl">
+            Every project here is a different layer of the same problem: making AI reliable in production. The coordination infrastructure manages the agents. The analytics intelligence makes data actionable without dashboards. The automation pipeline eliminates the manual work between systems. The products — Prometheus, Prettify, ClientEngine — put that infrastructure in front of users who need outcomes, not tools. The layers build on each other, and each case study is a record of what it took to make one of them actually work.
+          </p>
+
           {/* Search */}
           <div className="max-w-md">
             <Input

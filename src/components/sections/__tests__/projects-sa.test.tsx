@@ -110,10 +110,10 @@ describe('ProjectsGrid — SA Projects Exist', () => {
     expect(screen.getByText('Enterprise Automation Pipeline')).toBeInTheDocument();
   });
 
-  it('Masumi Hayashi is first project (hero card)', () => {
+  it('Multi-Agent Coordination is first project (hero card)', () => {
     render(<ProjectsGrid />);
     const titles = screen.getAllByRole('heading', { level: 3 });
-    expect(titles[0].textContent).toBe('Masumi Hayashi Foundation');
+    expect(titles[0].textContent).toBe('Multi-Agent Coordination System');
   });
 });
 

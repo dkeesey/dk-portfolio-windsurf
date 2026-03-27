@@ -1,0 +1,148 @@
+---
+import Layout from '@/components/layout/Layout.astro';
+import { Badge } from '@/components/ui/badge';
+import type { SEOProps } from '@/types';
+
+const seo: SEOProps = {
+  title: "Prettify AI — Case Study",
+  description: "Free markdown-to-document formatter built as the output layer for AI-generated content. Converts LLM output into styled PDFs and DOCX files without touching a formatting tool.",
+  image: "/images/projects/prettify-ai-screenshot.png",
+  type: "article" as const
+};
+---
+
+<Layout {seo}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <Badge className="bg-violet-100 text-violet-800 border-violet-200">AI Product</Badge>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Prettify AI</h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        LLM output comes out as markdown. Prettify turns it into a document a human would actually hand to another human. No formatting tools, no manual cleanup, no black-box PDF converters.
+      </p>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="rounded-lg overflow-hidden mb-12 shadow-lg">
+      <img src="/images/projects/prettify-ai-screenshot.png" alt="Prettify AI editor with document themes" class="w-full" />
+    </div>
+
+    <!-- Problem -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Problem</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        AI generates markdown. Humans exchange PDFs and DOCX files. The gap between those two facts is where productivity dies. Copy markdown into Word, fix the formatting. Copy into Google Docs, lose the structure. Export a PDF from either, hope for the best.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The formatting step — markdown in, professional document out — is mechanical. It doesn't require intelligence. It requires a reliable, styled pipeline. But no tool existed that handled this cleanly for LLM-generated content specifically: the long-form resumes, structured reports, and formatted outputs that AI tools produce but can't finish.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The second problem: most document converters are black boxes. They make decisions you can't audit or override. Font choices, margin behavior, heading hierarchy — all hidden. When the output looks wrong, you can't diagnose why or fix it without switching tools entirely.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">The Approach</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        Markdown as the protocol. The LLM produces structured markdown; the formatter applies a theme and exports to the target format. The architecture has two output paths with different design constraints:
+      </p>
+
+      <div class="space-y-6">
+        <div class="border-l-4 border-violet-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">The TipTap Editor</h3>
+          <p class="text-gray-700">Markdown pastes into a TipTap WYSIWYG editor. The editor handles parsing, renders the content into a structured document model, and gives the user a live preview. No black box — the editor state is inspectable and the output is exactly what you see.</p>
+        </div>
+
+        <div class="border-l-4 border-violet-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Theme System: Two Output Paths</h3>
+          <p class="text-gray-700">Six themes split into two categories by use case. Four decorative themes — visual hierarchy, professional typography, print-optimized CSS — export via browser print to PDF. Two plain themes are ATS-optimized: clean structure, no decorative elements, designed for Applicant Tracking Systems that choke on styling. These export to DOCX via the <code class="bg-gray-200 px-1 rounded">docx</code> library.</p>
+        </div>
+
+        <div class="border-l-4 border-violet-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Zero Server-Side AI</h3>
+          <p class="text-gray-700">Prettify doesn't call any AI API. The user provides the AI-generated content; the tool formats it. This makes the free tier genuinely free — no per-use LLM cost, no backend required for the core workflow. localStorage auto-save handles persistence without auth.</p>
+        </div>
+
+        <div class="border-l-4 border-violet-500 pl-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Shared DNA with Prometheus Careers</h3>
+          <p class="text-gray-700">The editor and theme system are shared with Prometheus Careers via a copy-on-fix pattern — not an npm package. When a bug is fixed in <code class="bg-gray-200 px-1 rounded">Editor.tsx</code> in either project, the fix is applied to both. This avoids version lock-in and the overhead of a shared package while keeping both projects up to date.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Decision -->
+    <section class="mb-12 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Key Architectural Decision</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Prettify AI and the resume coaching tool started as one product. The coaching features were built as feature flags on top of the formatter. By January 2026, the feature flag file had grown from 77 lines to 192 lines, and the codebase was routing around itself — conditional auth logic, deployment modes, dependencies neither product needed.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The extraction happened in a single working session: January 8-9, 2026. Fourteen coach-specific files removed. Feature flags cut from 192 to 77 lines. A 125-test suite built from scratch before shipping to production. The old monorepo archived, not deleted — the git history is still there for archaeology.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        The decision against an npm shared package was deliberate. Copy-on-fix is simpler: when something is fixed in one project, the same fix gets applied to the other. No version management, no publishing pipeline, no risk of one product being pinned to an old version of shared code. The overhead of a shared package isn't justified until a third consumer appears.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Results</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-violet-600 mb-1">6</div>
+          <div class="text-gray-700">Themes — 4 decorative PDF and 2 ATS-optimized DOCX, matching export intent to format</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-violet-600 mb-1">1 day</div>
+          <div class="text-gray-700">Monolith extracted to standalone product with 167 tests before shipping to production</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-violet-600 mb-1">0</div>
+          <div class="text-gray-700">Server-side AI calls required — user-generated markdown formats client-side</div>
+        </div>
+        <div class="bg-white border rounded-lg p-6">
+          <div class="text-3xl font-bold text-violet-600 mb-1">2</div>
+          <div class="text-gray-700">Products share the same editor and theme system via copy-on-fix — improvements cascade</div>
+        </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        The immediate use case is resume formatting — paste the markdown output from any AI career tool, pick a theme, export a PDF or ATS-ready DOCX. The positioning is broader: any LLM-generated structured content that needs to be handed to a human. Reports, proposals, briefs. Markdown in, professional document out.
+      </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        {['Astro', 'React', 'TipTap 3.x', 'TypeScript', 'Cloudflare Pages', 'Supabase', 'docx library', 'Tailwind CSS'].map(tech => (
+          <Badge variant="secondary" className="text-sm">{tech}</Badge>
+        ))}
+      </div>
+    </section>
+
+    <!-- Deep Dives -->
+    <section class="border-t pt-8 mb-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Deep Dives</h2>
+      <div class="flex flex-col gap-2">
+        <a href="/projects/prometheus-careers" class="text-primary hover:underline">Prometheus Careers — the AI coaching layer that generates the markdown Prettify formats</a>
+        <a href="/blog/the-non-determinism-defense" class="text-primary hover:underline">The Non-Determinism Defense — why the formatting layer is where your IP lives</a>
+      </div>
+    </section>
+
+    <!-- Visit Live Site -->
+    <div class="bg-violet-50 rounded-lg p-6 mb-8">
+      <p class="text-gray-700 mb-3">Free to use. Paste your markdown, pick a theme, export.</p>
+      <a href="https://prettify-ai.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-violet-700 font-semibold hover:underline">
+        Visit prettify-ai.com →
+      </a>
+    </div>
+
+    <!-- Back -->
+    <div class="pt-8 border-t">
+      <a href="/projects" class="text-primary hover:underline">&larr; All Case Studies</a>
+    </div>
+  </article>
+</Layout>
