@@ -48,3 +48,12 @@
 - ✅ Specific Project Screenshot — Leading with a high-impact architectural screenshot directly supports the "AI Systems Builder" positioning for the case studies index.
 - ❌ Creating a generic `og-default.jpg` — Deferred because site-wide fallbacks are less effective than tailored visual previews for high-value landing pages.
 **Consequences:** The portfolio index now has a valid, specific social preview image. Other index pages still require explicit image definitions until a global fallback is created.
+
+## DECISION-005: Practitioner-Led "Orchestration Architecture" for AI Workflow (2026-03-27)
+**Status:** Accepted
+**Context:** Claude Desktop's single-threaded nature creates a productivity bottleneck when complex development tasks require parallel research and execution.
+**Decision:** Adopt an "Orchestration Architecture" where Claude Desktop serves as the strategic intelligence/orchestration layer, delegating focused execution tasks to parallel Claude Code agents.
+**Considered options:**
+- ✅ Orchestration Approach (Delegation Architecture) — enables parallel processing and maintains context across concurrent workstreams.
+- ❌ Traditional Direct Execution — limited by single-threaded bottlenecks and high cognitive overhead during context-switching.
+**Consequences:** Unlocks higher developer throughput for complex tasks but requires deliberate management of multiple agent states.

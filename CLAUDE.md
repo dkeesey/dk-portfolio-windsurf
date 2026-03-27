@@ -133,6 +133,7 @@ These are the actual changes made; will bite you on any future migration or new 
 
 ## 5. WHAT'S HAPPENING NOW?
 
-- ✅ Fixed missing `og:image` on `/projects/` index page (previously falling back to non-existent default).
-- ⚠️ Global `og-default.jpg` fallback asset is missing; ensure all top-level index pages explicitly define a valid social preview image.
+- ✅ Environment migration complete; transient migration notes decommissioned.
+- ✅ Blog content strategy pivoted to practitioner-focused voice, emphasizing architectural bottlenecks and orchestration workflows.
+- ⚠️ Global `og-default.jpg` fallback asset is still missing; ensure all top-level index pages explicitly define a valid social preview image.
 
