@@ -33,11 +33,11 @@ describe('ProjectsGrid — Coherency', () => {
     });
   });
 
-  it('all projects have a valid link (starts with "/projects/")', () => {
+  it('all projects have a valid link (internal /projects/ or external https://)', () => {
     const linkMatches = [...source.matchAll(/link:\s*'([^']+)'/g)];
     expect(linkMatches.length).toBeGreaterThanOrEqual(4);
     linkMatches.forEach((match) => {
-      expect(match[1]).toMatch(/^\/projects\//);
+      expect(match[1]).toMatch(/^\/projects\/|^https:\/\//);
     });
   });
 

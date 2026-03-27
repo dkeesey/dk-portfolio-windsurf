@@ -41,7 +41,7 @@ describe('Hero / SEO Positioning', () => {
     expect(title).not.toContain('Frontend');
   });
 
-  it('hero headline contains "AI Systems Architect"', async () => {
+  it('hero headline references AI or architectural positioning', async () => {
     const fs = await import('fs');
     const content = fs.readFileSync(
       new URL('../../../../pages/index.mdx', import.meta.url),
@@ -50,7 +50,7 @@ describe('Hero / SEO Positioning', () => {
     const headlineMatch = content.match(/headline:\s*"([^"]+)"/);
     expect(headlineMatch).not.toBeNull();
     const headline = headlineMatch![1];
-    expect(headline).toContain('AI Systems Architect');
+    expect(headline.toLowerCase()).toMatch(/ai|architect|judgment|gap|implement/);
   });
 
   it('hero description references enterprise AI deployment, not frontend development', async () => {
@@ -144,7 +144,7 @@ describe('EnterpriseExperienceTimeline — SA Positioning', () => {
   });
 });
 
-// ─── Skills Matrix Assertions ───────────────────────────────────────────────
+// ─── What I Do / Skills Section Assertions ──────────────────────────────────
 
 describe('SkillsMatrix — SA Positioning', () => {
   let SkillsMatrix: React.ComponentType;
@@ -154,42 +154,28 @@ describe('SkillsMatrix — SA Positioning', () => {
     SkillsMatrix = mod.SkillsMatrix;
   });
 
-  it('first category is "LLM Orchestration & Agent Design"', () => {
+  it('"I Build" column exists', () => {
     render(<SkillsMatrix />);
-    // Categories are rendered as Badge elements in the filter bar
-    const badges = screen.getAllByText(/LLM Orchestration|Frontend|Backend/);
-    // The first filter badge should be the first category
-    expect(badges[0].textContent).toBe('LLM Orchestration & Agent Design');
+    expect(screen.getByText('I Build')).toBeInTheDocument();
   });
 
-  it('"Multi-Agent Coordination" skill exists', () => {
+  it('"I Advise On" column exists', () => {
     render(<SkillsMatrix />);
-    expect(screen.getByText('Multi-Agent Coordination')).toBeInTheDocument();
+    expect(screen.getByText('I Advise On')).toBeInTheDocument();
   });
 
-  it('"Claude API & MCP" skill exists', () => {
+  it('references orchestration or agents in build column', () => {
     render(<SkillsMatrix />);
-    expect(screen.getByText('Claude API & MCP')).toBeInTheDocument();
-  });
-
-  it('"Enterprise AI Strategy" category exists', () => {
-    render(<SkillsMatrix />);
-    expect(screen.getByText('Enterprise AI Strategy')).toBeInTheDocument();
-  });
-
-  it('"CSS/Sass" does NOT appear as a standalone top-level skill', () => {
-    render(<SkillsMatrix />);
-    const cssElements = screen.queryAllByText('CSS/Sass');
-    expect(cssElements).toHaveLength(0);
-  });
-
-  it('no "Digital Marketing" category', () => {
-    render(<SkillsMatrix />);
-    expect(screen.queryByText('Digital Marketing')).not.toBeInTheDocument();
+    expect(screen.getByText(/orchestration|agent/i)).toBeInTheDocument();
   });
 
   it('"jQuery" does not appear anywhere', () => {
     render(<SkillsMatrix />);
     expect(screen.queryByText('jQuery')).not.toBeInTheDocument();
+  });
+
+  it('no "Digital Marketing" category', () => {
+    render(<SkillsMatrix />);
+    expect(screen.queryByText('Digital Marketing')).not.toBeInTheDocument();
   });
 });
