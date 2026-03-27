@@ -59,6 +59,33 @@ const projects: Project[] = [
     category: 'AI Automation',
     link: '/projects/enterprise-automation-pipeline',
   },
+  {
+    title: 'Prometheus Careers',
+    description:
+      'AI-powered career coaching platform. Analyzes what employers want, extracts relevant experience from a candidate\'s history, and shapes it into language that lands. Full-stack SaaS with resume editor, AI coach, and application tracking — built on Claude API.',
+    image: '/images/projects/prometheus-careers-screenshot.png',
+    technologies: ['Claude API', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'Supabase'],
+    category: 'AI Product',
+    link: 'https://prometheus.careers',
+  },
+  {
+    title: 'Prettify AI',
+    description:
+      'AI-powered document formatter and resume builder. Converts raw markdown into professionally styled PDFs and DOCX files. Shared rendering engine with Prometheus Careers — the canonical DOCX/PDF pipeline powering both products.',
+    image: '/images/projects/prettify-ai-screenshot.png',
+    technologies: ['Claude API', 'Astro', 'React', 'TypeScript', 'Cloudflare Pages', 'DOCX', 'WeasyPrint'],
+    category: 'AI Product',
+    link: 'https://prettify-ai.com',
+  },
+  {
+    title: 'ClientEngine AI',
+    description:
+      'AI systems for small business operations — handling the follow-ups, scheduling, and inbox work that falls through the cracks. A 3-person shop operating like a 10-person one. Founder-built from product strategy through technical delivery.',
+    image: '/images/projects/clientengineai-screenshot.png',
+    technologies: ['Claude API', 'n8n', 'Astro', 'React', 'TypeScript', 'Cloudflare'],
+    category: 'AI Startup',
+    link: 'https://clientengineai.com',
+  },
 ];
 
 export function ProjectsGrid() {
