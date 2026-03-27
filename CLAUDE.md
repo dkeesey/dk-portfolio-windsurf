@@ -14,6 +14,17 @@
 
 **Purpose**: Personal portfolio and technical blog. Positioning: AI Systems Builder / AI Product Engineer.
 
+**Positioning Notes — Do Not Compress:**
+The real story is institutional trust across consequential domains — not dollar values, not level numbers.
+- **Goldman Sachs**: v1 analyst research distribution for HNW investors. Trust bar for that environment is extraordinary.
+- **iKnowMed / US Oncology**: Oncology EMR. Wrong data = patient harm. Life-critical software.
+- **Spore.com / EA Maxis**: 1M+ daily visitors at launch. Will Wright's cultural landmark.
+- **SAP SuccessFactors**: Action Search shipped into the global SAP ecosystem — millions of HR users.
+- **Masumi Hayashi Foundation**: Work collected by SFMOMA and top-tier institutions. Technical steward of irreplaceable cultural heritage.
+- **SupportLogic**: AI-powered support ops at scale.
+
+**The frame**: "Trusted with what was irreplaceable" — financial infrastructure, life-critical healthcare, cultural preservation, global enterprise platforms. Dollar figures are the wrong dimension. Don't compress this story into smaller clothes to fit conventional job-search metrics.
+
 **Tech Stack**:
 - **Framework**: Astro 5.17.1 — SSR mode, Cloudflare adapter
 - **Frontend**: React 18 + TypeScript (strict)
