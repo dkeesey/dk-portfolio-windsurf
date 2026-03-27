@@ -29,8 +29,8 @@ test.describe('Home Page', () => {
     const heroHeadline = page.locator('h1:visible').first();
     await expect(heroHeadline).toBeVisible({ timeout: 15000 });
 
-    // Verify it contains expected text
-    await expect(heroHeadline).toContainText(/Dean/i);
+    // Verify it contains expected text (headline copy, not name)
+    await expect(heroHeadline).toContainText(/gap between AI tools|architectural/i);
   });
 
   test('should render hero description text', async ({ page }) => {
@@ -38,9 +38,9 @@ test.describe('Home Page', () => {
     // Wait for React hydration
     await page.waitForLoadState('networkidle');
 
-    // Look for visible paragraph with key phrases
+    // Look for visible paragraph with key phrases from current hero copy
     const description = page.locator('p:visible').filter({
-      hasText: /Full Stack Developer|Frontend Engineer|web frameworks|SEO/i,
+      hasText: /knowledge infrastructure|orchestration|AI results|judgment/i,
     }).first();
     await expect(description).toBeVisible({ timeout: 15000 });
   });
