@@ -30,7 +30,9 @@ const seo: SEOProps = {
           </p>
           <p>
             Every layer below represents a deliberate design decision — not configuration, not
-            tutorial-following. Alignment of tools to work together, to suit the work.
+            tutorial-following. Context architecture, model routing, failure isolation: the
+            engineering disciplines that make agentic AI systems reliable. The model is one
+            commodity input among many.
           </p>
         </div>
       </section>
@@ -185,7 +187,7 @@ const seo: SEOProps = {
               <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 mb-1">Coordination Layer (SQLite) → Tamper-Evident State, No Lock-In</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">SQLite is an open standard. The coordination database is a file you can inspect with any SQL tool. There's no proprietary state format, no vendor-controlled API required to read what the system has done. FedRAMP shared responsibility hinges on understanding what each system component is doing — SQLite makes that legible to anyone, including an auditor who doesn't have access to your tooling.</p>
+                <p class="text-gray-600 text-sm leading-relaxed">The coordination database is the context architecture layer — a queryable, open-standard record of what every agent knows, what work is in progress, and what has been resolved. SQLite means no proprietary state format, no vendor-controlled API required to read what the system has done. FedRAMP shared responsibility hinges on understanding what each system component is doing — SQLite makes that legible to anyone, including an auditor who doesn't have access to your tooling.</p>
               </div>
             </div>
           </div>
@@ -194,7 +196,7 @@ const seo: SEOProps = {
               <div class="shrink-0 w-2 h-2 mt-2 rounded-full bg-purple-500"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 mb-1">Model Routing (Haiku / Sonnet / Opus) → Cost Governance, Right-Sized Capability</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">Routing decisions are explicit and documented: this task class routes to this model tier, for these reasons. That's cost governance — not just spend control, but defensible justification for why capability was matched to task. Government procurement frameworks increasingly require that AI systems demonstrate proportionality. The routing layer is where proportionality is implemented, not claimed.</p>
+                <p class="text-gray-600 text-sm leading-relaxed">Routing decisions are explicit and documented: this task class routes to this model tier, for these reasons. That's cost and token economics in practice — not just spend control, but defensible justification for why capability was matched to task. Government procurement frameworks increasingly require that AI systems demonstrate proportionality. The routing layer is where proportionality is implemented, not claimed.</p>
               </div>
             </div>
           </div>

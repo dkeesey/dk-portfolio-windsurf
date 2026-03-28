@@ -100,13 +100,13 @@ const services = [
     title: 'AI Infrastructure & Orchestration',
     tagline: 'The systems layer that protects your work',
     description:
-      'Multi-agent coordination, model routing, hook architectures, and context management. Built on the same stack I run daily — every layer traceable, every decision attributable.',
+      'Multi-agent coordination, model routing, hook architectures, and context architecture. Built on the same stack I run daily — every layer traceable, every decision attributable.',
     price: '$5,000 - $15,000',
     timeline: '3-6 weeks',
     technologies: ['Claude Code', 'Multi-model Routing', 'SQLite Coordination', 'Hook Systems'],
     highlights: [
       'Work product defensible by design',
-      'Token economics built in (Haiku/Sonnet/Opus)',
+      'Cost and token economics (Haiku/Sonnet/Opus routing)',
       'Multi-agent state management',
       'Full audit trail in git',
     ],
@@ -262,9 +262,9 @@ export function HirePage() {
               variants={heroTextVariants}
               className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
             >
-              The LLM is a cloud of possibilities. I build the orchestration systems
-              that harness it — from multi-agent infrastructure through AI-powered
-              frontends. Work product defensible by design.
+              The LLM is a cloud of possibilities. I build agentic AI systems that
+              harness it — context architecture, model routing, and failure pattern
+              recognition from the ground up. Work product defensible by design.
             </motion.p>
 
             <motion.div

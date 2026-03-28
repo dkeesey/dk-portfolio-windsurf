@@ -26,7 +26,7 @@ const projects: Project[] = [
   {
     title: 'Multi-Agent Coordination System',
     description:
-      'Built an array of AI coordination tools — MCP servers, CLI orchestration, tmux-based session management, SQLite coordination databases, and cross-session task delegation — reducing complex debugging sessions from 6+ hours to 2 hours.',
+      'Context architecture and failure pattern recognition for agentic AI: MCP servers, CLI orchestration, tmux-based session management, SQLite coordination databases, and cross-session task delegation. Complex debugging: 6+ hours → 2 hours.',
     image: '/images/projects/multi-agent-coordination.png',
     technologies: ['Claude API', 'MCP', 'Python', 'TypeScript', 'SQLite', 'tmux', 'Bash'],
     category: 'AI Orchestration',
