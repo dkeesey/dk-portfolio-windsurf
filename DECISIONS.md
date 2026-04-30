@@ -57,3 +57,343 @@
 - ✅ Orchestration Approach (Delegation Architecture) — enables parallel processing and maintains context across concurrent workstreams.
 - ❌ Traditional Direct Execution — limited by single-threaded bottlenecks and high cognitive overhead during context-switching.
 **Consequences:** Unlocks higher developer throughput for complex tasks but requires deliberate management of multiple agent states.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-12)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-12)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-15)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-15)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-15)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-15)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-15)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-15)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-16)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-16)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-16)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-16)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-19)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-19)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-19)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-19)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-19)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-19)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-19)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-19)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-19)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-19)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-20)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-20)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-20)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-20)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-20)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-20)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-22)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-22)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-28)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-28)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-28)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-28)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-29)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-29)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-29)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-29)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.
+
+## DECISION-008: Workspace Documentation Consolidation (2026-04-30)
+**Status:** Accepted
+**Context:** The project root was cluttered with legacy documentation and multiple versions of "memory banks," hindering developer focus and workspace navigation.
+**Decision:** Archive legacy documentation to the `archive/` directory to declutter the root and improve workspace focus.
+**Considered options:**
+- ✅ [Archiving] — Removes clutter from the primary work area while preserving historical context for future reference.
+- ❌ [Maintaining in-place] — Root directory remains difficult to navigate and maintain as the project evolves.
+**Consequences:** A cleaner, more focused root directory that prioritizes active development files; historical documentation now requires navigating into the `archive/` folder.
+## DECISION-009: Pinning Axios Dependency (2026-04-30)
+**Status:** Accepted
+**Context:** Dependency version ranges (e.g., `^1.8.1`) can introduce non-deterministic build failures or unexpected behavior if upstream updates contain regressions.
+**Decision:** Pin `axios` to the exact version `1.8.1` to ensure build reproducibility.
+**Considered options:**
+- ✅ [Pinned Version] — Guarantees consistency and stability across all developer environments and CI/CD pipelines.
+- ❌ [Caret Range (^)] — Allows automatic minor/patch updates which risks introducing bugs without manual verification.
+**Consequences:** Ensures stability but requires manual intervention to update `axios` for security patches or new features.

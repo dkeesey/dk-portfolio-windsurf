@@ -133,7 +133,6 @@ These are the actual changes made; will bite you on any future migration or new 
 
 ## 5. WHAT'S HAPPENING NOW?
 
-- ✅ Environment migration complete; transient migration notes decommissioned.
-- ✅ Blog content strategy pivoted to practitioner-focused voice, emphasizing architectural bottlenecks and orchestration workflows.
-- ⚠️ Global `og-default.jpg` fallback asset is still missing; ensure all top-level index pages explicitly define a valid social preview image.
+- ✅ Workspace root decluttered: legacy documentation moved to `archive/` to improve maintainability.
+- ✅ Build reproducibility: `axios` dependency pinned to version `1.8.1`.
 
